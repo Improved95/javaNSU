@@ -18,13 +18,13 @@ public class BullsAndCows {
     private boolean comparateNumber(String inputNumber, String hiddenNumber, Integer cows, Integer bulls) {
         for (int i = 0; i < this.quantityNumber; i++) {
             if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
-                bulls++;
+                bulls = 1;
             } else if (hiddenNumber.contains("" + inputNumber.charAt(i))) {
-                cows++;
+                cows = 1;
             }
         }
 
-        return inputNumber == hiddenNumber;
+        return (inputNumber == hiddenNumber);
     }
 
     private void gameplay() {
@@ -34,7 +34,8 @@ public class BullsAndCows {
         do {
             inputNumber = consoleInput.readCorrectNumber(this.quantityNumber);
 
-            Integer cows = 0, bulls = 0;
+            Integer cows = 0;
+            Integer bulls = 0;
             gameIsOver = comparateNumber(inputNumber, this.hiddenNumber, cows, bulls);
             System.out.println("Cows: " + cows + "; Bulls: " + bulls);
 
