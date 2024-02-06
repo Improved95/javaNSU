@@ -2,9 +2,7 @@ package org.lab1;
 
 public class Main {
     public static void main (String[] args) {
-        System.out.println("Hello world!");
-
-        MyClass mc = new MyClass();
-        mc.printTest();
+        BullsAndCows bullsAndCows = new BullsAndCows();
+        bullsAndCows.initialBoolsAndCows();
     }
 }
