@@ -15,7 +15,7 @@ public class BullsAndCows {
         }
     }
 
-    private boolean comparateNumber(String inputNumber, String hiddenNumber, Integer cows, Integer bulls) {
+   /* private boolean comparateNumber(String inputNumber, String hiddenNumber, Integer cows, Integer bulls) {
         for (int i = 0; i < this.quantityNumber; i++) {
             if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
                 bulls = 1;
@@ -25,26 +25,31 @@ public class BullsAndCows {
         }
 
         return (inputNumber == hiddenNumber);
-    }
+    }*/
 
     private void gameplay() {
         String inputNumber;
-        boolean gameIsOver;
+
         ConsoleInput consoleInput = new ConsoleInput();
         do {
             inputNumber = consoleInput.readCorrectNumber(this.quantityNumber);
 
-            Integer cows = 0;
-            Integer bulls = 0;
-            gameIsOver = comparateNumber(inputNumber, this.hiddenNumber, cows, bulls);
+            int cows = 0, bulls = 0;
+            for (int i = 0; i < this.quantityNumber; i++) {
+                if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
+                    bulls++;
+                } else if (hiddenNumber.contains("" + inputNumber.charAt(i))) {
+                    cows++;
+                }
+            }
             System.out.println("Cows: " + cows + "; Bulls: " + bulls);
 
-        } while(!gameIsOver);
+        } while(!inputNumber.equals(hiddenNumber));
     }
 
     public void initialBullsAndCows() {
         generateNumber();
         gameplay();
-        System.out.println("You guessed number!");
+        System.out.println("You guessed number! Answer: " + this.hiddenNumber + ".");
     }
 }
