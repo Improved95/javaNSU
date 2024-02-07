@@ -27,7 +27,6 @@ public class ConsoleInput {
             inputNumber = scanner.nextLine();
         }
 
-//        scanner.close();
         return inputNumber;
     }
 }
