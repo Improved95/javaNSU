@@ -1,6 +1,37 @@
 package org.lab1;
 public class BullsAndCows {
-    public BullsAndCows() {}
+    public BullsAndCows() {
+        generateNumber();
+    }
+
+    public String getHiddenNumber() { return hiddenNumber; }
+    public int getQuantityNumber() { return quantityNumber; }
+
+    public void initialBullsAndCows() {
+        generateNumber();
+        gameplay();
+        System.out.println("You guessed number! Answer: " + this.hiddenNumber + ".");
+    }
+
+    public int countBullsNumber(String inputNumber) {
+        int bulls = 0;
+        for (int i = 0; i < this.quantityNumber; i++) {
+            if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
+                bulls += 1;
+            }
+        }
+        return bulls;
+    }
+
+    public int countCowsNumber(String inputNumber) {
+        int cows = 0;
+        for (int i = 0; i < this.quantityNumber; i++) {
+            if (hiddenNumber.contains("" + inputNumber.charAt(i))) {
+                cows += 1;
+            }
+        }
+        return cows;
+    }
 
     private String hiddenNumber = "";
     private final int quantityNumber = 4;
@@ -15,41 +46,18 @@ public class BullsAndCows {
         }
     }
 
-   /* private boolean comparateNumber(String inputNumber, String hiddenNumber, Integer cows, Integer bulls) {
-        for (int i = 0; i < this.quantityNumber; i++) {
-            if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
-                bulls = 1;
-            } else if (hiddenNumber.contains("" + inputNumber.charAt(i))) {
-                cows = 1;
-            }
-        }
-
-        return (inputNumber == hiddenNumber);
-    }*/
-
     private void gameplay() {
         String inputNumber;
-
         ConsoleInput consoleInput = new ConsoleInput();
         do {
             inputNumber = consoleInput.readCorrectNumber(this.quantityNumber);
 
-            int cows = 0, bulls = 0;
-            for (int i = 0; i < this.quantityNumber; i++) {
-                if (inputNumber.charAt(i) == hiddenNumber.charAt(i)) {
-                    bulls++;
-                } else if (hiddenNumber.contains("" + inputNumber.charAt(i))) {
-                    cows++;
-                }
-            }
+            int cows, bulls;
+            cows = countCowsNumber(inputNumber);
+            bulls = countBullsNumber(inputNumber);
+
             System.out.println("Cows: " + cows + "; Bulls: " + bulls);
 
         } while(!inputNumber.equals(hiddenNumber));
-    }
-
-    public void initialBullsAndCows() {
-        generateNumber();
-        gameplay();
-        System.out.println("You guessed number! Answer: " + this.hiddenNumber + ".");
     }
 }
