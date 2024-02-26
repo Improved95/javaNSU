@@ -1,5 +1,5 @@
 package org.lab2.commands;
 
-interface Commands {
-
+public interface Commands {
+    public abstract void executeCommand();
 }
