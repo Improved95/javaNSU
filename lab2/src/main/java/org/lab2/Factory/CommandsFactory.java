@@ -6,6 +6,4 @@ public class CommandsFactory {
     public Commands create() {
         return null;
     }
-
-//    private Arrays<Commands> commandList = {};
 }
