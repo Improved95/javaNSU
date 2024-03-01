@@ -2,19 +2,21 @@ package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
 public class CommandsFactory {
-    public CommandsFactory() throws FileNotFoundException {
+    public CommandsFactory() throws FileNotFoundException, IOException {
 //        File fileIn = new File("org/lab2/Factory/commandsClassesConfig.txt");
 //        FileInputStream inputStream = new FileInputStream(fileIn);
 
-        Class clazz = CommandsFactory.class;
-        InputStream inputStream = clazz.getResourceAsStream("/fileTest.txt");
+//        Class clazz = CommandsFactory.class;
+//        InputStream inputStream = clazz.getResourceAsStream("org/lab2/Factory/commandsClassesConfig.txt");
 
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/commandsClassesConfig.txt");
 
         ConfigReader configReader = new ConfigReader(inputStream);
         commandsMap = configReader.getConfigMap();

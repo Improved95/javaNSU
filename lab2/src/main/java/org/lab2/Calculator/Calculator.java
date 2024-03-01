@@ -4,7 +4,7 @@ import org.lab2.Factory.CommandsFactory;
 import org.lab2.commands.Commands;
 
 import java.io.FileNotFoundException;
-import java.rmi.AccessException;
+import java.io.IOException;
 
 public class Calculator {
     public void initialCalculator() {
@@ -18,10 +18,12 @@ public class Calculator {
             ex.printStackTrace();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    private void calculatorExecution() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    private void calculatorExecution() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
         CommandsFactory factory = new CommandsFactory();
             Commands command = factory.create("Add");
             command.execute();
