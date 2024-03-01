@@ -1,31 +1,26 @@
 package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
+import org.lab2.readers.ConfigReader;
+import org.lab2.readers.FileParser;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-import static java.lang.System.exit;
-
 public class CommandsFactory {
-    public CommandsFactory() throws IOException {
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt"); // работает на винде (не полный путь)
+    public CommandsFactory() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
-//        File fileInput = new File("org/lab2/Factory/config.txt"); //работает везде, но нужно прописывать полный пусть, начиная с диска или с корневого каталога, если в linux
-//        InputStream inputStream = new FileInputStream(fileInput);
-
-        ConfigReader configReader = new ConfigReader(inputStream);
-        commandsMap = configReader.getConfigMap();
+        FileParser configReader = new ConfigReader();
+        commandsMap = (Map<String, String>) configReader.parse(inputStream);
     }
 
-    public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-       Class c = Class.forName("org.lab2.commands.mathematical." + className);
-       Commands commandObject = (Commands)c.newInstance();
-       return commandObject;
+    public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+        Class c = Class.forName(commandsMap.get(className));
+        Commands commandObject = (Commands)c.newInstance();
+
+        return commandObject;
     }
 
     private Map<String, String> commandsMap;
