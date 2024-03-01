@@ -11,15 +11,12 @@ public class CommandsFactory {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
-//        File fileInput = new File("org/lab2/Factory/config.txt"); //работает везде, но нужно прописывать полный пусть, начиная с диска или с корневого каталога, если в linux
-//        InputStream inputStream = new FileInputStream(fileInput);
-
         ConfigReader configReader = new ConfigReader();
         commandsMap = configReader.getConfigMap(inputStream);
     }
 
     public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class c = Class.forName("org.lab2.commands.mathematical." + className);
+        Class c = Class.forName(commandsMap.get(className));
         Commands commandObject = (Commands)c.newInstance();
         return commandObject;
     }

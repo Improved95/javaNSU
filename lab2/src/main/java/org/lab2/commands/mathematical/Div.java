@@ -1,4 +1,4 @@
 package org.lab2.commands.mathematical;
 
-class Div {
+public class Div {
 }
