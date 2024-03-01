@@ -4,22 +4,20 @@ import org.lab2.commands.Commands;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.FileNotFoundException;
 import java.util.Map;
 
+import static java.lang.System.exit;
+
 public class CommandsFactory {
-    public CommandsFactory() throws FileNotFoundException, IOException {
-//        File fileIn = new File("org/lab2/Factory/commandsClassesConfig.txt");
-//        FileInputStream inputStream = new FileInputStream(fileIn);
-
-//        Class clazz = CommandsFactory.class;
-//        InputStream inputStream = clazz.getResourceAsStream("org/lab2/Factory/commandsClassesConfig.txt");
-
+    public CommandsFactory() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/commandsClassesConfig.txt");
+        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config");
 
         ConfigReader configReader = new ConfigReader(inputStream);
         commandsMap = configReader.getConfigMap();
+
+        System.out.println(commandsMap);
+        exit(-2);
     }
 
     public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {

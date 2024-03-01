@@ -14,17 +14,15 @@ public class ConfigReader {
     }
 
     public Map<String, String> getConfigMap() throws IOException {
-//        StringBuilder resultStringBuilder = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
-        Map<String, String> configMap;
+        Map<String, String> configMap = null;
         while ((line = br.readLine()) != null) {
-//            resultStringBuilder.append(line).append("\n");
-            configMap.put();
+            String args[] = line.split("=");
+            configMap.put(args[0], args[1]);
             System.out.println(line);
         }
-
-        return null;
+        return configMap;
     }
 
     private InputStream inputStream;
