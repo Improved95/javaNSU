@@ -7,9 +7,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConfigReader implements FileParser {
-    @Override
-    public Map<String, String> parse(InputStream inputStream) {
+public class ConfigReader {
+    public Map<String, String> getConfigMap(InputStream inputStream) {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         Map<String, String> configMap = new HashMap<>();
