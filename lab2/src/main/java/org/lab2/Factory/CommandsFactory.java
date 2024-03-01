@@ -13,16 +13,13 @@ import static java.lang.System.exit;
 public class CommandsFactory {
     public CommandsFactory() throws IOException {
 //        ClassLoader classLoader = getClass().getClassLoader();
-//        InputStream inputStream = classLoader.getResourceAsStream("config");
+//        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt"); // работает на винде (не полный путь)
 
-        File fileInput = new File("config");
-        InputStream inputStream = new FileInputStream(fileInput);
+//        File fileInput = new File("org/lab2/Factory/config.txt"); //работает везде, но нужно прописывать полный пусть, начиная с диска или с корневого каталога, если в linux
+//        InputStream inputStream = new FileInputStream(fileInput);
 
         ConfigReader configReader = new ConfigReader(inputStream);
         commandsMap = configReader.getConfigMap();
-
-        System.out.println(commandsMap);
-        exit(-2);
     }
 
     public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
