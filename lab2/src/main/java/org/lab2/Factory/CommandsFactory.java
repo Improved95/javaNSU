@@ -2,6 +2,7 @@ package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
 import org.lab2.readers.ConfigReader;
+import org.lab2.readers.FileParser;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -11,8 +12,8 @@ public class CommandsFactory {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
-        ConfigReader configReader = new ConfigReader();
-        commandsMap = configReader.getConfigMap(inputStream);
+        FileParser configReader = new ConfigReader();
+        commandsMap = configReader.parse(inputStream);
     }
 
     public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
