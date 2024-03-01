@@ -20,6 +20,8 @@ public class Calculator {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
     }
 

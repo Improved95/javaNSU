@@ -2,6 +2,8 @@ package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -10,8 +12,11 @@ import static java.lang.System.exit;
 
 public class CommandsFactory {
     public CommandsFactory() throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config");
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        InputStream inputStream = classLoader.getResourceAsStream("config");
+
+        File fileInput = new File("config");
+        InputStream inputStream = new FileInputStream(fileInput);
 
         ConfigReader configReader = new ConfigReader(inputStream);
         commandsMap = configReader.getConfigMap();
