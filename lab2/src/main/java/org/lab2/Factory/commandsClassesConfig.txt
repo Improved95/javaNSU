@@ -1,0 +1,9 @@
+Define=src.main.java.org.lab2.commands.controls.Define
+Pop=src.main.java.org.lab2.commands.controls.Pop
+Print=src.main.java.org.lab2.commands.controls.Print
+Push=src.main.java.org.lab2.commands.controls.Push
+Add=src.main.java.org.lab2.commands.mathematical.Add
+Div=src.main.java.org.lab2.commands.mathematical.Div
+Mul=src.main.java.org.lab2.commands.mathematical.Mul
+Sqrt=src.main.java.org.lab2.commands.mathematical.Sqrt
+Sub=src.main.java.org.lab2.commands.mathematical.Sub
