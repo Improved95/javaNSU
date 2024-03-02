@@ -7,6 +7,7 @@ import org.lab2.readers.ConfigParser;
 import org.lab2.readers.FileParser;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Map;
 
 public class CommandsFactory {
@@ -18,7 +19,7 @@ public class CommandsFactory {
         commandsMap = configReader.parse(inputStream);
     }
 
-    public Commands create(String className, String[] argumentsObject) throws ClassNotFoundException, InstantiationException,
+    public Commands create(String className, String[] argumentsForObject) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException, MyExceptions {
 
         if (commandsMap.isEmpty() || !commandsMap.containsKey(className)) {
@@ -27,7 +28,7 @@ public class CommandsFactory {
 
         Class c = Class.forName(commandsMap.get(className));
         Commands commandObject = (Commands)c.newInstance();
-        commandObject.setArguments(argumentsObject);
+        commandObject.setArguments(Arrays.copyOfRange(argumentsForObject, 1, argumentsForObject.length));
         return commandObject;
     }
 

@@ -15,7 +15,6 @@ public class Sqrt extends MathematicalCommands {
             throw new NotEnoughElementsException("SQRT");
         }
         double num1 = stack.removeLast();
-        double num2 = stack.removeLast();
-        stack.addLast(num1 / num2);
+        stack.addLast(Math.sqrt(num1));
     }
 }
