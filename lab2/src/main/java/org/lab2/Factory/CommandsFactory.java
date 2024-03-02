@@ -18,7 +18,7 @@ public class CommandsFactory {
         commandsMap = configReader.parse(inputStream);
     }
 
-    public Commands create(String className) throws ClassNotFoundException, InstantiationException,
+    public Commands create(String className, String[] argumentsObject) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException, MyExceptions {
 
         if (commandsMap.isEmpty() || !commandsMap.containsKey(className)) {
@@ -27,6 +27,7 @@ public class CommandsFactory {
 
         Class c = Class.forName(commandsMap.get(className));
         Commands commandObject = (Commands)c.newInstance();
+        commandObject.setArguments(argumentsObject);
         return commandObject;
     }
 

@@ -22,8 +22,8 @@ public class Calculator {
     }
 
     private InputStream inputStream;
-    private Map<String, ? extends Number> parametersMap;
-    private Deque<? extends Number> stack;
+    private Map<String, Double> parametersMap;
+    private Deque<Double> stack;
 
     private void calculatorExecution() {
         CommandsFactory factory = new CommandsFactory();
@@ -35,7 +35,7 @@ public class Calculator {
 
                 Commands command = null;
                 try {
-                    command = factory.create(args[0]);
+                    command = factory.create(args[0], args);
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } catch (IllegalAccessException ex) {
@@ -47,7 +47,11 @@ public class Calculator {
                     break;
                 }
 
-                command.execute(stack, parametersMap);
+                try {
+                    command.execute(stack, parametersMap);
+                } catch (MyExceptions ex) {
+                    ex.PrintInfo();
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
