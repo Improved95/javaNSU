@@ -21,4 +21,11 @@ public class Push extends ControlCommands {
         }
         stack.addLast(parametersMap.get(this.arguments[0]));
     }
+
+    @Override
+    public void checkArguments() throws MyExceptions {
+        if (arguments.length != 1) {
+            throw new IncorrectArgumentException("DEFINE");
+        }
+    }
 }

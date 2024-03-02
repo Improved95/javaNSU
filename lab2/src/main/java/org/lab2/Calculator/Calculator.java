@@ -5,10 +5,7 @@ import org.lab2.commands.Commands;
 import org.lab2.exceptions.MyExceptions;
 
 import java.io.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Calculator {
     public Calculator(InputStream inputStream) {
@@ -31,11 +28,11 @@ public class Calculator {
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                String args[] = line.split(" ");
+                String arguments[] = line.split(" ");
 
                 Commands command = null;
                 try {
-                    command = factory.create(args[0], args);
+                    command = factory.create(arguments[0], Arrays.copyOfRange(arguments, 1, arguments.length));
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } catch (IllegalAccessException ex) {
@@ -51,6 +48,7 @@ public class Calculator {
                     command.execute(stack, parametersMap);
                 } catch (MyExceptions ex) {
                     ex.PrintInfo();
+                    break;
                 }
             }
         } catch (IOException ex) {
