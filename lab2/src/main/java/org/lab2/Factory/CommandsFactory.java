@@ -1,7 +1,7 @@
 package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
-import org.lab2.readers.ConfigReader;
+import org.lab2.readers.ConfigParser;
 import org.lab2.readers.FileParser;
 
 import java.io.InputStream;
@@ -12,7 +12,7 @@ public class CommandsFactory {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
-        FileParser configReader = new ConfigReader();
+        FileParser configReader = new ConfigParser();
         commandsMap = configReader.parse(inputStream);
     }
 

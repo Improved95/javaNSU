@@ -2,10 +2,7 @@ package org.lab2;
 
 import org.lab2.Calculator.Calculator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
