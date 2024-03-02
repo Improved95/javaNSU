@@ -1,4 +1,8 @@
 package org.lab2.commands.controls;
 
-class Define {
+public class Define extends ControlCommands {
+    @Override
+    public void execute() {
+
+    }
 }

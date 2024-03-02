@@ -1,6 +1,8 @@
 package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
+import org.lab2.exceptions.CommandNotFoundException;
+import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.ConfigParser;
 import org.lab2.readers.FileParser;
 
@@ -16,7 +18,13 @@ public class CommandsFactory {
         commandsMap = configReader.parse(inputStream);
     }
 
-    public Commands create(String className) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Commands create(String className) throws ClassNotFoundException, InstantiationException,
+            IllegalAccessException, MyExceptions {
+
+        if (commandsMap.isEmpty() || !commandsMap.containsKey(className)) {
+            throw new CommandNotFoundException(className);
+        }
+
         Class c = Class.forName(commandsMap.get(className));
         Commands commandObject = (Commands)c.newInstance();
         return commandObject;
