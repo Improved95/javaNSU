@@ -6,6 +6,7 @@ import org.lab2.exceptions.MyExceptions;
 
 import java.io.*;
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class Calculator {
 
     private InputStream inputStream;
     private Map<String, ? extends Number> parametersMap;
-    private ArrayDeque<? extends Number> stack;
+    private Deque<? extends Number> stack;
 
     private void calculatorExecution() {
         CommandsFactory factory = new CommandsFactory();
@@ -46,7 +47,7 @@ public class Calculator {
                     break;
                 }
 
-                command.execute();
+                command.execute(stack, parametersMap);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
