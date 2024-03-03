@@ -18,6 +18,9 @@ public class Calculator {
         calculatorExecution();
     }
 
+    public Map<String, Double> getParametersMap() { return parametersMap; }
+    public  Deque<Double> getStack() { return stack; }
+
     private InputStream inputStream;
     private Map<String, Double> parametersMap;
     private Deque<Double> stack;

@@ -19,7 +19,7 @@ public class Push extends ControlCommands {
                 throw new IncorrectArgumentException("PUSH");
             }
         }
-        stack.addLast(parametersMap.get(this.arguments[0]));
+        stack.addLast(Double.parseDouble(this.arguments[0]));
     }
 
     @Override
