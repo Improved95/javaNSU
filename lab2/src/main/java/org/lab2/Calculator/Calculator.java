@@ -6,12 +6,17 @@ import org.lab2.commands.annotations.NeedOneElementsInStack;
 import org.lab2.commands.annotations.NeedTwoElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
+import org.lab2.readers.InputParser;
 
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.*;
 
 public class Calculator {
+    private InputStream inputStream;
+    private Map<String, Double> parametersMap;
+    private Deque<Double> stack;
+
     public Calculator(InputStream inputStream) {
         this.inputStream = inputStream;
         this.parametersMap = new HashMap<>();
@@ -25,14 +30,11 @@ public class Calculator {
     public Map<String, Double> getParametersMap() { return parametersMap; }
     public  Deque<Double> getStack() { return stack; }
 
-    private InputStream inputStream;
-    private Map<String, Double> parametersMap;
-    private Deque<Double> stack;
-
     private void calculatorExecution() {
         CommandsFactory factory = new CommandsFactory();
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
+
+        InputParser inputParser = new InputParser(inputStream);
         try {
             while ((line = br.readLine()) != null) {
                 String arguments[] = line.split(" ");
@@ -67,14 +69,13 @@ public class Calculator {
     }
 
     private void executeCommand(Commands commandObject, Context context) throws MyExceptions, NoSuchMethodException {
-        Method method = commandObject.getClass().getMethod("execute", Context.class);
-        if (method.isAnnotationPresent(NeedOneElementsInStack.class)) {
+        if (commandObject.getClass().isAnnotationPresent(NeedOneElementsInStack.class)) {
             if (context.getStack().size() < 1) {
-                throw new NotEnoughElementsException("Some method");
+                throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
             }
-        } else if (method.isAnnotationPresent(NeedTwoElementsInStack.class)) {
+        } else if (commandObject.getClass().isAnnotationPresent(NeedTwoElementsInStack.class)) {
             if (context.getStack().size() < 2) {
-                throw new NotEnoughElementsException("Some method");
+                throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
             }
         }
         commandObject.execute(context);
