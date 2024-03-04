@@ -31,14 +31,10 @@ public class CommandsFactory {
         Class cl = Class.forName(commandsMap.get(userInput[0]));
         Commands commandObject = (Commands)cl.newInstance();
 
-        /*не знаю зачем добавил это, с тем же успехом все работало бы и без это проверки и без аннотаций*/
+        /*не знаю зачем добавил это, с тем же успехом все работало бы и без этой проверки и без аннотаций*/
         if (commandObject.getClass().isAnnotationPresent(ArgumentsExist.class)) {
             commandObject.setArguments(userInput);
         }
-
-
-
-//        commandObject.setArguments(argumentsForObject);
         return commandObject;
     }
 }

@@ -11,25 +11,33 @@ import java.util.Map;
 
 @ArgumentsExist
 public class Push implements Commands {
+    private String parameterValue;
+
     @Override
     public void execute(Context context) throws MyExceptions {
         Map<String, Double> parametersMap = context.getParametersMap();
         Deque<Double> stack = context.getStack();
         try {
-            Double.parseDouble(this.arguments[0]);
+            Double.parseDouble(parameterValue);
         } catch (NumberFormatException ex) {
-            if (parametersMap.containsKey(this.arguments[0])) {
-                stack.addLast(parametersMap.get(this.arguments[0]));
+            if (parametersMap.containsKey(parameterValue)) {
+                stack.addLast(parametersMap.get(parameterValue));
                 return;
             } else {
                 throw new IncorrectArgumentException("PUSH");
             }
         }
-        stack.addLast(Double.parseDouble(this.arguments[0]));
+        stack.addLast(Double.parseDouble(parameterValue));
     }
 
-    public void checkArguments() throws MyExceptions {
-        if (arguments.length != 1) {
+    @Override
+    public void setArguments(String[] arguments) throws MyExceptions {
+        checkArguments(arguments);
+        this.parameterValue = arguments[1];
+    }
+
+    private void checkArguments(String[] arguments) throws MyExceptions {
+        if (arguments.length != 1 + 1) {
             throw new IncorrectArgumentException("PUSH");
         }
     }

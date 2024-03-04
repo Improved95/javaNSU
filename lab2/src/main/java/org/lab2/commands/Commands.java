@@ -5,5 +5,5 @@ import org.lab2.exceptions.MyExceptions;
 
 public interface Commands {
     void execute(Context context) throws MyExceptions;
-    default void setArguments(String[] arguments) {}
+    default void setArguments(String[] arguments) throws MyExceptions {}
 }

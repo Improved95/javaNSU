@@ -9,27 +9,32 @@ import java.util.Map;
 
 @ArgumentsExist
 public class Define implements Commands {
+    private String parameterName;
+    private double parameterValue;
+
     @Override
     public void execute(Context context) throws MyExceptions {
         Map<String, Double> parametersMap = context.getParametersMap();
-        if (parametersMap.containsKey(this.arguments[0])) {
-            parametersMap.replace(this.arguments[0], Double.parseDouble(this.arguments[1]));
+        if (parametersMap.containsKey(parameterName)) {
+            parametersMap.replace(parameterName, parameterValue);
         } else {
-            parametersMap.put(this.arguments[0], Double.parseDouble(this.arguments[1]));
+            parametersMap.put(parameterName, parameterValue);
         }
     }
 
     @Override
-    public void setArguments(String[] arguments) {
-
+    public void setArguments(String[] arguments) throws MyExceptions {
+        checkArguments(arguments);
+        this.parameterName = arguments[1];
+        this.parameterValue = Double.parseDouble(arguments[2]);
     }
 
-    private void checkArguments() throws MyExceptions {
-        if (arguments.length != 2) {
+    private void checkArguments(String[] arguments) throws MyExceptions {
+        if (arguments.length != 2 + 1) {
             throw new IncorrectArgumentException("DEFINE");
         }
         try {
-            Double.parseDouble(this.arguments[1]);
+            Double.parseDouble(arguments[2]);
         } catch (NumberFormatException ex) {
             throw new IncorrectArgumentException("DEFINE");
         }
