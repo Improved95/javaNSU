@@ -5,7 +5,6 @@ import org.lab2.commands.annotations.ArgumentsExist;
 import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.ConfigParser;
-import org.lab2.readers.FileParser;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -17,7 +16,7 @@ public class CommandsFactory {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
-        FileParser configReader = new ConfigParser();
+        ConfigParser configReader = new ConfigParser();
         commandsMap = configReader.parse(inputStream);
     }
 

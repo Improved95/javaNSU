@@ -32,43 +32,35 @@ public class Calculator {
 
     private void calculatorExecution() {
         CommandsFactory factory = new CommandsFactory();
-        String line;
 
         InputParser inputParser = new InputParser(inputStream);
-        try {
-            while ((line = br.readLine()) != null) {
-                String arguments[] = line.split(" ");
-
-                Commands command = null;
-                try {
-                    command = factory.create(arguments);
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
-                } catch (InstantiationException ex) {
-                    ex.printStackTrace();
-                } catch (MyExceptions ex) {
-                    ex.PrintInfo();
-                    break;
-                }
-
-                try {
-                    Context context = new Context(parametersMap, stack);
-                    executeCommand(command, context);
-                } catch (NoSuchMethodException ex) {
-                    ex.printStackTrace();
-                } catch (MyExceptions ex) {
-                    ex.PrintInfo();
-                    break;
-                }
+        ReturnInputArguments arguments = new ReturnInputArguments();
+        while (inputParser.parse(arguments)) {
+            Commands command = null;
+            try {
+                command = factory.create(arguments.getArguments());
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            } catch (InstantiationException ex) {
+                ex.printStackTrace();
+            } catch (MyExceptions ex) {
+                ex.PrintInfo();
+                break;
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+            try {
+                Context context = new Context(parametersMap, stack);
+                executeCommand(command, context);
+            } catch (MyExceptions ex) {
+                ex.PrintInfo();
+                break;
+            }
         }
     }
 
-    private void executeCommand(Commands commandObject, Context context) throws MyExceptions, NoSuchMethodException {
+    private void executeCommand(Commands commandObject, Context context) throws MyExceptions {
         if (commandObject.getClass().isAnnotationPresent(NeedOneElementsInStack.class)) {
             if (context.getStack().size() < 1) {
                 throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
