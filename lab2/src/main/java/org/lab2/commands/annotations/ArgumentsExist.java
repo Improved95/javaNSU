@@ -6,4 +6,4 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NeedOneElementsInStack {}
+public @interface ArgumentsExist {}

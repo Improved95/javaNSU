@@ -1,11 +1,14 @@
 package org.lab2.commands.controls;
 
 import org.lab2.Calculator.Context;
+import org.lab2.commands.Commands;
+import org.lab2.commands.annotations.ArgumentsExist;
 import org.lab2.exceptions.IncorrectArgumentException;
 import org.lab2.exceptions.MyExceptions;
 import java.util.Map;
 
-public class Define extends ControlCommands {
+@ArgumentsExist
+public class Define implements Commands {
     @Override
     public void execute(Context context) throws MyExceptions {
         Map<String, Double> parametersMap = context.getParametersMap();
@@ -17,7 +20,11 @@ public class Define extends ControlCommands {
     }
 
     @Override
-    public void checkArguments() throws MyExceptions {
+    public void setArguments(String[] arguments) {
+
+    }
+
+    private void checkArguments() throws MyExceptions {
         if (arguments.length != 2) {
             throw new IncorrectArgumentException("DEFINE");
         }

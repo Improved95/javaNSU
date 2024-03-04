@@ -2,9 +2,13 @@ package org.lab2.Calculator;
 
 import org.lab2.Factory.CommandsFactory;
 import org.lab2.commands.Commands;
+import org.lab2.commands.annotations.NeedOneElementsInStack;
+import org.lab2.commands.annotations.NeedTwoElementsInStack;
 import org.lab2.exceptions.MyExceptions;
+import org.lab2.exceptions.NotEnoughElementsException;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class Calculator {
@@ -35,7 +39,7 @@ public class Calculator {
 
                 Commands command = null;
                 try {
-                    command = factory.create(arguments[0], Arrays.copyOfRange(arguments, 1, arguments.length));
+                    command = factory.create(arguments);
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } catch (IllegalAccessException ex) {
@@ -49,7 +53,9 @@ public class Calculator {
 
                 try {
                     Context context = new Context(parametersMap, stack);
-                    command.execute(context);
+                    executeCommand(command, context);
+                } catch (NoSuchMethodException ex) {
+                    ex.printStackTrace();
                 } catch (MyExceptions ex) {
                     ex.PrintInfo();
                     break;
@@ -58,5 +64,19 @@ public class Calculator {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void executeCommand(Commands commandObject, Context context) throws MyExceptions, NoSuchMethodException {
+        Method method = commandObject.getClass().getMethod("execute", Context.class);
+        if (method.isAnnotationPresent(NeedOneElementsInStack.class)) {
+            if (context.getStack().size() < 1) {
+                throw new NotEnoughElementsException("Some method");
+            }
+        } else if (method.isAnnotationPresent(NeedTwoElementsInStack.class)) {
+            if (context.getStack().size() < 2) {
+                throw new NotEnoughElementsException("Some method");
+            }
+        }
+        commandObject.execute(context);
     }
 }
