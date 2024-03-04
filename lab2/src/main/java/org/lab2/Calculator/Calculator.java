@@ -31,7 +31,13 @@ public class Calculator {
     public  Deque<Double> getStack() { return stack; }
 
     private void calculatorExecution() {
-        CommandsFactory factory = new CommandsFactory();
+        CommandsFactory factory = null;
+        try {
+            factory = new CommandsFactory();
+        } catch (IOException ex) {
+            System.out.println("Cannot read config.");
+            ex.printStackTrace();
+        }
 
         InputParser inputParser = new InputParser(inputStream);
         ReturnInputArguments arguments = new ReturnInputArguments();

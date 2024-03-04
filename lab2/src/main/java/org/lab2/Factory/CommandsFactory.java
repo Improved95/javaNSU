@@ -6,28 +6,30 @@ import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.ConfigParser;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 
 public class CommandsFactory {
-    private Map<String, String> commandsMap;
+    private Properties commandsProperties;
 
-    public CommandsFactory() {
+    public CommandsFactory() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
 
         ConfigParser configReader = new ConfigParser();
-        commandsMap = configReader.parse(inputStream);
+        commandsProperties = configReader.parse(inputStream);
     }
 
     public Commands create(String[] userInput) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException, MyExceptions {
 
-        if (commandsMap.isEmpty() || !commandsMap.containsKey(userInput[0])) {
+        if (commandsProperties.isEmpty() || !commandsProperties.containsKey(userInput[0])) {
             throw new CommandNotFoundException(userInput[0]);
         }
 
-        Class cl = Class.forName(commandsMap.get(userInput[0]));
+        Class cl = Class.forName(commandsProperties.getProperty(userInput[0]));
         Commands commandObject = (Commands)cl.newInstance();
 
         /*не знаю зачем добавил это, с тем же успехом все работало бы и без этой проверки и без аннотаций*/
