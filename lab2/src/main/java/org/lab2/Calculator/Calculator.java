@@ -40,6 +40,7 @@ public class Calculator {
             try {
                 command = factory.create(arguments.getArguments());
             } catch (ClassNotFoundException ex) {
+                System.out.println("Class for command " + arguments.getArguments()[0] + " not found.");
                 ex.printStackTrace();
             } catch (IllegalAccessException ex) {
                 ex.printStackTrace();
@@ -53,6 +54,8 @@ public class Calculator {
             try {
                 Context context = new Context(parametersMap, stack);
                 executeCommand(command, context);
+            } catch (NoSuchMethodException ex) {
+                ex.printStackTrace();
             } catch (MyExceptions ex) {
                 ex.PrintInfo();
                 break;
@@ -60,12 +63,13 @@ public class Calculator {
         }
     }
 
-    private void executeCommand(Commands commandObject, Context context) throws MyExceptions {
-        if (commandObject.getClass().isAnnotationPresent(NeedOneElementsInStack.class)) {
+    private void executeCommand(Commands commandObject, Context context) throws NoSuchMethodException, MyExceptions {
+        Method method = commandObject.getClass().getMethod("execute", Context.class);
+        if (method.isAnnotationPresent(NeedOneElementsInStack.class)) {
             if (context.getStack().size() < 1) {
                 throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
             }
-        } else if (commandObject.getClass().isAnnotationPresent(NeedTwoElementsInStack.class)) {
+        } else if (method.isAnnotationPresent(NeedTwoElementsInStack.class)) {
             if (context.getStack().size() < 2) {
                 throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
             }

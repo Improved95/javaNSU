@@ -7,9 +7,9 @@ import org.lab2.exceptions.MyExceptions;
 
 import java.util.Deque;
 
-@NeedTwoElementsInStack
 public class Sub implements Commands {
     @Override
+    @NeedTwoElementsInStack
     public void execute(Context context) throws MyExceptions {
         Deque<Double> stack = context.getStack();
         double num1 = stack.removeLast();
