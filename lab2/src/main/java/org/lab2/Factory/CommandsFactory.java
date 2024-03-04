@@ -8,7 +8,6 @@ import org.lab2.readers.ConfigParser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.util.Properties;
 
 public class CommandsFactory {

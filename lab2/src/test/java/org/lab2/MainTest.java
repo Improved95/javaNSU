@@ -19,7 +19,7 @@ public class MainTest {
     void setupThis() {}
 
     @Test
-    void TestCalculator() {
+    void TestCalculator1() {
         String input = "DEFINE a 4\n" + "DEFINE b 25\n" + "PUSH a\n" + "PUSH b\n" + "ADD\n" + "PUSH 4\n" + "SUB\n" + "SQRT\n" + "PRINT";
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         Calculator calculator = new Calculator(inputStream);
@@ -28,19 +28,23 @@ public class MainTest {
         Assertions.assertEquals(5, calculator.getStack().getLast());
         Assertions.assertEquals(4, calculator.getParametersMap().get("a"));
         Assertions.assertEquals(25, calculator.getParametersMap().get("b"));
+    }
 
-
-        input = "PUSH 123\n" + "PUSH 1000\n" + "PUSH 10\n" + "DIV\n" + "PRINT";
-        inputStream = new ByteArrayInputStream(input.getBytes());
-        calculator = new Calculator(inputStream);
+    @Test
+    void TestCalculator2() {
+        String input = "PUSH 123\n" + "PUSH 1000\n" + "PUSH 10\n" + "DIV\n" + "PRINT";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        Calculator calculator = new Calculator(inputStream);
         calculator.initialCalculator();
 
         Assertions.assertEquals(100, calculator.getStack().getLast());
+    }
 
-
-        input = "PUSH 321\n" + "PUSH 123\n" + "POP\n" + "PUSH 1000\n" + "PUSH 10\n" + "DIV\n" + "MUL\n" + "PRINT\n";
-        inputStream = new ByteArrayInputStream(input.getBytes());
-        calculator = new Calculator(inputStream);
+    @Test
+    void TestCalculator3() {
+        String input = "PUSH 321\n" + "PUSH 123\n" + "POP\n" + "PUSH 1000\n" + "PUSH 10\n" + "DIV\n" + "MUL\n" + "PRINT\n";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        Calculator calculator = new Calculator(inputStream);
         calculator.initialCalculator();
 
         Assertions.assertEquals(32100, calculator.getStack().getLast());
