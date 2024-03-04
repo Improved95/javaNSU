@@ -48,7 +48,8 @@ public class Calculator {
                 }
 
                 try {
-                    command.execute(stack, parametersMap);
+                    Context context = new Context(parametersMap, stack);
+                    command.execute(context);
                 } catch (MyExceptions ex) {
                     ex.PrintInfo();
                     break;

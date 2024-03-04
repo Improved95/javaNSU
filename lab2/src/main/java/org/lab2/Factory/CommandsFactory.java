@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class CommandsFactory {
+    private Map<String, String> commandsMap;
+
     public CommandsFactory() {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
@@ -31,6 +33,4 @@ public class CommandsFactory {
         commandObject.setArguments(argumentsForObject);
         return commandObject;
     }
-
-    private Map<String, String> commandsMap;
 }

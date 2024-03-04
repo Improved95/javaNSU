@@ -1,13 +1,14 @@
 package org.lab2.commands.controls;
 
+import org.lab2.Calculator.Context;
 import org.lab2.exceptions.IncorrectArgumentException;
 import org.lab2.exceptions.MyExceptions;
-import java.util.Deque;
 import java.util.Map;
 
 public class Define extends ControlCommands {
     @Override
-    public void execute(Deque<Double> stack, Map<String, Double> parametersMap) throws MyExceptions {
+    public void execute(Context context) throws MyExceptions {
+        Map<String, Double> parametersMap = context.getParametersMap();
         if (parametersMap.containsKey(this.arguments[0])) {
             parametersMap.replace(this.arguments[0], Double.parseDouble(this.arguments[1]));
         } else {
