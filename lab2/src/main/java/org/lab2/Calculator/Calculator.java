@@ -35,8 +35,10 @@ public class Calculator {
         try {
             factory = new CommandsFactory();
         } catch (IOException ex) {
-            System.out.println("Cannot read config.");
             ex.printStackTrace();
+        } catch (MyExceptions ex) {
+            ex.PrintInfo();
+            return;
         }
 
         InputParser inputParser = new InputParser(inputStream);
@@ -54,7 +56,7 @@ public class Calculator {
                 ex.printStackTrace();
             } catch (MyExceptions ex) {
                 ex.PrintInfo();
-                break;
+                return;
             }
 
             try {
@@ -64,7 +66,7 @@ public class Calculator {
                 ex.printStackTrace();
             } catch (MyExceptions ex) {
                 ex.PrintInfo();
-                break;
+                return;
             }
         }
     }

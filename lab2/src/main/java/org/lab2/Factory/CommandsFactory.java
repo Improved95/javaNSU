@@ -2,6 +2,7 @@ package org.lab2.Factory;
 
 import org.lab2.commands.Commands;
 import org.lab2.commands.annotations.ArgumentsExist;
+import org.lab2.exceptions.CannotOpenFile;
 import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.ConfigParser;
@@ -13,9 +14,14 @@ import java.util.Properties;
 public class CommandsFactory {
     private Properties commandsProperties;
 
-    public CommandsFactory() throws IOException {
+    public CommandsFactory() throws IOException, MyExceptions {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
+        InputStream inputStream = classLoader.getResourceAsStream("/org/lab2/Factory/config.txt");
+        System.out.println(inputStream);
+
+        if (inputStream == null) {
+            throw new CannotOpenFile("FactoryConfig");
+        }
 
         ConfigParser configReader = new ConfigParser();
         commandsProperties = configReader.parse(inputStream);
