@@ -6,7 +6,7 @@ import org.lab2.commands.annotations.NeedOneElementsInStack;
 import org.lab2.commands.annotations.NeedTwoElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
-import org.lab2.readers.InputParser;
+import org.lab2.readers.FileStreamReader;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -41,9 +41,9 @@ public class Calculator {
             return;
         }
 
-        InputParser inputParser = new InputParser(inputStream);
+        FileStreamReader inputReader = new FileStreamReader(inputStream);
         ReturnInputArguments arguments = new ReturnInputArguments();
-        while (inputParser.parse(arguments)) {
+        while (inputReader.parse(arguments)) {
             Commands command = null;
             try {
                 command = factory.create(arguments.getArguments());
