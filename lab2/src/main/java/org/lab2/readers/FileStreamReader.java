@@ -28,9 +28,10 @@ public class FileStreamReader implements InputReader {
     }
 
     private BufferedReader openReader(String filePath) throws IOException {
-        try (FileReader fileInputReader = new FileReader(filePath);
-             BufferedReader br = new BufferedReader(fileInputReader)) {
-             return br;
-        }
+        FileReader fileInputReader = new FileReader(filePath);
+        BufferedReader br = new BufferedReader(fileInputReader);
+
+        fileInputReader.close();
+        return br;
     }
 }
