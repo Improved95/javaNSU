@@ -5,16 +5,23 @@ import org.lab2.readers.ConsoleStreamReader;
 import org.lab2.readers.FileStreamReader;
 import org.lab2.readers.InputReader;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         InputReader inputReader = null;
-        if (args.length == 2) {
-            inputReader = new FileStreamReader(args[1]);
+        if (args.length == 1) {
+            try {
+                inputReader = new FileStreamReader(args[0]);
+            } catch (IOException ex) {
+                System.err.println("Cannot open " + args[0] + " file.");
+                ex.printStackTrace();
+            }
         } else {
             inputReader = new ConsoleStreamReader();
         }
 
-        Calculator calculator = new Calculator();
+        Calculator calculator = new Calculator(inputReader);
         calculator.initialCalculator();
     }
 }

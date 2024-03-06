@@ -2,34 +2,35 @@ package org.lab2.readers;
 
 import org.lab2.Calculator.ReturnInputArguments;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class FileStreamReader implements InputReader {
     private BufferedReader br;
 
-    public FileStreamReader(String filePath) {
-        br = new BufferedReader(new FileInputStream(filePath));
+    public FileStreamReader(String filePath) throws IOException {
+        br = openReader(filePath);
     }
 
     @Override
     public boolean read(ReturnInputArguments arguments) {
-        return false;
+        String line;
+        try {
+            if ((line = br.readLine()) == null) {
+                return false;
+            }
+        } catch (java.io.IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+        arguments.setArguments(line.split(" "));
+        return true;
     }
 
-    //    public boolean parse(ReturnInputArguments arguments) {
-//        String line;
-//        try {
-//            if ((line = br.readLine()) == null) {
-//                return false;
-//            }
-//        } catch (java.io.IOException ex) {
-//            return false;
-//        }
-//
-//        arguments.setArguments(line.split(" "));
-//        return true;
-//    }
+    private BufferedReader openReader(String filePath) throws IOException {
+        try (FileReader fileInputReader = new FileReader(filePath);
+             BufferedReader br = new BufferedReader(fileInputReader)) {
+             return br;
+        }
+    }
 }

@@ -7,18 +7,19 @@ import org.lab2.commands.annotations.NeedTwoElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
 import org.lab2.readers.FileStreamReader;
+import org.lab2.readers.InputReader;
 
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.*;
 
 public class Calculator {
-    private InputStream inputStream;
+    private InputReader inputReader;
     private Map<String, Double> parametersMap;
     private Deque<Double> stack;
 
-    public Calculator(InputStream inputStream) {
-        this.inputStream = inputStream;
+    public Calculator(InputReader inputReader) {
+        this.inputReader = inputReader;
         this.parametersMap = new HashMap<>();
         this.stack = new ArrayDeque<>();
     }
@@ -41,9 +42,8 @@ public class Calculator {
             return;
         }
 
-        FileStreamReader inputReader = new FileStreamReader(inputStream);
         ReturnInputArguments arguments = new ReturnInputArguments();
-        while (inputReader.parse(arguments)) {
+        while (inputReader.read(arguments)) {
             Commands command = null;
             try {
                 command = factory.create(arguments.getArguments());
