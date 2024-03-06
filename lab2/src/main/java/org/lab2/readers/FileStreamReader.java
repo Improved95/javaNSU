@@ -8,7 +8,7 @@ public class FileStreamReader implements InputReader {
     private BufferedReader br;
 
     public FileStreamReader(String filePath) throws IOException {
-        br = openReader(filePath);
+        this.br = openReader(filePath);
     }
 
     @Override
@@ -31,7 +31,6 @@ public class FileStreamReader implements InputReader {
         FileReader fileInputReader = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fileInputReader);
 
-        fileInputReader.close();
         return br;
     }
 }
