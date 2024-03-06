@@ -15,8 +15,7 @@ public class CommandsFactory {
     private Properties commandsProperties;
 
     public CommandsFactory() throws IOException, MyExceptions {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("org/lab2/Factory/config.txt");
+        InputStream inputStream = getClass().getResourceAsStream("config.txt");
 
         if (inputStream == null) {
             throw new CannotOpenFile("FactoryConfig");
