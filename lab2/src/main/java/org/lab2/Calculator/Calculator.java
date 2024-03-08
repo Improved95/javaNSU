@@ -7,6 +7,8 @@ import org.lab2.commands.annotations.NeedTwoElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
 import org.lab2.readers.InputReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -16,11 +18,13 @@ public class Calculator {
     private InputReader inputReader;
     private Map<String, Double> parametersMap;
     private Deque<Double> stack;
+    private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
     public Calculator(InputReader inputReader) {
         this.inputReader = inputReader;
         this.parametersMap = new HashMap<>();
         this.stack = new ArrayDeque<>();
+        log.info("Calculator created");
     }
 
     public void initialCalculator() {
@@ -31,13 +35,17 @@ public class Calculator {
     public  Deque<Double> getStack() { return stack; }
 
     private void calculatorExecution() {
+        log.info("Calculator execute");
+
         CommandsFactory factory = null;
         try {
             factory = new CommandsFactory();
         } catch (IOException ex) {
+            log.error("creating Factory with {}", ex.getMessage());
             ex.printStackTrace();
         } catch (MyExceptions ex) {
-            ex.PrintInfo();
+            log.error("creating Factory with {}", ex.getErrorInfo());
+            System.err.println(ex.getErrorInfo());
             return;
         }
 
@@ -47,24 +55,30 @@ public class Calculator {
             try {
                 command = factory.create(arguments.getArguments());
             } catch (ClassNotFoundException ex) {
-                System.out.println("Class for command " + arguments.getArguments()[0] + " not found.");
+                log.error("{}", ex.getMessage());
+                System.out.println("Class for command " + arguments.getArguments()[0] + " not found");
                 ex.printStackTrace();
             } catch (IllegalAccessException ex) {
+                log.error("{}", ex.getMessage());
                 ex.printStackTrace();
             } catch (InstantiationException ex) {
+                log.error("{}", ex.getMessage());
                 ex.printStackTrace();
             } catch (MyExceptions ex) {
-                ex.PrintInfo();
+                System.err.println(ex.getErrorInfo());
+                log.error("creating calculator command with input {}, msg: {}", arguments.getArguments(), ex.getErrorInfo());
                 return;
             }
+
 
             try {
                 Context context = new Context(parametersMap, stack);
                 executeCommand(command, context);
             } catch (NoSuchMethodException ex) {
+                log.error("{}", ex.getMessage());
                 ex.printStackTrace();
             } catch (MyExceptions ex) {
-                ex.PrintInfo();
+                log.error("execute command with input {}, msg {}", arguments.getArguments(), ex.getErrorInfo());
                 return;
             }
         }

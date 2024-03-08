@@ -7,7 +7,7 @@ public abstract class MyExceptions extends Exception {
         this.msg = msg;
     }
 
-    public void PrintInfo() {
-        System.err.println(msg);
+    public String getErrorInfo() {
+        return msg;
     }
 }

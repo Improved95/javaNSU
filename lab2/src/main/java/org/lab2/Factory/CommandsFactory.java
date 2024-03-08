@@ -6,6 +6,8 @@ import org.lab2.exceptions.CannotOpenFile;
 import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.ConfigParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +15,7 @@ import java.util.Properties;
 
 public class CommandsFactory {
     private Properties commandsProperties;
+    private static final Logger log = (Logger) LoggerFactory.getLogger(CommandsFactory.class);
 
     public CommandsFactory() throws IOException, MyExceptions {
         InputStream inputStream = getClass().getResourceAsStream("config.txt");
@@ -23,6 +26,7 @@ public class CommandsFactory {
 
         ConfigParser configReader = new ConfigParser();
         commandsProperties = configReader.parse(inputStream);
+        log.info("Factory created.");
     }
 
     public Commands create(String[] userInput) throws ClassNotFoundException, InstantiationException,

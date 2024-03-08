@@ -1,4 +1,8 @@
 DEFINE a 4
 PUSH a
+PUSH 56
+ADD
+PUSH 32
+fsdag ;ljk rew
 SQRT
 PRINT
