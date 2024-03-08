@@ -11,7 +11,6 @@ public class ConsoleStreamReader implements InputReader {
         Scanner scanner = new Scanner(System.in);
 
         String line = scanner.nextLine();
-        System.out.println(line);
         if (line.equals("exit")) { return false; }
 
         arguments.setArguments(line.split(" "));
