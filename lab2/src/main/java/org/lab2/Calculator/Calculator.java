@@ -36,9 +36,9 @@ public class Calculator {
         try {
             factory = new CommandsFactory();
         } catch (IOException ex) {
-            log.error("creating Factory with", ex);
+            log.error("creating Factory with ", ex);
         } catch (MyExceptions ex) {
-            log.error("creating Factory with {}", ex.getErrorInfo());
+            log.error("creating Factory with ", ex);
             System.err.println(ex.getErrorInfo());
             return;
         }
@@ -49,12 +49,10 @@ public class Calculator {
             try {
                 command = factory.create(arguments.getArguments());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
-                System.out.println("Class for command " + arguments.getArguments()[0] + " not found");
-                log.error("{}", ex.getMessage());
-                ex.printStackTrace();
+                log.error("creating command ", ex);
             } catch (MyExceptions ex) {
                 System.err.println(ex.getErrorInfo());
-                log.error("creating calculator command with input {}, msg: {}", arguments.getArguments(), ex.getErrorInfo());
+                log.error("creating command with input {}, msg: {}", arguments.getArguments(), ex);
                 return;
             }
 
@@ -62,10 +60,9 @@ public class Calculator {
             try {
                 executeCommand(command, context);
             } catch (NoSuchMethodException ex) {
-                log.error("{}", ex.getMessage());
-                ex.printStackTrace();
+                log.error("", ex);
             } catch (MyExceptions ex) {
-                log.error("execute command with input {}, msg {}", arguments.getArguments(), ex.getErrorInfo());
+                log.error("execute command with input {}, msg {}", arguments.getArguments(), ex);
                 return;
             }
         }
