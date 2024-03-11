@@ -16,4 +16,8 @@ public class ConsoleStreamReader implements InputReader {
         arguments.setArguments(line.split(" "));
         return true;
     }
+
+    @Override
+    public void close() throws Exception {
+    }
 }

@@ -27,6 +27,11 @@ public class FileStreamReader implements InputReader {
         return true;
     }
 
+    @Override
+    public void close() throws Exception {
+        br.close();
+    }
+
     private BufferedReader openReader(String filePath) throws IOException {
         FileReader fileInputReader = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fileInputReader);

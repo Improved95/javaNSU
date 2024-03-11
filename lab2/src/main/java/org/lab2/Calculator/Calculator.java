@@ -36,8 +36,7 @@ public class Calculator {
         try {
             factory = new CommandsFactory();
         } catch (IOException ex) {
-            log.error("creating Factory with {}", ex.getMessage());
-            ex.printStackTrace();
+            log.error("creating Factory with", ex);
         } catch (MyExceptions ex) {
             log.error("creating Factory with {}", ex.getErrorInfo());
             System.err.println(ex.getErrorInfo());
