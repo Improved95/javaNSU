@@ -19,9 +19,9 @@ public class MainTest {
         Calculator calculator = new Calculator(inputReader);
         calculator.initialCalculator();
 
-        Assertions.assertEquals(5, calculator.getStack().getLast());
-        Assertions.assertEquals(4, calculator.getParametersMap().get("a"));
-        Assertions.assertEquals(25, calculator.getParametersMap().get("b"));
+        Assertions.assertEquals(5, calculator.getContext().getStack().getLast());
+        Assertions.assertEquals(4, calculator.getContext().getParametersMap().get("a"));
+        Assertions.assertEquals(25, calculator.getContext().getParametersMap().get("b"));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class MainTest {
         Calculator calculator = new Calculator(inputReader);
         calculator.initialCalculator();
 
-        Assertions.assertEquals(100, calculator.getStack().getLast());
+        Assertions.assertEquals(100, calculator.getContext().getStack().getLast());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class MainTest {
         Calculator calculator = new Calculator(inputReader);
         calculator.initialCalculator();
 
-        Assertions.assertEquals(32100, calculator.getStack().getLast());
+        Assertions.assertEquals(32100, calculator.getContext().getStack().getLast());
     }
 
     @AfterEach

@@ -2,8 +2,7 @@ package org.lab2.Calculator;
 
 import org.lab2.Factory.CommandsFactory;
 import org.lab2.commands.Commands;
-import org.lab2.commands.annotations.NeedOneElementsInStack;
-import org.lab2.commands.annotations.NeedTwoElementsInStack;
+import org.lab2.commands.annotations.NeedNElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
 import org.lab2.readers.InputReader;
@@ -12,27 +11,22 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.reflect.Method;
-import java.util.*;
 
 public class Calculator {
     private InputReader inputReader;
-    private Map<String, Double> parametersMap;
-    private Deque<Double> stack;
+    private Context context = new Context();
     private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
     public Calculator(InputReader inputReader) {
         this.inputReader = inputReader;
-        this.parametersMap = new HashMap<>();
-        this.stack = new ArrayDeque<>();
         log.info("Calculator created");
     }
+
+    public Context getContext() { return context; }
 
     public void initialCalculator() {
         calculatorExecution();
     }
-
-    public Map<String, Double> getParametersMap() { return parametersMap; }
-    public  Deque<Double> getStack() { return stack; }
 
     private void calculatorExecution() {
         log.info("Calculator execute");
@@ -54,14 +48,8 @@ public class Calculator {
             Commands command = null;
             try {
                 command = factory.create(arguments.getArguments());
-            } catch (ClassNotFoundException ex) {
-                log.error("{}", ex.getMessage());
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
                 System.out.println("Class for command " + arguments.getArguments()[0] + " not found");
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                log.error("{}", ex.getMessage());
-                ex.printStackTrace();
-            } catch (InstantiationException ex) {
                 log.error("{}", ex.getMessage());
                 ex.printStackTrace();
             } catch (MyExceptions ex) {
@@ -72,7 +60,6 @@ public class Calculator {
 
 
             try {
-                Context context = new Context(parametersMap, stack);
                 executeCommand(command, context);
             } catch (NoSuchMethodException ex) {
                 log.error("{}", ex.getMessage());
@@ -86,12 +73,8 @@ public class Calculator {
 
     private void executeCommand(Commands commandObject, Context context) throws NoSuchMethodException, MyExceptions {
         Method method = commandObject.getClass().getMethod("execute", Context.class);
-        if (method.isAnnotationPresent(NeedOneElementsInStack.class)) {
-            if (context.getStack().size() < 1) {
-                throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
-            }
-        } else if (method.isAnnotationPresent(NeedTwoElementsInStack.class)) {
-            if (context.getStack().size() < 2) {
+        if (method.isAnnotationPresent(NeedNElementsInStack.class)) {
+            if (context.getStack().size() < method.getAnnotation(NeedNElementsInStack.class).requiredNumberOfElements()) {
                 throw new NotEnoughElementsException(commandObject.getClass().getSimpleName());
             }
         }

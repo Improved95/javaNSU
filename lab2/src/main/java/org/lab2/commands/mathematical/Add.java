@@ -3,7 +3,7 @@ package org.lab2.commands.mathematical;
 import org.lab2.Calculator.Calculator;
 import org.lab2.Calculator.Context;
 import org.lab2.commands.Commands;
-import org.lab2.commands.annotations.NeedTwoElementsInStack;
+import org.lab2.commands.annotations.NeedNElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class Add implements Commands {
     public String getCommandName() { return commandName; }
 
     @Override
-    @NeedTwoElementsInStack
+    @NeedNElementsInStack(requiredNumberOfElements = 2)
     public void execute(Context context) throws MyExceptions {
         Deque<Double> stack = context.getStack();
         double num1 = stack.removeLast();

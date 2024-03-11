@@ -1,9 +1,9 @@
 package org.lab2.commands.annotations;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NeedOneElementsInStack {}
+public @interface NeedNElementsInStack {
+    int requiredNumberOfElements();
+}
