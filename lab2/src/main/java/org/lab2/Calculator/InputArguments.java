@@ -1,6 +1,6 @@
 package org.lab2.Calculator;
 
-public class ReturnInputArguments {
+public class InputArguments {
     private String[] arguments;
 
     public void setArguments(String[] arguments) { this.arguments = arguments; }

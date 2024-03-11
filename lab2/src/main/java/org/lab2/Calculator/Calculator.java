@@ -5,7 +5,7 @@ import org.lab2.commands.Commands;
 import org.lab2.commands.annotations.NeedNElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
-import org.lab2.readers.InputDataReader;
+import org.lab2.readers.CalculatorInputDataReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +28,9 @@ public class Calculator {
 
     public Context getContext() { return context; }
 
-    public void calculating(InputDataReader inputData) {
+    public void calculating(CalculatorInputDataReader inputData) {
         log.info("Calculator execute");
-        ReturnInputArguments arguments = new ReturnInputArguments();
+        InputArguments arguments = new InputArguments();
         while (inputData.read(arguments)) {
             if (!executeCommand(arguments)) {
                 return;
@@ -38,7 +38,7 @@ public class Calculator {
         }
     }
 
-    public boolean executeCommand(ReturnInputArguments arguments) {
+    public boolean executeCommand(InputArguments arguments) {
         Commands command = null;
         try {
             command = commandsFactory.create(arguments.getArguments());

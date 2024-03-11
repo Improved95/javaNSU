@@ -1,18 +1,18 @@
 package org.lab2.readers;
 
-import org.lab2.Calculator.ReturnInputArguments;
+import org.lab2.Calculator.InputArguments;
 
 import java.io.*;
 
-public class FileStreamReader implements InputDataReader {
+public class FileStreamReaderCalculator implements CalculatorInputDataReader {
     private BufferedReader br;
 
-    public FileStreamReader(String filePath) throws IOException {
+    public FileStreamReaderCalculator(String filePath) throws IOException {
         this.br = openReader(filePath);
     }
 
     @Override
-    public boolean read(ReturnInputArguments arguments) {
+    public boolean read(InputArguments arguments) {
         String line;
         try {
             if ((line = br.readLine()) == null) {

@@ -1,13 +1,12 @@
 package org.lab2.readers;
 
-import org.lab2.Calculator.ReturnInputArguments;
+import org.lab2.Calculator.InputArguments;
 
-import java.io.BufferedReader;
 import java.util.Scanner;
 
-public class ConsoleStreamReader implements InputDataReader {
+public class ConsoleStreamReaderCalculator implements CalculatorInputDataReader {
     @Override
-    public boolean read(ReturnInputArguments arguments) {
+    public boolean read(InputArguments arguments) {
         Scanner scanner = new Scanner(System.in);
 
         String line = scanner.nextLine();

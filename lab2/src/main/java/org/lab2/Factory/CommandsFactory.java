@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class CommandsFactory {
     private Properties commandsProperties;
-    private static final Logger log = (Logger) LoggerFactory.getLogger(CommandsFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(CommandsFactory.class);
 
     public CommandsFactory() throws IOException, MyExceptions {
         InputStream inputStream = getClass().getResourceAsStream("config.txt");
