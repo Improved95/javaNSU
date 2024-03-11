@@ -14,11 +14,12 @@ import java.lang.reflect.Method;
 
 public class Calculator {
     private InputReader inputReader;
-    private Context context = new Context();
+    private Context context;
     private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
     public Calculator(InputReader inputReader) {
         this.inputReader = inputReader;
+        this.context = new Context();
         log.info("Calculator created");
     }
 
