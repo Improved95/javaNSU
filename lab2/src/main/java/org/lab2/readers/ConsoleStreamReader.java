@@ -5,7 +5,7 @@ import org.lab2.Calculator.ReturnInputArguments;
 import java.io.BufferedReader;
 import java.util.Scanner;
 
-public class ConsoleStreamReader implements InputReader {
+public class ConsoleStreamReader implements InputDataReader {
     @Override
     public boolean read(ReturnInputArguments arguments) {
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +18,5 @@ public class ConsoleStreamReader implements InputReader {
     }
 
     @Override
-    public void close() throws Exception {
-    }
+    public void close() throws Exception {}
 }

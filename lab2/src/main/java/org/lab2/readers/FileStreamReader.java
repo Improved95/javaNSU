@@ -4,7 +4,7 @@ import org.lab2.Calculator.ReturnInputArguments;
 
 import java.io.*;
 
-public class FileStreamReader implements InputReader {
+public class FileStreamReader implements InputDataReader {
     private BufferedReader br;
 
     public FileStreamReader(String filePath) throws IOException {
@@ -35,7 +35,6 @@ public class FileStreamReader implements InputReader {
     private BufferedReader openReader(String filePath) throws IOException {
         FileReader fileInputReader = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fileInputReader);
-
         return br;
     }
 }

@@ -4,7 +4,7 @@ import org.lab2.Calculator.ReturnInputArguments;
 
 import java.io.*;
 
-public class StringReader implements InputReader {
+public class StringReader implements InputDataReader {
     private BufferedReader br;
 
     public StringReader(String commandsSet) {

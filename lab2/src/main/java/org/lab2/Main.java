@@ -3,30 +3,35 @@ package org.lab2;
 import org.lab2.Calculator.Calculator;
 import org.lab2.readers.ConsoleStreamReader;
 import org.lab2.readers.FileStreamReader;
-import org.lab2.readers.InputReader;
+import org.lab2.readers.InputDataReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class Main {
+    private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
     public static void main(String[] args) {
-        try(InputReader inputReader = openReader(args)) {
-        /*try {
-            inputReader = new FileStreamReader("/Users/improvedmac/Documents/improved/java/javaNSU/lab2/src/main/java/org/lab2/input.txt");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
 
-            Calculator calculator = new Calculator(inputReader);
-            calculator.initialCalculator();
+        Calculator calculator = null;
+        try {
+            calculator = new Calculator();
+        } catch (Exception ex) {
+            log.error("", ex);
         }
-        catch(Exception e) {
-            e.printStackTrace();
+
+        try (InputDataReader inputData = openReader(args)) {
+            calculator.calculating(inputData);
+        } catch (Exception ex) {
+            log.error("Cannot open input data stream, args: {}, exception: {}", args, ex);
+            System.err.println("Cannot open input data stream, args:" + args);
         }
+
     }
 
-    private static InputReader openReader(String[] args) {
-        InputReader inputReader = null;
+    private static InputDataReader openReader(String[] args) {
+        InputDataReader inputReader = null;
         if (args.length == 1) {
             try {
                 inputReader = new FileStreamReader(args[0]);

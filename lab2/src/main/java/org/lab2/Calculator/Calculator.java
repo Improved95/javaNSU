@@ -5,7 +5,7 @@ import org.lab2.commands.Commands;
 import org.lab2.commands.annotations.NeedNElementsInStack;
 import org.lab2.exceptions.MyExceptions;
 import org.lab2.exceptions.NotEnoughElementsException;
-import org.lab2.readers.InputReader;
+import org.lab2.readers.InputDataReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,58 +13,66 @@ import java.io.*;
 import java.lang.reflect.Method;
 
 public class Calculator {
-    private InputReader inputReader;
     private Context context;
+    private CommandsFactory commandsFactory;
     private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
-    public Calculator(InputReader inputReader) {
-        this.inputReader = inputReader;
+    public Calculator() throws Exception {
         this.context = new Context();
+        this.commandsFactory = initialFactory();
+        if (this.commandsFactory == null) {
+            throw new Exception();
+        }
         log.info("Calculator created");
     }
 
     public Context getContext() { return context; }
 
-    public void initialCalculator() {
-        calculatorExecution();
+    public void calculating(InputDataReader inputData) {
+        log.info("Calculator execute");
+        ReturnInputArguments arguments = new ReturnInputArguments();
+        while (inputData.read(arguments)) {
+            if (!executeCommand(arguments)) {
+                return;
+            }
+        }
     }
 
-    private void calculatorExecution() {
-        log.info("Calculator execute");
-
-        CommandsFactory factory = null;
+    public boolean executeCommand(ReturnInputArguments arguments) {
+        Commands command = null;
         try {
-            factory = new CommandsFactory();
+            command = commandsFactory.create(arguments.getArguments());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+            log.error("creating command ", ex);
+        } catch (MyExceptions ex) {
+            System.err.println(ex.getErrorInfo());
+            log.error("creating command with input {}, msg: {}", arguments.getArguments(), ex);
+            return false;
+        }
+
+        try {
+            executeCommand(command, context);
+        } catch (NoSuchMethodException ex) {
+            log.error("", ex);
+        } catch (MyExceptions ex) {
+            log.error("execute command with input {}, msg {}", arguments.getArguments(), ex);
+            return false;
+        }
+
+        return true;
+    }
+
+    private CommandsFactory initialFactory() {
+        CommandsFactory commandsFactory = null;
+        try {
+            commandsFactory = new CommandsFactory();
         } catch (IOException ex) {
             log.error("creating Factory with ", ex);
         } catch (MyExceptions ex) {
             log.error("creating Factory with ", ex);
             System.err.println(ex.getErrorInfo());
-            return;
-        }
-
-        ReturnInputArguments arguments = new ReturnInputArguments();
-        while (inputReader.read(arguments)) {
-            Commands command = null;
-            try {
-                command = factory.create(arguments.getArguments());
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
-                log.error("creating command ", ex);
-            } catch (MyExceptions ex) {
-                System.err.println(ex.getErrorInfo());
-                log.error("creating command with input {}, msg: {}", arguments.getArguments(), ex);
-                return;
-            }
-
-
-            try {
-                executeCommand(command, context);
-            } catch (NoSuchMethodException ex) {
-                log.error("", ex);
-            } catch (MyExceptions ex) {
-                log.error("execute command with input {}, msg {}", arguments.getArguments(), ex);
-                return;
-            }
+        } finally {
+            return commandsFactory;
         }
     }
 
