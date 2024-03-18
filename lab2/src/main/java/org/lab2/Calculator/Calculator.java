@@ -20,17 +20,8 @@ public class Calculator {
 
     public Context getContext() { return context; }
 
-    public boolean calculate(Commands commands) {
-        try {
-            executeCommand(commands, context);
-        } catch (NoSuchMethodException ex) {
-            log.error("", ex);
-        } catch (MyExceptions ex) {
-            log.error("execute command with input {}", ex);
-            return false;
-        }
-
-        return true;
+    public void calculate(Commands commands) throws NoSuchMethodException, MyExceptions{
+        executeCommand(commands, context);
     }
 
     private void executeCommand(Commands commandObject, Context context) throws NoSuchMethodException, MyExceptions {

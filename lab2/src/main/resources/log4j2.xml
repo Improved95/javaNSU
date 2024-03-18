@@ -36,7 +36,7 @@
 <!--            <AppenderDef ref = "" />-->
 <!--        </Logger>-->
 
-        <Root level="error">
+        <Root level="info">
             <AppenderRef ref="CalculatorLogTRACE" level="trace"/>
             <AppenderRef ref="CalculatorLogDEBUG" level="debug"/>
             <AppenderRef ref="CalculatorLogINFO" level="info"/>

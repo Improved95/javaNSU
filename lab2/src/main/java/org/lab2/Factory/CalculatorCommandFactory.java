@@ -5,7 +5,6 @@ import org.lab2.commands.annotations.ArgumentsExist;
 import org.lab2.exceptions.CannotOpenFile;
 import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
-import org.lab2.exceptions.MyRuntimeExceptions;
 import org.lab2.readers.ConfigParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

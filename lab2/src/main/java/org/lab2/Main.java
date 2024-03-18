@@ -44,7 +44,8 @@ public class Main {
 
     }
 
-    private static void calculatingInputData(Calculator calculator, CalculatorInputDataReader inputData, Factory calculatorCommandFactory) {
+    private static void calculatingInputData(Calculator calculator, CalculatorInputDataReader inputData,
+                                                Factory calculatorCommandFactory) {
         InputArguments arguments = new InputArguments();
         while (inputData.read(arguments)) {
             Commands command = null;
@@ -58,8 +59,13 @@ public class Main {
                 continue;
             }
 
-            if (!calculator.calculate(command)) {
-                return;
+            try {
+                calculator.calculate(command);
+            } catch (NoSuchMethodException ex) {
+                log.error("", ex);
+            } catch (MyExceptions ex) {
+                System.err.println(ex.getErrorInfo());
+                log.error("ex: {}, msg: {}", ex, ex.getErrorInfo());
             }
         }
     }
@@ -76,7 +82,6 @@ public class Main {
         } else {
             inputReader = new ConsoleStreamReaderCalculator();
         }
-
         return inputReader;
     }
 }
