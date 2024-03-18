@@ -1,4 +1,4 @@
-package org.lab3.view;
+package org.lab3.model.view;
 
 import javax.swing.*;
 import java.awt.*;

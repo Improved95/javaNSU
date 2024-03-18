@@ -1,8 +1,6 @@
 package org.lab3.slashBlade;
 
-import org.lab3.model.Model;
-import org.lab3.controller.Controller;
-import org.lab3.view.View;
+import org.lab3.model.view.View;
 
 public class SlashBlade {
     public static void initial() {
