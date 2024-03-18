@@ -20,7 +20,7 @@ public class Calculator {
 
     public Context getContext() { return context; }
 
-    public void calculate(Commands commands) throws NoSuchMethodException, MyExceptions{
+    public void calculate(Commands commands) throws NoSuchMethodException, MyExceptions {
         executeCommand(commands, context);
     }
 
