@@ -5,6 +5,7 @@ import org.lab2.commands.annotations.ArgumentsExist;
 import org.lab2.exceptions.CannotOpenFile;
 import org.lab2.exceptions.CommandNotFoundException;
 import org.lab2.exceptions.MyExceptions;
+import org.lab2.exceptions.MyRuntimeExceptions;
 import org.lab2.readers.ConfigParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +14,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class CommandsFactory {
+public class CalculatorCommandFactory implements Factory {
     private Properties commandsProperties;
-    private static final Logger log = LoggerFactory.getLogger(CommandsFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(CalculatorCommandFactory.class);
 
-    public CommandsFactory() throws IOException, MyExceptions {
+    public CalculatorCommandFactory() throws IOException, MyExceptions {
         InputStream inputStream = getClass().getResourceAsStream("config.txt");
 
         if (inputStream == null) {
