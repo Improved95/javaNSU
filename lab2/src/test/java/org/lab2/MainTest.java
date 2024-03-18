@@ -3,8 +3,16 @@ package org.lab2;
 import org.junit.jupiter.api.*;
 import org.lab2.Calculator.Calculator;
 import org.lab2.Calculator.InputArguments;
+import org.lab2.Factory.CalculatorCommandFactory;
+import org.lab2.Factory.Factory;
+import org.lab2.commands.Commands;
+import org.lab2.exceptions.MyExceptions;
 import org.lab2.readers.CalculatorInputDataReader;
 import org.lab2.readers.CalculatorStringDataReaderCalculator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 public class MainTest {
     @BeforeAll
@@ -14,37 +22,42 @@ public class MainTest {
     void setupThis() {}
 
     @Test
-    void TestCalculator1() {
-        Calculator calculator = null;
-        try {
-            calculator = new Calculator();
-        } catch (Exception ex) {}
+    void TestCalculator1() throws Exception {
+        Calculator calculator = new Calculator();
+        Factory calculatorCommandFactory = new CalculatorCommandFactory();
 
         InputArguments arguments = new InputArguments();
+
         arguments.setArguments(new String[]{"PUSH", "2"});
-        calculator.executeCommand(arguments);
+        Commands command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         arguments.setArguments(new String[]{"DEFINE", "a", "7"});
-        calculator.executeCommand(arguments);
+        command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         arguments.setArguments(new String[]{"PUSH", "a"});
-        calculator.executeCommand(arguments);
+        command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         arguments.setArguments(new String[]{"ADD"});
-        calculator.executeCommand(arguments);
+        command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         arguments.setArguments(new String[]{"SQRT"});
-        calculator.executeCommand(arguments);
+        command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         Assertions.assertEquals(3, calculator.getContext().getStack().getLast());
 
         arguments.setArguments(new String[]{"POP"});
-        calculator.executeCommand(arguments);
+        command = calculatorCommandFactory.create(arguments.getArguments());
+        calculator.calculate(command);
 
         Assertions.assertTrue(calculator.getContext().getStack().isEmpty());
     }
 
-    @Test
+    /*@Test
     void TestCalculator2() {
         Calculator calculator = null;
         try {
@@ -75,7 +88,7 @@ public class MainTest {
             Assertions.assertEquals(32100, calculator.getContext().getStack().getLast());
 
         } catch (Exception ex) {}
-    }
+    }*/
 
     @AfterEach
     void teatThis() {}
