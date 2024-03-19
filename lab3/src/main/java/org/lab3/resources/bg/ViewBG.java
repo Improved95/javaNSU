@@ -1,9 +1,10 @@
 package org.lab3.resources.bg;
 
-import org.lab3.resources.Resources;
-
 import java.awt.image.BufferedImage;
 
-public interface ViewBG extends Resources {
+public interface ViewBG extends AutoCloseable {
     BufferedImage getImage();
+
+    @Override
+    void close() throws Exception;
 }
