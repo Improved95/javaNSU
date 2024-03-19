@@ -6,8 +6,6 @@ import org.lab3.model.Model;
 import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
-import org.lab3.view.bg.SlashBladeViewBG;
-import org.lab3.view.bg.ViewBG;
 
 public class SlashBlade {
     public static void initial() {
