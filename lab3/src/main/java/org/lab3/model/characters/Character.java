@@ -1,6 +1,6 @@
 package org.lab3.model.characters;
 
-public abstract class Character implements CharacterInterface {
+public abstract class Character implements SlashBladeCharacter {
     private int posX;
     private int posY;
 

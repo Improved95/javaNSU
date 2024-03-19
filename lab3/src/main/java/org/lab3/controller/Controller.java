@@ -1,5 +1,5 @@
 package org.lab3.controller;
 
-public class Controller {
-
+public interface Controller {
+    void readInput();
 }

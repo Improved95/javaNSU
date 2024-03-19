@@ -1,14 +1,19 @@
-package org.lab3.model.view;
+package org.lab3.view;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class View {
+class Resolution {
+    public static final int widthRes = 16;
+    public static final int heightRes = 9;
+}
+
+public class SlashBladeView implements View {
     private int width;
     private int height;
     private JFrame jFrame;
 
-    public View(int width) {
+    public SlashBladeView(int width) {
         this.width = width;
         this.height = getHeightByWidth();
         this.jFrame = getFrame();
@@ -31,9 +36,4 @@ public class View {
     public void change() {
 
     }
-}
-
-class Resolution {
-    public static final int widthRes = 16;
-    public static final int heightRes = 9;
 }

@@ -1,5 +1,5 @@
 package org.lab3.model;
 
-public class Model {
-
+public interface Model {
+    public void changeModel();
 }
