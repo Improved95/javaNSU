@@ -1,6 +1,6 @@
-package org.lab3.model.characters;
+package org.lab3.model.objects;
 
-public class Enemy extends Character {
+public class Player extends Character {
     @Override
     public void attack() {
 

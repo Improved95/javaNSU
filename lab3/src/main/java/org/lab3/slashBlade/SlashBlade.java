@@ -28,6 +28,4 @@ public class SlashBlade {
             slashBladeView.change();
         }
     }
-
-
 }
