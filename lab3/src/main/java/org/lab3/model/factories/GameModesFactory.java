@@ -23,4 +23,3 @@ public class GameModesFactory {
         return properties;
     }
 }
-

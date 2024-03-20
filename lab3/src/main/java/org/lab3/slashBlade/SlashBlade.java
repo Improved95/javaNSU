@@ -10,9 +10,17 @@ import org.lab3.view.View;
 
 public class SlashBlade {
     public static void initial(ResourcesContext resourcesContext) {
-        Controller slashBladeController = new SlashBladeController();
-        Model slashBladeModel = new SlashBladeModel();
-        View slashBladeView = new SlashBladeView(1500);
+        Controller slashBladeController = null;
+        Model slashBladeModel = null;
+        View slashBladeView = null;
+
+        try {
+            slashBladeController = new SlashBladeController();
+            slashBladeModel = new SlashBladeModel();
+            slashBladeView = new SlashBladeView(1500);
+        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
+            ex.printStackTrace();
+        }
 
         while (true) {
             slashBladeController.readInput();
