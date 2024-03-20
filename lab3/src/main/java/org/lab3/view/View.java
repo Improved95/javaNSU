@@ -1,5 +1,7 @@
 package org.lab3.view;
 
+import org.lab3.model.Model;
+
 public interface View {
-    public void change();
+    void change(Model slashBladeModel);
 }

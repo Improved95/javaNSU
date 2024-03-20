@@ -5,16 +5,20 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 
 public class ResourcesContext implements AutoCloseable {
-    AbstractList<ResourcesView> bgImages = new ArrayList<>();
+    private AbstractList<ResourcesView> openedResourcesList = new ArrayList<>();
 
-    public void addBgImage(String path) throws IOException {
-        bgImages.add(new SlashBladeResourcesView(path));
+    public void addImage(String path) throws IOException {
+        openedResourcesList.add(new SlashBladeResourcesView(path));
+    }
+
+    public AbstractList<ResourcesView> getOpenedResourcesList() {
+        return openedResourcesList;
     }
 
     @Override
     public void close() throws Exception {
-        for (ResourcesView bgImage : bgImages) {
-            bgImage.close();
+        for (ResourcesView resource : openedResourcesList) {
+            resource.close();
         }
     }
 }

@@ -8,6 +8,10 @@ public class SlashBladeAbstractObject implements SlashBladeObject {
     private int size;
     private VisualContext visualContext;
 
+    public SlashBladeAbstractObject() {
+        this.visualContext = new VisualContext();
+    }
+
     @Override
     public void setPosition(int x, int y) {
         this.posX = x;
@@ -43,11 +47,6 @@ public class SlashBladeAbstractObject implements SlashBladeObject {
     @Override
     public int getSize() {
         return size;
-    }
-
-    @Override
-    public void setVisualContext(VisualContext visualContext) {
-        this.visualContext = visualContext;
     }
 
     @Override

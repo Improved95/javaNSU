@@ -14,6 +14,11 @@ public class SlashBladeModel implements Model {
         changeGameMode("LEVEL");
     }
 
+    @Override
+    public GameMode getCurrentGameMode() {
+        return currentGameMode;
+    }
+
     public void changeModel(Controller controller) {
         currentGameMode.execute();
     }

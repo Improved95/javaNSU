@@ -1,7 +1,12 @@
 package org.lab3.view;
 
+import org.lab3.model.Model;
+import org.lab3.model.NeedDrawObject;
+import org.lab3.model.gameMode.GameMode;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.AbstractList;
 
 class Resolution {
     public static final int widthRes = 16;
@@ -33,7 +38,24 @@ public class SlashBladeView implements View {
         return (width * Resolution.heightRes) / Resolution.widthRes;
     }
 
-    public void change() {
+    @Override
+    public void change(Model slashBladeModel) {
+        GameMode gameMode = slashBladeModel.getCurrentGameMode();
+        AbstractList<NeedDrawObject> drawObjectsList = gameMode.getNeedDrawObject();
 
+
+
+        for (NeedDrawObject drawObject : drawObjectsList) {
+            System.out.println(drawObject + " " + drawObject.getPosX() + " " + drawObject.getPosY());
+
+            JComponent jComponent = new JComponent() {
+                @Override
+                public void paint(Graphics g) {
+                    Graphics2D g2 = (Graphics2D)g;
+                    g2.drawImage(drawObject.getVisualContext().getImage(), drawObject.getPosX(), drawObject.getPosY(), null);
+                }
+            };
+            jFrame.add(jComponent);
+        }
     }
 }
