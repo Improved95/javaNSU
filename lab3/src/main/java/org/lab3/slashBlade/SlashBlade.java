@@ -16,7 +16,7 @@ public class SlashBlade {
 
         while (true) {
             slashBladeController.readInput();
-            slashBladeModel.changeModel();
+            slashBladeModel.changeModel(slashBladeController);
             slashBladeView.change();
         }
     }

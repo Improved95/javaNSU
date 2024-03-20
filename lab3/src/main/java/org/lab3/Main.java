@@ -1,6 +1,5 @@
 package org.lab3;
 
-
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.SlashBlade;
 

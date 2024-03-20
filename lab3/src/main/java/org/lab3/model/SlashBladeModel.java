@@ -1,7 +1,13 @@
 package org.lab3.model;
 
+import org.lab3.controller.Controller;
+
 public class SlashBladeModel implements Model {
-    public void changeModel() {
+    private void changeMode() {
+
+    }
+
+    public void changeModel(Controller controller) {
 
     }
 }
