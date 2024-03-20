@@ -1,23 +1,23 @@
 package org.lab3.model.objects;
 
-import org.lab3.model.NeedDrawObject;
 import org.lab3.model.VisualContext;
 
-public abstract class Character implements SlashBladeCharacter, NeedDrawObject {
+public class SlashBladeAbstractObject implements SlashBladeObject {
     private int posX;
     private int posY;
     private int size;
     private VisualContext visualContext;
 
     @Override
-    public void changePosition(int x, int y) {
-        this.posX += x;
-        this.posY += y;
+    public void setPosition(int x, int y) {
+        this.posX = x;
+        this.posY = y;
     }
 
     @Override
-    public void changeSize(int size) {
-        this.size += size;
+    public void changePosition(int x, int y) {
+        this.posX += x;
+        this.posY += y;
     }
 
     @Override
@@ -28,6 +28,16 @@ public abstract class Character implements SlashBladeCharacter, NeedDrawObject {
     @Override
     public int getPosY() {
         return posY;
+    }
+
+    @Override
+    public void changeSize(int size) {
+        this.size += size;
+    }
+
+    @Override
+    public void setSize(int size) {
+        this.size = size;
     }
 
     @Override

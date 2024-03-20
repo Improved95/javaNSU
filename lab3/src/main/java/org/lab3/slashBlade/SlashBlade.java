@@ -9,7 +9,7 @@ import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
 public class SlashBlade {
-    public static void initial(ResourcesContext resourcesContext) {
+    public static void initial() {
         Controller slashBladeController = null;
         Model slashBladeModel = null;
         View slashBladeView = null;
