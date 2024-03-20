@@ -8,16 +8,18 @@ public class SlashBladeModel implements Model {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
 
-    public SlashBladeModel() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public SlashBladeModel() throws ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
         this.gameModesFactory = new GameModesFactory();
-        this.currentGameMode = gameModesFactory.create("LEVEL");
+        changeGameMode("LEVEL");
     }
 
     public void changeModel(Controller controller) {
         currentGameMode.execute();
     }
 
-    private void changeMode() {
-
+    private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
+        currentGameMode = gameModesFactory.create(gameModeName);
     }
 }

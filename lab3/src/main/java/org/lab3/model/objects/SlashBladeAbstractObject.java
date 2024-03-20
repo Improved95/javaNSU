@@ -46,6 +46,11 @@ public class SlashBladeAbstractObject implements SlashBladeObject {
     }
 
     @Override
+    public void setVisualContext(VisualContext visualContext) {
+        this.visualContext = visualContext;
+    }
+
+    @Override
     public VisualContext getVisualContext() {
         return visualContext;
     }

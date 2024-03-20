@@ -1,8 +1,8 @@
-package org.lab3.resources.bg;
+package org.lab3.resources;
 
 import java.awt.image.BufferedImage;
 
-public interface ViewBG extends AutoCloseable {
+public interface ResourcesView extends AutoCloseable {
     BufferedImage getImage();
 
     @Override

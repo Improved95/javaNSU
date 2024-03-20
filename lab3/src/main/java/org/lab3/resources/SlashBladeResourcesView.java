@@ -1,15 +1,15 @@
-package org.lab3.resources.bg;
+package org.lab3.resources;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SlashBladeViewBG implements ViewBG {
+public class SlashBladeResourcesView implements ResourcesView {
     private InputStream imageStream;
     private BufferedImage bgImage;
 
-    public SlashBladeViewBG(String path) throws IOException {
+    public SlashBladeResourcesView(String path) throws IOException {
         this.imageStream = this.getClass().getResourceAsStream("../../../../SlashBladeResources/" + path);
         if (this.imageStream == null) {
             throw new IOException();
