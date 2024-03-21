@@ -16,15 +16,19 @@ public class SlashBlade {
         try {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel();
-            slashBladeView = new SlashBladeView(1500);
+            slashBladeView = new SlashBladeView(1920);
         } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
             ex.printStackTrace();
         }
 
-        while (true) {
-            slashBladeController.readInput();
-            slashBladeModel.changeModel(slashBladeController);
-            slashBladeView.change(slashBladeModel);
+        try {
+            while (true) {
+                slashBladeController.readInput();
+                slashBladeModel.changeModel(slashBladeController);
+                slashBladeView.change(slashBladeModel);
+            }
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
         }
     }
 }

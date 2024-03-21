@@ -8,7 +8,8 @@ public class SlashBladeAbstractObject implements SlashBladeObject {
     private int size;
     private VisualContext visualContext;
 
-    public SlashBladeAbstractObject() {
+    public SlashBladeAbstractObject(int x, int y) {
+        setPosition(x, y);
         this.visualContext = new VisualContext();
     }
 

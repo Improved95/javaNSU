@@ -12,35 +12,27 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Level implements GameMode {
     private Background background;
     private SamuraiV1 samurai;
 
     public Level() {
-        this.background = new Background();
-        background.setPosition(100, 0);
-
-//        this.samurai = new SamuraiV1();
-//        samurai.setPosition(300, 20);
+        this.background = new Background(100, 100);
+        this.samurai = new SamuraiV1(300, 20);
         initial();
     }
 
     @Override
-    public AbstractList<NeedDrawObject> getNeedDrawObject() {
+    public AbstractList<NeedDrawObject> getNeedDrawObject() throws IllegalAccessException {
         AbstractList<NeedDrawObject> needDrawObjects = new ArrayList<>();
 
-        /*Field[] fields = this.getClass().getFields();
+        Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.getType().isAnnotationPresent(DrawObject.class)) {
-                field.
-//                needDrawObjects.add();
+                needDrawObjects.add((NeedDrawObject)field.get(this));
             }
-        }*/
-
-        needDrawObjects.add(background);
-//        needDrawObjects.add(samurai);
+        }
 
         return needDrawObjects;
     }
@@ -51,7 +43,7 @@ public class Level implements GameMode {
     }
 
     private void initial() {
-        ResourcesContext samuraiImages = new ResourcesContext();
+//        ResourcesContext samuraiImages = new ResourcesContext();
 //        try {
 //            samuraiImages.addImage("samurai/fifteen.jpg");
 //            BufferedImage image = ImageIO.read(samuraiImages.getOpenedResourcesList().get(0).getOpenedResource());
@@ -60,11 +52,18 @@ public class Level implements GameMode {
 //            ex.printStackTrace();
 //        }
 
-        ResourcesContext backgroundImages = new ResourcesContext();
+        ResourcesContext samuraiImagesResources = new ResourcesContext();
+        ResourcesContext backgroundImagesResources = new ResourcesContext();
         try {
-            backgroundImages.addImage("bg/bg1.jpg");
-            BufferedImage image = ImageIO.read(samuraiImages.getOpenedResourcesList().get(0).getOpenedResource());
+
+            samuraiImagesResources.addImage("samurai/fifteen.jpg");
+            BufferedImage image = ImageIO.read(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
+            this.samurai.getVisualContext().setImage(image);
+
+            backgroundImagesResources.addImage("bg/bg3.jpg");
+            image = ImageIO.read(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
             this.background.getVisualContext().setImage(image);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

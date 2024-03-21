@@ -6,5 +6,5 @@ import java.util.AbstractList;
 
 public interface GameMode {
     void execute();
-    AbstractList<NeedDrawObject> getNeedDrawObject();
+    AbstractList<NeedDrawObject> getNeedDrawObject() throws IllegalAccessException;
 }
