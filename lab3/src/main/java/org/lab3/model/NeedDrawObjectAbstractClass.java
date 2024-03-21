@@ -24,13 +24,23 @@ public abstract class NeedDrawObjectAbstractClass implements NeedDrawObject, Sla
     }
 
     @Override
+    public void setScreenSize(int size) {
+        this.screenSize = size;
+    }
+
+    @Override
     public int getScreenSize() {
         return screenSize;
     }
 
     @Override
-    public int getScreenLevelLayer() {
-        return 0;
+    public void setScreenLayerLevel(int screenLayerLevel) {
+        this.screenLayerLevel = screenLayerLevel;
+    }
+
+    @Override
+    public int getScreenLayerLevel() {
+        return screenLayerLevel;
     }
 
     @Override

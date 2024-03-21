@@ -30,14 +30,16 @@ public class SlashBladeView implements View {
     public void change(Model slashBladeModel) throws IllegalAccessException {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
         Set<NeedDrawObject> drawObjectsList = gameMode.getDrawObjectsList();
-        jFrame.add(new MyComponent(drawObjectsList));
+        jFrame.add(new MyComponent(drawObjectsList, height));
     }
 
     private static class MyComponent extends JComponent {
         private Set<NeedDrawObject> drawObjectsList;
+        private ScreenImagePosition screenPos;
 
-        public MyComponent(Set<NeedDrawObject> drawObjectsList) {
+        public MyComponent(Set<NeedDrawObject> drawObjectsList, int screenHeight) {
             this.drawObjectsList = drawObjectsList;
+            screenPos = new ScreenImagePosition(screenHeight);
         }
 
         @Override
@@ -46,14 +48,29 @@ public class SlashBladeView implements View {
             ImageEditor imageEditor = new ImageEditor();
             for (NeedDrawObject drawObject : drawObjectsList) {
                 BufferedImage oldImage = drawObject.getVisualContext().getImage();
-//                BufferedImage editedImage = imageEditor.resizingImage(oldImage, oldImage.getWidth(), oldImage.getHeight(), drawObject.getSize());
-//                g2.drawImage(editedImage, drawObject.getPosX(), drawObject.getPosY(), null);
+                BufferedImage editedImage = imageEditor.resizingImage(oldImage, oldImage.getWidth(), oldImage.getHeight(), drawObject.getScreenSize());
+
+                screenPos.getScreenPosition(drawObject, editedImage);
+                g2.drawImage(editedImage, screenPos.posX, screenPos.posY, null);
             }
         }
     }
 
-    private void getScreenObjectPosition() {
+    private static class ScreenImagePosition {
+        private int screenHeight;
 
+        public int posX;
+        public int posY;
+
+
+        public ScreenImagePosition(int screenWidth) {
+            this.screenHeight = screenWidth;
+        }
+
+        public void getScreenPosition(NeedDrawObject drawObject, BufferedImage image) {
+            posX = drawObject.getScreenPosX();
+            posY = screenHeight - image.getHeight() - drawObject.getScreenPosY() - 39;
+        }
     }
 
     private int getHeightByWidth() {

@@ -27,16 +27,20 @@ public class Level implements GameMode {
         Set<NeedDrawObject> needDrawObjects = new TreeSet<>(new Comparator<NeedDrawObject>() {
             @Override
             public int compare(NeedDrawObject o1, NeedDrawObject o2) {
-                return o1.getScreenLevelLayer() - o2.getScreenLevelLayer();
+                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
+                    return -1;
+                }
+                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
             }
         });
 
-//        Field[] fields = this.getClass().getDeclaredFields();
-//        for (Field field : fields) {
-//            if (field.getType().isAnnotationPresent(DrawObject.class)) {
-//                needDrawObjects.add((NeedDrawObject)field.get(this));
-//            }
-//        }
+
+        /*Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getType().isAnnotationPresent(DrawObject.class)) {
+                needDrawObjects.add((NeedDrawObject)field.get(this));
+            }
+        }*/
 
         needDrawObjects.add(samurai);
         needDrawObjects.add(background);
@@ -46,6 +50,8 @@ public class Level implements GameMode {
 
     @Override
     public void execute() {
+        background.setScreenLayerLevel(0);
+        samurai.setScreenLayerLevel(1);
 //        System.out.println("play");
     }
 
@@ -54,7 +60,7 @@ public class Level implements GameMode {
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         try {
 
-            samuraiImagesResources.addImage("samurai/fifteen.jpg");
+            samuraiImagesResources.addImage("samurai/zero.png");
             BufferedImage image = ImageIO.read(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
             this.samurai.getVisualContext().setImage(image);
 
