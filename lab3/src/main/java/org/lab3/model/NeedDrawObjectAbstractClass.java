@@ -1,6 +1,8 @@
 package org.lab3.model;
 
-public abstract class NeedDrawObjectAbstractClass implements NeedDrawObject {
+import org.lab3.model.objects.SlashBladeObject;
+
+public abstract class NeedDrawObjectAbstractClass implements NeedDrawObject, SlashBladeObject {
     private int screenPosX;
     private int screenPosY;
     private int screenSize;

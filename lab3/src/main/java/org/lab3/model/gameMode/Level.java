@@ -17,8 +17,8 @@ public class Level implements GameMode {
     private SamuraiV1 samurai;
 
     public Level() {
-//        this.background = new Background(0, 0, 100, 0);
-//        this.samurai = new SamuraiV1(300, 100, 50, 1);
+        this.background = new Background();
+        this.samurai = new SamuraiV1();
         initial();
     }
 
@@ -27,7 +27,7 @@ public class Level implements GameMode {
         Set<NeedDrawObject> needDrawObjects = new TreeSet<>(new Comparator<NeedDrawObject>() {
             @Override
             public int compare(NeedDrawObject o1, NeedDrawObject o2) {
-//                return o1.getLevelLayer() - o2.getLevelLayer();
+                return o1.getScreenLevelLayer() - o2.getScreenLevelLayer();
             }
         });
 
