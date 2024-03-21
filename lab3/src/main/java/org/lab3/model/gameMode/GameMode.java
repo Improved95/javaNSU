@@ -2,9 +2,9 @@ package org.lab3.model.gameMode;
 
 import org.lab3.model.NeedDrawObject;
 
-import java.util.AbstractList;
+import java.util.Set;
 
 public interface GameMode {
     void execute();
-    AbstractList<NeedDrawObject> getNeedDrawObject() throws IllegalAccessException;
+    Set<NeedDrawObject> getDrawObjectsList() throws IllegalAccessException;
 }

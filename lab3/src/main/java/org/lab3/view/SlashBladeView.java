@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.AbstractList;
+import java.util.Set;
 
 class Resolution {
     public static final int widthRes = 16;
@@ -28,26 +29,31 @@ public class SlashBladeView implements View {
     @Override
     public void change(Model slashBladeModel) throws IllegalAccessException {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
-        AbstractList<NeedDrawObject> drawObjectsList = gameMode.getNeedDrawObject();
-        for (NeedDrawObject drawObject : drawObjectsList) {
-            System.out.println(drawObject.getClass().getSimpleName() + " " + drawObject.getPosX() + " " + drawObject.getPosY());
-            addComponentOnScreen(drawObject);
+        Set<NeedDrawObject> drawObjectsList = gameMode.getDrawObjectsList();
+        jFrame.add(new MyComponent(drawObjectsList));
+    }
+
+    private static class MyComponent extends JComponent {
+        private Set<NeedDrawObject> drawObjectsList;
+
+        public MyComponent(Set<NeedDrawObject> drawObjectsList) {
+            this.drawObjectsList = drawObjectsList;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D)g;
+            ImageEditor imageEditor = new ImageEditor();
+            for (NeedDrawObject drawObject : drawObjectsList) {
+                BufferedImage oldImage = drawObject.getVisualContext().getImage();
+//                BufferedImage editedImage = imageEditor.resizingImage(oldImage, oldImage.getWidth(), oldImage.getHeight(), drawObject.getSize());
+//                g2.drawImage(editedImage, drawObject.getPosX(), drawObject.getPosY(), null);
+            }
         }
     }
 
-    private void addComponentOnScreen(NeedDrawObject drawObject) {
-//        ImageEditor imageEditor = new ImageEditor();
-//        BufferedImage editedImage = imageEditor.resizingImage(drawObject.getVisualContext().getImage(), 1000, 1000);
-//        System.out.println(editedImage.getWidth() + " " + editedImage.getHeight());
+    private void getScreenObjectPosition() {
 
-        JComponent jComponent = new JComponent() {
-            @Override
-            public void paint(Graphics g) {
-                Graphics2D g2 = (Graphics2D)g;
-                g2.drawImage(drawObject.getVisualContext().getImage(), drawObject.getPosX(), drawObject.getPosY(), null);
-            }
-        };
-        jFrame.add(jComponent);
     }
 
     private int getHeightByWidth() {

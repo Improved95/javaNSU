@@ -1,57 +1,7 @@
 package org.lab3.model.objects;
 
-import org.lab3.model.VisualContext;
+import org.lab3.model.NeedDrawObjectAbstractClass;
 
-public class SlashBladeAbstractObject implements SlashBladeObject {
-    private int posX;
-    private int posY;
-    private int size;
-    private VisualContext visualContext;
+public class SlashBladeAbstractObject extends NeedDrawObjectAbstractClass {
 
-    public SlashBladeAbstractObject(int x, int y) {
-        setPosition(x, y);
-        this.visualContext = new VisualContext();
-    }
-
-    @Override
-    public void setPosition(int x, int y) {
-        this.posX = x;
-        this.posY = y;
-    }
-
-    @Override
-    public void changePosition(int x, int y) {
-        this.posX += x;
-        this.posY += y;
-    }
-
-    @Override
-    public int getPosX() {
-        return posX;
-    }
-
-    @Override
-    public int getPosY() {
-        return posY;
-    }
-
-    @Override
-    public void changeSize(int size) {
-        this.size += size;
-    }
-
-    @Override
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    @Override
-    public int getSize() {
-        return size;
-    }
-
-    @Override
-    public VisualContext getVisualContext() {
-        return visualContext;
-    }
 }

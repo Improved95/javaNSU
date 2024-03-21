@@ -10,48 +10,46 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.AbstractList;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Level implements GameMode {
     private Background background;
     private SamuraiV1 samurai;
 
     public Level() {
-        this.background = new Background(100, 100);
-        this.samurai = new SamuraiV1(300, 20);
+//        this.background = new Background(0, 0, 100, 0);
+//        this.samurai = new SamuraiV1(300, 100, 50, 1);
         initial();
     }
 
     @Override
-    public AbstractList<NeedDrawObject> getNeedDrawObject() throws IllegalAccessException {
-        AbstractList<NeedDrawObject> needDrawObjects = new ArrayList<>();
-
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (field.getType().isAnnotationPresent(DrawObject.class)) {
-                needDrawObjects.add((NeedDrawObject)field.get(this));
+    public Set<NeedDrawObject> getDrawObjectsList() throws IllegalAccessException {
+        Set<NeedDrawObject> needDrawObjects = new TreeSet<>(new Comparator<NeedDrawObject>() {
+            @Override
+            public int compare(NeedDrawObject o1, NeedDrawObject o2) {
+//                return o1.getLevelLayer() - o2.getLevelLayer();
             }
-        }
+        });
+
+//        Field[] fields = this.getClass().getDeclaredFields();
+//        for (Field field : fields) {
+//            if (field.getType().isAnnotationPresent(DrawObject.class)) {
+//                needDrawObjects.add((NeedDrawObject)field.get(this));
+//            }
+//        }
+
+        needDrawObjects.add(samurai);
+        needDrawObjects.add(background);
 
         return needDrawObjects;
     }
 
     @Override
     public void execute() {
-
+//        System.out.println("play");
     }
 
     private void initial() {
-//        ResourcesContext samuraiImages = new ResourcesContext();
-//        try {
-//            samuraiImages.addImage("samurai/fifteen.jpg");
-//            BufferedImage image = ImageIO.read(samuraiImages.getOpenedResourcesList().get(0).getOpenedResource());
-//            this.samurai.getVisualContext().setImage(image);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-
         ResourcesContext samuraiImagesResources = new ResourcesContext();
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         try {
@@ -60,7 +58,7 @@ public class Level implements GameMode {
             BufferedImage image = ImageIO.read(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
             this.samurai.getVisualContext().setImage(image);
 
-            backgroundImagesResources.addImage("bg/bg3.jpg");
+            backgroundImagesResources.addImage("bg/bg1.jpg");
             image = ImageIO.read(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
             this.background.getVisualContext().setImage(image);
 
