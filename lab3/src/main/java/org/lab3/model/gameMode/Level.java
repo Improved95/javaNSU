@@ -43,7 +43,7 @@ public class Level implements GameMode {
         }*/
 
         needDrawObjects.add(samurai);
-//        needDrawObjects.add(background);
+        needDrawObjects.add(background);
 
         return needDrawObjects;
     }

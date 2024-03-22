@@ -11,8 +11,10 @@ public class EditedImage {
     private int newPosX;
     private int newPosY;
 
-    public EditedImage(NeedDrawObject oldImage) {
+    public EditedImage(NeedDrawObject oldImage, int screenHeight) {
         this.oldImage = oldImage;
+        resizingImage();
+        replaceImage(screenHeight);
     }
 
     public int getNewPosX() {
@@ -41,7 +43,6 @@ public class EditedImage {
 
     public void replaceImage(int screenHeight) {
         newPosX = oldImage.getScreenPosX();
-        newPosY = screenHeight - oldImage.getVisualContext().getImage().getHeight() - oldImage.getScreenPosY();
-//        newPosY = screenHeight - newImage.getHeight() - oldImage.getScreenPosY();
+        newPosY = screenHeight - 39 - newImage.getHeight() - oldImage.getScreenPosY();
     }
 }

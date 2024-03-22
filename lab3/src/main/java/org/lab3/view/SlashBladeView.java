@@ -18,7 +18,6 @@ class Resolution {
 public class SlashBladeView implements View {
     private int width;
     private int height;
-    private JFrame jFrame;
 
     public SlashBladeView(int width) {
         this.width = width;
@@ -46,25 +45,11 @@ public class SlashBladeView implements View {
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D)g;
             for (NeedDrawObject drawObject : drawObjectsList) {
-                EditedImage imageEditor = new EditedImage(drawObject);
-                imageEditor.resizingImage();
-                imageEditor.replaceImage(screenHeight);
+                EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
                 g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);
             }
         }
     }
 
-    private int getHeightByWidth() {
-        return (width * Resolution.heightRes) / Resolution.widthRes;
-    }
 
-    private JFrame getFrame() {
-        JFrame jFrame = new JFrame();
-        jFrame.setVisible(true);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
-        jFrame.setBounds(dimension.width / 2 - width / 2, dimension.height / 2 - height / 2, width, height);
-        return jFrame;
-    }
 }
