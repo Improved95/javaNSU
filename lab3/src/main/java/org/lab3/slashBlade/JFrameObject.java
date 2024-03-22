@@ -14,11 +14,11 @@ public class JFrameObject {
         this.jFrame = getFrame();
     }
 
-    public int getHeight() {
+    public int getScreenHeight() {
         return height;
     }
 
-    public JFrame getjFrame() {
+    public JFrame getJFrame() {
         return jFrame;
     }
 
@@ -33,11 +33,11 @@ public class JFrameObject {
 
     private JFrame getFrame() {
         JFrame jFrame = new JFrame();
-        jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - width / 2, dimension.height / 2 - height / 2, width, height);
+        jFrame.setVisible(true);
         return jFrame;
     }
 }

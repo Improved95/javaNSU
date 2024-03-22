@@ -7,14 +7,14 @@ import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class SlashBlade {
     private JFrameObject jFrameObject;
 
+    public SlashBlade() {
+        this.jFrameObject = new JFrameObject(1500);
+    }
+
     public void initial() {
-        this.jFrameObject = new JFrameObject(1920);
         Controller slashBladeController = null;
         Model slashBladeModel = null;
         View slashBladeView = null;
