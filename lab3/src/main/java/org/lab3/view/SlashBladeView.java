@@ -10,26 +10,12 @@ import java.awt.image.BufferedImage;
 import java.util.AbstractList;
 import java.util.Set;
 
-class Resolution {
-    public static final int widthRes = 16;
-    public static final int heightRes = 9;
-}
-
 public class SlashBladeView implements View {
-    private int width;
-    private int height;
-
-    public SlashBladeView(int width) {
-        this.width = width;
-        this.height = getHeightByWidth();
-        this.jFrame = getFrame();
-    }
-
     @Override
-    public void change(Model slashBladeModel) throws IllegalAccessException {
+    public void change(Model slashBladeModel, JFrame jFrame) throws IllegalAccessException {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
         Set<NeedDrawObject> drawObjectsList = gameMode.getDrawObjectsList();
-        jFrame.add(new MyComponent(drawObjectsList, height));
+        jFrame.add(new MyComponent(drawObjectsList, ));
     }
 
     private static class MyComponent extends JComponent {
@@ -50,6 +36,4 @@ public class SlashBladeView implements View {
             }
         }
     }
-
-
 }
