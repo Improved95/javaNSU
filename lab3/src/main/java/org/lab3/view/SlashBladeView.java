@@ -3,6 +3,7 @@ package org.lab3.view;
 import org.lab3.model.Model;
 import org.lab3.model.NeedDrawObject;
 import org.lab3.model.gameMode.GameMode;
+import org.lab3.slashBlade.JFrameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,10 @@ import java.util.Set;
 
 public class SlashBladeView implements View {
     @Override
-    public void change(Model slashBladeModel, JFrame jFrame) throws IllegalAccessException {
+    public void change(Model slashBladeModel, JFrameObject jFrameObject) throws IllegalAccessException {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
         Set<NeedDrawObject> drawObjectsList = gameMode.getDrawObjectsList();
-        jFrame.add(new MyComponent(drawObjectsList, ));
+        jFrameObject.getjFrame().add(new MyComponent(drawObjectsList, jFrameObject.getHeight()));
     }
 
     private static class MyComponent extends JComponent {
