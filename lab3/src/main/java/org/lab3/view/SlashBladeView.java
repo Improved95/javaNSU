@@ -35,41 +35,22 @@ public class SlashBladeView implements View {
 
     private static class MyComponent extends JComponent {
         private Set<NeedDrawObject> drawObjectsList;
-        private ScreenImagePosition screenPos;
+        private int screenHeight;
 
         public MyComponent(Set<NeedDrawObject> drawObjectsList, int screenHeight) {
             this.drawObjectsList = drawObjectsList;
-            screenPos = new ScreenImagePosition(screenHeight);
+            this.screenHeight = screenHeight;
         }
 
         @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D)g;
-            ImageEditor imageEditor = new ImageEditor();
             for (NeedDrawObject drawObject : drawObjectsList) {
-                BufferedImage oldImage = drawObject.getVisualContext().getImage();
-                BufferedImage editedImage = imageEditor.resizingImage(oldImage, oldImage.getWidth(), oldImage.getHeight(), drawObject.getScreenSize());
-
-                screenPos.getScreenPosition(drawObject, editedImage);
-                g2.drawImage(editedImage, screenPos.posX, screenPos.posY, null);
+                EditedImage imageEditor = new EditedImage(drawObject);
+                imageEditor.resizingImage();
+                imageEditor.replaceImage(screenHeight);
+                g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);
             }
-        }
-    }
-
-    private static class ScreenImagePosition {
-        private int screenHeight;
-
-        public int posX;
-        public int posY;
-
-
-        public ScreenImagePosition(int screenWidth) {
-            this.screenHeight = screenWidth;
-        }
-
-        public void getScreenPosition(NeedDrawObject drawObject, BufferedImage image) {
-            posX = drawObject.getScreenPosX();
-            posY = screenHeight - image.getHeight() - drawObject.getScreenPosY() - 39;
         }
     }
 

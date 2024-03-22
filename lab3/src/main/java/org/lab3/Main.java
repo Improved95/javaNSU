@@ -1,9 +1,6 @@
 package org.lab3;
 
-import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.SlashBlade;
-
-import java.io.IOException;
 
 public class Main {
     public static void main(String args[]) {
