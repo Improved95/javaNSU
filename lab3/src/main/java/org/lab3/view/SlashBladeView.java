@@ -7,7 +7,12 @@ import org.lab3.slashBlade.JFrameObject;
 
 import java.util.Set;
 
-public class SlashBladeView implements View {
+public class SlashBladeView extends ObsererViewAbstract {
+    @Override
+    public void update() {
+
+    }
+
     @Override
     public void change(Model slashBladeModel, JFrameObject jFrameObject) throws IllegalAccessException {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();

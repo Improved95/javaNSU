@@ -2,14 +2,14 @@ package org.lab3.model;
 
 import org.lab3.model.objects.SlashBladeObject;
 
-public abstract class NeedDrawObjectAbstractClass implements NeedDrawObject, SlashBladeObject {
+public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBladeObject {
     private int screenPosX;
     private int screenPosY;
     private int screenSize;
     private int screenLayerLevel;
     private VisualContext visualContext;
 
-    public NeedDrawObjectAbstractClass() {
+    public NeedDrawObjectAbstract() {
         this.visualContext = new VisualContext();
     }
 

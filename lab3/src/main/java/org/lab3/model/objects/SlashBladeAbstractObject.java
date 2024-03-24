@@ -1,8 +1,8 @@
 package org.lab3.model.objects;
 
-import org.lab3.model.NeedDrawObjectAbstractClass;
+import org.lab3.model.NeedDrawObjectAbstract;
 
-public class SlashBladeAbstractObject extends NeedDrawObjectAbstractClass {
+public class SlashBladeAbstractObject extends NeedDrawObjectAbstract {
     protected int inGamePosX;
     protected int inGamePosY;
 
