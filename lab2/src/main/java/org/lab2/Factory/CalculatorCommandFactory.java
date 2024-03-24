@@ -18,15 +18,15 @@ public class CalculatorCommandFactory implements Factory {
     private static final Logger log = LoggerFactory.getLogger(CalculatorCommandFactory.class);
 
     public CalculatorCommandFactory() throws IOException, MyExceptions {
-        InputStream inputStream = getClass().getResourceAsStream("config.txt");
+        try (InputStream inputStream = getClass().getResourceAsStream("../../../config.txt")) {
+            if (inputStream == null) {
+                throw new CannotOpenFile("FactoryConfig");
+            }
 
-        if (inputStream == null) {
-            throw new CannotOpenFile("FactoryConfig");
+            ConfigParser configReader = new ConfigParser();
+            commandsProperties = configReader.parse(inputStream);
+            log.info("Factory created.");
         }
-
-        ConfigParser configReader = new ConfigParser();
-        commandsProperties = configReader.parse(inputStream);
-        log.info("Factory created.");
     }
 
     public Commands create(String[] userInput) throws ClassNotFoundException, InstantiationException,

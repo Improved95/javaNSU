@@ -23,7 +23,7 @@ public class FileStreamReaderCalculator implements CalculatorInputDataReader {
                 return false;
             }
         } catch (java.io.IOException ex) {
-            ex.printStackTrace();
+            log.info("cannot read next line form input file {}", ex);
             return false;
         }
 

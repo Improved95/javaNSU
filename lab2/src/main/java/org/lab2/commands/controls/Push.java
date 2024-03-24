@@ -30,6 +30,7 @@ public class Push implements Commands {
         } catch (NumberFormatException ex) {
             if (parametersMap.containsKey(parameterValue)) {
                 stack.addLast(parametersMap.get(parameterValue));
+                log.info("Executed {} with arguments {}", commandName, parameterValue);
                 return;
             } else {
                 throw new IncorrectArgumentException("PUSH");

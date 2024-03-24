@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import static java.lang.System.exit;
-
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Calculator.class);
 
@@ -39,7 +37,6 @@ public class Main {
 
         } catch (Exception ex) {
             log.error("Cannot open input data stream, args: {}, exception: {}", args, ex);
-            System.err.println("Cannot open input data stream, args:" + args);
         }
 
     }

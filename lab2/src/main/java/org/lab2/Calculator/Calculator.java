@@ -18,7 +18,9 @@ public class Calculator {
         log.info("Calculator created");
     }
 
-    public Context getContext() { return context; }
+    public Context getContext() {
+        return context;
+    }
 
     public void calculate(Commands commands) throws NoSuchMethodException, MyExceptions {
         executeCommand(commands, context);

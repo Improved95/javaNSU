@@ -4,6 +4,7 @@ import org.lab2.Calculator.Calculator;
 import org.lab2.Calculator.Context;
 import org.lab2.commands.Commands;
 import org.lab2.commands.annotations.NeedNElementsInStack;
+import org.lab2.exceptions.DivNullException;
 import org.lab2.exceptions.MyExceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,12 @@ public class Div implements Commands {
         Deque<Double> stack = context.getStack();
         double num1 = stack.removeLast();
         double num2 = stack.removeLast();
-        stack.addLast(num2 / num1);
 
+        if (num1 == 0) {
+            throw new DivNullException();
+        }
+
+        stack.addLast(num2 / num1);
 
         log.info("Executed {} with got value {} {}", commandName, num1, num2);
     }
