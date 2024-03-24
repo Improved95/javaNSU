@@ -32,10 +32,6 @@
 
     <Loggers>
 
-<!--        <Logger name="" level="debug" additivity="false">-->
-<!--            <AppenderDef ref = "" />-->
-<!--        </Logger>-->
-
         <Root level="info">
             <AppenderRef ref="CalculatorLogTRACE" level="trace"/>
             <AppenderRef ref="CalculatorLogDEBUG" level="debug"/>
