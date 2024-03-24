@@ -1,30 +1,34 @@
 package org.lab3.model;
 
-import org.lab3.controller.Controller;
+import org.lab3.observers.ControllerObservable;
 import org.lab3.observers.ViewObserver;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+
 public abstract class ObserverModelAbstract implements Model {
-    public ObserverModelAbstract(Controller controller) {
-        controller.registerObserver(this);
+    AbstractList<ViewObserver> viewObservers = new ArrayList<>();
+    public ObserverModelAbstract(ControllerObservable controllerObservable) {
+        controllerObservable.registerObserver(this);
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     @Override
     public void registerObserver(ViewObserver o) {
-
+        viewObservers.add(o);
     }
 
     @Override
     public void removeObserver(ViewObserver o) {
-
+        viewObservers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
-
+        for (ViewObserver viewObserver : viewObservers) {
+            viewObserver.update();
+        }
     }
 }

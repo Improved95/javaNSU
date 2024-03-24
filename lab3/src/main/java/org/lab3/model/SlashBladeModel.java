@@ -22,7 +22,7 @@ public class SlashBladeModel extends ObserverModelAbstract {
 
     @Override
     public void update() {
-
+        change();
     }
 
     @Override

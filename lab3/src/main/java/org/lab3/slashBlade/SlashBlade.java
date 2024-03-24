@@ -7,8 +7,6 @@ import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
-import javax.swing.*;
-
 public class SlashBlade {
     private JFrameObject jFrameObject;
 
@@ -25,7 +23,7 @@ public class SlashBlade {
         try {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel(slashBladeController);
-            slashBladeView = new SlashBladeView();
+            slashBladeView = new SlashBladeView(slashBladeModel);
         } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
             ex.printStackTrace();
         }
