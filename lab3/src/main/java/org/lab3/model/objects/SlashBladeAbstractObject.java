@@ -3,6 +3,10 @@ package org.lab3.model.objects;
 import org.lab3.model.NeedDrawObjectAbstract;
 
 public class SlashBladeAbstractObject extends NeedDrawObjectAbstract {
+    public SlashBladeAbstractObject() {
+        this.setScreenSize(100);
+    }
+
     protected int inGamePosX;
     protected int inGamePosY;
 

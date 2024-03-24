@@ -6,5 +6,5 @@ import java.util.Set;
 
 public interface GameMode {
     void execute();
-    Set<NeedDrawObject> getDrawObjectsList() throws IllegalAccessException;
+    void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) throws IllegalAccessException;
 }

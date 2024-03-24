@@ -23,36 +23,27 @@ public class Level implements GameMode {
     }
 
     @Override
-    public Set<NeedDrawObject> getDrawObjectsList() throws IllegalAccessException {
-        Set<NeedDrawObject> needDrawObjects = new TreeSet<>(new Comparator<NeedDrawObject>() {
-            @Override
-            public int compare(NeedDrawObject o1, NeedDrawObject o2) {
-                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
-                    return -1;
-                }
-                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
-            }
-        });
-
-
+    public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) throws IllegalAccessException {
         /*Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.getType().isAnnotationPresent(DrawObject.class)) {
                 needDrawObjects.add((NeedDrawObject)field.get(this));
             }
         }*/
-
-        needDrawObjects.add(samurai);
-        needDrawObjects.add(background);
-
-        return needDrawObjects;
+        drawObjectsList.clear();
+        drawObjectsList.add(samurai);
+        drawObjectsList.add(background);
     }
 
     @Override
     public void execute() {
         background.setScreenLayerLevel(0);
+        background.setInGamePosition(-400, -170);
+        background.setScreenSize(115);
+
         samurai.setScreenLayerLevel(1);
-//        System.out.println("play");
+        samurai.setInGamePosition(100, 0);
+        samurai.setScreenSize(40);
     }
 
     private void initial() {

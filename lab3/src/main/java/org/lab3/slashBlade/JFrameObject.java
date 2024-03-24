@@ -1,11 +1,9 @@
 package org.lab3.slashBlade;
 
-import org.lab3.model.NeedDrawObject;
-import org.lab3.view.EditedImage;
+import org.lab3.view.SlashBladeView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Set;
 
 public class JFrameObject {
     private int width;
@@ -16,18 +14,19 @@ public class JFrameObject {
         this.width = width;
         this.height = getHeightByWidth();
         this.jFrame = getFrame();
+
     }
 
-    public void addObjectsOnFrame(Set<NeedDrawObject> drawObjectsList) {
-        jFrame.add(new MyComponent(drawObjectsList, height));
+    public void addDrawableComponent(SlashBladeView slashBladeView) {
+        jFrame.add(new MyComponent(slashBladeView, height));
     }
 
     private static class MyComponent extends JComponent {
-        private Set<NeedDrawObject> drawObjectsList;
+        private SlashBladeView slashBladeView;
         private int screenHeight;
 
-        public MyComponent(Set<NeedDrawObject> drawObjectsList, int screenHeight) {
-            this.drawObjectsList = drawObjectsList;
+        public MyComponent(SlashBladeView slashBladeView, int screenHeight) {
+            this.slashBladeView = slashBladeView;
             this.screenHeight = screenHeight;
         }
 
@@ -35,11 +34,9 @@ public class JFrameObject {
         protected void paintComponent(Graphics g) {
             System.out.println("paintComponent");
             Graphics2D g2 = (Graphics2D)g;
-//            g2.drawRect(20, 20, 40, 40);
-            for (NeedDrawObject drawObject : drawObjectsList) {
-                EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
-                g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);
-            }
+
+            slashBladeView.drawObject(g2, screenHeight);
+
             g2.dispose();
         }
     }

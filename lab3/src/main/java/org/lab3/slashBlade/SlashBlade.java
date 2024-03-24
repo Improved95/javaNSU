@@ -15,7 +15,6 @@ public class SlashBlade {
         Model slashBladeModel = null;
         View slashBladeView = null;
 
-
         try {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel();
@@ -27,14 +26,14 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        this.jFrameObject = new JFrameObject(1920);
-        while (true) {
-            slashBladeController.readInput();
-            try {
-                slashBladeView.change(slashBladeModel, jFrameObject);
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            }
+        jFrameObject = new JFrameObject(1920);
+        jFrameObject.addDrawableComponent((SlashBladeView) slashBladeView);
+
+        slashBladeModel.change();
+        try {
+            slashBladeView.change(slashBladeModel, jFrameObject);
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
         }
     }
 }
