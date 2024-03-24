@@ -37,7 +37,7 @@ public class SlashBlade {
         }
 
         while (true) {
-            slashBladeController.readInput();
+            slashBladeController.readInput(jFrameObject);
         }
     }
 }

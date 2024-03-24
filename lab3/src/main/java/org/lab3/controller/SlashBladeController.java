@@ -1,6 +1,11 @@
 package org.lab3.controller;
 
-public class SlashBladeController extends ObserverControllerAbstract {
+import org.lab3.slashBlade.JFrameObject;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class SlashBladeController extends ObserverControllerAbstract implements KeyListener {
     KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
 
     public KeysIsPressedContext getKeysIsPressedContext() {
@@ -8,9 +13,18 @@ public class SlashBladeController extends ObserverControllerAbstract {
     }
 
     @Override
-    public void readInput() {
+    public void readInput(JFrameObject jFrameObject) {
         if (false) {
             notifyObservers();
         }
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 }
