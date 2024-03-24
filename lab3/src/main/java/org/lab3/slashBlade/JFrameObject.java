@@ -1,6 +1,6 @@
 package org.lab3.slashBlade;
 
-import org.lab3.controller.SlashBladeController;
+import org.lab3.controller.Controller;
 import org.lab3.view.SlashBladeView;
 
 import javax.swing.*;
@@ -8,30 +8,21 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class JFrameObject extends Frame implements KeyListener {
+public class JFrameObject extends Frame {
     private int width;
     private int height;
     private JFrame jFrame;
 
-    public JFrameObject(int width) {
+    public JFrameObject(int width, Controller slashBlaseController) {
         this.width = width;
         this.height = getHeightByWidth();
         this.jFrame = getFrame();
-        this.jFrame.addKeyListener(this);
+        this.jFrame.addKeyListener(slashBlaseController);
     }
 
     public void addDrawableComponent(SlashBladeView slashBladeView) {
         jFrame.add(new MyComponent(slashBladeView, height));
     }
-
-    @Override
-    public void keyTyped(KeyEvent e) {}
-
-    @Override
-    public void keyPressed(KeyEvent e) {}
-
-    @Override
-    public void keyReleased(KeyEvent e) {}
 
     private static class MyComponent extends JComponent {
         private SlashBladeView slashBladeView;

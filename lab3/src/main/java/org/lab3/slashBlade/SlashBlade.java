@@ -26,7 +26,7 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        jFrameObject = new JFrameObject(1920);
+        jFrameObject = new JFrameObject(1920, slashBladeController);
         jFrameObject.addDrawableComponent((SlashBladeView) slashBladeView);
 
         slashBladeModel.change();
