@@ -10,7 +10,13 @@ import org.lab3.view.View;
 import javax.swing.*;
 
 public class SlashBlade {
-    public static void initial() {
+    private JFrameObject jFrameObject;
+
+    public SlashBlade() {
+        this.jFrameObject = new JFrameObject(1920);
+    }
+
+    public void initial() {
         Controller slashBladeController = null;
         Model slashBladeModel = null;
         View slashBladeView = null;
@@ -18,7 +24,7 @@ public class SlashBlade {
         try {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel();
-            slashBladeView = new SlashBladeView(1920);
+            slashBladeView = new SlashBladeView();
         } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
             ex.printStackTrace();
         }
@@ -27,7 +33,7 @@ public class SlashBlade {
             while (true) {
                 slashBladeController.readInput();
                 slashBladeModel.changeModel(slashBladeController);
-                slashBladeView.change(slashBladeModel);
+                slashBladeView.change(slashBladeModel, jFrameObject);
             }
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
