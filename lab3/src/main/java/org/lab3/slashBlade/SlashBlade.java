@@ -14,6 +14,7 @@ public class SlashBlade {
 
     public SlashBlade() {
         this.jFrameObject = new JFrameObject(1920);
+//        jFrameObject.addObjectsOnFrame(null);
     }
 
     public void initial() {
@@ -29,14 +30,13 @@ public class SlashBlade {
             ex.printStackTrace();
         }
 
-        try {
-            while (true) {
-                slashBladeController.readInput();
-                slashBladeModel.changeModel(slashBladeController);
-                slashBladeView.change(slashBladeModel, jFrameObject);
-            }
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            slashBladeController.readInput();
+            slashBladeModel.changeModel(slashBladeController);
+            this.jFrameObject.addObjectsOnFrame(null);
+//            slashBladeView.change(slashBladeModel, jFrameObject);
+//        } catch (IllegalAccessException ex) {
+//            ex.printStackTrace();
+//        }
     }
 }

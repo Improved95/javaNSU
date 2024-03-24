@@ -5,6 +5,7 @@ import org.lab3.view.EditedImage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 import java.util.Set;
 
 public class JFrameObject {
@@ -19,6 +20,7 @@ public class JFrameObject {
     }
 
     public void addObjectsOnFrame(Set<NeedDrawObject> drawObjectsList) {
+        System.out.println("addObjectsOnFrame");
         jFrame.add(new MyComponent(drawObjectsList, height));
     }
 
@@ -33,11 +35,13 @@ public class JFrameObject {
 
         @Override
         protected void paintComponent(Graphics g) {
+            System.out.println("paintComponent");
             Graphics2D g2 = (Graphics2D)g;
-            for (NeedDrawObject drawObject : drawObjectsList) {
-                EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
-                g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);
-            }
+            g2.drawRect(20, 20, 40, 40);
+//            for (NeedDrawObject drawObject : drawObjectsList) {
+//                EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
+//                g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);
+//            }
         }
     }
 
