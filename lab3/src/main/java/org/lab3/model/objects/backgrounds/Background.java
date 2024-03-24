@@ -6,8 +6,8 @@ import org.lab3.model.objects.SlashBladeAbstractObject;
 @DrawObject
 public class Background extends SlashBladeAbstractObject {
     public Background() {
-        setInGamePosition(0, 0);
-        setScreenSize(100);
+        setInGamePosition(-400, -170);
+        setScreenSize(115);
     }
 
     @Override

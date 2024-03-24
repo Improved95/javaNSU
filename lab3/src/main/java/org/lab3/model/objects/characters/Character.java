@@ -5,7 +5,7 @@ import org.lab3.model.objects.SlashBladeAbstractObject;
 public abstract class Character extends SlashBladeAbstractObject {
     public Character() {
         setInGamePosition(100, 0);
-        setScreenSize(30);
+        setScreenSize(40);
     }
 
     @Override
