@@ -8,9 +8,8 @@ public class SlashBladeModel extends ObserverModelAbstract {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
 
-    public SlashBladeModel(Controller controller) throws ClassNotFoundException, InstantiationException,
+    public SlashBladeModel() throws ClassNotFoundException, InstantiationException,
             IllegalAccessException {
-        super(controller);
         this.gameModesFactory = new GameModesFactory();
         changeGameMode("LEVEL");
     }

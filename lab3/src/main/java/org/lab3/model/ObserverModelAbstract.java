@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 public abstract class ObserverModelAbstract implements Model {
     AbstractList<ViewObserver> viewObservers = new ArrayList<>();
-    public ObserverModelAbstract(ControllerObservable controllerObservable) {
-        controllerObservable.registerObserver(this);
-    }
 
     @Override
     public void update() {}

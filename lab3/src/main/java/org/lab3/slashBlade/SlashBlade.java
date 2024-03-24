@@ -10,22 +10,31 @@ import org.lab3.view.View;
 public class SlashBlade {
     private JFrameObject jFrameObject;
 
-    public SlashBlade() {
-        this.jFrameObject = new JFrameObject(1920);
-        jFrameObject.addObjectsOnFrame(null);
-    }
-
     public void initial() {
         Controller slashBladeController = null;
         Model slashBladeModel = null;
         View slashBladeView = null;
 
+
         try {
             slashBladeController = new SlashBladeController();
-            slashBladeModel = new SlashBladeModel(slashBladeController);
-            slashBladeView = new SlashBladeView(slashBladeModel);
+            slashBladeModel = new SlashBladeModel();
+            slashBladeView = new SlashBladeView();
         } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
             ex.printStackTrace();
+        }
+
+        slashBladeController.registerObserver(slashBladeModel);
+        slashBladeModel.registerObserver(slashBladeView);
+
+        this.jFrameObject = new JFrameObject(1920);
+        while (true) {
+            slashBladeController.readInput();
+            try {
+                slashBladeView.change(slashBladeModel, jFrameObject);
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
