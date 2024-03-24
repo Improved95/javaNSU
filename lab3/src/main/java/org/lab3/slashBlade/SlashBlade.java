@@ -35,5 +35,9 @@ public class SlashBlade {
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
         }
+
+        while (true) {
+            slashBladeController.readInput();
+        }
     }
 }

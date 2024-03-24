@@ -1,6 +1,5 @@
 package org.lab3.model;
 
-import org.lab3.observers.ControllerObservable;
 import org.lab3.observers.ViewObserver;
 
 import java.util.AbstractList;

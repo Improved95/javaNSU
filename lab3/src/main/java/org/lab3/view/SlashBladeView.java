@@ -31,7 +31,6 @@ public class SlashBladeView extends ViewObserverAbstract {
     }
 
     public void drawObject(Graphics2D g2, int screenHeight) {
-        System.out.println(drawObjectsList.size());
         for (NeedDrawObject drawObject : drawObjectsList) {
             EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
             g2.drawImage(imageEditor.getNewImage(), imageEditor.getNewPosX(), imageEditor.getNewPosY(), null);

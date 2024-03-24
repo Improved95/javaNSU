@@ -24,13 +24,13 @@ public class Level implements GameMode {
 
     @Override
     public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) throws IllegalAccessException {
+        drawObjectsList.clear();
         /*Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.getType().isAnnotationPresent(DrawObject.class)) {
-                needDrawObjects.add((NeedDrawObject)field.get(this));
+                drawObjectsList.add((NeedDrawObject)field.get(this));
             }
         }*/
-        drawObjectsList.clear();
         drawObjectsList.add(samurai);
         drawObjectsList.add(background);
     }

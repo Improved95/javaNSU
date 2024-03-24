@@ -32,11 +32,8 @@ public class JFrameObject {
 
         @Override
         protected void paintComponent(Graphics g) {
-            System.out.println("paintComponent");
             Graphics2D g2 = (Graphics2D)g;
-
             slashBladeView.drawObject(g2, screenHeight);
-
             g2.dispose();
         }
     }
