@@ -19,9 +19,5 @@ public abstract class ObserverControllerAbstract implements Controller {
     }
 
     @Override
-    public void notifyObservers() {
-        for (ModelObserver modelObserver : modelObservers) {
-            modelObserver.update();
-        }
-    }
+    public void notifyObservers() {}
 }

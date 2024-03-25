@@ -5,14 +5,12 @@ import org.lab3.model.NeedDrawObject;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.slashBlade.JFrameObject;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class SlashBladeView extends ViewObserverAbstract {
-    private JFrameObject slashBladeJFrame;
     private Set<NeedDrawObject> drawObjectsList = new TreeSet<>(new Comparator<NeedDrawObject>() {
         @Override
         public int compare(NeedDrawObject o1, NeedDrawObject o2) {
@@ -24,12 +22,12 @@ public class SlashBladeView extends ViewObserverAbstract {
     });
 
     @Override
-    public void update(Model model) {
-        change(model);
+    public void update(Model model, JFrameObject slashBladeJFrame) {
+        change(model, slashBladeJFrame);
     }
 
     @Override
-    public void change(Model slashBladeModel) {
+    public void change(Model slashBladeModel, JFrameObject slashBladeJFrame) {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
         gameMode.getDrawObjectsList(drawObjectsList);
         slashBladeJFrame.repaintObjects();

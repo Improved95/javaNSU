@@ -34,7 +34,7 @@ public class SlashBlade {
 //            }
 //        }
 
-        slashBladeModel.change();
+        slashBladeModel.changeModel(jFrameSlashBlade);
 
         try {
             sleep(2000);
@@ -42,7 +42,7 @@ public class SlashBlade {
             ex.printStackTrace();
         }
 
-        slashBladeModel.change();
+        slashBladeModel.changeModel(jFrameSlashBlade);
     }
 
     private class TickGenerator {

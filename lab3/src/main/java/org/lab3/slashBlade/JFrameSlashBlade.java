@@ -10,6 +10,7 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
     private int width;
     private int height;
     private JFrame jFrame;
+    private Canvas canvas;
 
     public JFrameSlashBlade(int width, Controller slashBlaseController) {
         this.width = width;
@@ -19,7 +20,12 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
     }
 
     public void addDrawableComponent(View slashBladeView) {
-        Canvas canvas = new Canvas() {
+        canvas = new Canvas() {
+            @Override
+            public void repaint() {
+                super.repaint();
+            }
+
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
@@ -34,7 +40,7 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
 
     @Override
     public void repaintObjects() {
-        super.repaint();
+        canvas.repaint();
     }
 
     private int getHeightByWidth() {

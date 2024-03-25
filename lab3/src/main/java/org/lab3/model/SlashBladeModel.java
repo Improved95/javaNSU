@@ -3,6 +3,7 @@ package org.lab3.model;
 import org.lab3.model.factories.GameModesFactory;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.observers.ViewObserver;
+import org.lab3.slashBlade.JFrameObject;
 
 public class SlashBladeModel extends ObserverModelAbstract {
     private GameModesFactory gameModesFactory;
@@ -20,20 +21,20 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void update() {
-        change();
+    public void update(JFrameObject slashBladeJFrame) {
+        changeModel(slashBladeJFrame);
     }
 
     @Override
-    public void change() {
+    public void changeModel(JFrameObject slashBladeJFrame) {
         currentGameMode.execute();
-        notifyObservers();
+        notifyObservers(slashBladeJFrame);
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(JFrameObject slashBladeJFrame) {
         for (ViewObserver viewObserver : viewObservers) {
-            viewObserver.update(this);
+            viewObserver.update(this, slashBladeJFrame);
         }
     }
 
