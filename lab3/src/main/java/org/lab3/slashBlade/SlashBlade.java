@@ -7,8 +7,10 @@ import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
+import static java.lang.Thread.sleep;
+
 public class SlashBlade {
-    private JFrameObject jFrameObject;
+    private JFrameSlashBlade jFrameSlashBlade;
     private Controller slashBladeController = null;
     private Model slashBladeModel = null;
     private View slashBladeView = null;
@@ -18,20 +20,45 @@ public class SlashBlade {
     }
 
     public void play() {
-        long nowTime = System.currentTimeMillis();
-        int FPS = 60;
+        TickGenerator tickGenerator = new TickGenerator();
+        long currentFrameTimeStart = 0;
+        long currentFrameTimeEnd = 0;
 
-        while(true) {
+//        while(true) {
+//            if (tickGenerator.isGenerateNext(currentFrameTimeEnd - currentFrameTimeStart)) {
+//                currentFrameTimeStart = System.currentTimeMillis();
+//
+//                slashBladeModel.change();
+//
+//                currentFrameTimeEnd = System.currentTimeMillis();
+//            }
+//        }
 
+        slashBladeModel.change();
 
-
+        try {
+            sleep(2000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
 
         slashBladeModel.change();
-        try {
-            slashBladeView.change(slashBladeModel, jFrameObject);
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
+    }
+
+    private class TickGenerator {
+        private final double maxFPS = 1;
+        private final double maxWaitingTime = 1000 / maxFPS;
+
+        public long nowTime;
+        public long lastTime = System.currentTimeMillis();
+
+        public boolean isGenerateNext(long frameTime) {
+            nowTime = System.currentTimeMillis();
+            if (nowTime - lastTime >= maxWaitingTime - frameTime) {
+                lastTime = nowTime;
+                return true;
+            }
+            return false;
         }
     }
 
@@ -47,7 +74,7 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        jFrameObject = new JFrameObject(1920, slashBladeController);
-        jFrameObject.addDrawableComponent((SlashBladeView) slashBladeView);
+        jFrameSlashBlade = new JFrameSlashBlade(1920, slashBladeController);
+        jFrameSlashBlade.addDrawableComponent(slashBladeView);
     }
 }

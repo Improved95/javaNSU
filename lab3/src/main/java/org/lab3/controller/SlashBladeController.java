@@ -1,6 +1,6 @@
 package org.lab3.controller;
 
-import org.lab3.slashBlade.JFrameObject;
+import org.lab3.slashBlade.JFrameSlashBlade;
 
 import java.awt.event.KeyEvent;
 
@@ -25,7 +25,7 @@ public class SlashBladeController extends ObserverControllerAbstract {
     }
 
     @Override
-    public void readInput(JFrameObject jFrameObject) {
+    public void readInput(JFrameSlashBlade jFrameSlashBlade) {
         if (false) {
             notifyObservers();
         }

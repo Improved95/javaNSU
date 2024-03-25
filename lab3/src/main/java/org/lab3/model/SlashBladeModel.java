@@ -2,6 +2,7 @@ package org.lab3.model;
 
 import org.lab3.model.factories.GameModesFactory;
 import org.lab3.model.gameMode.GameMode;
+import org.lab3.observers.ViewObserver;
 
 public class SlashBladeModel extends ObserverModelAbstract {
     private GameModesFactory gameModesFactory;
@@ -27,6 +28,13 @@ public class SlashBladeModel extends ObserverModelAbstract {
     public void change() {
         currentGameMode.execute();
         notifyObservers();
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (ViewObserver viewObserver : viewObservers) {
+            viewObserver.update(this);
+        }
     }
 
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,

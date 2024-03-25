@@ -22,9 +22,5 @@ public abstract class ObserverModelAbstract implements Model {
     }
 
     @Override
-    public void notifyObservers() {
-        for (ViewObserver viewObserver : viewObservers) {
-            viewObserver.update();
-        }
-    }
+    public void notifyObservers() {}
 }
