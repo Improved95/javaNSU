@@ -9,12 +9,33 @@ import org.lab3.view.View;
 
 public class SlashBlade {
     private JFrameObject jFrameObject;
+    private Controller slashBladeController = null;
+    private Model slashBladeModel = null;
+    private View slashBladeView = null;
 
-    public void initial() {
-        Controller slashBladeController = null;
-        Model slashBladeModel = null;
-        View slashBladeView = null;
+    public SlashBlade() {
+        initial();
+    }
 
+    public void play() {
+        long nowTime = System.currentTimeMillis();
+        int FPS = 60;
+
+        while(true) {
+
+
+
+        }
+
+        slashBladeModel.change();
+        try {
+            slashBladeView.change(slashBladeModel, jFrameObject);
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void initial() {
         try {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel();
@@ -28,16 +49,5 @@ public class SlashBlade {
 
         jFrameObject = new JFrameObject(1920, slashBladeController);
         jFrameObject.addDrawableComponent((SlashBladeView) slashBladeView);
-
-        slashBladeModel.change();
-        try {
-            slashBladeView.change(slashBladeModel, jFrameObject);
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-        }
-
-        while (true) {
-            slashBladeController.readInput(jFrameObject);
-        }
     }
 }
