@@ -21,24 +21,17 @@ public class JFrameObject extends Frame {
     }
 
     public void addDrawableComponent(SlashBladeView slashBladeView) {
-        jFrame.add(new MyComponent(slashBladeView, height));
-    }
+        Canvas canvas = new Canvas() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                Graphics2D g2 = (Graphics2D) g;
+                slashBladeView.drawObject(g2, height);
+                g2.dispose();
+            }
+        };
+        jFrame.add(canvas);
 
-    private static class MyComponent extends JComponent {
-        private SlashBladeView slashBladeView;
-        private int screenHeight;
-
-        public MyComponent(SlashBladeView slashBladeView, int screenHeight) {
-            this.slashBladeView = slashBladeView;
-            this.screenHeight = screenHeight;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D)g;
-            slashBladeView.drawObject(g2, screenHeight);
-            g2.dispose();
-        }
     }
 
     private int getHeightByWidth() {

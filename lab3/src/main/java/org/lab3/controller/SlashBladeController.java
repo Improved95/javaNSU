@@ -3,7 +3,6 @@ package org.lab3.controller;
 import org.lab3.slashBlade.JFrameObject;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class SlashBladeController extends ObserverControllerAbstract {
     KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
