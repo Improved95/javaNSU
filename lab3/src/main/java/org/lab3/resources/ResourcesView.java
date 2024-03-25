@@ -1,8 +1,7 @@
 package org.lab3.resources;
 
-import java.io.InputStream;
+import java.awt.image.BufferedImage;
 
-public interface ResourcesView /*extends AutoCloseable*/ {
-    InputStream getOpenedResource();
-    void close() throws Exception;
+public interface ResourcesView {
+    BufferedImage getOpenedImage();
 }

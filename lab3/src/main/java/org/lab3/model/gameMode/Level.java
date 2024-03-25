@@ -6,9 +6,6 @@ import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -23,16 +20,10 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) throws IllegalAccessException {
+    public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) {
         drawObjectsList.clear();
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (field.getType().isAnnotationPresent(DrawObject.class)) {
-                drawObjectsList.add((NeedDrawObject)field.get(this));
-            }
-        }
-//        drawObjectsList.add(samurai);
-//        drawObjectsList.add(background);
+        drawObjectsList.add(samurai);
+        drawObjectsList.add(background);
     }
 
     @Override
@@ -48,19 +39,11 @@ public class Level implements GameMode {
 
     private void initial() {
         ResourcesContext samuraiImagesResources = new ResourcesContext();
+        samuraiImagesResources.addImage("samurai/zero.png");
+        this.samurai.getVisualContext().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+
         ResourcesContext backgroundImagesResources = new ResourcesContext();
-        try {
-
-            samuraiImagesResources.addImage("samurai/zero.png");
-            BufferedImage image = ImageIO.read(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
-            this.samurai.getVisualContext().setImage(image);
-
-            backgroundImagesResources.addImage("bg/bg1.jpg");
-            image = ImageIO.read(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedResource());
-            this.background.getVisualContext().setImage(image);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        backgroundImagesResources.addImage("bg/bg1.jpg");
+        this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
     }
 }
