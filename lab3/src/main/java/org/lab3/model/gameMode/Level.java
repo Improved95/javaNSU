@@ -11,8 +11,6 @@ public class Level implements GameMode {
     private Background background;
     private SamuraiV1 samurai;
 
-    private int a = 0;
-
     public Level() {
         this.background = new Background();
         this.samurai = new SamuraiV1();
@@ -21,22 +19,19 @@ public class Level implements GameMode {
 
     @Override
     public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) {
-        drawObjectsList.clear();
         drawObjectsList.add(samurai);
-//        drawObjectsList.add(background);
+        drawObjectsList.add(background);
     }
 
     @Override
     public void execute() {
-        System.out.println("execute");
         background.setScreenLayerLevel(0);
         background.setInGamePosition(-400, -170);
         background.setScreenSize(115);
 
         samurai.setScreenLayerLevel(1);
-        samurai.setInGamePosition(100 + 100 * a, 0);
+        samurai.setInGamePosition(100, 0);
         samurai.setScreenSize(40);
-        a++;
     }
 
     private void initial() {

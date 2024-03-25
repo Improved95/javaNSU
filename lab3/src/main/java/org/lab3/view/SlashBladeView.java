@@ -29,6 +29,7 @@ public class SlashBladeView extends ViewObserverAbstract {
     @Override
     public void change(Model slashBladeModel, JFrameObject slashBladeJFrame) {
         GameMode gameMode = slashBladeModel.getCurrentGameMode();
+        drawObjectsList.clear();
         gameMode.getDrawObjectsList(drawObjectsList);
         slashBladeJFrame.repaintObjects();
     }

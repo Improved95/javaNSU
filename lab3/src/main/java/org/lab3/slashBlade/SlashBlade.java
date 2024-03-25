@@ -7,8 +7,6 @@ import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
-import static java.lang.Thread.sleep;
-
 public class SlashBlade {
     private JFrameSlashBlade jFrameSlashBlade;
     private Controller slashBladeController = null;
@@ -24,29 +22,30 @@ public class SlashBlade {
         long currentFrameTimeStart = 0;
         long currentFrameTimeEnd = 0;
 
-//        while(true) {
-//            if (tickGenerator.isGenerateNext(currentFrameTimeEnd - currentFrameTimeStart)) {
-//                currentFrameTimeStart = System.currentTimeMillis();
-//
-//                slashBladeModel.change();
-//
-//                currentFrameTimeEnd = System.currentTimeMillis();
-//            }
-//        }
+        while(true) {
+            if (tickGenerator.isGenerateNext(currentFrameTimeEnd - currentFrameTimeStart)) {
+                currentFrameTimeStart = System.currentTimeMillis();
 
-        slashBladeModel.changeModel(jFrameSlashBlade);
+                System.out.println("hello");
+                slashBladeModel.changeModel(jFrameSlashBlade);
 
-        try {
-            sleep(2000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+                currentFrameTimeEnd = System.currentTimeMillis();
+            }
         }
 
-        slashBladeModel.changeModel(jFrameSlashBlade);
+//        slashBladeModel.changeModel(jFrameSlashBlade);
+//
+//        try {
+//            sleep(2000);
+//        } catch (InterruptedException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        slashBladeModel.changeModel(jFrameSlashBlade);
     }
 
     private class TickGenerator {
-        private final double maxFPS = 1;
+        private final double maxFPS = 60;
         private final double maxWaitingTime = 1000 / maxFPS;
 
         public long nowTime;

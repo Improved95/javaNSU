@@ -29,7 +29,6 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
-                System.out.println("paint");
                 Graphics2D g2 = (Graphics2D) g;
                 slashBladeView.drawObject(g2, height);
                 g2.dispose();
