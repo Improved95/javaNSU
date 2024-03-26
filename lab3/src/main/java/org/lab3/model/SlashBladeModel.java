@@ -23,17 +23,12 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void changeModel() {
-        currentGameMode.execute();
-    }
-
-    @Override
     public void initial() {
         currentGameMode.initial();
     }
 
     @Override
-    public void update() {
+    public void updateModel() {
         changeModel();
     }
 
@@ -42,6 +37,11 @@ public class SlashBladeModel extends ObserverModelAbstract {
         for (ViewObserver viewObserver : viewObservers) {
             viewObserver.updateDrawList(this);
         }
+    }
+
+    @Override
+    public void changeModel() {
+        currentGameMode.execute();
     }
 
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,

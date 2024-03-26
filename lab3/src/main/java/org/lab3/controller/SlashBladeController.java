@@ -12,7 +12,9 @@ public class SlashBladeController extends ObserverControllerAbstract {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -27,7 +29,7 @@ public class SlashBladeController extends ObserverControllerAbstract {
     @Override
     public void readInput(JFrameSlashBlade jFrameSlashBlade) {
         if (false) {
-            notifyObservers();
+            notifyObserversModifyKey();
         }
     }
 }

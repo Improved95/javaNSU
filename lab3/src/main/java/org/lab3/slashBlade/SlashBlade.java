@@ -21,19 +21,19 @@ public class SlashBlade {
 
     public void play() {
         TickGenerator tickGenerator = new TickGenerator();
-        long currentFrameTimeStart = 0;
-        long currentFrameTimeEnd = 0;
-        long previousFrameTime = 0;
+        long currentFrameTimeStart;
+        long currentFrameTimeEnd;
+        long makeFrameTime = 0;
 
         while(true) {
-            if (tickGenerator.isGenerateNext(previousFrameTime)) {
+            if (tickGenerator.isGenerateNext(makeFrameTime)) {
                 currentFrameTimeStart = System.currentTimeMillis();
 
                 slashBladeModel.changeModel();
-                slashBladeView.updateViewScreen(slashBladeModel, jFrameSlashBlade);
+                slashBladeView.changeViewScreen(jFrameSlashBlade);
 
                 currentFrameTimeEnd = System.currentTimeMillis();
-                previousFrameTime = currentFrameTimeEnd - currentFrameTimeStart;
+                makeFrameTime = currentFrameTimeEnd - currentFrameTimeStart;
             }
         }
 
@@ -49,15 +49,15 @@ public class SlashBlade {
     }
 
     private class TickGenerator {
-        private final double maxFPS = 1;
+        private final double maxFPS = 60;
         private final double maxWaitingTime = 1000 / maxFPS;
 
         private long nowTime;
         private long lastTime = System.currentTimeMillis();
 
-        public boolean isGenerateNext(long frameTime) {
+        public boolean isGenerateNext(long makeFrameTime) {
             nowTime = System.currentTimeMillis();
-            if (nowTime - lastTime >= maxWaitingTime - frameTime) {
+            if (nowTime - lastTime >= maxWaitingTime - makeFrameTime) {
                 lastTime = nowTime;
                 return true;
             }
@@ -79,8 +79,8 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        jFrameSlashBlade = new JFrameSlashBlade(1500, slashBladeController);
-        jFrameSlashBlade.addDrawableComponent(slashBladeView);
+        jFrameSlashBlade = new JFrameSlashBlade(1500);
+        jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeController);
         slashBladeModel.initial();
     }
 }

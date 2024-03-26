@@ -22,7 +22,7 @@ public class SlashBladeView extends ViewObserverAbstract {
     });
 
     @Override
-    public void updateViewScreen(Model model, JFrameObject jFrameObject) {
+    public void updateViewScreen(JFrameObject jFrameObject) {
         changeViewScreen(jFrameObject);
     }
 

@@ -10,7 +10,7 @@ public abstract class ObserverModelAbstract implements Model {
     AbstractList<ViewObserver> viewObservers = new ArrayList<>();
 
     @Override
-    public void update() {
+    public void updateModel() {
 
     }
 

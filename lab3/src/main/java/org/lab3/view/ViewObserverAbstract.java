@@ -7,12 +7,12 @@ import java.awt.*;
 
 public abstract class ViewObserverAbstract implements View {
     @Override
-    public void updateViewScreen(Model model, JFrameObject slashBladeJFrame) {
+    public void updateViewScreen(JFrameObject JFrame) {
 
     }
 
     @Override
-    public void changeViewScreen(JFrameObject slashBladeJFrame) {
+    public void changeViewScreen(JFrameObject JFrame) {
 
     }
 

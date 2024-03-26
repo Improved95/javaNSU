@@ -5,27 +5,23 @@ import org.lab3.view.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class JFrameSlashBlade extends Frame implements JFrameObject {
+public class JFrameSlashBlade implements JFrameObject {
     private int width;
     private int height;
     private JFrame jFrame;
     private Canvas canvas;
 
-    public JFrameSlashBlade(int width, Controller slashBlaseController) {
+    public JFrameSlashBlade(int width) {
         this.width = width;
         this.height = getHeightByWidth();
         this.jFrame = getFrame();
-        this.jFrame.addKeyListener(slashBlaseController);
     }
 
-    public void addDrawableComponent(View slashBladeView) {
+    public void addDrawableComponent(View slashBladeView, Controller controller) {
         canvas = new Canvas() {
-            @Override
-            public void repaint() {
-                super.repaint();
-            }
-
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
@@ -34,6 +30,7 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
                 g2.dispose();
             }
         };
+        canvas.addKeyListener(controller);
         jFrame.add(canvas);
     }
 
@@ -46,7 +43,7 @@ public class JFrameSlashBlade extends Frame implements JFrameObject {
         return (width * Resolution.heightRes) / Resolution.widthRes;
     }
 
-    private static class Resolution {
+    private class Resolution {
         public static final int widthRes = 16;
         public static final int heightRes = 9;
     }

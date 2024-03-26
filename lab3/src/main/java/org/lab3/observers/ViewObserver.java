@@ -5,5 +5,5 @@ import org.lab3.slashBlade.JFrameObject;
 
 public interface ViewObserver {
     void updateDrawList(Model model);
-    void updateViewScreen(Model model, JFrameObject slashBladeJFrame);
+    void updateViewScreen(JFrameObject JFrame);
 }

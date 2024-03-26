@@ -19,5 +19,7 @@ public abstract class ObserverControllerAbstract implements Controller {
     }
 
     @Override
-    public void notifyObservers() {}
+    public void notifyObserversModifyKey() {
+
+    }
 }

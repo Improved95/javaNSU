@@ -6,5 +6,5 @@ import org.lab3.slashBlade.JFrameSlashBlade;
 import java.awt.event.KeyListener;
 
 public interface Controller extends ControllerObservable, KeyListener {
-    void readInput(JFrameSlashBlade jFrameSlashBlade);
+    void readInput(JFrameSlashBlade jFrame);
 }
