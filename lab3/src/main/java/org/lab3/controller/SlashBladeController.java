@@ -1,7 +1,5 @@
 package org.lab3.controller;
 
-import org.lab3.slashBlade.JFrameSlashBlade;
-
 import java.awt.event.KeyEvent;
 
 public class SlashBladeController extends ObserverControllerAbstract {
@@ -19,17 +17,12 @@ public class SlashBladeController extends ObserverControllerAbstract {
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("keyPressed " + e.getKeyCode());
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("keyReleased " + e.getKeyCode());
-    }
 
-    @Override
-    public void readInput(JFrameSlashBlade jFrameSlashBlade) {
-        if (false) {
-            notifyObserversModifyKey();
-        }
     }
 }
