@@ -3,7 +3,6 @@ package org.lab3.model;
 import org.lab3.model.factories.GameModesFactory;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.observers.ViewObserver;
-import org.lab3.slashBlade.JFrameObject;
 
 public class SlashBladeModel extends ObserverModelAbstract {
     private GameModesFactory gameModesFactory;
@@ -21,25 +20,25 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void update(JFrameObject slashBladeJFrame) {
-        changeModel(slashBladeJFrame);
+    public void update() {
+        changeModel();
     }
 
     @Override
-    public void changeModel(JFrameObject slashBladeJFrame) {
+    public void changeModel() {
         currentGameMode.execute();
-        notifyObservers(slashBladeJFrame);
     }
 
     @Override
-    public void notifyObservers(JFrameObject slashBladeJFrame) {
+    public void notifyObserversModifyDrawObjectList() {
         for (ViewObserver viewObserver : viewObservers) {
-            viewObserver.update(this, slashBladeJFrame);
+            viewObserver.updateDrawList(this);
         }
     }
 
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException {
-        currentGameMode = gameModesFactory.create(gameModeName);
+        currentGameMode = gameModesFactory.create(gameModeName, this);
+        currentGameMode.initial();
     }
 }

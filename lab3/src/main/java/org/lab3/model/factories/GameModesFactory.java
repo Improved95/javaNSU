@@ -1,5 +1,6 @@
 package org.lab3.model.factories;
 
+import org.lab3.model.Model;
 import org.lab3.model.gameMode.GameMode;
 
 import java.util.Properties;
@@ -11,9 +12,10 @@ public class GameModesFactory {
         this.gameModesProperty = setGameModesProperty();
     }
 
-    public GameMode create(String modeName) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public GameMode create(String modeName, Model model) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Class classObject = Class.forName(gameModesProperty.getProperty(modeName));
         GameMode gameMode = (GameMode)classObject.newInstance();
+        gameMode.setModelLoader(model);
         return gameMode;
     }
 

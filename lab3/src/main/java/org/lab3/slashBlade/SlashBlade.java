@@ -26,8 +26,9 @@ public class SlashBlade {
             if (tickGenerator.isGenerateNext(currentFrameTimeEnd - currentFrameTimeStart)) {
                 currentFrameTimeStart = System.currentTimeMillis();
 
-                System.out.println("hello");
-                slashBladeModel.changeModel(jFrameSlashBlade);
+//                System.out.println("hello");
+                slashBladeModel.changeModel();
+                slashBladeView.updateViewScreen(slashBladeModel, jFrameSlashBlade);
 
                 currentFrameTimeEnd = System.currentTimeMillis();
             }
@@ -48,8 +49,8 @@ public class SlashBlade {
         private final double maxFPS = 60;
         private final double maxWaitingTime = 1000 / maxFPS;
 
-        public long nowTime;
-        public long lastTime = System.currentTimeMillis();
+        private long nowTime;
+        private long lastTime = System.currentTimeMillis();
 
         public boolean isGenerateNext(long frameTime) {
             nowTime = System.currentTimeMillis();
@@ -73,7 +74,7 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        jFrameSlashBlade = new JFrameSlashBlade(1920, slashBladeController);
+        jFrameSlashBlade = new JFrameSlashBlade(1500, slashBladeController);
         jFrameSlashBlade.addDrawableComponent(slashBladeView);
     }
 }

@@ -7,6 +7,6 @@ import org.lab3.slashBlade.JFrameObject;
 import java.awt.*;
 
 public interface View extends ViewObserver {
-    void change(Model slashBladeModel, JFrameObject slashBladeJFrame);
+    void changeViewScreen(JFrameObject jFrameObject);
     void drawObject(Graphics2D g2, int screenHeight);
 }

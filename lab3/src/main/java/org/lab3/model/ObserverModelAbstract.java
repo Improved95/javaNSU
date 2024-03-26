@@ -10,7 +10,9 @@ public abstract class ObserverModelAbstract implements Model {
     AbstractList<ViewObserver> viewObservers = new ArrayList<>();
 
     @Override
-    public void update(JFrameObject slashBladeJFrame) {}
+    public void update() {
+
+    }
 
     @Override
     public void registerObserver(ViewObserver o) {
@@ -23,5 +25,7 @@ public abstract class ObserverModelAbstract implements Model {
     }
 
     @Override
-    public void notifyObservers(JFrameObject slashBladeJFrame) {}
+    public void notifyObserversModifyDrawObjectList() {
+
+    }
 }

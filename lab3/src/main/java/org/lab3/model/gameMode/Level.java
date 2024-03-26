@@ -1,5 +1,6 @@
 package org.lab3.model.gameMode;
 
+import org.lab3.model.Model;
 import org.lab3.model.NeedDrawObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
@@ -8,13 +9,19 @@ import org.lab3.resources.ResourcesContext;
 import java.util.*;
 
 public class Level implements GameMode {
+    private Model modelLoader;
+
     private Background background;
     private SamuraiV1 samurai;
 
     public Level() {
         this.background = new Background();
         this.samurai = new SamuraiV1();
-        initial();
+    }
+
+    @Override
+    public void setModelLoader(Model model) {
+        this.modelLoader = model;
     }
 
     @Override
@@ -34,7 +41,8 @@ public class Level implements GameMode {
         samurai.setScreenSize(40);
     }
 
-    private void initial() {
+    @Override
+    public void initial() {
         ResourcesContext samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
         this.samurai.getVisualContext().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
@@ -42,5 +50,7 @@ public class Level implements GameMode {
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
         this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+
+        modelLoader.notifyObserversModifyDrawObjectList();
     }
 }

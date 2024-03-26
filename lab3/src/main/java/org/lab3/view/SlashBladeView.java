@@ -22,16 +22,20 @@ public class SlashBladeView extends ViewObserverAbstract {
     });
 
     @Override
-    public void update(Model model, JFrameObject slashBladeJFrame) {
-        change(model, slashBladeJFrame);
+    public void updateViewScreen(Model model, JFrameObject jFrameObject) {
+        changeViewScreen(jFrameObject);
     }
 
     @Override
-    public void change(Model slashBladeModel, JFrameObject slashBladeJFrame) {
-        GameMode gameMode = slashBladeModel.getCurrentGameMode();
+    public void updateDrawList(Model model) {
         drawObjectsList.clear();
+        GameMode gameMode = model.getCurrentGameMode();
         gameMode.getDrawObjectsList(drawObjectsList);
-        slashBladeJFrame.repaintObjects();
+    }
+
+    @Override
+    public void changeViewScreen(JFrameObject jFrameObject) {
+        jFrameObject.repaintObjects();
     }
 
     public void drawObject(Graphics2D g2, int screenHeight) {
