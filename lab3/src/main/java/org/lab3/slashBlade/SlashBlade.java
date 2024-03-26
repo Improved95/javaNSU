@@ -46,7 +46,7 @@ public class SlashBlade {
     }
 
     private class TickGenerator {
-        private final double maxFPS = 60;
+        private final double maxFPS = 1;
         private final double maxWaitingTime = 1000 / maxFPS;
 
         private long nowTime;
@@ -76,5 +76,6 @@ public class SlashBlade {
 
         jFrameSlashBlade = new JFrameSlashBlade(1500, slashBladeController);
         jFrameSlashBlade.addDrawableComponent(slashBladeView);
+        slashBladeModel.getCurrentGameMode().initial();
     }
 }

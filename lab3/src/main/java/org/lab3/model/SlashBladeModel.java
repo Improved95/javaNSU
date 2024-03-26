@@ -39,6 +39,5 @@ public class SlashBladeModel extends ObserverModelAbstract {
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException {
         currentGameMode = gameModesFactory.create(gameModeName, this);
-        currentGameMode.initial();
     }
 }
