@@ -7,6 +7,8 @@ import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class SlashBlade {
     private JFrameSlashBlade jFrameSlashBlade;
     private Controller slashBladeController = null;
@@ -21,16 +23,17 @@ public class SlashBlade {
         TickGenerator tickGenerator = new TickGenerator();
         long currentFrameTimeStart = 0;
         long currentFrameTimeEnd = 0;
+        long previousFrameTime = 0;
 
         while(true) {
-            if (tickGenerator.isGenerateNext(currentFrameTimeEnd - currentFrameTimeStart)) {
+            if (tickGenerator.isGenerateNext(previousFrameTime)) {
                 currentFrameTimeStart = System.currentTimeMillis();
 
-//                System.out.println("hello");
                 slashBladeModel.changeModel();
                 slashBladeView.updateViewScreen(slashBladeModel, jFrameSlashBlade);
 
                 currentFrameTimeEnd = System.currentTimeMillis();
+                previousFrameTime = currentFrameTimeEnd - currentFrameTimeStart;
             }
         }
 
@@ -67,7 +70,9 @@ public class SlashBlade {
             slashBladeController = new SlashBladeController();
             slashBladeModel = new SlashBladeModel();
             slashBladeView = new SlashBladeView();
-        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
+        } catch (ClassNotFoundException | InvocationTargetException |
+                 InstantiationException | IllegalAccessException | NoSuchMethodException ex) {
+
             ex.printStackTrace();
         }
 
@@ -76,6 +81,6 @@ public class SlashBlade {
 
         jFrameSlashBlade = new JFrameSlashBlade(1500, slashBladeController);
         jFrameSlashBlade.addDrawableComponent(slashBladeView);
-        slashBladeModel.getCurrentGameMode().initial();
+        slashBladeModel.initial();
     }
 }

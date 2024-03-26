@@ -16,14 +16,10 @@ public class Level implements GameMode {
 
     private int a = 0;
 
-    public Level() {
+    public Level(Model model) {
+        this.modelLoader = model;
         this.background = new Background();
         this.samurai = new SamuraiV1();
-    }
-
-    @Override
-    public void setModelLoader(Model model) {
-        this.modelLoader = model;
     }
 
     @Override

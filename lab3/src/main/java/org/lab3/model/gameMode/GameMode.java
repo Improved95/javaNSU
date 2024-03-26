@@ -6,9 +6,7 @@ import org.lab3.model.NeedDrawObject;
 import java.util.Set;
 
 public interface GameMode {
-    void setModelLoader(Model model);
     void initial();
-
     void execute();
     void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList);
 }

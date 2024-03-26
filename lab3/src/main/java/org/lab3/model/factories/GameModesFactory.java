@@ -3,6 +3,8 @@ package org.lab3.model.factories;
 import org.lab3.model.Model;
 import org.lab3.model.gameMode.GameMode;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public class GameModesFactory {
@@ -12,10 +14,12 @@ public class GameModesFactory {
         this.gameModesProperty = setGameModesProperty();
     }
 
-    public GameMode create(String modeName, Model model) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public GameMode create(String modeName, Model model) throws ClassNotFoundException, IllegalAccessException,
+            InstantiationException, NoSuchMethodException, InvocationTargetException {
+
         Class classObject = Class.forName(gameModesProperty.getProperty(modeName));
-        GameMode gameMode = (GameMode)classObject.newInstance();
-        gameMode.setModelLoader(model);
+        Constructor ctor = classObject.getDeclaredConstructor(Model.class);
+        GameMode gameMode = (GameMode)ctor.newInstance(model);
         return gameMode;
     }
 
