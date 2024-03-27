@@ -16,13 +16,17 @@ public class SlashBladeController extends ObserverControllerAbstract {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed " + e.getKeyCode());
-
+        if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 0) {
+            keysIsPressedContext.setKeyStatus(e.getKeyCode(), 1);
+            System.out.println("keyPressed " + e.getKeyChar());
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("keyReleased " + e.getKeyCode());
-
+        if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
+            keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
+            System.out.println("keyReleased " + e.getKeyChar());
+        }
     }
 }

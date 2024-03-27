@@ -1,29 +1,33 @@
 package org.lab3.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class KeysIsPressedContext {
-    private boolean w;
-    private boolean a;
-    private boolean s;
-    private boolean d;
-    private boolean space;
+    Map<Integer, KeyStatus> keysStatusMap = new HashMap<>();
 
-    public boolean wIsPress() {
-        return w;
+    KeysIsPressedContext() {
+        keysStatusMap.put(87, new KeyStatus()); // w
+        keysStatusMap.put(65, new KeyStatus()); // a
+        keysStatusMap.put(83, new KeyStatus()); // s
+        keysStatusMap.put(68, new KeyStatus()); // d
+        keysStatusMap.put(32, new KeyStatus()); // space
     }
 
-    public boolean aIsPress() {
-        return a;
+    public int getKeyStatus(int keyCode) {
+        if (keysStatusMap.containsKey(keyCode)) {
+            return keysStatusMap.get(keyCode).status;
+        }
+        return -1;
     }
 
-    public boolean sIsPress() {
-        return s;
+    public void setKeyStatus(int keyCode, int keyStatus) {
+        if (keysStatusMap.containsKey(keyCode)) {
+            keysStatusMap.get(keyCode).status = keyStatus;
+        }
     }
 
-    public boolean dIsPress() {
-        return d;
-    }
-
-    public boolean spaceIsPress() {
-        return space;
+    private class KeyStatus {
+        public int status = 0;
     }
 }
