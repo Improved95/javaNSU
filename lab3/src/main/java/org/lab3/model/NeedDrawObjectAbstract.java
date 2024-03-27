@@ -7,6 +7,7 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     private double screenPosY;
     private double screenSize;
     private int horizontalDirection = 1;
+    private boolean drawImageOnMiddle = false;
     private int screenLayerLevel = 0;
     private VisualContext visualContext;
 
@@ -42,6 +43,16 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     @Override
     public double getScreenSize() {
         return screenSize;
+    }
+
+    @Override
+    public void setDrawImageOnMiddle(boolean drawImageOnMiddle) {
+        this.drawImageOnMiddle = drawImageOnMiddle;
+    }
+
+    @Override
+    public boolean isDrawImageOnMiddle() {
+        return drawImageOnMiddle;
     }
 
     @Override

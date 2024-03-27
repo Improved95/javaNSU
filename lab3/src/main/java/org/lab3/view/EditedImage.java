@@ -32,7 +32,6 @@ public class EditedImage {
     public void resizingImage() {
         double newSize = oldImage.getScreenSize() / 100;
         int oldImageWidth = oldImage.getVisualContext().getImage().getWidth();
-
         int oldImageHeight = oldImage.getVisualContext().getImage().getHeight();
 
         int newImageWidth = (int)(oldImageWidth * newSize);
@@ -44,7 +43,10 @@ public class EditedImage {
     }
 
     public void replaceImage(int screenHeight) {
-        newPosX += oldImage.getScreenPosX();
+        if (oldImage.isDrawImageOnMiddle()) {
+            newPosX -= (newImage.getWidth() * oldImage.getHorizontalDirection()) / 2;
+        }
+        newPosX += oldImage.getScreenPosX() ;
         newPosY += screenHeight - 39 - newImage.getHeight() - oldImage.getScreenPosY();
     }
 }

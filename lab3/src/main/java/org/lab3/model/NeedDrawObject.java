@@ -11,6 +11,10 @@ public interface NeedDrawObject {
     double getScreenSize();
 
 
+    void setDrawImageOnMiddle(boolean drawImageOnMiddle);
+
+    boolean isDrawImageOnMiddle();
+
     void setScreenLayerLevel(int levelLayer);
     int getScreenLayerLevel();
 

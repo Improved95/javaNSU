@@ -65,12 +65,10 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
+            case 68:
                 samurai.changeRunStatus(false);
                 break;
             case 83:
-                break;
-            case 68:
-                samurai.changeRunStatus(false);
                 break;
         }
     }
