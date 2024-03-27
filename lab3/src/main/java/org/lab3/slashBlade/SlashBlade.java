@@ -24,28 +24,20 @@ public class SlashBlade {
         long currentFrameTimeStart;
         long currentFrameTimeEnd;
         long makeFrameTime = 0;
+        double currentFPS;
 
         while(true) {
             if (tickGenerator.isGenerateNext(makeFrameTime)) {
                 currentFrameTimeStart = System.currentTimeMillis();
 
-                slashBladeModel.changeModel();
+                currentFPS = 1000 / (makeFrameTime + tickGenerator.getMaxWaitingTime());
+                slashBladeModel.changeModel(currentFPS);
                 slashBladeView.changeViewScreen(jFrameSlashBlade);
 
                 currentFrameTimeEnd = System.currentTimeMillis();
                 makeFrameTime = currentFrameTimeEnd - currentFrameTimeStart;
             }
         }
-
-//        slashBladeModel.changeModel(jFrameSlashBlade);
-//
-//        try {
-//            sleep(2000);
-//        } catch (InterruptedException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        slashBladeModel.changeModel(jFrameSlashBlade);
     }
 
     private class TickGenerator {
@@ -54,6 +46,14 @@ public class SlashBlade {
 
         private long nowTime;
         private long lastTime = System.currentTimeMillis();
+
+        public double getMaxFPS() {
+            return maxFPS;
+        }
+
+        public double getMaxWaitingTime() {
+            return maxWaitingTime;
+        }
 
         public boolean isGenerateNext(long makeFrameTime) {
             nowTime = System.currentTimeMillis();

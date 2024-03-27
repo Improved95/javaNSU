@@ -6,7 +6,8 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     private double screenPosX;
     private double screenPosY;
     private double screenSize;
-    private int screenLayerLevel;
+    private int horizontalDirection = 1;
+    private int screenLayerLevel = 0;
     private VisualContext visualContext;
 
     public NeedDrawObjectAbstract() {
@@ -24,7 +25,17 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     }
 
     @Override
-    public void setScreenSize(int size) {
+    public int getHorizontalDirection() {
+        return horizontalDirection;
+    }
+
+    @Override
+    public void setHorizontalDirection(int horizontalDirection) {
+        this.horizontalDirection = horizontalDirection;
+    }
+
+    @Override
+    public void setScreenSize(double size) {
         this.screenSize = size;
     }
 

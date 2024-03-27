@@ -4,8 +4,12 @@ public interface NeedDrawObject {
     double getScreenPosX();
     double getScreenPosY();
 
-    void setScreenSize(int size);
+    void setHorizontalDirection(int horizontalDirection);
+    int getHorizontalDirection();
+
+    void setScreenSize(double size);
     double getScreenSize();
+
 
     void setScreenLayerLevel(int levelLayer);
     int getScreenLayerLevel();

@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 public class EditedImage {
     private NeedDrawObject oldImage;
     private BufferedImage newImage;
-    private double newPosX;
-    private double newPosY;
+    private double newPosX = 0;
+    private double newPosY = 0;
 
     public EditedImage(NeedDrawObject oldImage, int screenHeight) {
         this.oldImage = oldImage;
@@ -30,8 +30,9 @@ public class EditedImage {
     }
 
     public void resizingImage() {
-        double newSize = oldImage.getScreenSize() / (double)100;
+        double newSize = oldImage.getScreenSize() / 100;
         int oldImageWidth = oldImage.getVisualContext().getImage().getWidth();
+
         int oldImageHeight = oldImage.getVisualContext().getImage().getHeight();
 
         int newImageWidth = (int)(oldImageWidth * newSize);
@@ -39,10 +40,11 @@ public class EditedImage {
 
         this.newImage = Scalr.resize(oldImage.getVisualContext().getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
                 newImageWidth, newImageHeight, Scalr.OP_ANTIALIAS);
+
     }
 
     public void replaceImage(int screenHeight) {
-        newPosX = oldImage.getScreenPosX();
-        newPosY = screenHeight - 39 - newImage.getHeight() - oldImage.getScreenPosY();
+        newPosX += oldImage.getScreenPosX();
+        newPosY += screenHeight - 39 - newImage.getHeight() - oldImage.getScreenPosY();
     }
 }

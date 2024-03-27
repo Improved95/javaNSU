@@ -5,7 +5,7 @@ import org.lab3.observers.ModelObservable;
 import org.lab3.observers.ModelObserver;
 
 public interface Model extends ModelObserver, ModelObservable {
-    void changeModel();
+    void changeModel(double currentFPS);
     void initial();
     GameMode getCurrentGameMode();
 }

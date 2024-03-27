@@ -45,8 +45,8 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void changeModel() {
-        currentGameMode.execute();
+    public void changeModel(double currentFPS) {
+        currentGameMode.execute(currentFPS);
     }
 
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,
