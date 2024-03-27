@@ -3,6 +3,7 @@ package org.lab3.model.gameMode;
 import org.lab3.model.Model;
 import org.lab3.model.NeedDrawObject;
 import org.lab3.model.objects.backgrounds.Background;
+import org.lab3.model.objects.characters.Character;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 
@@ -27,17 +28,6 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void execute() {
-        background.setScreenLayerLevel(0);
-        background.setInGamePosition(-400, -170);
-        background.setScreenSize(115);
-
-        samurai.setScreenLayerLevel(1);
-        samurai.setInGamePosition(100, 0);
-        samurai.setScreenSize(40);
-    }
-
-    @Override
     public void initial() {
         ResourcesContext samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
@@ -47,6 +37,36 @@ public class Level implements GameMode {
         backgroundImagesResources.addImage("bg/bg1.jpg");
         this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
+        setSamurai();
+        setBackground();
+
         modelLoader.notifyObserversModifyDrawObjectList();
+    }
+
+    @Override
+    public void actionOnKeyPress(int keyCode) {
+        System.out.println("actionOnKeyPress " + keyCode);
+    }
+
+    @Override
+    public void actionOnKeyReleased(int keyCode) {
+        System.out.println("actionOnKeyReleased " + keyCode);
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    private void setSamurai() {
+        samurai.setScreenLayerLevel(1);
+        samurai.setInGamePosition(100, 0);
+        samurai.setScreenSize(40);
+    }
+
+    private void setBackground() {
+        background.setScreenLayerLevel(0);
+        background.setInGamePosition(-400, -170);
+        background.setScreenSize(115);
     }
 }

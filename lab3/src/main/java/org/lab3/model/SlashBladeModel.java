@@ -28,8 +28,13 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void updateModel() {
-        changeModel();
+    public void updateKeyPressStatus(int keyCode) {
+        currentGameMode.actionOnKeyPress(keyCode);
+    }
+
+    @Override
+    public void updateKeyReleaseStatus(int keyCode) {
+        currentGameMode.actionOnKeyReleased(keyCode);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.lab3.controller;
 
+import org.lab3.observers.ModelObserver;
+
 import java.awt.event.KeyEvent;
 
 public class SlashBladeController extends ObserverControllerAbstract {
@@ -18,7 +20,7 @@ public class SlashBladeController extends ObserverControllerAbstract {
     public void keyPressed(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 0) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 1);
-            System.out.println("keyPressed " + e.getKeyChar());
+            notifyObserversPressKey(e.getKeyCode());
         }
     }
 
@@ -26,7 +28,21 @@ public class SlashBladeController extends ObserverControllerAbstract {
     public void keyReleased(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
-            System.out.println("keyReleased " + e.getKeyChar());
+            notifyObserversPressKey(e.getKeyCode());
+        }
+    }
+
+    @Override
+    public void notifyObserversPressKey(int keyCode) {
+        for (ModelObserver observer : modelObservers) {
+            observer.updateKeyPressStatus(keyCode);
+        }
+    }
+
+    @Override
+    public void notifyObserversReleaseKey(int keyCode) {
+        for (ModelObserver observer : modelObservers) {
+            observer.updateKeyReleaseStatus(keyCode);
         }
     }
 }

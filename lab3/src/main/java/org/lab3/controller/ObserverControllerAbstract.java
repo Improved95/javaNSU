@@ -6,7 +6,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 
 public abstract class ObserverControllerAbstract implements Controller {
-    private AbstractList<ModelObserver> modelObservers = new ArrayList<>();
+    protected AbstractList<ModelObserver> modelObservers = new ArrayList<>();
 
     @Override
     public void registerObserver(ModelObserver o) {
@@ -19,7 +19,12 @@ public abstract class ObserverControllerAbstract implements Controller {
     }
 
     @Override
-    public void notifyObserversModifyKey() {
+    public void notifyObserversPressKey(int keyCode) {
+
+    }
+
+    @Override
+    public void notifyObserversReleaseKey(int keyCode) {
 
     }
 }

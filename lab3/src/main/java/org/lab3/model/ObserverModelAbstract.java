@@ -7,12 +7,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 
 public abstract class ObserverModelAbstract implements Model {
-    AbstractList<ViewObserver> viewObservers = new ArrayList<>();
-
-    @Override
-    public void updateModel() {
-
-    }
+    protected AbstractList<ViewObserver> viewObservers = new ArrayList<>();
 
     @Override
     public void registerObserver(ViewObserver o) {
@@ -26,6 +21,16 @@ public abstract class ObserverModelAbstract implements Model {
 
     @Override
     public void notifyObserversModifyDrawObjectList() {
+
+    }
+
+    @Override
+    public void updateKeyPressStatus(int keyCode) {
+
+    }
+
+    @Override
+    public void updateKeyReleaseStatus(int keyCode) {
 
     }
 }

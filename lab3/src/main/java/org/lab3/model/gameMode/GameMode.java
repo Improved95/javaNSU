@@ -8,5 +8,7 @@ import java.util.Set;
 public interface GameMode {
     void initial();
     void execute();
+    void actionOnKeyPress(int keyCode);
+    void actionOnKeyReleased(int keyCode);
     void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList);
 }

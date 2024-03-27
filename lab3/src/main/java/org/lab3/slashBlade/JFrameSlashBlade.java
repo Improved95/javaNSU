@@ -5,8 +5,6 @@ import org.lab3.view.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class JFrameSlashBlade extends JFrame implements JFrameObject {
     private int width;
