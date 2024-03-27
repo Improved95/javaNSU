@@ -8,11 +8,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class JFrameSlashBlade implements JFrameObject {
+public class JFrameSlashBlade extends JFrame implements JFrameObject {
     private int width;
     private int height;
     private JFrame jFrame;
-    private Canvas canvas;
+    private MyComponent myComponent;
 
     public JFrameSlashBlade(int width) {
         this.width = width;
@@ -21,22 +21,29 @@ public class JFrameSlashBlade implements JFrameObject {
     }
 
     public void addDrawableComponent(View slashBladeView, Controller controller) {
-        canvas = new Canvas() {
-            @Override
-            public void paint(Graphics g) {
-                super.paint(g);
-                Graphics2D g2 = (Graphics2D) g;
-                slashBladeView.drawObject(g2, height);
-                g2.dispose();
-            }
-        };
-        canvas.addKeyListener(controller);
-        jFrame.add(canvas);
+        myComponent = new MyComponent(slashBladeView);
+        jFrame.addKeyListener(controller);
+        jFrame.add(myComponent);
+    }
+
+    private class MyComponent extends JComponent {
+        private View view;
+
+        public MyComponent(View view) {
+            this.view = view;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            view.drawObject(g2, height);
+            g2.dispose();
+        }
     }
 
     @Override
     public void repaintObjects() {
-        canvas.repaint();
+        myComponent.repaint();
     }
 
     private int getHeightByWidth() {
