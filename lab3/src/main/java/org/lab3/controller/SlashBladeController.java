@@ -28,7 +28,7 @@ public class SlashBladeController extends ObserverControllerAbstract {
     public void keyReleased(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
-            notifyObserversPressKey(e.getKeyCode());
+            notifyObserversReleaseKey(e.getKeyCode());
         }
     }
 

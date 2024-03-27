@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 public class EditedImage {
     private NeedDrawObject oldImage;
     private BufferedImage newImage;
-    private int newPosX;
-    private int newPosY;
+    private double newPosX;
+    private double newPosY;
 
     public EditedImage(NeedDrawObject oldImage, int screenHeight) {
         this.oldImage = oldImage;
@@ -17,11 +17,11 @@ public class EditedImage {
         replaceImage(screenHeight);
     }
 
-    public int getNewPosX() {
+    public double getNewPosX() {
         return newPosX;
     }
 
-    public int getNewPosY() {
+    public double getNewPosY() {
         return newPosY;
     }
 

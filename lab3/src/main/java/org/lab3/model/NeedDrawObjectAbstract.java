@@ -3,9 +3,9 @@ package org.lab3.model;
 import org.lab3.model.objects.SlashBladeObject;
 
 public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBladeObject {
-    private int screenPosX;
-    private int screenPosY;
-    private int screenSize;
+    private double screenPosX;
+    private double screenPosY;
+    private double screenSize;
     private int screenLayerLevel;
     private VisualContext visualContext;
 
@@ -14,12 +14,12 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     }
 
     @Override
-    public int getScreenPosX() {
+    public double getScreenPosX() {
         return screenPosX;
     }
 
     @Override
-    public int getScreenPosY() {
+    public double getScreenPosY() {
         return screenPosY;
     }
 
@@ -29,7 +29,7 @@ public abstract class NeedDrawObjectAbstract implements NeedDrawObject, SlashBla
     }
 
     @Override
-    public int getScreenSize() {
+    public double getScreenSize() {
         return screenSize;
     }
 

@@ -1,11 +1,11 @@
 package org.lab3.model;
 
 public interface NeedDrawObject {
-    int getScreenPosX();
-    int getScreenPosY();
+    double getScreenPosX();
+    double getScreenPosY();
 
     void setScreenSize(int size);
-    int getScreenSize();
+    double getScreenSize();
 
     void setScreenLayerLevel(int levelLayer);
     int getScreenLayerLevel();

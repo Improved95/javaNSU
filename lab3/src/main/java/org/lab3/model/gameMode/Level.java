@@ -45,6 +45,7 @@ public class Level implements GameMode {
 
     @Override
     public void actionOnKeyPress(int keyCode) {
+        this.samurai.changeInGamePosition(10, 0);
         System.out.println("actionOnKeyPress " + keyCode);
     }
 

@@ -4,12 +4,12 @@ import org.lab3.model.objects.SlashBladeAbstractObject;
 
 public abstract class Character extends SlashBladeAbstractObject {
     @Override
-    public int getScreenPosX() {
+    public double getScreenPosX() {
         return inGamePosX;
     }
 
     @Override
-    public int getScreenPosY() {
+    public double getScreenPosY() {
         return inGamePosY;
     }
 }
