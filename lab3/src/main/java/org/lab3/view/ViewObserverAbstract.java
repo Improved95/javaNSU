@@ -17,7 +17,7 @@ public abstract class ViewObserverAbstract implements View {
     }
 
     @Override
-    public void drawObject(Graphics2D g2, int screenHeight) {
+    public void drawObject(Graphics2D g2, int screenWidth, int screenHeight) {
 
     }
 

@@ -11,9 +11,9 @@ public class EditedImage {
     private double newPosX = 0;
     private double newPosY = 0;
 
-    public EditedImage(NeedDrawObject oldImage, int screenHeight) {
+    public EditedImage(NeedDrawObject oldImage, int screenWidth, int screenHeight) {
         this.oldImage = oldImage;
-        resizingImage();
+        resizingImage(screenWidth, screenHeight);
         replaceImage(screenHeight);
     }
 
@@ -29,16 +29,19 @@ public class EditedImage {
         return newImage;
     }
 
-    public void resizingImage() {
-        double newSize = oldImage.getScreenSize() / 100;
+    public void resizingImage(int screenWidth, int screenHeight) {
         int oldImageWidth = oldImage.getVisualContext().getImage().getWidth();
         int oldImageHeight = oldImage.getVisualContext().getImage().getHeight();
 
-        int newImageWidth = (int)(oldImageWidth * newSize);
-        int newImageHeight = (int)(oldImageHeight * newSize);
+        double newSize = oldImage.getScreenSize() / 100;
+        double newNativeImageWidth = oldImageWidth * newSize;
+        double newNativeImageHeight = oldImageHeight * newSize;
+
+        double newImageWidthByScreenSize = newNativeImageWidth * ((double)screenWidth / 1920);
+        double newImageHeightByScreenSize = newNativeImageHeight * ((double)screenHeight / 1080);
 
         this.newImage = Scalr.resize(oldImage.getVisualContext().getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
-                newImageWidth, newImageHeight, Scalr.OP_ANTIALIAS);
+                (int)newImageWidthByScreenSize, (int)newImageHeightByScreenSize, Scalr.OP_ANTIALIAS);
 
     }
 
@@ -46,7 +49,7 @@ public class EditedImage {
         if (oldImage.isDrawImageOnMiddle()) {
             newPosX -= (newImage.getWidth() * oldImage.getHorizontalDirection()) / 2;
         }
-        newPosX += oldImage.getScreenPosX() ;
-        newPosY += screenHeight - 39 - newImage.getHeight() - oldImage.getScreenPosY();
+        newPosX += oldImage.getScreenPosX();
+        newPosY += screenHeight - ( ( 37 * ((double)screenHeight / 1080) ) + newImage.getHeight() + ( oldImage.getScreenPosY() * ((double)screenHeight / 1080) ) );
     }
 }

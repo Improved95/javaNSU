@@ -79,7 +79,7 @@ public class SlashBlade {
         slashBladeController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
-        jFrameSlashBlade = new JFrameSlashBlade(1920);
+        jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeController);
         slashBladeModel.initial();
     }

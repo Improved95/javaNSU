@@ -38,9 +38,9 @@ public class SlashBladeView extends ViewObserverAbstract {
         jFrameObject.repaintObjects();
     }
 
-    public void drawObject(Graphics2D g2, int screenHeight) {
+    public void drawObject(Graphics2D g2, int screenWidth, int screenHeight) {
         for (NeedDrawObject drawObject : drawObjectsList) {
-            EditedImage imageEditor = new EditedImage(drawObject, screenHeight);
+            EditedImage imageEditor = new EditedImage(drawObject, screenWidth, screenHeight);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                     drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
         }

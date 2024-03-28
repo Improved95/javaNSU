@@ -8,5 +8,5 @@ import java.awt.*;
 
 public interface View extends ViewObserver {
     void changeViewScreen(JFrameObject jFrameObject);
-    void drawObject(Graphics2D g2, int screenHeight);
+    void drawObject(Graphics2D g2, int screenWidth, int screenHeight);
 }

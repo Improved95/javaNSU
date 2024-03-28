@@ -44,6 +44,7 @@ public class Level implements GameMode {
 
     @Override
     public void actionOnKeyPress(int keyCode) {
+        System.out.println("Action");
         switch (keyCode) {
             case 87:
                 break;
