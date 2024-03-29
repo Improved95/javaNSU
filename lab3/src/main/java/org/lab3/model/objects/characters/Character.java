@@ -33,7 +33,7 @@ public abstract class Character extends SlashBladeAbstractObject implements Slas
     }
 
     @Override
-    public void running2D(double currentFPS) {
+    public void moveX(double currentFPS) {
         if (isRun) {
             inGamePosX += getValueByFPS(speedOfRun * this.direction, currentFPS);
         }
