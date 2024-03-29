@@ -10,7 +10,7 @@ import org.lab3.view.View;
 import java.lang.reflect.InvocationTargetException;
 
 public class SlashBlade {
-    private JFrameSlashBlade jFrameSlashBlade;
+    private JFrameObject jFrameSlashBlade;
     private Controller slashBladeController = null;
     private Model slashBladeModel = null;
     private View slashBladeView = null;
@@ -31,7 +31,7 @@ public class SlashBlade {
                 currentFrameTimeStart = System.currentTimeMillis();
 
                 currentFPS = 1000 / (makeFrameTime + tickGenerator.getMaxWaitingTime());
-                slashBladeModel.changeModel(currentFPS);
+                slashBladeModel.changeModel(currentFPS, jFrameSlashBlade.getFrameSize());
                 slashBladeView.changeViewScreen(jFrameSlashBlade);
 
                 currentFrameTimeEnd = System.currentTimeMillis();
@@ -46,10 +46,6 @@ public class SlashBlade {
 
         private long nowTime;
         private long lastTime = System.currentTimeMillis();
-
-        public double getMaxFPS() {
-            return maxFPS;
-        }
 
         public double getMaxWaitingTime() {
             return maxWaitingTime;

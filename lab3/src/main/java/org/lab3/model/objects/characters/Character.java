@@ -1,6 +1,7 @@
 package org.lab3.model.objects.characters;
 
 import org.lab3.model.objects.SlashBladeAbstractObject;
+import org.lab3.slashBlade.FrameSize;
 
 public abstract class Character extends SlashBladeAbstractObject implements SlashBladeCharacter {
     protected int direction;
@@ -33,9 +34,9 @@ public abstract class Character extends SlashBladeAbstractObject implements Slas
     }
 
     @Override
-    public void moveX(double currentFPS) {
+    public void moveX(double currentFPS, FrameSize frameSize) {
         if (isMoveX) {
-            inGamePosX += getValueByFPS(speedOfRun * this.direction, currentFPS);
+            inGamePosX += getValueByFPS((speedOfRun * this.direction * frameSize.getReductionFactor()) , currentFPS);
         }
     }
 

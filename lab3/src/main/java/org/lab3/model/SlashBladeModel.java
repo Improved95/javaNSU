@@ -3,6 +3,7 @@ package org.lab3.model;
 import org.lab3.model.factories.GameModesFactory;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.observers.ViewObserver;
+import org.lab3.slashBlade.FrameSize;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -45,8 +46,8 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void changeModel(double currentFPS) {
-        currentGameMode.execute(currentFPS);
+    public void changeModel(double currentFPS, FrameSize frameSize) {
+        currentGameMode.execute(currentFPS, frameSize);
     }
 
     private void changeGameMode(String gameModeName) throws ClassNotFoundException, InstantiationException,

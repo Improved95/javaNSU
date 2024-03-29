@@ -6,6 +6,7 @@ import org.lab3.model.gameMode.GameMode;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
+import org.lab3.slashBlade.FrameSize;
 
 import java.util.*;
 
@@ -77,14 +78,14 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void execute(double currentFPS) {
-        samurai.moveX(currentFPS);
+    public void execute(double currentFPS, FrameSize frameSize) {
+        samurai.moveX(currentFPS, frameSize);
     }
 
     private void setSamurai() {
         samurai.setScreenLayerLevel(1);
         samurai.setInGamePosition(100, 0);
-        samurai.setScreenSize(110);
+        samurai.setScreenSize(90);
     }
 
     private void setBackground() {

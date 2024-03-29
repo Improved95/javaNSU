@@ -7,15 +7,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JFrameSlashBlade extends JFrame implements JFrameObject {
-    private int width;
-    private int height;
+    private FrameSize frameSize = new FrameSize();
     private JFrame jFrame;
     private MyComponent myComponent;
 
     public JFrameSlashBlade(int width) {
-        this.width = width;
-        this.height = getHeightByWidth();
+        this.frameSize.setWidth(width);
+        this.frameSize.setHeight(getHeightByWidth());
         this.jFrame = getFrame();
+    }
+
+    public FrameSize getFrameSize() {
+        return frameSize;
     }
 
     public void addDrawableComponent(View slashBladeView, Controller controller) {
@@ -34,7 +37,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
-            view.drawObject(g2, width, height);
+            view.drawObject(g2, frameSize);
             g2.dispose();
         }
     }
@@ -45,12 +48,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
     }
 
     private int getHeightByWidth() {
-        return (width * Resolution.heightRes) / Resolution.widthRes;
-    }
-
-    private class Resolution {
-        public static final int widthRes = 16;
-        public static final int heightRes = 9;
+        return (frameSize.getWidth() * frameSize.heightRes) / frameSize.widthRes;
     }
 
     private JFrame getFrame() {
@@ -59,7 +57,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
-        jFrame.setBounds(dimension.width / 2 - width / 2, dimension.height / 2 - height / 2, width, height);
+        jFrame.setBounds(dimension.width / 2 - frameSize.getWidth() / 2, dimension.height / 2 - frameSize.getHeight() / 2, frameSize.getWidth(), frameSize.getHeight());
         return jFrame;
     }
 }

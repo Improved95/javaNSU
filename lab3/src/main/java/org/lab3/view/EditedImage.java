@@ -2,6 +2,7 @@ package org.lab3.view;
 
 import org.imgscalr.Scalr;
 import org.lab3.model.NeedDrawObject;
+import org.lab3.slashBlade.FrameSize;
 
 import java.awt.image.BufferedImage;
 
@@ -11,10 +12,10 @@ public class EditedImage {
     private double newPosX = 0;
     private double newPosY = 0;
 
-    public EditedImage(NeedDrawObject oldImage, int screenWidth, int screenHeight) {
+    public EditedImage(NeedDrawObject oldImage, FrameSize frameSize) {
         this.oldImage = oldImage;
-        resizingImage(screenWidth, screenHeight);
-        replaceImage(screenHeight);
+        resizingImage(frameSize);
+        replaceImage(frameSize);
     }
 
     public double getNewPosX() {
@@ -29,7 +30,7 @@ public class EditedImage {
         return newImage;
     }
 
-    public void resizingImage(int screenWidth, int screenHeight) {
+    public void resizingImage(FrameSize frameSize) {
         int oldImageWidth = oldImage.getVisualContext().getImage().getWidth();
         int oldImageHeight = oldImage.getVisualContext().getImage().getHeight();
 
@@ -37,19 +38,19 @@ public class EditedImage {
         double newNativeImageWidth = oldImageWidth * newSize;
         double newNativeImageHeight = oldImageHeight * newSize;
 
-        double newImageWidthByScreenSize = newNativeImageWidth * ((double)screenWidth / 1920);
-        double newImageHeightByScreenSize = newNativeImageHeight * ((double)screenHeight / 1080);
+        double newImageWidthByScreenSize = newNativeImageWidth * frameSize.getReductionFactor();
+        double newImageHeightByScreenSize = newNativeImageHeight * frameSize.getReductionFactor();
 
         this.newImage = Scalr.resize(oldImage.getVisualContext().getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
                 (int)newImageWidthByScreenSize, (int)newImageHeightByScreenSize, Scalr.OP_ANTIALIAS);
 
     }
 
-    public void replaceImage(int screenHeight) {
+    public void replaceImage(FrameSize frameSize) {
         if (oldImage.isDrawImageOnMiddle()) {
             newPosX -= (newImage.getWidth() * oldImage.getHorizontalDirection()) / 2;
         }
         newPosX += oldImage.getScreenPosX();
-        newPosY += screenHeight - ( ( 37 * ((double)screenHeight / 1080) ) + newImage.getHeight() + ( oldImage.getScreenPosY() * ((double)screenHeight / 1080) ) );
+        newPosY += frameSize.getHeight() - (  39 + newImage.getHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
     }
 }
