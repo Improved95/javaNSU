@@ -19,13 +19,14 @@ public class GameModesFactory {
 
         Class classObject = Class.forName(gameModesProperty.getProperty(modeName));
         Constructor ctor = classObject.getDeclaredConstructor(Model.class);
+        ctor.setAccessible(true);
         GameMode gameMode = (GameMode)ctor.newInstance(model);
         return gameMode;
     }
 
     private Properties setGameModesProperty() {
         Properties properties = new Properties();
-        properties.setProperty("LEVEL", "org.lab3.model.gameMode.Level");
+        properties.setProperty("LEVEL", "org.lab3.model.gameMode.level.Level");
         return properties;
     }
 }

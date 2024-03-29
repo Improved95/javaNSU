@@ -1,9 +1,9 @@
-package org.lab3.model.gameMode;
+package org.lab3.model.gameMode.level;
 
 import org.lab3.model.Model;
 import org.lab3.model.NeedDrawObject;
+import org.lab3.model.gameMode.GameMode;
 import org.lab3.model.objects.backgrounds.Background;
-import org.lab3.model.objects.characters.Character;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 
@@ -16,7 +16,7 @@ public class Level implements GameMode {
     private Background background;
     private SamuraiV1 samurai;
 
-    public Level(Model model) {
+    private Level(Model model) {
         this.modelLoader = model;
         this.background = new Background();
         this.samurai = new SamuraiV1();
@@ -84,57 +84,12 @@ public class Level implements GameMode {
     private void setSamurai() {
         samurai.setScreenLayerLevel(1);
         samurai.setInGamePosition(100, 0);
-        samurai.setScreenSize(100);
+        samurai.setScreenSize(110);
     }
 
     private void setBackground() {
         background.setScreenLayerLevel(0);
         background.setInGamePosition(0, -170);
         background.setScreenSize(115);
-    }
-}
-
-class CharacterMovementController {
-    public int aIsPress = 0;
-    public int dIsPress = 0;
-
-    public void changeMoveX(Character character, int a, int d) {
-        System.out.println(a + " " + d);
-        if (a == 1) {
-            if (dIsPress != 1) {
-                character.changeDirection(-1);
-                character.changeMoveXStatus(true);
-            } else {
-                character.changeMoveXStatus(false);
-            }
-            aIsPress = a;
-        }
-        if (d == 1) {
-            if (aIsPress != 1) {
-                character.changeDirection(1);
-                character.changeMoveXStatus(true);
-                dIsPress = d;
-            } else {
-                character.changeMoveXStatus(false);
-            }
-            dIsPress = d;
-        }
-        if (a == 0) {
-            if (dIsPress == 1) {
-                character.changeDirection(1);
-                character.changeMoveXStatus(true);
-            }
-            aIsPress = a;
-        }
-        if (d == 0) {
-            if (aIsPress == 1) {
-                character.changeDirection(-1);
-                character.changeMoveXStatus(true);
-            }
-            dIsPress = d;
-        }
-        if ((aIsPress == 0 && dIsPress == 0) || (aIsPress == 1 && dIsPress == 1)) {
-            character.changeMoveXStatus(false);
-        }
     }
 }
