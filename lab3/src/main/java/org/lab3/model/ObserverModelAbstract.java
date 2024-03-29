@@ -33,4 +33,9 @@ public abstract class ObserverModelAbstract implements Model {
     public void updateKeyReleaseStatus(int keyCode) {
 
     }
+
+    @Override
+    public void updateMouseKeyPressedStatus(int mouseKeyCode) {
+
+    }
 }

@@ -6,4 +6,5 @@ public interface SlashBladeCharacter {
     void changeDirection(int direction);
     void changeMoveXStatus(boolean isMoveX);
     void moveX(double currentFPS, FrameSize frameSize);
+    void attack();
 }

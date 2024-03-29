@@ -78,6 +78,13 @@ public class Level implements GameMode {
     }
 
     @Override
+    public void actionOnMousePressed(int mouseKeyCode) {
+        if (mouseKeyCode == 1) {
+            samurai.attack();
+        }
+    }
+
+    @Override
     public void execute(double currentFPS, FrameSize frameSize) {
         samurai.moveX(currentFPS, frameSize);
     }

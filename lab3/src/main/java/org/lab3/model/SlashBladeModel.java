@@ -39,6 +39,11 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
+    public void updateMouseKeyPressedStatus(int mouseKeyCode) {
+        currentGameMode.actionOnMousePressed(mouseKeyCode);
+    }
+
+    @Override
     public void notifyObserversModifyDrawObjectList() {
         for (ViewObserver viewObserver : viewObservers) {
             viewObserver.updateDrawList(this);

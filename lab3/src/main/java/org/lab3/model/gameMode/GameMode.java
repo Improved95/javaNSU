@@ -10,5 +10,6 @@ public interface GameMode {
     void execute(double currentFPS, FrameSize frameSize);
     void actionOnKeyPress(int keyCode);
     void actionOnKeyReleased(int keyCode);
+    void actionOnMousePressed(int mouseKeyCode);
     void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList);
 }

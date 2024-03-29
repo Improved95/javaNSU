@@ -5,4 +5,5 @@ public interface ControllerObservable {
     void removeObserver(ModelObserver o);
     void notifyObserversPressKey(int keyCode);
     void notifyObserversReleaseKey(int keyCode);
+    void notifyObserversMousePressed(int mouseKeyCode);
 }
