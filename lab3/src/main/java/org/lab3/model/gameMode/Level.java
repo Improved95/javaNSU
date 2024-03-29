@@ -103,38 +103,38 @@ class CharacterMovementController {
         if (a == 1) {
             if (dIsPress != 1) {
                 character.changeDirection(-1);
-                character.changeRunStatus(true);
+                character.changeMoveXStatus(true);
             } else {
-                character.changeRunStatus(false);
+                character.changeMoveXStatus(false);
             }
             aIsPress = a;
         }
         if (d == 1) {
             if (aIsPress != 1) {
                 character.changeDirection(1);
-                character.changeRunStatus(true);
+                character.changeMoveXStatus(true);
                 dIsPress = d;
             } else {
-                character.changeRunStatus(false);
+                character.changeMoveXStatus(false);
             }
             dIsPress = d;
         }
         if (a == 0) {
             if (dIsPress == 1) {
                 character.changeDirection(1);
-                character.changeRunStatus(true);
+                character.changeMoveXStatus(true);
             }
             aIsPress = a;
         }
         if (d == 0) {
             if (aIsPress == 1) {
                 character.changeDirection(-1);
-                character.changeRunStatus(true);
+                character.changeMoveXStatus(true);
             }
             dIsPress = d;
         }
         if ((aIsPress == 0 && dIsPress == 0) || (aIsPress == 1 && dIsPress == 1)) {
-            character.changeRunStatus(false);
+            character.changeMoveXStatus(false);
         }
     }
 }

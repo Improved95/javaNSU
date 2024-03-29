@@ -5,7 +5,7 @@ import org.lab3.model.objects.SlashBladeAbstractObject;
 public abstract class Character extends SlashBladeAbstractObject implements SlashBladeCharacter {
     protected int direction;
     protected double speedOfRun; // units per second
-    protected boolean isRun;
+    protected boolean isMoveX;
 
     public Character() {
         setDrawImageOnMiddle(true);
@@ -22,8 +22,8 @@ public abstract class Character extends SlashBladeAbstractObject implements Slas
     }
 
     @Override
-    public void changeRunStatus(boolean isRun) {
-        this.isRun = isRun;
+    public void changeMoveXStatus(boolean isRun) {
+        this.isMoveX = isRun;
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class Character extends SlashBladeAbstractObject implements Slas
 
     @Override
     public void moveX(double currentFPS) {
-        if (isRun) {
+        if (isMoveX) {
             inGamePosX += getValueByFPS(speedOfRun * this.direction, currentFPS);
         }
     }
