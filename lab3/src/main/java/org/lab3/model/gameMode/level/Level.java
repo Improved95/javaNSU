@@ -17,6 +17,9 @@ public class Level implements GameMode {
     private Background background;
     private SamuraiV1 player;
 
+    ResourcesContext enemyImagesResources;
+    ArrayList<SamuraiV1> enemyList = new ArrayList<>();
+
     private Level(Model model) {
         this.modelLoader = model;
         this.background = new Background();
@@ -37,6 +40,10 @@ public class Level implements GameMode {
 
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
+        this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+
+        enemyImagesResources = new ResourcesContext();
+        backgroundImagesResources.addImage("samurai/enemy.png");
         this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         setSamurai();
@@ -86,10 +93,13 @@ public class Level implements GameMode {
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
+        playerMove(currentFPS, frameSize);
+
+    }
+
+    private void playerMove(double currentFPS, FrameSize frameSize) {
         player.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
         player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
-
-
     }
 
     private void setSamurai() {
@@ -102,5 +112,9 @@ public class Level implements GameMode {
         background.setScreenLayerLevel(0);
         background.setInGamePosition(0, -170);
         background.setScreenSize(115);
+    }
+
+    private void createEnemy() {
+
     }
 }

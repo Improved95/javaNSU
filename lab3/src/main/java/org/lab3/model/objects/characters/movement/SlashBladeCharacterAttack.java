@@ -15,6 +15,7 @@ public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstra
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
+        character.getParametersContext().setAttackStatus(true);
         if (isExecute && !blockExecute) {
             if (attackDuration > 0) {
                 attackDuration -= 1000 / currentFPS;

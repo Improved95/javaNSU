@@ -42,7 +42,6 @@ class CharacterMovementController {
     }
 
     public void changeAttack(SlashBladeCharacterAbstract character) {
-        character.getParametersContext().setAttackStatus(true);
         character.getMovementList().get("ATTACK").changeExecuteStatus(true);
     }
 }
