@@ -12,8 +12,6 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
     protected CharacterParametersContext parametersContext = new CharacterParametersContext();
     protected Map<String, CharacterMovement> movementList = new HashMap<>();
 
-//    protected boolean isMoveX;
-
     public SlashBladeCharacterAbstract() {
         setDrawImageOnMiddle(true);
     }
@@ -37,11 +35,6 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
         return movementList;
     }
 
-//    @Override
-//    public void changeMoveXStatus(boolean isRun) {
-//        this.isMoveX = isRun;
-//    }
-
     @Override
     public void changeDirection(int direction) {
         parametersContext.setDirection(direction);
@@ -53,15 +46,12 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
         inGamePosX += getValueByFPS((parametersContext.getSpeedOfMoveX() * parametersContext.getDirection() * frameSize.getReductionFactor()) , currentFPS);
     }
 
+    @Override
+    public void attack() {
+
+    }
+
     protected double getValueByFPS(double value, double FPS) {
         return value / FPS;
     }
-//    @Override
-//    public void attack() {
-//
-//    }
-
-//    protected double getValueByFPS(double value, double FPS) {
-//        return value / FPS;
-//    }
 }

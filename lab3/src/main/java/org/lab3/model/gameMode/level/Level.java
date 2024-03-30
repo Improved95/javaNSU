@@ -15,17 +15,17 @@ public class Level implements GameMode {
 
     private CharacterMovementController characterMovementController = new CharacterMovementController();
     private Background background;
-    private SamuraiV1 samurai;
+    private SamuraiV1 player;
 
     private Level(Model model) {
         this.modelLoader = model;
         this.background = new Background();
-        this.samurai = new SamuraiV1();
+        this.player = new SamuraiV1();
     }
 
     @Override
     public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) {
-        drawObjectsList.add(samurai);
+        drawObjectsList.add(player);
         drawObjectsList.add(background);
     }
 
@@ -33,7 +33,7 @@ public class Level implements GameMode {
     public void initial() {
         ResourcesContext samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
-        this.samurai.getVisualContext().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        this.player.getVisualContext().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
@@ -52,12 +52,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                characterMovementController.changeMoveX(samurai, 1, -1);
+                characterMovementController.changeMoveX(player, 1, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementController.changeMoveX(samurai, -1, 1);
+                characterMovementController.changeMoveX(player, -1, 1);
         }
     }
 
@@ -67,12 +67,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                characterMovementController.changeMoveX(samurai, 0, -1);
+                characterMovementController.changeMoveX(player, 0, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementController.changeMoveX(samurai, -1, 0);
+                characterMovementController.changeMoveX(player, -1, 0);
                 break;
         }
     }
@@ -80,20 +80,22 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-//            samurai.attack();
+            characterMovementController.changeAttack(player);
         }
     }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-//        samurai.moveX(currentFPS, frameSize);
-        samurai.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
+        player.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
+        player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
+
+
     }
 
     private void setSamurai() {
-        samurai.setScreenLayerLevel(1);
-        samurai.setInGamePosition(100, 0);
-        samurai.setScreenSize(90);
+        player.setScreenLayerLevel(1);
+        player.setInGamePosition(100, 0);
+        player.setScreenSize(90);
     }
 
     private void setBackground() {

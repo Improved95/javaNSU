@@ -5,7 +5,8 @@ import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 public abstract class SlashBladeCharacterMovementAbstract implements CharacterMovement {
     protected SlashBladeCharacterAbstract character;
     protected boolean isExecute = false;
-    protected double timer;
+    protected boolean blockExecute = false;
+//    protected double timer;
 
     public SlashBladeCharacterMovementAbstract(SlashBladeCharacterAbstract character) {
         this.character = character;
