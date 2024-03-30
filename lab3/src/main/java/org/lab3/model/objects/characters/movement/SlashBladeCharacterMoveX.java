@@ -1,16 +1,16 @@
 package org.lab3.model.objects.characters.movement;
 
-import org.lab3.model.objects.characters.Character;
+import org.lab3.model.objects.characters.SlashBladeCharacter;
+import org.lab3.slashBlade.FrameSize;
 
 public class SlashBladeCharacterMoveX extends SlashBladeCharacterMovementAbstract {
-    private CharacterParametersContext characterParametersContext;
-
-    public SlashBladeCharacterMoveX(Character character) {
-        super(character);
-        character.getParametersContext();
-    }
-
     @Override
-    public void execute() {
+    public void execute(SlashBladeCharacter character, movementParametersContext,
+                            double currentFPS, FrameSize frameSize) {
+
+        if (isExecute) {
+
+            character.moveX(currentFPS, frameSize);
+        }
     }
 }

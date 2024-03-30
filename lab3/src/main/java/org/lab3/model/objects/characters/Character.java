@@ -1,16 +1,10 @@
 package org.lab3.model.objects.characters;
 
 import org.lab3.model.objects.SlashBladeAbstractObject;
-import org.lab3.model.objects.characters.movement.CharacterMovement;
-import org.lab3.model.objects.characters.movement.CharacterParametersContext;
 import org.lab3.slashBlade.FrameSize;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class Character extends SlashBladeAbstractObject implements SlashBladeCharacter {
     protected CharacterParametersContext parametersContext = new CharacterParametersContext();
-    protected Map<String, CharacterMovement> movementList = new HashMap<>();
 
     protected boolean isMoveX;
 

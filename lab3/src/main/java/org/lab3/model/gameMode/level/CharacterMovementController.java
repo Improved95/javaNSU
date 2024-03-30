@@ -1,12 +1,12 @@
 package org.lab3.model.gameMode.level;
 
-import org.lab3.model.objects.characters.Character;
+import org.lab3.model.objects.characters.SlashBladeCharacter;
 
 class CharacterMovementController {
     public int aIsPress = 0;
     public int dIsPress = 0;
 
-    public void changeMoveX(Character character, int a, int d) {
+    public void changeMoveX(SlashBladeCharacter character, int a, int d) {
         if (a == 1) {
             if (dIsPress != 1) {
                 character.changeDirection(-1);
