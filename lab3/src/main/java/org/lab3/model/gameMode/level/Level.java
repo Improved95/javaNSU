@@ -5,8 +5,6 @@ import org.lab3.model.NeedDrawObject;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.model.objects.characters.movement.CharacterMovement;
-import org.lab3.model.objects.characters.movement.SlashBladeCharacterMoveX;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 
@@ -16,8 +14,6 @@ public class Level implements GameMode {
     private Model modelLoader;
 
     private CharacterMovementController characterMovementController = new CharacterMovementController();
-    private Map<String, CharacterMovement> characterMovementMap = new HashMap<>();
-
     private Background background;
     private SamuraiV1 samurai;
 
@@ -25,8 +21,6 @@ public class Level implements GameMode {
         this.modelLoader = model;
         this.background = new Background();
         this.samurai = new SamuraiV1();
-
-        characterMovementMap.put("MOVE_X", new SlashBladeCharacterMoveX());
     }
 
     @Override
@@ -86,14 +80,14 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-            samurai.attack();
+//            samurai.attack();
         }
     }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
 //        samurai.moveX(currentFPS, frameSize);
-        characterMovementMap.get("MOVE_X").execute(samurai, currentFPS, frameSize);
+        samurai.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
     }
 
     private void setSamurai() {
