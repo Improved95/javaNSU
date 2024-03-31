@@ -1,6 +1,7 @@
 package org.lab3.view;
 
 import org.lab3.model.Model;
+import org.lab3.model.NeedDrawObject;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
@@ -23,7 +24,12 @@ public abstract class ViewObserverAbstract implements View {
     }
 
     @Override
-    public void updateDrawList(Model model) {
+    public void addDrawObject(NeedDrawObject drawObject) {
+
+    }
+
+    @Override
+    public void removeDrawObject(NeedDrawObject drawObject) {
 
     }
 }

@@ -25,10 +25,20 @@ public class SlashBladeView extends ViewObserverAbstract {
         changeViewScreen(jFrameObject);
     }
 
-    @Override
+    /*@Override
     public void updateDrawList(Model model) {
         GameMode gameMode = model.getCurrentGameMode();
         gameMode.getDrawObjectsList(drawObjectsList);
+    }*/
+
+    @Override
+    public void addDrawObject(NeedDrawObject drawObject) {
+        drawObjectsList.add(drawObject);
+    }
+
+    @Override
+    public void removeDrawObject(NeedDrawObject drawObject) {
+        drawObjectsList.remove(drawObject);
     }
 
     @Override

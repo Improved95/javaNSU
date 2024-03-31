@@ -44,9 +44,16 @@ public class SlashBladeModel extends ObserverModelAbstract {
     }
 
     @Override
-    public void notifyObserversModifyDrawObjectList() {
-        for (ViewObserver viewObserver : viewObservers) {
-            viewObserver.updateDrawList(this);
+    public void notifyObserversAddDrawObject(NeedDrawObject drawObject) {
+        for (ViewObserver observer : viewObservers) {
+            observer.addDrawObject(drawObject);
+        }
+    }
+
+    @Override
+    public void notifyObserversRemoveDrawObject(NeedDrawObject drawObject) {
+        for (ViewObserver observer : viewObservers) {
+
         }
     }
 

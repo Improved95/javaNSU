@@ -1,7 +1,6 @@
 package org.lab3.model.gameMode.level;
 
 import org.lab3.model.Model;
-import org.lab3.model.NeedDrawObject;
 import org.lab3.model.gameMode.GameMode;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
@@ -14,7 +13,7 @@ import java.util.*;
 public class Level implements GameMode {
     private Model modelLoader;
 
-    private EnemyCreator enemyCreator = new EnemyCreator();
+    private EnemyCreator<SamuraiV1> enemyCreator = new EnemyCreator();
     private CharacterMovementController characterMovementController = new CharacterMovementController();
     private Background background;
     private SamuraiV1 player;
@@ -54,7 +53,8 @@ public class Level implements GameMode {
         setBackground();
         enemyCreator.setTimer(2000);
 
-        modelLoader.notifyObserversModifyDrawObjectList();
+        modelLoader.notifyObserversAddDrawObject(player);
+        modelLoader.notifyObserversAddDrawObject(background);
     }
 
     @Override
@@ -99,9 +99,18 @@ public class Level implements GameMode {
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
         playerMove(currentFPS, frameSize);
-        if (enemyCreator.create(enemyList, enemyImagesResources, currentFPS)) {
-            modelLoader.notifyObserversModifyDrawObjectList();
+
+        SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
+        if (enemy != null) {
+            modelLoader.notifyObserversAddDrawObject(enemy);
             System.out.println("new enemy");
+
+            Random random = new Random();
+            if (random.nextInt() % 2 == 1) {
+                SamuraiV1 removedEnemy = enemyList.remove(0);
+                System.out.println("remove enemy");
+                modelLoader.notifyObserversRemoveDrawObject(removedEnemy);
+            }
         }
 
     }

@@ -20,7 +20,12 @@ public abstract class ObserverModelAbstract implements Model {
     }
 
     @Override
-    public void notifyObserversModifyDrawObjectList() {
+    public void notifyObserversAddDrawObject(NeedDrawObject drawObject) {
+
+    }
+
+    @Override
+    public void notifyObserversRemoveDrawObject(NeedDrawObject drawObject) {
 
     }
 

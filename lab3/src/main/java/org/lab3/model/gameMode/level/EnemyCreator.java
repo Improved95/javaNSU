@@ -5,7 +5,7 @@ import org.lab3.resources.ResourcesContext;
 
 import java.util.ArrayList;
 
-public class EnemyCreator {
+public class EnemyCreator<EnemyType> {
     private double createDelay;
     private double timerCreateDelay = createDelay;
 
@@ -21,19 +21,20 @@ public class EnemyCreator {
         this.createDelay = createDelay;
     }
 
-    public boolean create(ArrayList<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, double currentFPS) {
+    public EnemyType create(ArrayList<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, double currentFPS) {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setHealth(1);
             enemy.setScreenSize(90);
+            enemy.setInGamePosition(500, 0);
             enemy.getVisualContext().setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
             enemyList.add(enemy);
             timerCreateDelay = createDelay;
-            return true;
+            return (EnemyType) enemy;
         } else {
             timerCreateDelay -= 1000 / currentFPS;
-            return false;
+            return null;
         }
     }
 }
