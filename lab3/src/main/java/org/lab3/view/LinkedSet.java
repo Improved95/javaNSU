@@ -1,21 +1,28 @@
-package org.lab3.slashBlade;
+package org.lab3.view;
+
+import org.lab3.model.NeedDrawObject;
 
 import java.util.*;
 
-public class LinkedSet<E> extends AbstractSet<E> {
-    private static class LinkedElement<E> {
-        E value;
+public class LinkedSet extends AbstractSet<NeedDrawObject> {
+    public LinkedSet(Comparator comparator) {
+        this.comparator = comparator;
+    }
+
+    private static class LinkedElement {
+        NeedDrawObject value;
 
         boolean exists;
 
-        LinkedElement<E> prev;
-        LinkedElement<E> next;
+        LinkedElement prev;
+        LinkedElement next;
     }
 
-    private Map<E, LinkedElement<E>> map = new HashMap<>();
+    private Map<NeedDrawObject, LinkedElement> map = new HashMap<>();
+    private Comparator comparator;
 
-    private LinkedElement<E> placeholder = new LinkedElement<>();
-    private LinkedElement<E> head = placeholder;
+    private LinkedElement placeholder = new LinkedElement();
+    private LinkedElement head = placeholder;
 
     @Override
     public boolean isEmpty() {
@@ -33,28 +40,48 @@ public class LinkedSet<E> extends AbstractSet<E> {
     }
 
     @Override
-    public boolean add(E e) {
-        LinkedElement<E> element = map.putIfAbsent(e, placeholder);
+    public boolean add(NeedDrawObject e) {
+        LinkedElement element = map.putIfAbsent(e, placeholder);
 
         if (element != null) {
             return false;
         }
 
-        element = placeholder;
-        element.exists = true;
-        element.value = e;
+        LinkedElement node = head;
+        while (!node.equals(placeholder)) {
+            if (comparator.compare(e, node.value) > 0) {
+                node = node.next;
+            } else {
+                break;
+            }
+        }
 
-        placeholder = new LinkedElement<>();
-        placeholder.prev = element;
+        if (node.equals(placeholder)) {
+            element = placeholder;
+            element.exists = true;
+            element.value = e;
 
-        element.next = placeholder;
+            placeholder = new LinkedElement();
+            placeholder.prev = element;
+
+            element.next = placeholder;
+        } else {
+            element = new LinkedElement();
+            element.exists = true;
+            element.value = e;
+
+            node.prev.next = element;
+            element.next = node;
+            element.prev = node.prev;
+            node.prev = element;
+        }
 
         return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        LinkedElement<E> removedElement = map.remove(o);
+        LinkedElement removedElement = map.remove(o);
 
         if (removedElement == null) {
             return false;
@@ -65,7 +92,7 @@ public class LinkedSet<E> extends AbstractSet<E> {
         return true;
     }
 
-    private void removeElementFromLinkedList(LinkedElement<E> element) {
+    private void removeElementFromLinkedList(LinkedElement element) {
         element.exists = false;
         element.value = null;
 
@@ -80,16 +107,16 @@ public class LinkedSet<E> extends AbstractSet<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator iterator() {
         return new ElementIterator();
     }
 
-    private class ElementIterator implements Iterator<E> {
-        LinkedElement<E> next = head;
-        LinkedElement<E> current = null;
+    private class ElementIterator implements Iterator {
+        LinkedElement next = head;
+        LinkedElement current = null;
 
-        LinkedElement<E> findNext() {
-            LinkedElement<E> n = next;
+        LinkedElement findNext() {
+            LinkedElement n = next;
 
             while (!n.exists && n.next != null) {
                 next = n = n.next;
@@ -104,8 +131,8 @@ public class LinkedSet<E> extends AbstractSet<E> {
         }
 
         @Override
-        public E next() {
-            LinkedElement<E> n = findNext();
+        public NeedDrawObject next() {
+            LinkedElement n = findNext();
 
             if (!n.exists) {
                 throw new NoSuchElementException();

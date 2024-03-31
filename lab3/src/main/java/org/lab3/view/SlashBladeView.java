@@ -42,17 +42,10 @@ public class SlashBladeView extends ViewObserverAbstract {
 
     @Override
     public void drawObject(Graphics2D g2, FrameSize frameSize) {
-        Iterator<NeedDrawObject> iterator = drawObjectsList.iterator();
-        while (iterator.hasNext()) {
-            NeedDrawObject drawObject = iterator.next();
+        for (NeedDrawObject drawObject : drawObjectsList) {
             EditedImage imageEditor = new EditedImage(drawObject, frameSize);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                     drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
         }
-        /*for (NeedDrawObject drawObject : drawObjectsList) {
-            EditedImage imageEditor = new EditedImage(drawObject, frameSize);
-            g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
-                    drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
-        }*/
     }
 }
