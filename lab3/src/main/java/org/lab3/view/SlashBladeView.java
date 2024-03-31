@@ -7,13 +7,10 @@ import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
 import java.awt.*;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SlashBladeView extends ViewObserverAbstract {
-    private Set<NeedDrawObject> drawObjectsList = new TreeSet<>(new Comparator<NeedDrawObject>() {
+    private LinkedSetDrawObjects drawObjectsList = new LinkedSetDrawObjects(new Comparator<NeedDrawObject>() {
         @Override
         public int compare(NeedDrawObject o1, NeedDrawObject o2) {
             if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
@@ -30,7 +27,6 @@ public class SlashBladeView extends ViewObserverAbstract {
 
     @Override
     public void updateDrawList(Model model) {
-        drawObjectsList.clear();
         GameMode gameMode = model.getCurrentGameMode();
         gameMode.getDrawObjectsList(drawObjectsList);
     }

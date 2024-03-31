@@ -4,8 +4,8 @@ import org.lab3.model.NeedDrawObject;
 
 import java.util.*;
 
-public class LinkedSet extends AbstractSet<NeedDrawObject> {
-    public LinkedSet(Comparator comparator) {
+public class LinkedSetDrawObjects extends AbstractSet<NeedDrawObject> {
+    public LinkedSetDrawObjects(Comparator comparator) {
         this.comparator = comparator;
     }
 
@@ -70,7 +70,12 @@ public class LinkedSet extends AbstractSet<NeedDrawObject> {
             element.exists = true;
             element.value = e;
 
-            node.prev.next = element;
+            if (node.prev != null) {
+                node.prev.next = element;
+            } else {
+                head = element;
+            }
+
             element.next = node;
             element.prev = node.prev;
             node.prev = element;

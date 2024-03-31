@@ -1,9 +1,8 @@
 package org.lab3.model.gameMode;
 
-import org.lab3.model.NeedDrawObject;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.view.LinkedSetDrawObjects;
 
-import java.util.Set;
 
 public interface GameMode {
     void initial();
@@ -11,5 +10,5 @@ public interface GameMode {
     void actionOnKeyPress(int keyCode);
     void actionOnKeyReleased(int keyCode);
     void actionOnMousePressed(int mouseKeyCode);
-    void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList);
+    void getDrawObjectsList(LinkedSetDrawObjects drawObjectsList);
 }

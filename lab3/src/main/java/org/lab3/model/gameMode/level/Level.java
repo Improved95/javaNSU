@@ -7,6 +7,7 @@ import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.view.LinkedSetDrawObjects;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) {
+    public void getDrawObjectsList(LinkedSetDrawObjects drawObjectsList) {
         drawObjectsList.add(player);
         drawObjectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
@@ -51,7 +52,7 @@ public class Level implements GameMode {
 
         setSamurai();
         setBackground();
-        enemyCreator.setTimer(1000);
+        enemyCreator.setTimer(2000);
 
         modelLoader.notifyObserversModifyDrawObjectList();
     }
@@ -100,7 +101,7 @@ public class Level implements GameMode {
         playerMove(currentFPS, frameSize);
         if (enemyCreator.create(enemyList, enemyImagesResources, currentFPS)) {
             modelLoader.notifyObserversModifyDrawObjectList();
-//            System.out.println("new enemy");
+            System.out.println("new enemy");
         }
 
     }
