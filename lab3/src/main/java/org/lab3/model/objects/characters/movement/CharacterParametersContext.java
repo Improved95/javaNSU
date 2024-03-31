@@ -1,11 +1,13 @@
 package org.lab3.model.objects.characters.movement;
 
 public class CharacterParametersContext {
+    private int health = 0;
+
     private int direction;
     private double speedOfMoveX; // units per second
 
-    private int attackDuration = 0; //ms
-    private int attackDelay = 0; //ms
+    private double attackDuration = 0; // ms
+    private double attackDelay = 0; // ms
     private boolean attackStatus = false;
 
     public int getDirection() {
@@ -24,7 +26,7 @@ public class CharacterParametersContext {
         this.speedOfMoveX = speedOfMoveX;
     }
 
-    public int getAttackDuration() {
+    public double getAttackDuration() {
         return attackDuration;
     }
 
@@ -32,7 +34,7 @@ public class CharacterParametersContext {
         this.attackDuration = attackDuration;
     }
 
-    public int getAttackDelay() {
+    public double getAttackDelay() {
         return attackDelay;
     }
 
@@ -46,5 +48,13 @@ public class CharacterParametersContext {
 
     public void setAttackStatus(boolean attackStatus) {
         this.attackStatus = attackStatus;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

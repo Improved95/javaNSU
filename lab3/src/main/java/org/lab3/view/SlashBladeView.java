@@ -8,6 +8,7 @@ import org.lab3.slashBlade.JFrameObject;
 
 import java.awt.*;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,10 +42,17 @@ public class SlashBladeView extends ViewObserverAbstract {
 
     @Override
     public void drawObject(Graphics2D g2, FrameSize frameSize) {
-        for (NeedDrawObject drawObject : drawObjectsList) {
+        Iterator<NeedDrawObject> iterator = drawObjectsList.iterator();
+        while (iterator.hasNext()) {
+            NeedDrawObject drawObject = iterator.next();
             EditedImage imageEditor = new EditedImage(drawObject, frameSize);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                     drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
         }
+        /*for (NeedDrawObject drawObject : drawObjectsList) {
+            EditedImage imageEditor = new EditedImage(drawObject, frameSize);
+            g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
+                    drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
+        }*/
     }
 }

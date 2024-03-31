@@ -16,6 +16,7 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
         setDrawImageOnMiddle(true);
     }
 
+    @Override
     public CharacterParametersContext getParametersContext() {
         return parametersContext;
     }
@@ -47,9 +48,7 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
     }
 
     @Override
-    public void attack() {
-
-    }
+    public void attack() {}
 
     protected double getValueByFPS(double value, double FPS) {
         return value / FPS;

@@ -4,10 +4,10 @@ import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
 public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstract {
-    private int attackDuration; //ms
-    private int attackDelay; //ms
+    private double attackDuration; //ms
+    private double attackDelay; //ms
 
-    public SlashBladeCharacterAttack(SlashBladeCharacterAbstract character, int attackDuration, int attackDelay) {
+    public SlashBladeCharacterAttack(SlashBladeCharacterAbstract character, double attackDuration, double attackDelay) {
         super(character);
         this.attackDuration = attackDuration;
         this.attackDelay = attackDelay;

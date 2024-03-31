@@ -13,6 +13,7 @@ import java.util.*;
 public class Level implements GameMode {
     private Model modelLoader;
 
+    private EnemyCreator enemyCreator = new EnemyCreator();
     private CharacterMovementController characterMovementController = new CharacterMovementController();
     private Background background;
     private SamuraiV1 player;
@@ -30,6 +31,9 @@ public class Level implements GameMode {
     public void getDrawObjectsList(Set<NeedDrawObject> drawObjectsList) {
         drawObjectsList.add(player);
         drawObjectsList.add(background);
+        for (SamuraiV1 enemy : enemyList) {
+            drawObjectsList.add(enemy);
+        }
     }
 
     @Override
@@ -43,11 +47,11 @@ public class Level implements GameMode {
         this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         enemyImagesResources = new ResourcesContext();
-        backgroundImagesResources.addImage("samurai/enemy.png");
-        this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        enemyImagesResources.addImage("samurai/enemy.png");
 
         setSamurai();
         setBackground();
+        enemyCreator.setTimer(1000);
 
         modelLoader.notifyObserversModifyDrawObjectList();
     }
@@ -94,6 +98,10 @@ public class Level implements GameMode {
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
         playerMove(currentFPS, frameSize);
+        if (enemyCreator.create(enemyList, enemyImagesResources, currentFPS)) {
+            modelLoader.notifyObserversModifyDrawObjectList();
+//            System.out.println("new enemy");
+        }
 
     }
 
@@ -104,6 +112,7 @@ public class Level implements GameMode {
 
     private void setSamurai() {
         player.setScreenLayerLevel(1);
+        player.getParametersContext().setHealth(3);
         player.setInGamePosition(100, 0);
         player.setScreenSize(90);
     }
@@ -112,9 +121,5 @@ public class Level implements GameMode {
         background.setScreenLayerLevel(0);
         background.setInGamePosition(0, -170);
         background.setScreenSize(115);
-    }
-
-    private void createEnemy() {
-
     }
 }
