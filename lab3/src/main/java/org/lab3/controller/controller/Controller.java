@@ -4,7 +4,7 @@ import org.lab3.model.Model;
 import org.lab3.view.View;
 
 public interface Controller {
-    void setSlashBladeModel(Model slashBladeModel);
-    void setSlashBladeView(View slashBladeView);
+    void setModel(Model model);
+    void setView(View view);
     void initial();
 }

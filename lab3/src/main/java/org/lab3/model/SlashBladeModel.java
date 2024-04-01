@@ -52,9 +52,7 @@ public class SlashBladeModel extends ObserverModelAbstract {
 
     @Override
     public void notifyObserversRemoveDrawObject(NeedDrawObject drawObject) {
-        for (ViewObserver observer : viewObservers) {
-
-        }
+        
     }
 
     @Override

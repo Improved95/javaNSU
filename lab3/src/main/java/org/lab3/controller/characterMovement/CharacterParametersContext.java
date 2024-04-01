@@ -1,4 +1,4 @@
-package org.lab3.controller.movement;
+package org.lab3.controller.characterMovement;
 
 public class CharacterParametersContext {
     private int health = 0;

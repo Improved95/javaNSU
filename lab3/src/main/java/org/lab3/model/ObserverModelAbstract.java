@@ -1,7 +1,6 @@
 package org.lab3.model;
 
 import org.lab3.observers.ViewObserver;
-import org.lab3.slashBlade.JFrameObject;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

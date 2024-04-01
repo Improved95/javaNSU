@@ -1,4 +1,4 @@
-package org.lab3.controller.movement;
+package org.lab3.controller.characterMovement;
 
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;

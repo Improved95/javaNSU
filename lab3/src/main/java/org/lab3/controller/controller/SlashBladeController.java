@@ -13,16 +13,16 @@ import java.awt.event.ActionListener;
 
 public class SlashBladeController implements Controller {
     private final double maxFPS = 1;
-    private final double maxWaitingTime = 1000 / maxFPS;
+    private final long maxWaitingTime = (long)(1000 / maxFPS);
 
     private static LogicController slashBladeLogicController;
     private static KeyListenerController slashBladeKeyListenerController;
 
-    private Model slashBladeModel;
-    private View slashBladeView;
+    private Model model;
+    private View view;
 
-    private static Timer generationTickTimer;
-    private static TimerContext timerContext;
+    private Timer generationTickTimer;
+    private TimerContext timerContext;
 
     public SlashBladeController() {
         slashBladeLogicController = new SlashBladeLogicController();
@@ -39,13 +39,13 @@ public class SlashBladeController implements Controller {
     }
 
     @Override
-    public void setSlashBladeModel(Model slashBladeModel) {
-        this.slashBladeModel = slashBladeModel;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     @Override
-    public void setSlashBladeView(View slashBladeView) {
-        this.slashBladeView = slashBladeView;
+    public void setView(View view) {
+        this.view = view;
     }
 
     @Override
@@ -58,6 +58,7 @@ public class SlashBladeController implements Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             createAndGetTimeCreateFrame(timerContext);
+            generationTickTimer.setDelay((int)(maxWaitingTime - timerContext.timeMakeFrame));
         }
     }
 
@@ -65,7 +66,8 @@ public class SlashBladeController implements Controller {
         timerContext.currentFrameTimeStart = System.currentTimeMillis();
         timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
 
-        slashBladeLogicController.calculateFrame();
+        slashBladeLogicController.calculateFrame(model);
+//        view.changeViewScreen();
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();
         timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;
