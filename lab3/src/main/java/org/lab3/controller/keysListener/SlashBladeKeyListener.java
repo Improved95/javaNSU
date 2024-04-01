@@ -1,4 +1,4 @@
-package org.lab3.controller;
+package org.lab3.controller.keysListener;
 
 import org.lab3.observers.ModelObserver;
 

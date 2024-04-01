@@ -1,7 +1,8 @@
 package org.lab3.slashBlade;
 
-import org.lab3.controller.KeyListenerController;
-import org.lab3.controller.SlashBladeKeyListener;
+import org.lab3.controller.keysListener.KeyListenerController;
+import org.lab3.controller.tickGenerator.SlashBladeTickGenerator;
+import org.lab3.controller.keysListener.SlashBladeKeyListener;
 import org.lab3.model.Model;
 import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
@@ -78,5 +79,8 @@ public class SlashBlade {
         jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeKeyListenerController);
         slashBladeModel.initial();
+
+        SlashBladeTickGenerator sbc = new SlashBladeTickGenerator();
+        sbc.initial();
     }
 }
