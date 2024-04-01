@@ -1,10 +1,10 @@
 package org.lab3.observers;
 
-import org.lab3.model.NeedDrawObject;
+import org.lab3.model.objects.DrawObject;
 
 public interface ModelObservable {
     void registerObserver(ViewObserver o);
     void removeObserver(ViewObserver o);
-    void notifyObserversAddDrawObject(NeedDrawObject drawObject);
-    void notifyObserversRemoveDrawObject(NeedDrawObject drawObject);
+    void notifyObserversAddDrawObject(DrawObject drawObject);
+    void notifyObserversRemoveDrawObject(DrawObject drawObject);
 }

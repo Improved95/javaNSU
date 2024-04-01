@@ -1,18 +1,18 @@
 package org.lab3.view;
 
 import org.imgscalr.Scalr;
-import org.lab3.model.NeedDrawObject;
+import org.lab3.model.objects.DrawObject;
 import org.lab3.slashBlade.FrameSize;
 
 import java.awt.image.BufferedImage;
 
 public class EditedImage {
-    private NeedDrawObject oldImage;
+    private DrawObject oldImage;
     private BufferedImage newImage;
     private double newPosX = 0;
     private double newPosY = 0;
 
-    public EditedImage(NeedDrawObject oldImage, FrameSize frameSize) {
+    public EditedImage(DrawObject oldImage, FrameSize frameSize) {
         this.oldImage = oldImage;
         resizingImage(frameSize);
         replaceImage(frameSize);
@@ -31,8 +31,8 @@ public class EditedImage {
     }
 
     public void resizingImage(FrameSize frameSize) {
-        int oldImageWidth = oldImage.getVisualContext().getImage().getWidth();
-        int oldImageHeight = oldImage.getVisualContext().getImage().getHeight();
+        int oldImageWidth = oldImage.getImage().getWidth();
+        int oldImageHeight = oldImage.getImage().getHeight();
 
         double newSize = oldImage.getScreenSize() / 100;
         double newNativeImageWidth = oldImageWidth * newSize;
@@ -41,7 +41,7 @@ public class EditedImage {
         double newImageWidthByScreenSize = newNativeImageWidth * frameSize.getReductionFactor();
         double newImageHeightByScreenSize = newNativeImageHeight * frameSize.getReductionFactor();
 
-        this.newImage = Scalr.resize(oldImage.getVisualContext().getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
+        this.newImage = Scalr.resize(oldImage.getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
                 (int)newImageWidthByScreenSize, (int)newImageHeightByScreenSize, Scalr.OP_ANTIALIAS);
 
     }

@@ -1,6 +1,6 @@
 package org.lab3.controller.gameMode.factories;
 
-import org.lab3.model.Model;
+import org.lab3.model.model.Model;
 import org.lab3.controller.gameMode.GameMode;
 
 import java.lang.reflect.Constructor;

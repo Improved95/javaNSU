@@ -1,26 +1,8 @@
 package org.lab3.model.objects;
 
-import org.lab3.model.NeedDrawObjectAbstract;
-
-public abstract class SlashBladeAbstractObject extends NeedDrawObjectAbstract {
+public abstract class SlashBladeAbstractObject extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
-
-    public SlashBladeAbstractObject() {
-        this.setScreenSize(100);
-    }
-
-    @Override
-    public void setInGamePosition(double x, double y) {
-        this.inGamePosX = x;
-        this.inGamePosY = y;
-    }
-
-    @Override
-    public void changeInGamePosition(double x, double y) {
-        this.inGamePosX += x;
-        this.inGamePosY += y;
-    }
 
     @Override
     public double getInGamePosX() {
@@ -28,7 +10,23 @@ public abstract class SlashBladeAbstractObject extends NeedDrawObjectAbstract {
     }
 
     @Override
+    public void setInGamePosX(double inGamePosX) {
+        this.inGamePosX = inGamePosX;
+    }
+
+    @Override
     public double getInGamePosY() {
         return inGamePosY;
+    }
+
+    @Override
+    public void setInGamePosY(double inGamePosY) {
+        this.inGamePosY = inGamePosY;
+    }
+
+    @Override
+    public void changeInGamePos(double dx, double dy) {
+        this.inGamePosX += dx;
+        this.inGamePosY += dy;
     }
 }

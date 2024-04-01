@@ -1,6 +1,6 @@
 package org.lab3.controller.logicController;
 
-import org.lab3.model.Model;
+import org.lab3.model.model.Model;
 
 public class SlashBladeLogicController implements LogicController {
     @Override

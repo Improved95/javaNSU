@@ -1,16 +1,16 @@
 package org.lab3.view;
 
-import org.lab3.model.NeedDrawObject;
+import org.lab3.model.objects.DrawObject;
 
 import java.util.*;
 
-public class LinkedSetDrawObjects extends AbstractSet<NeedDrawObject> {
+public class LinkedSetDrawObjects extends AbstractSet<DrawObject> {
     public LinkedSetDrawObjects(Comparator comparator) {
         this.comparator = comparator;
     }
 
     private static class LinkedElement {
-        NeedDrawObject value;
+        DrawObject value;
 
         boolean exists;
 
@@ -18,7 +18,7 @@ public class LinkedSetDrawObjects extends AbstractSet<NeedDrawObject> {
         LinkedElement next;
     }
 
-    private Map<NeedDrawObject, LinkedElement> map = new HashMap<>();
+    private Map<DrawObject, LinkedElement> map = new HashMap<>();
     private Comparator comparator;
 
     private LinkedElement placeholder = new LinkedElement();
@@ -40,7 +40,7 @@ public class LinkedSetDrawObjects extends AbstractSet<NeedDrawObject> {
     }
 
     @Override
-    public boolean add(NeedDrawObject e) {
+    public boolean add(DrawObject e) {
         LinkedElement element = map.putIfAbsent(e, placeholder);
 
         if (element != null) {
@@ -136,7 +136,7 @@ public class LinkedSetDrawObjects extends AbstractSet<NeedDrawObject> {
         }
 
         @Override
-        public NeedDrawObject next() {
+        public DrawObject next() {
             LinkedElement n = findNext();
 
             if (!n.exists) {
