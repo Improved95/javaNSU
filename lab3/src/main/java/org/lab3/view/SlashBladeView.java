@@ -7,7 +7,7 @@ import org.lab3.slashBlade.JFrameObject;
 import java.awt.*;
 import java.util.*;
 
-public class SlashBladeView extends ViewObserverAbstract {
+public class SlashBladeView implements View {
     private LinkedSetDrawObjects drawObjectsList = new LinkedSetDrawObjects(new Comparator<DrawObject>() {
         @Override
         public int compare(DrawObject o1, DrawObject o2) {
@@ -17,27 +17,6 @@ public class SlashBladeView extends ViewObserverAbstract {
             return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
         }
     });
-
-    @Override
-    public void updateViewScreen(JFrameObject jFrameObject) {
-        changeViewScreen(jFrameObject);
-    }
-
-    /*@Override
-    public void updateDrawList(Model model) {
-        GameMode gameMode = model.getCurrentGameMode();
-        gameMode.getDrawObjectsList(drawObjectsList);
-    }*/
-
-    @Override
-    public void addDrawObject(DrawObject drawObject) {
-        drawObjectsList.add(drawObject);
-    }
-
-    @Override
-    public void removeDrawObject(DrawObject drawObject) {
-        drawObjectsList.remove(drawObject);
-    }
 
     @Override
     public void changeViewScreen(JFrameObject jFrameObject) {
