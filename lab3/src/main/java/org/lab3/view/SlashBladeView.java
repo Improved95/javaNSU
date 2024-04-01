@@ -49,7 +49,7 @@ public class SlashBladeView extends ViewObserverAbstract {
         for (DrawObject drawObject : drawObjectsList) {
             EditedImage imageEditor = new EditedImage(drawObject, frameSize);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
-                    drawObject.getHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
+                    drawObject.getScreenHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
         }
     }
 }

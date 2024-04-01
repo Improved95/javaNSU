@@ -3,19 +3,19 @@ package org.lab3.controller.characterMovement;
 public class CharacterParametersContext {
     private int health = 0;
 
-    private int direction;
-    private double speedOfMoveX; // units per second
+    private int inGameHorizontalDirection;
+    private double speedOfMoveX;
 
-    private double attackDuration = 0; // ms
-    private double attackDelay = 0; // ms
+    private double attackDuration = 0;
+    private double attackDelay = 0;
     private boolean attackStatus = false;
 
-    public int getDirection() {
-        return direction;
+    public int getInGameHorizontalDirection() {
+        return inGameHorizontalDirection;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public void setInGameHorizontalDirection(int direction) {
+        this.inGameHorizontalDirection = direction;
     }
 
     public double getSpeedOfMoveX() {

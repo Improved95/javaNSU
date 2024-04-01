@@ -1,5 +1,6 @@
 package org.lab3.controller.characterMovement;
 
+import org.lab3.controller.characterMovement.CharacterMovement;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 
 public abstract class SlashBladeCharacterMovementAbstract implements CharacterMovement {

@@ -25,6 +25,12 @@ public abstract class SlashBladeAbstractObject extends DrawObjectAbstract implem
     }
 
     @Override
+    public void setInGamePosition(double x, double y) {
+        this.inGamePosX = x;
+        this.inGamePosY = y;
+    }
+
+    @Override
     public void changeInGamePos(double dx, double dy) {
         this.inGamePosX += dx;
         this.inGamePosY += dy;

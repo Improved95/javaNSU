@@ -28,7 +28,7 @@ public class EnemyCreator<EnemyType> {
             enemy.getParametersContext().setHealth(1);
             enemy.setScreenSize(90);
             enemy.setInGamePosition(500, 0);
-            enemy.getVisualContext().setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+            enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
             enemyList.add(enemy);
             timerCreateDelay = createDelay;
             return (EnemyType) enemy;

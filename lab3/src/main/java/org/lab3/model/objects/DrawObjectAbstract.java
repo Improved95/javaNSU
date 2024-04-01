@@ -3,13 +3,13 @@ package org.lab3.model.objects;
 import java.awt.image.BufferedImage;
 
 public class DrawObjectAbstract implements DrawObject {
-    protected double screenPosX;
-    protected double screenPosY;
-    protected double screenSize = 100;
-    protected int horizontalDirection = 1;
-    protected boolean drawImageOnMiddle = false;
-    protected int screenLayerLevel = 0;
-    protected BufferedImage image;
+    private double screenPosX;
+    private double screenPosY;
+    private double screenSize = 100;
+    private int screenHorizontalDirection = 1;
+    private boolean drawImageOnMiddle = false;
+    private int screenLayerLevel = 0;
+    private BufferedImage image;
 
     @Override
     public double getScreenPosX() {
@@ -42,13 +42,13 @@ public class DrawObjectAbstract implements DrawObject {
     }
 
     @Override
-    public int getHorizontalDirection() {
-        return horizontalDirection;
+    public int getScreenHorizontalDirection() {
+        return screenHorizontalDirection;
     }
 
     @Override
-    public void setHorizontalDirection(int horizontalDirection) {
-        this.horizontalDirection = horizontalDirection;
+    public void setScreenHorizontalDirection(int screenHorizontalDirection) {
+        this.screenHorizontalDirection = screenHorizontalDirection;
     }
 
     @Override

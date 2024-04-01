@@ -48,7 +48,7 @@ public class EditedImage {
 
     public void replaceImage(FrameSize frameSize) {
         if (oldImage.isDrawImageOnMiddle()) {
-            newPosX -= (newImage.getWidth() * oldImage.getHorizontalDirection()) / 2;
+            newPosX -= (newImage.getWidth() * oldImage.getScreenHorizontalDirection()) / 2;
         }
         newPosX += oldImage.getScreenPosX();
         newPosY += frameSize.getHeight() - (  39 + newImage.getHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );

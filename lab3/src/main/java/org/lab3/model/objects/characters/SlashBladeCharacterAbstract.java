@@ -1,16 +1,10 @@
 package org.lab3.model.objects.characters;
 
 import org.lab3.model.objects.SlashBladeAbstractObject;
-import org.lab3.controller.characterMovement.CharacterMovement;
 import org.lab3.controller.characterMovement.CharacterParametersContext;
-import org.lab3.slashBlade.FrameSize;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObject implements SlashBladeCharacter {
     protected CharacterParametersContext parametersContext = new CharacterParametersContext();
-    protected Map<String, CharacterMovement> movementList = new HashMap<>();
 
     public SlashBladeCharacterAbstract() {
         setDrawImageOnMiddle(true);
@@ -32,25 +26,23 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObje
     }
 
     @Override
-    public Map<String, CharacterMovement> getMovementList() {
-        return movementList;
+    public void moveX(double dx) {
+        changeInGamePos(dx, 0);
+    }
+
+    @Override
+    public void moveY(double dy) {
+        changeInGamePos(0, dy);
+    }
+
+    @Override
+    public void attack() {
+
     }
 
     @Override
     public void changeDirection(int direction) {
-        parametersContext.setDirection(direction);
-        setHorizontalDirection(direction);
-    }
-
-    @Override
-    public void moveX(double currentFPS, FrameSize frameSize) {
-        inGamePosX += getValueByFPS((parametersContext.getSpeedOfMoveX() * parametersContext.getDirection() * frameSize.getReductionFactor()) , currentFPS);
-    }
-
-    @Override
-    public void attack() {}
-
-    protected double getValueByFPS(double value, double FPS) {
-        return value / FPS;
+        parametersContext.setInGameHorizontalDirection(direction);
+        setScreenHorizontalDirection(direction);
     }
 }

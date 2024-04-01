@@ -12,7 +12,7 @@ public class SlashBladeCharacterMoveX extends SlashBladeCharacterMovementAbstrac
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
         if (isExecute && !blockExecute) {
-            character.moveX(currentFPS, frameSize);
+//            character.moveX(currentFPS, frameSize);
         }
     }
 }

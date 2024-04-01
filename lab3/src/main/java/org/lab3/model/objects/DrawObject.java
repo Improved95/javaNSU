@@ -15,9 +15,9 @@ public interface DrawObject {
 
     void setScreenSize(double screenSize);
 
-    int getHorizontalDirection();
+    int getScreenHorizontalDirection();
 
-    void setHorizontalDirection(int horizontalDirection);
+    void setScreenHorizontalDirection(int horizontalDirection);
 
     boolean isDrawImageOnMiddle();
 

@@ -9,5 +9,7 @@ public interface SlashBladeObject {
 
     void setInGamePosY(double inGamePosY);
 
+    void setInGamePosition(double x, double y);
+
     void changeInGamePos(double dx, double dy);
 }
