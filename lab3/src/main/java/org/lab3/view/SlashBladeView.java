@@ -1,8 +1,6 @@
 package org.lab3.view;
 
-import org.lab3.model.Model;
 import org.lab3.model.NeedDrawObject;
-import org.lab3.model.gameMode.GameMode;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
