@@ -1,4 +1,4 @@
-package org.lab3.model.objects.characters.movement;
+package org.lab3.controller.movement;
 
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 

@@ -1,7 +1,7 @@
-package org.lab3.model.factories;
+package org.lab3.controller.gameMode.factories;
 
 import org.lab3.model.Model;
-import org.lab3.model.gameMode.GameMode;
+import org.lab3.controller.gameMode.GameMode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

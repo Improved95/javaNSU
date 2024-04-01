@@ -1,7 +1,7 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.model.objects.characters.movement.CharacterMovement;
-import org.lab3.model.objects.characters.movement.CharacterParametersContext;
+import org.lab3.controller.movement.CharacterMovement;
+import org.lab3.controller.movement.CharacterParametersContext;
 import org.lab3.slashBlade.FrameSize;
 
 import java.util.Map;

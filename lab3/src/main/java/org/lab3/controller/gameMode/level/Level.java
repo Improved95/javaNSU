@@ -1,7 +1,7 @@
-package org.lab3.model.gameMode.level;
+package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.Model;
-import org.lab3.model.gameMode.GameMode;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;

@@ -1,4 +1,4 @@
-package org.lab3.model.gameMode.level;
+package org.lab3.controller.gameMode.level;
 
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 

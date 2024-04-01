@@ -16,10 +16,10 @@ public class SlashBlade {
     private Controller slashBladeController = null;
 
     public SlashBlade() {
-        initial();
+        initialSlashBlade();
     }
 
-    private void initial() {
+    private void initialSlashBlade() {
         slashBladeController = new SlashBladeController();
         try {
             slashBladeModel = new SlashBladeModel();
@@ -32,6 +32,9 @@ public class SlashBlade {
 
         jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, SlashBladeController.getSlashBladeKeyListenerController());
+
+        slashBladeController.setSlashBladeModel(slashBladeModel);
+        slashBladeController.setSlashBladeView(slashBladeView);
 
         slashBladeController.initial();
     }

@@ -1,7 +1,7 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.model.objects.characters.movement.SlashBladeCharacterAttack;
-import org.lab3.model.objects.characters.movement.SlashBladeCharacterMoveX;
+import org.lab3.controller.movement.SlashBladeCharacterAttack;
+import org.lab3.controller.movement.SlashBladeCharacterMoveX;
 
 public class SamuraiV1 extends SlashBladeCharacterAbstract {
     public SamuraiV1() {
