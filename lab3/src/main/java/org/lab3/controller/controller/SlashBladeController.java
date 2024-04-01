@@ -1,9 +1,5 @@
 package org.lab3.controller.controller;
 
-import org.lab3.controller.logicController.LogicController;
-import org.lab3.controller.logicController.SlashBladeLogicController;
-import org.lab3.controller.keysListener.KeyListenerController;
-import org.lab3.controller.keysListener.SlashBladeKeyListener;
 import org.lab3.model.model.Model;
 import org.lab3.view.View;
 
@@ -15,8 +11,8 @@ public class SlashBladeController implements Controller {
     private final double maxFPS = 1;
     private final long maxWaitingTime = (long)(1000 / maxFPS);
 
-    private static LogicController slashBladeLogicController;
-    private static KeyListenerController slashBladeKeyListenerController;
+    private static SlashBladeLogicController slashBladeLogicController;
+    private static SlashBladeKeyListener slashBladeKeyListenerController;
 
     private Model model;
     private View view;
@@ -30,7 +26,7 @@ public class SlashBladeController implements Controller {
         timerContext = new TimerContext();
     }
 
-    public static LogicController getSlashBladeController() {
+    public static SlashBladeLogicController getSlashBladeController() {
         return slashBladeLogicController;
     }
 
@@ -41,6 +37,7 @@ public class SlashBladeController implements Controller {
     @Override
     public void setModel(Model model) {
         this.model = model;
+        slashBladeLogicController.setModel(model);
     }
 
     @Override
@@ -50,6 +47,7 @@ public class SlashBladeController implements Controller {
 
     @Override
     public void initial() {
+        slashBladeLogicController.initial();
         generationTickTimer = new Timer((int)maxWaitingTime, new MyTaskActionListener());
         generationTickTimer.start();
     }

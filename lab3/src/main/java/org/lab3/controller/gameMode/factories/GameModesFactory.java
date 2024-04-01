@@ -1,6 +1,5 @@
 package org.lab3.controller.gameMode.factories;
 
-import org.lab3.model.model.Model;
 import org.lab3.controller.gameMode.GameMode;
 
 import java.lang.reflect.Constructor;
@@ -14,19 +13,19 @@ public class GameModesFactory {
         this.gameModesProperty = setGameModesProperty();
     }
 
-    public GameMode create(String modeName, Model model) throws ClassNotFoundException, IllegalAccessException,
+    public GameMode create(String modeName) throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, NoSuchMethodException, InvocationTargetException {
 
         Class classObject = Class.forName(gameModesProperty.getProperty(modeName));
-        Constructor ctor = classObject.getDeclaredConstructor(Model.class);
+        Constructor ctor = classObject.getDeclaredConstructor();
         ctor.setAccessible(true);
-        GameMode gameMode = (GameMode)ctor.newInstance(model);
+        GameMode gameMode = (GameMode)ctor.newInstance();
         return gameMode;
     }
 
     private Properties setGameModesProperty() {
         Properties properties = new Properties();
-        properties.setProperty("LEVEL", "org.lab3.model.gameMode.level.Level");
+        properties.setProperty("LEVEL", "org.lab3.controller.gameMode.level.Level");
         return properties;
     }
 }

@@ -1,4 +1,4 @@
-package org.lab3.controller.keysListener;
+package org.lab3.controller.controller;
 
 import java.util.HashMap;
 import java.util.Map;

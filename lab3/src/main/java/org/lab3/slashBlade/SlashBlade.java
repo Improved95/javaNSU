@@ -8,16 +8,16 @@ import org.lab3.view.SlashBladeView;
 import org.lab3.view.View;
 
 public class SlashBlade {
-    private JFrameObject jFrameSlashBlade;
-    private Model slashBladeModel = null;
-    private View slashBladeView = null;
-    private Controller slashBladeController = null;
+    private static JFrameObject jFrameSlashBlade;
+    private static Model slashBladeModel = null;
+    private static View slashBladeView = null;
+    private static Controller slashBladeController = null;
 
     public SlashBlade() {
         initialSlashBlade();
     }
 
-    private void initialSlashBlade() {
+    private static void initialSlashBlade() {
         slashBladeController = new SlashBladeController();
         slashBladeModel = new SlashBladeModel();
         slashBladeView = new SlashBladeView();

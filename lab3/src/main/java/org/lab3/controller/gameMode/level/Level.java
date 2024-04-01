@@ -40,11 +40,11 @@ public class Level implements GameMode {
     public void initial() {
         ResourcesContext samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
-        this.player.getVisualContext().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        this.player.setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         ResourcesContext backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
-        this.background.getVisualContext().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        this.background.setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         enemyImagesResources = new ResourcesContext();
         enemyImagesResources.addImage("samurai/enemy.png");
@@ -53,8 +53,8 @@ public class Level implements GameMode {
         setBackground();
         enemyCreator.setTimer(2000);
 
-        modelLoader.notifyObserversAddDrawObject(player);
-        modelLoader.notifyObserversAddDrawObject(background);
+//        modelLoader.notifyObserversAddDrawObject(player);
+//        modelLoader.notifyObserversAddDrawObject(background);
     }
 
     @Override
@@ -102,22 +102,22 @@ public class Level implements GameMode {
 
         SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
         if (enemy != null) {
-            modelLoader.notifyObserversAddDrawObject(enemy);
+//            modelLoader.notifyObserversAddDrawObject(enemy);
             System.out.println("new enemy");
 
             Random random = new Random();
             if (random.nextInt() % 2 == 1) {
                 SamuraiV1 removedEnemy = enemyList.remove(0);
                 System.out.println("remove enemy");
-                modelLoader.notifyObserversRemoveDrawObject(removedEnemy);
+//                modelLoader.notifyObserversRemoveDrawObject(removedEnemy);
             }
         }
 
     }
 
     private void playerMove(double currentFPS, FrameSize frameSize) {
-        player.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
-        player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
+//        player.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
+//        player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
     }
 
     private void setSamurai() {
