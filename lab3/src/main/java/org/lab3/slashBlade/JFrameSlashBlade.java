@@ -21,6 +21,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         return frameSize;
     }
 
+    @Override
     public void addDrawableComponent(View slashBladeView, KeyListenerController keyListenerController) {
         myComponent = new MyComponent(slashBladeView);
         jFrame.addKeyListener(keyListenerController);
@@ -28,7 +29,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         jFrame.add(myComponent);
     }
 
-    private class MyComponent extends JComponent {
+    class MyComponent extends JComponent {
         private View view;
 
         public MyComponent(View view) {
