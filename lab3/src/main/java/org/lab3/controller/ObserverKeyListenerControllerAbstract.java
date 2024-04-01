@@ -5,7 +5,7 @@ import org.lab3.observers.ModelObserver;
 import java.util.AbstractList;
 import java.util.ArrayList;
 
-public abstract class ObserverControllerAbstract implements Controller {
+public abstract class ObserverKeyListenerControllerAbstract implements KeyListenerController {
     protected AbstractList<ModelObserver> modelObservers = new ArrayList<>();
 
     @Override

@@ -1,6 +1,6 @@
 package org.lab3.slashBlade;
 
-import org.lab3.controller.Controller;
+import org.lab3.controller.KeyListenerController;
 import org.lab3.view.View;
 
 import javax.swing.*;
@@ -21,10 +21,10 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         return frameSize;
     }
 
-    public void addDrawableComponent(View slashBladeView, Controller controller) {
+    public void addDrawableComponent(View slashBladeView, KeyListenerController keyListenerController) {
         myComponent = new MyComponent(slashBladeView);
-        jFrame.addKeyListener(controller);
-        jFrame.addMouseListener(controller);
+        jFrame.addKeyListener(keyListenerController);
+        jFrame.addMouseListener(keyListenerController);
         jFrame.add(myComponent);
     }
 

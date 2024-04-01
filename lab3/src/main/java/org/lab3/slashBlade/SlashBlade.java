@@ -1,7 +1,7 @@
 package org.lab3.slashBlade;
 
-import org.lab3.controller.Controller;
-import org.lab3.controller.SlashBladeController;
+import org.lab3.controller.KeyListenerController;
+import org.lab3.controller.SlashBladeKeyListener;
 import org.lab3.model.Model;
 import org.lab3.model.SlashBladeModel;
 import org.lab3.view.SlashBladeView;
@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class SlashBlade {
     private JFrameObject jFrameSlashBlade;
-    private Controller slashBladeController = null;
+    private KeyListenerController slashBladeKeyListenerController = null;
     private Model slashBladeModel = null;
     private View slashBladeView = null;
 
@@ -63,7 +63,7 @@ public class SlashBlade {
 
     private void initial() {
         try {
-            slashBladeController = new SlashBladeController();
+            slashBladeKeyListenerController = new SlashBladeKeyListener();
             slashBladeModel = new SlashBladeModel();
             slashBladeView = new SlashBladeView();
         } catch (ClassNotFoundException | InvocationTargetException |
@@ -72,11 +72,11 @@ public class SlashBlade {
             ex.printStackTrace();
         }
 
-        slashBladeController.registerObserver(slashBladeModel);
+        slashBladeKeyListenerController.registerObserver(slashBladeModel);
         slashBladeModel.registerObserver(slashBladeView);
 
         jFrameSlashBlade = new JFrameSlashBlade(1500);
-        jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeController);
+        jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeKeyListenerController);
         slashBladeModel.initial();
     }
 }

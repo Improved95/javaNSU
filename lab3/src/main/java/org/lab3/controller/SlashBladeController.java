@@ -1,80 +1,32 @@
 package org.lab3.controller;
 
-import org.lab3.observers.ModelObserver;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-public class SlashBladeController extends ObserverControllerAbstract {
-    KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
-
-    public KeysIsPressedContext getKeysIsPressedContext() {
-        return keysIsPressedContext;
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
+public class SlashBladeController {
+    public void calculateNextFrame() {
 
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 0) {
-            keysIsPressedContext.setKeyStatus(e.getKeyCode(), 1);
-            notifyObserversPressKey(e.getKeyCode());
+    private class TickGenerator {
+        private final double maxFPS = 60;
+        private final double maxWaitingTime = 1000 / maxFPS;
+
+        private long nowTime;
+        private long lastTime = System.currentTimeMillis();
+
+        public double getMaxWaitingTime() {
+            return maxWaitingTime;
+        }
+
+        public boolean isGenerateNext(long makeFrameTime) {
+            nowTime = System.currentTimeMillis();
+            if (nowTime - lastTime >= maxWaitingTime - makeFrameTime) {
+                lastTime = nowTime;
+                return true;
+            }
+            return false;
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
-            keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
-            notifyObserversReleaseKey(e.getKeyCode());
-        }
-    }
+    private void initial() {
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        notifyObserversMousePressed(e.getButton());
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void notifyObserversPressKey(int keyCode) {
-        for (ModelObserver observer : modelObservers) {
-            observer.updateKeyPressStatus(keyCode);
-        }
-    }
-
-    @Override
-    public void notifyObserversReleaseKey(int keyCode) {
-        for (ModelObserver observer : modelObservers) {
-            observer.updateKeyReleaseStatus(keyCode);
-        }
-    }
-
-    @Override
-    public void notifyObserversMousePressed(int mouseKeyCode) {
-        for (ModelObserver observer : modelObservers) {
-            observer.updateMouseKeyPressedStatus(mouseKeyCode);
-        }
     }
 }
