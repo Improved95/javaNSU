@@ -2,9 +2,17 @@ package org.lab3.controller.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 class SlashBladeKeyListener implements KeyListenerController {
     KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
+
+    SlashBladeLogicController slashBladeLogicController;
+
+    SlashBladeKeyListener(SlashBladeLogicController slashBladeLogicController) {
+        this.slashBladeLogicController = slashBladeLogicController;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -15,7 +23,7 @@ class SlashBladeKeyListener implements KeyListenerController {
     public void keyPressed(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 0) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 1);
-//            notifyObserversPressKey(e.getKeyCode());
+            slashBladeLogicController.keyPressedObserver(e.getKeyCode());
         }
     }
 
@@ -23,7 +31,7 @@ class SlashBladeKeyListener implements KeyListenerController {
     public void keyReleased(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
-//            notifyObserversReleaseKey(e.getKeyCode());
+            slashBladeLogicController.keyReleasedObserver(e.getKeyCode());
         }
     }
 
@@ -34,7 +42,7 @@ class SlashBladeKeyListener implements KeyListenerController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        slashBladeLogicController.mousePressedObserver(e.getButton());
     }
 
     @Override
@@ -50,5 +58,34 @@ class SlashBladeKeyListener implements KeyListenerController {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+}
+
+class KeysIsPressedContext {
+    Map<Integer, KeyStatus> keysStatusMap = new HashMap<>();
+
+    KeysIsPressedContext() {
+        keysStatusMap.put(87, new KeyStatus()); // w
+        keysStatusMap.put(65, new KeyStatus()); // a
+        keysStatusMap.put(83, new KeyStatus()); // s
+        keysStatusMap.put(68, new KeyStatus()); // d
+        keysStatusMap.put(32, new KeyStatus()); // space
+    }
+
+    public int getKeyStatus(int keyCode) {
+        if (keysStatusMap.containsKey(keyCode)) {
+            return keysStatusMap.get(keyCode).status;
+        }
+        return -1;
+    }
+
+    public void setKeyStatus(int keyCode, int keyStatus) {
+        if (keysStatusMap.containsKey(keyCode)) {
+            keysStatusMap.get(keyCode).status = keyStatus;
+        }
+    }
+
+    private class KeyStatus {
+        public int status = 0;
     }
 }

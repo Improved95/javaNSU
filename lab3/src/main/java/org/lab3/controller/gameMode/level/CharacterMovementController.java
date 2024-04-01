@@ -6,7 +6,7 @@ class CharacterMovementController {
     public int aIsPress = 0;
     public int dIsPress = 0;
 
-    public void changeMoveX(SlashBladeCharacterAbstract character, int a, int d) {
+    /*public void changeMoveX(SlashBladeCharacterAbstract character, int a, int d) {
         if (a == 1) {
             if (dIsPress != 1) {
                 character.changeDirection(-1);
@@ -43,5 +43,5 @@ class CharacterMovementController {
 
     public void changeAttack(SlashBladeCharacterAbstract character) {
         character.getMovementList().get("ATTACK").changeExecuteStatus(true);
-    }
+    }*/
 }

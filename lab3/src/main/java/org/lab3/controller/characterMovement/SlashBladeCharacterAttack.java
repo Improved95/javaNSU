@@ -7,15 +7,15 @@ public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstra
     private double attackDuration; //ms
     private double attackDelay; //ms
 
-    public SlashBladeCharacterAttack(SlashBladeCharacterAbstract character, double attackDuration, double attackDelay) {
+    /*public SlashBladeCharacterAttack(SlashBladeCharacterAbstract character, double attackDuration, double attackDelay) {
         super(character);
         this.attackDuration = attackDuration;
         this.attackDelay = attackDelay;
-    }
+    }*/
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        character.getParametersContext().setAttackStatus(true);
+        /*character.getParametersContext().setAttackStatus(true);
         if (isExecute && !blockExecute) {
             if (attackDuration > 0) {
                 attackDuration -= 1000 / currentFPS;
@@ -29,6 +29,6 @@ public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstra
                     attackDelay = character.getParametersContext().getAttackDelay();
                 }
             }
-        }
+        }*/
     }
 }

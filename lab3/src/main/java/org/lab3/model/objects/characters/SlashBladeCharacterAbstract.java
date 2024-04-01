@@ -1,12 +1,12 @@
 package org.lab3.model.objects.characters;
 
 import org.lab3.model.objects.SlashBladeAbstractObject;
-import org.lab3.controller.characterMovement.CharacterParametersContext;
 
 public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObject implements SlashBladeCharacter {
-    protected CharacterParametersContext parametersContext = new CharacterParametersContext();
+    protected CharacterParametersContext parametersContext;
 
     public SlashBladeCharacterAbstract() {
+        this.parametersContext = new CharacterParametersContext();
         setDrawImageOnMiddle(true);
     }
 

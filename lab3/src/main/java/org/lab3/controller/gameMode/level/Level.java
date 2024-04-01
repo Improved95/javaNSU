@@ -1,18 +1,14 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.gameMode.GameMode;
-import org.lab3.model.model.Model;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
-import org.lab3.view.LinkedSetDrawObjects;
 
 import java.util.*;
 
 public class Level implements GameMode {
-    private Model modelLoader;
-
     private EnemyCreator<SamuraiV1> enemyCreator = new EnemyCreator();
     private CharacterMovementController characterMovementController = new CharacterMovementController();
     private Background background;
@@ -21,19 +17,9 @@ public class Level implements GameMode {
     ResourcesContext enemyImagesResources;
     ArrayList<SamuraiV1> enemyList = new ArrayList<>();
 
-    private Level(Model model) {
-        this.modelLoader = model;
+    private Level() {
         this.background = new Background();
         this.player = new SamuraiV1();
-    }
-
-    @Override
-    public void getDrawObjectsList(LinkedSetDrawObjects drawObjectsList) {
-        drawObjectsList.add(player);
-        drawObjectsList.add(background);
-        for (SamuraiV1 enemy : enemyList) {
-            drawObjectsList.add(enemy);
-        }
     }
 
     @Override
@@ -58,18 +44,17 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void actionOnKeyPress(int keyCode) {
-//        System.out.println("Action");
+    public void actionOnKeyPressed(int keyCode) {
         switch (keyCode) {
             case 87:
                 break;
             case 65:
-                characterMovementController.changeMoveX(player, 1, -1);
+//                characterMovementController.changeMoveX(player, 1, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementController.changeMoveX(player, -1, 1);
+//                characterMovementController.changeMoveX(player, -1, 1);
         }
     }
 
@@ -79,12 +64,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                characterMovementController.changeMoveX(player, 0, -1);
+//                characterMovementController.changeMoveX(player, 0, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementController.changeMoveX(player, -1, 0);
+//                characterMovementController.changeMoveX(player, -1, 0);
                 break;
         }
     }
@@ -92,7 +77,7 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-            characterMovementController.changeAttack(player);
+//            characterMovementController.changeAttack(player);
         }
     }
 

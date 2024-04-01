@@ -1,0 +1,50 @@
+package org.lab3.model.gameObjectsContext;
+
+import org.lab3.model.objects.SlashBladeObject;
+import org.lab3.model.objects.characters.SamuraiV1;
+
+import java.util.AbstractList;
+import java.util.ArrayList;
+
+public class LevelObjectsContext<GameObject> implements ObjectsContext {
+    private SamuraiV1 player;
+    private SlashBladeObject background;
+    private AbstractList<SamuraiV1> enemyList = new ArrayList();
+
+    public SamuraiV1 getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(SamuraiV1 player) {
+        this.player = player;
+    }
+
+    public SlashBladeObject getBackground() {
+        return background;
+    }
+
+    public void setBackground(SlashBladeObject background) {
+        this.background = background;
+    }
+
+    public AbstractList<SamuraiV1> getEnemyList() {
+        return enemyList;
+    }
+
+    public void setEnemyList(AbstractList<SamuraiV1> enemyList) {
+        this.enemyList = enemyList;
+    }
+
+    @Override
+    public AbstractList<SlashBladeObject> createObjectsList() {
+        AbstractList<SlashBladeObject> objectsList = new ArrayList<>();
+
+        objectsList.add(player);
+        objectsList.add(background);
+        for (SamuraiV1 enemy : enemyList) {
+            objectsList.add(enemy);
+        }
+
+        return objectsList;
+    }
+}

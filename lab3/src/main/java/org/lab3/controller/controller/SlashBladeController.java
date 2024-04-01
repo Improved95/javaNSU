@@ -1,6 +1,7 @@
 package org.lab3.controller.controller;
 
 import org.lab3.model.model.Model;
+import org.lab3.slashBlade.JFrameObject;
 import org.lab3.view.View;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class SlashBladeController implements Controller {
     private static SlashBladeLogicController slashBladeLogicController;
     private static SlashBladeKeyListener slashBladeKeyListenerController;
 
+    private JFrameObject jFrameObject;
     private Model model;
     private View view;
 
@@ -22,7 +24,7 @@ public class SlashBladeController implements Controller {
 
     public SlashBladeController() {
         slashBladeLogicController = new SlashBladeLogicController();
-        slashBladeKeyListenerController = new SlashBladeKeyListener();
+        slashBladeKeyListenerController = new SlashBladeKeyListener(slashBladeLogicController);
         timerContext = new TimerContext();
     }
 
@@ -35,9 +37,13 @@ public class SlashBladeController implements Controller {
     }
 
     @Override
+    public void setJFrameObject(JFrameObject jFrameObject) {
+        this.jFrameObject = jFrameObject;
+    }
+
+    @Override
     public void setModel(Model model) {
         this.model = model;
-        slashBladeLogicController.setModel(model);
     }
 
     @Override
@@ -64,7 +70,7 @@ public class SlashBladeController implements Controller {
         timerContext.currentFrameTimeStart = System.currentTimeMillis();
         timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
 
-        slashBladeLogicController.calculateFrame(model);
+        slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
 //        view.changeViewScreen();
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();

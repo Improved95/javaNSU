@@ -25,6 +25,7 @@ public class SlashBlade {
         jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, SlashBladeController.getSlashBladeKeyListenerController());
 
+        slashBladeController.setJFrameObject(jFrameSlashBlade);
         slashBladeController.setModel(slashBladeModel);
         slashBladeController.setView(slashBladeView);
 

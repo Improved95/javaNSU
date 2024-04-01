@@ -1,21 +1,28 @@
-package org.lab3.controller.characterMovement;
+package org.lab3.model.objects.characters;
 
 public class CharacterParametersContext {
     private int health = 0;
-
     private int inGameHorizontalDirection;
     private double speedOfMoveX;
 
     private double attackDuration = 0;
     private double attackDelay = 0;
-    private boolean attackStatus = false;
+    private boolean attack = false;
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public int getInGameHorizontalDirection() {
         return inGameHorizontalDirection;
     }
 
-    public void setInGameHorizontalDirection(int direction) {
-        this.inGameHorizontalDirection = direction;
+    public void setInGameHorizontalDirection(int inGameHorizontalDirection) {
+        this.inGameHorizontalDirection = inGameHorizontalDirection;
     }
 
     public double getSpeedOfMoveX() {
@@ -30,7 +37,7 @@ public class CharacterParametersContext {
         return attackDuration;
     }
 
-    public void setAttackDuration(int attackDuration) {
+    public void setAttackDuration(double attackDuration) {
         this.attackDuration = attackDuration;
     }
 
@@ -38,23 +45,15 @@ public class CharacterParametersContext {
         return attackDelay;
     }
 
-    public void setAttackDelay(int attackDelay) {
+    public void setAttackDelay(double attackDelay) {
         this.attackDelay = attackDelay;
     }
 
-    public boolean isAttackStatus() {
-        return attackStatus;
+    public boolean isAttack() {
+        return attack;
     }
 
-    public void setAttackStatus(boolean attackStatus) {
-        this.attackStatus = attackStatus;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
+    public void setAttackStatus(boolean attack) {
+        this.attack = attack;
     }
 }
