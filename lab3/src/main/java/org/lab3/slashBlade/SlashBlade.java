@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 
 public class SlashBlade {
     private JFrameObject jFrameSlashBlade;
-    private KeyListenerController slashBladeKeyListenerController = null;
     private Model slashBladeModel = null;
     private View slashBladeView = null;
 
@@ -20,7 +19,7 @@ public class SlashBlade {
         initial();
     }
 
-    public void play() {
+   /* public void play() {
         TickGenerator tickGenerator = new TickGenerator();
         long currentFrameTimeStart;
         long currentFrameTimeEnd;
@@ -39,28 +38,7 @@ public class SlashBlade {
                 makeFrameTime = currentFrameTimeEnd - currentFrameTimeStart;
             }
         }
-    }
-
-    private class TickGenerator {
-        private final double maxFPS = 60;
-        private final double maxWaitingTime = 1000 / maxFPS;
-
-        private long nowTime;
-        private long lastTime = System.currentTimeMillis();
-
-        public double getMaxWaitingTime() {
-            return maxWaitingTime;
-        }
-
-        public boolean isGenerateNext(long makeFrameTime) {
-            nowTime = System.currentTimeMillis();
-            if (nowTime - lastTime >= maxWaitingTime - makeFrameTime) {
-                lastTime = nowTime;
-                return true;
-            }
-            return false;
-        }
-    }
+    }*/
 
     private void initial() {
         try {
@@ -79,8 +57,5 @@ public class SlashBlade {
         jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeKeyListenerController);
         slashBladeModel.initial();
-
-        SlashBladeTickGenerator sbc = new SlashBladeTickGenerator();
-        sbc.initial();
     }
 }
