@@ -5,7 +5,6 @@ import org.lab3.controller.gameMode.factories.GameModesFactory;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 
-import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
 
 class SlashBladeLogicController {

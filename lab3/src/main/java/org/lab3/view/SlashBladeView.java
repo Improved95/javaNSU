@@ -23,23 +23,18 @@ public class SlashBladeView implements View {
 
     @Override
     public void drawObject(Graphics2D g2, FrameSize frameSize) {
-        AbstractList<DrawObject> drawObjectsList = model.getGameModeObjectscontext().getDrawObjectsList();
-//        drawObjectsList.sort(new Comparator<DrawObject>() {
-//            @Override
-//            public int compare(DrawObject o1, DrawObject o2) {
-//                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
-//                    return -1;
-//                }
-//                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
-//            }
-//        });
+        AbstractList<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
+        drawObjectsList.sort((o1, o2) -> {
+            if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
+                return -1;
+            }
+            return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
+        });
 
-        Set<DrawObject> drawObjectSet = new TreeSet<>();
-
-        /*for (DrawObject drawObject : drawObjectsList) {
+        for (DrawObject drawObject : drawObjectsList) {
             EditedImage imageEditor = new EditedImage(drawObject, frameSize);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                     drawObject.getScreenHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
-        }*/
+        }
     }
 }

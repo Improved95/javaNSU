@@ -7,7 +7,7 @@ public interface Model {
 
     void setCurrentGameMode(String currentGameMode);
 
-    ObjectsContext getGameModeObjectscontext();
+    ObjectsContext getGameModeObjectsContext();
 
-    void setGameModeObjectscontext(ObjectsContext gameModeObjectscontext);
+    void setGameModeObjectsContext(ObjectsContext gameModeObjectsContext);
 }

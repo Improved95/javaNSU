@@ -22,14 +22,17 @@ public class SlashBlade {
         slashBladeModel = new SlashBladeModel();
         slashBladeView = new SlashBladeView();
 
+        slashBladeView.setModel(slashBladeModel);
+
+        slashBladeController.setModel(slashBladeModel);
+        slashBladeController.setView(slashBladeView);
+        slashBladeController.initial();
+
         jFrameSlashBlade = new JFrameSlashBlade(1500);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, SlashBladeController.getSlashBladeKeyListenerController());
 
-        slashBladeView.setModel(slashBladeModel);
         slashBladeController.setJFrameObject(jFrameSlashBlade);
-        slashBladeController.setModel(slashBladeModel);
-        slashBladeController.setView(slashBladeView);
 
-        slashBladeController.initial();
+        slashBladeController.executeCalculateGame();
     }
 }

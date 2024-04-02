@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SlashBladeController implements Controller {
-    private final double maxFPS = 1;
+    private final double maxFPS = 60;
     private final long maxWaitingTime = (long)(1000 / maxFPS);
 
-    private static SlashBladeLogicController slashBladeLogicController;
-    private static SlashBladeKeyListener slashBladeKeyListenerController;
+    private static SlashBladeLogicController slashBladeLogicController = new SlashBladeLogicController();
+    private static SlashBladeKeyListener slashBladeKeyListenerController  = new SlashBladeKeyListener(slashBladeLogicController);
 
     private JFrameObject jFrameObject;
     private Model model;
@@ -23,8 +23,6 @@ public class SlashBladeController implements Controller {
     private TimerContext timerContext;
 
     public SlashBladeController() {
-        slashBladeLogicController = new SlashBladeLogicController();
-        slashBladeKeyListenerController = new SlashBladeKeyListener(slashBladeLogicController);
         timerContext = new TimerContext();
     }
 
@@ -57,6 +55,10 @@ public class SlashBladeController implements Controller {
         slashBladeLogicController.initial();
 
         generationTickTimer = new Timer((int)maxWaitingTime, new MyTaskActionListener());
+    }
+
+    @Override
+    public void executeCalculateGame() {
         generationTickTimer.start();
     }
 
@@ -73,7 +75,7 @@ public class SlashBladeController implements Controller {
         timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
 
         slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
-//        view.changeViewScreen();
+        view.changeViewScreen(jFrameObject);
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();
         timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;

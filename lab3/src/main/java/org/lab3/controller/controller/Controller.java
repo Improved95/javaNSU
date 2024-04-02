@@ -10,4 +10,6 @@ public interface Controller {
     void setModel(Model model);
     void setView(View view);
     void initial();
+
+    void executeCalculateGame();
 }

@@ -4,7 +4,7 @@ import org.lab3.model.gameObjectsContext.ObjectsContext;
 
 public class SlashBladeModel implements Model {
     private String currentGameMode;
-    private ObjectsContext gameModeObjectscontext;
+    private ObjectsContext gameModeObjectsContext;
 
     @Override
     public String getCurrentGameMode() {
@@ -17,12 +17,12 @@ public class SlashBladeModel implements Model {
     }
 
     @Override
-    public ObjectsContext getGameModeObjectscontext() {
-        return gameModeObjectscontext;
+    public ObjectsContext getGameModeObjectsContext() {
+        return gameModeObjectsContext;
     }
 
     @Override
-    public void setGameModeObjectscontext(ObjectsContext gameModeObjectscontext) {
-        this.gameModeObjectscontext = gameModeObjectscontext;
+    public void setGameModeObjectsContext(ObjectsContext gameModeObjectsContext) {
+        this.gameModeObjectsContext = gameModeObjectsContext;
     }
 }

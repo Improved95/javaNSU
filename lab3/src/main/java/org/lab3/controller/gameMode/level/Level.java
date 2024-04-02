@@ -11,7 +11,7 @@ import org.lab3.slashBlade.FrameSize;
 
 public class Level implements GameMode {
     private Model model;
-    private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();;
+    private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();
 
     private ResourcesContext samuraiImagesResources;
     private ResourcesContext backgroundImagesResources;
@@ -21,7 +21,7 @@ public class Level implements GameMode {
 
     private Level(Model model) {
         this.model = model;
-        this.model.setGameModeObjectscontext(this.levelObjectsContext);
+        this.model.setGameModeObjectsContext(levelObjectsContext);
     }
 
     @Override
