@@ -72,13 +72,7 @@ public class SlashBladeController implements Controller {
         }
     }
 
-    private long start = 0;
-    private long end = 0;
-    private long res = 0;
-
     private void createAndGetTimeCreateFrame(TimerContext timerContext) {
-        end = System.currentTimeMillis();
-        System.out.println(end - start);
         timerContext.currentFrameTimeStart = System.currentTimeMillis();
         timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
 
@@ -87,7 +81,6 @@ public class SlashBladeController implements Controller {
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();
         timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;
-        start = System.currentTimeMillis();
     }
 
     class TimerContext {
