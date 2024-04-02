@@ -40,9 +40,6 @@ public class Level implements GameMode {
         setPlayer(levelObjectsContext.getPlayer());
         setBackground(levelObjectsContext.getBackground());
         enemyCreator.setTimer(2000);
-
-//        modelLoader.notifyObserversAddDrawObject(player);
-//        modelLoader.notifyObserversAddDrawObject(background);
     }
 
     @Override

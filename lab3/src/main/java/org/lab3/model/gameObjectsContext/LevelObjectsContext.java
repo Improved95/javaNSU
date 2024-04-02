@@ -1,11 +1,12 @@
 package org.lab3.model.gameObjectsContext;
 
+import org.lab3.model.objects.DrawObject;
 import org.lab3.model.objects.SlashBladeObject;
+import org.lab3.model.objects.SlashBladeObjectAbstract;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
+import java.util.*;
 
 public class LevelObjectsContext implements ObjectsContext {
     private SamuraiV1 player = new SamuraiV1();
@@ -37,8 +38,8 @@ public class LevelObjectsContext implements ObjectsContext {
     }
 
     @Override
-    public AbstractList<SlashBladeObject> createObjectsList() {
-        AbstractList<SlashBladeObject> objectsList = new ArrayList<>();
+    public AbstractList<DrawObject> getDrawObjectsList() {
+        AbstractList<DrawObject> objectsList = new ArrayList<>();
 
         objectsList.add(player);
         objectsList.add(background);

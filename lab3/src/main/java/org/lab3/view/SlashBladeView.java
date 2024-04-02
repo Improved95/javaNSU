@@ -9,17 +9,7 @@ import java.awt.*;
 import java.util.*;
 
 public class SlashBladeView implements View {
-    Model model;
-
-    private LinkedSetDrawObjects drawObjectsList = new LinkedSetDrawObjects(new Comparator<DrawObject>() {
-        @Override
-        public int compare(DrawObject o1, DrawObject o2) {
-            if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
-                return -1;
-            }
-            return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
-        }
-    });
+    private Model model;
 
     @Override
     public void setModel(Model model) {
@@ -33,10 +23,23 @@ public class SlashBladeView implements View {
 
     @Override
     public void drawObject(Graphics2D g2, FrameSize frameSize) {
-        for (DrawObject drawObject : drawObjectsList) {
+        AbstractList<DrawObject> drawObjectsList = model.getGameModeObjectscontext().getDrawObjectsList();
+//        drawObjectsList.sort(new Comparator<DrawObject>() {
+//            @Override
+//            public int compare(DrawObject o1, DrawObject o2) {
+//                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
+//                    return -1;
+//                }
+//                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
+//            }
+//        });
+
+        Set<DrawObject> drawObjectSet = new TreeSet<>();
+
+        /*for (DrawObject drawObject : drawObjectsList) {
             EditedImage imageEditor = new EditedImage(drawObject, frameSize);
             g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                     drawObject.getScreenHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
-        }
+        }*/
     }
 }
