@@ -1,7 +1,7 @@
 package org.lab3.controller.controller;
 
 import org.lab3.controller.gameMode.GameMode;
-import org.lab3.controller.gameMode.factories.GameModesFactory;
+import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 

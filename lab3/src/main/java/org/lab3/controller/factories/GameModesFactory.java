@@ -1,4 +1,4 @@
-package org.lab3.controller.gameMode.factories;
+package org.lab3.controller.factories;
 
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.model.Model;

@@ -1,5 +1,8 @@
 package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.actions.ActionController;
+import org.lab3.controller.actions.samuraiActions.SlashBladeCharacterCharacterAttack;
+import org.lab3.controller.actions.samuraiActions.SlashBladeCharacterCharacterMoveX;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -8,6 +11,9 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Level implements GameMode {
     private Model model;
@@ -19,9 +25,13 @@ public class Level implements GameMode {
 
     private EnemyCreator<SamuraiV1> enemyCreator = new EnemyCreator();
 
+    private Map<String, ActionController> characterMovementList = new HashMap<>();
+
     private Level(Model model) {
         this.model = model;
         this.model.setGameModeObjectsContext(levelObjectsContext);
+
+        fillMovementList();
     }
 
     @Override
@@ -48,12 +58,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-//                characterMovementController.changeMoveX(player, 1, -1);
+                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(1, -1);
                 break;
             case 83:
                 break;
             case 68:
-//                characterMovementController.changeMoveX(player, -1, 1);
+                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 1);
         }
     }
 
@@ -63,12 +73,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-//                characterMovementController.changeMoveX(player, 0, -1);
+                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(0, -1);
                 break;
             case 83:
                 break;
             case 68:
-//                characterMovementController.changeMoveX(player, -1, 0);
+                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 0);
                 break;
         }
     }
@@ -82,7 +92,7 @@ public class Level implements GameMode {
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-//        playerMove(currentFPS, frameSize);
+        playerMove(currentFPS, frameSize);
 
         /*SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
         if (enemy != null) {
@@ -100,8 +110,8 @@ public class Level implements GameMode {
     }
 
     private void playerMove(double currentFPS, FrameSize frameSize) {
-//        player.getMovementList().get("MOVE_X").execute(currentFPS, frameSize);
-//        player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
+        characterMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
+        characterMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
     }
 
     private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
@@ -115,5 +125,10 @@ public class Level implements GameMode {
         slashBladeObject.setScreenLayerLevel(0);
         slashBladeObject.setInGamePosition(0, -170);
         slashBladeObject.setScreenSize(115);
+    }
+
+    private void fillMovementList() {
+        characterMovementList.put("PLAYER_MOVE_X", new SlashBladeCharacterCharacterMoveX(levelObjectsContext.getPlayer()));
+        characterMovementList.put("PLAYER_ATTACK", new SlashBladeCharacterCharacterAttack(levelObjectsContext.getPlayer()));
     }
 }

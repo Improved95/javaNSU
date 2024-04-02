@@ -7,6 +7,7 @@ import org.lab3.slashBlade.JFrameObject;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class SlashBladeView implements View {
     private Model model;
@@ -23,7 +24,7 @@ public class SlashBladeView implements View {
 
     @Override
     public void drawObject(Graphics2D g2, FrameSize frameSize) {
-        AbstractList<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
+        List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
         drawObjectsList.sort((o1, o2) -> {
             if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
                 return -1;

@@ -79,6 +79,8 @@ public class SlashBladeController implements Controller {
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();
         timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;
+
+        System.out.println("next tick");
     }
 
     class TimerContext {

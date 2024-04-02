@@ -1,22 +1,22 @@
-package org.lab3.controller.characterMovement;
+package org.lab3.controller.actions.samuraiActions;
 
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
-public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstract {
-    private double attackDuration; //ms
-    private double attackDelay; //ms
+public class SlashBladeCharacterCharacterAttack extends SlashBladeCharacterActionControllerAbstract {
+    private double attackDuration;
+    private double attackDelay;
 
-    /*public SlashBladeCharacterAttack(SlashBladeCharacterAbstract character, double attackDuration, double attackDelay) {
+    public SlashBladeCharacterCharacterAttack(SlashBladeCharacterAbstract character) {
         super(character);
-        this.attackDuration = attackDuration;
-        this.attackDelay = attackDelay;
-    }*/
+        this.attackDuration = character.getParametersContext().getAttackDuration();
+        this.attackDelay = character.getParametersContext().getAttackDelay();
+    }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        /*character.getParametersContext().setAttackStatus(true);
-        if (isExecute && !blockExecute) {
+        character.getParametersContext().setAttackStatus(true);
+        if (isExecute && !isBlockExecute) {
             if (attackDuration > 0) {
                 attackDuration -= 1000 / currentFPS;
             } else {
@@ -29,6 +29,6 @@ public class SlashBladeCharacterAttack extends SlashBladeCharacterMovementAbstra
                     attackDelay = character.getParametersContext().getAttackDelay();
                 }
             }
-        }*/
+        }
     }
 }
