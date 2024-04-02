@@ -2,7 +2,7 @@ package org.lab3.model.objects;
 
 import java.awt.image.BufferedImage;
 
-public class DrawObjectAbstract implements DrawObject {
+public abstract class DrawObjectAbstract implements DrawObject {
     private double screenPosX;
     private double screenPosY;
     private double screenSize = 100;

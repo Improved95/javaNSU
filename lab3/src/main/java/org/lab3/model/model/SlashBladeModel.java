@@ -1,17 +1,28 @@
 package org.lab3.model.model;
 
-import org.lab3.controller.gameMode.GameMode;
+import org.lab3.model.gameObjectsContext.ObjectsContext;
 
 public class SlashBladeModel implements Model {
-    private GameMode currentGameMode;
+    private String currentGameMode;
+    private ObjectsContext gameModeObjectscontext;
 
     @Override
-    public GameMode getCurrentGameMode() {
+    public String getCurrentGameMode() {
         return currentGameMode;
     }
 
     @Override
-    public void setCurrentGameMode(GameMode currentGameMode) {
+    public void setCurrentGameMode(String currentGameMode) {
         this.currentGameMode = currentGameMode;
+    }
+
+    @Override
+    public ObjectsContext getGameModeObjectscontext() {
+        return gameModeObjectscontext;
+    }
+
+    @Override
+    public void setGameModeObjectscontext(ObjectsContext gameModeObjectscontext) {
+        this.gameModeObjectscontext = gameModeObjectscontext;
     }
 }

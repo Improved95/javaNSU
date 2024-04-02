@@ -1,6 +1,6 @@
 package org.lab3.model.objects;
 
-public abstract class SlashBladeAbstractObject extends DrawObjectAbstract implements SlashBladeObject {
+public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
 

@@ -1,9 +1,13 @@
 package org.lab3.model.model;
 
-import org.lab3.controller.gameMode.GameMode;
+import org.lab3.model.gameObjectsContext.ObjectsContext;
 
 public interface Model {
-    GameMode getCurrentGameMode();
+    String getCurrentGameMode();
 
-    void setCurrentGameMode(GameMode currentGameMode);
+    void setCurrentGameMode(String currentGameMode);
+
+    ObjectsContext getGameModeObjectscontext();
+
+    void setGameModeObjectscontext(ObjectsContext gameModeObjectscontext);
 }

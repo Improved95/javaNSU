@@ -1,42 +1,44 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.gameMode.GameMode;
-import org.lab3.model.objects.backgrounds.Background;
+import org.lab3.model.gameObjectsContext.LevelObjectsContext;
+import org.lab3.model.model.Model;
+import org.lab3.model.objects.SlashBladeObjectAbstract;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.*;
-
 public class Level implements GameMode {
+    private Model model;
+    private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();;
+
+    private ResourcesContext samuraiImagesResources;
+    private ResourcesContext backgroundImagesResources;
+    private ResourcesContext enemyImagesResources;
+
     private EnemyCreator<SamuraiV1> enemyCreator = new EnemyCreator();
-    private CharacterMovementController characterMovementController = new CharacterMovementController();
-    private Background background;
-    private SamuraiV1 player;
 
-    ResourcesContext enemyImagesResources;
-    ArrayList<SamuraiV1> enemyList = new ArrayList<>();
-
-    private Level() {
-        this.background = new Background();
-        this.player = new SamuraiV1();
+    private Level(Model model) {
+        this.model = model;
+        this.model.setGameModeObjectscontext(this.levelObjectsContext);
     }
 
     @Override
     public void initial() {
-        ResourcesContext samuraiImagesResources = new ResourcesContext();
+        this.samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
-        this.player.setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.getPlayer().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
-        ResourcesContext backgroundImagesResources = new ResourcesContext();
+        this.backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
-        this.background.setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.getBackground().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         enemyImagesResources = new ResourcesContext();
         enemyImagesResources.addImage("samurai/enemy.png");
 
-        setSamurai();
-        setBackground();
+        setPlayer(levelObjectsContext.getPlayer());
+        setBackground(levelObjectsContext.getBackground());
         enemyCreator.setTimer(2000);
 
 //        modelLoader.notifyObserversAddDrawObject(player);
@@ -83,9 +85,9 @@ public class Level implements GameMode {
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        playerMove(currentFPS, frameSize);
+//        playerMove(currentFPS, frameSize);
 
-        SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
+        /*SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
         if (enemy != null) {
 //            modelLoader.notifyObserversAddDrawObject(enemy);
             System.out.println("new enemy");
@@ -96,7 +98,7 @@ public class Level implements GameMode {
                 System.out.println("remove enemy");
 //                modelLoader.notifyObserversRemoveDrawObject(removedEnemy);
             }
-        }
+        }*/
 
     }
 
@@ -105,16 +107,16 @@ public class Level implements GameMode {
 //        player.getMovementList().get("ATTACK").execute(currentFPS, frameSize);
     }
 
-    private void setSamurai() {
-        player.setScreenLayerLevel(1);
-        player.getParametersContext().setHealth(3);
-        player.setInGamePosition(100, 0);
-        player.setScreenSize(90);
+    private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
+        slashBladeCharacter.setScreenLayerLevel(1);
+        slashBladeCharacter.getParametersContext().setHealth(3);
+        slashBladeCharacter.setInGamePosition(100, 0);
+        slashBladeCharacter.setScreenSize(90);
     }
 
-    private void setBackground() {
-        background.setScreenLayerLevel(0);
-        background.setInGamePosition(0, -170);
-        background.setScreenSize(115);
+    private void setBackground(SlashBladeObjectAbstract slashBladeObject) {
+        slashBladeObject.setScreenLayerLevel(0);
+        slashBladeObject.setInGamePosition(0, -170);
+        slashBladeObject.setScreenSize(115);
     }
 }

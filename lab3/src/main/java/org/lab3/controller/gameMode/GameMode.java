@@ -1,5 +1,6 @@
 package org.lab3.controller.gameMode;
 
+import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.view.LinkedSetDrawObjects;
 

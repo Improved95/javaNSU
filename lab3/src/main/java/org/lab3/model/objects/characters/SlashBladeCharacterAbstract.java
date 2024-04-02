@@ -1,8 +1,8 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.model.objects.SlashBladeAbstractObject;
+import org.lab3.model.objects.SlashBladeObjectAbstract;
 
-public abstract class SlashBladeCharacterAbstract extends SlashBladeAbstractObject implements SlashBladeCharacter {
+public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstract implements SlashBladeCharacter {
     protected CharacterParametersContext parametersContext;
 
     public SlashBladeCharacterAbstract() {

@@ -53,6 +53,7 @@ public class SlashBladeController implements Controller {
 
     @Override
     public void initial() {
+        slashBladeLogicController.setModel(model);
         slashBladeLogicController.initial();
         generationTickTimer = new Timer((int)maxWaitingTime, new MyTaskActionListener());
         generationTickTimer.start();

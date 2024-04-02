@@ -22,8 +22,8 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
     }
 
     @Override
-    public void addDrawableComponent(View slashBladeView, KeyListenerController keyListenerController) {
-        myComponent = new MyComponent(slashBladeView);
+    public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
+        myComponent = new MyComponent(view);
         jFrame.addKeyListener(keyListenerController);
         jFrame.addMouseListener(keyListenerController);
         jFrame.add(myComponent);
