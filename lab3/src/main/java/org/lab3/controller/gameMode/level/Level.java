@@ -14,6 +14,7 @@ import org.lab3.slashBlade.FrameSize;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Level implements GameMode {
     private Model model;
@@ -23,14 +24,13 @@ public class Level implements GameMode {
     private ResourcesContext backgroundImagesResources;
     private ResourcesContext enemyImagesResources;
 
-    private EnemyCreator<SamuraiV1> enemyCreator = new EnemyCreator();
+    private EnemyCreator enemyCreator = new EnemyCreator();
 
     private Map<String, ActionController> characterMovementList = new HashMap<>();
 
     private Level(Model model) {
         this.model = model;
         this.model.setGameModeObjectsContext(levelObjectsContext);
-
         fillMovementList();
     }
 
@@ -49,7 +49,7 @@ public class Level implements GameMode {
 
         setPlayer(levelObjectsContext.getPlayer());
         setBackground(levelObjectsContext.getBackground());
-        enemyCreator.setTimer(2000);
+        enemyCreator.setCreateDelay(1000);
     }
 
     @Override
@@ -86,30 +86,28 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-//            characterMovementController.changeAttack(player);
+            characterMovementList.get("PLAYER_ATTACK").attack();
         }
     }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        playerMove(currentFPS, frameSize);
+        playerAction(currentFPS, frameSize);
 
-        /*SamuraiV1 enemy = enemyCreator.create(enemyList, enemyImagesResources, currentFPS);
+        SamuraiV1 enemy = enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, currentFPS);
         if (enemy != null) {
-//            modelLoader.notifyObserversAddDrawObject(enemy);
             System.out.println("new enemy");
 
             Random random = new Random();
             if (random.nextInt() % 2 == 1) {
-                SamuraiV1 removedEnemy = enemyList.remove(0);
+                SamuraiV1 removedEnemy = levelObjectsContext.getEnemyList().remove(0);
                 System.out.println("remove enemy");
-//                modelLoader.notifyObserversRemoveDrawObject(removedEnemy);
             }
-        }*/
+        }
 
     }
 
-    private void playerMove(double currentFPS, FrameSize frameSize) {
+    private void playerAction(double currentFPS, FrameSize frameSize) {
         characterMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
         characterMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
     }

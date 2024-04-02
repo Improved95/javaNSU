@@ -3,25 +3,22 @@ package org.lab3.controller.gameMode.level;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class EnemyCreator<EnemyType> {
+public class EnemyCreator {
     private double createDelay;
     private double timerCreateDelay = createDelay;
 
-    public EnemyCreator() {
-
-    }
-
-    public double getTimer() {
+    public double getCreateDelay() {
         return createDelay;
     }
 
-    public void setTimer(int createDelay) {
+    public void setCreateDelay(double createDelay) {
         this.createDelay = createDelay;
+        timerCreateDelay = createDelay;
     }
 
-    public EnemyType create(ArrayList<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, double currentFPS) {
+    public SamuraiV1 create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, double currentFPS) {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
@@ -31,7 +28,7 @@ public class EnemyCreator<EnemyType> {
             enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
             enemyList.add(enemy);
             timerCreateDelay = createDelay;
-            return (EnemyType) enemy;
+            return enemy;
         } else {
             timerCreateDelay -= 1000 / currentFPS;
             return null;

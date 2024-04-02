@@ -14,15 +14,20 @@ public class SlashBladeCharacterCharacterAttack extends SlashBladeCharacterActio
     }
 
     @Override
+    public void attack() {
+        isExecute = true;
+    }
+
+    @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        character.getParametersContext().setAttackStatus(true);
         if (isExecute && !isBlockExecute) {
             if (attackDuration > 0) {
+                character.getParametersContext().setAttackStatus(true);
                 attackDuration -= 1000 / currentFPS;
             } else {
-                character.getParametersContext().setAttackStatus(false);
                 if (attackDelay > 0) {
                     attackDelay -= 1000 / currentFPS;
+                    character.getParametersContext().setAttackStatus(false);
                 } else {
                     isExecute = false;
                     attackDuration = character.getParametersContext().getAttackDuration();

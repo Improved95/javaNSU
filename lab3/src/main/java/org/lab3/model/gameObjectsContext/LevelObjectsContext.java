@@ -1,8 +1,6 @@
 package org.lab3.model.gameObjectsContext;
 
 import org.lab3.model.objects.DrawObject;
-import org.lab3.model.objects.SlashBladeObject;
-import org.lab3.model.objects.SlashBladeObjectAbstract;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 
@@ -29,7 +27,7 @@ public class LevelObjectsContext implements ObjectsContext {
         this.background = background;
     }
 
-    public AbstractList<SamuraiV1> getEnemyList() {
+    public List<SamuraiV1> getEnemyList() {
         return enemyList;
     }
 

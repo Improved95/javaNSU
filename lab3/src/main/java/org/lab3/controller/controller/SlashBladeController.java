@@ -1,12 +1,14 @@
 package org.lab3.controller.controller;
 
+import com.sun.source.util.TaskListener;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.JFrameObject;
 import org.lab3.view.View;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SlashBladeController implements Controller {
     private final double maxFPS = 60;
@@ -53,24 +55,30 @@ public class SlashBladeController implements Controller {
     public void initial() {
         slashBladeLogicController.setModel(model);
         slashBladeLogicController.initial();
-
-        generationTickTimer = new Timer((int)maxWaitingTime, new MyTaskActionListener());
+        generationTickTimer = new Timer();
     }
 
+    /*надо бы придумать как уменьшить задержку в случае долгого создания кадра,
+    * а может и не надо*/
     @Override
     public void executeCalculateGame() {
-        generationTickTimer.start();
+        generationTickTimer.scheduleAtFixedRate(new MyTask(), 0, maxWaitingTime);
     }
 
-    class MyTaskActionListener implements ActionListener {
+    class MyTask extends TimerTask {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void run() {
             createAndGetTimeCreateFrame(timerContext);
-            generationTickTimer.setDelay((int)(maxWaitingTime - timerContext.timeMakeFrame));
         }
     }
 
+    private long start = 0;
+    private long end = 0;
+    private long res = 0;
+
     private void createAndGetTimeCreateFrame(TimerContext timerContext) {
+        end = System.currentTimeMillis();
+        System.out.println(end - start);
         timerContext.currentFrameTimeStart = System.currentTimeMillis();
         timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
 
@@ -79,8 +87,7 @@ public class SlashBladeController implements Controller {
 
         timerContext.currentFrameTimeEnd = System.currentTimeMillis();
         timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;
-
-        System.out.println("next tick");
+        start = System.currentTimeMillis();
     }
 
     class TimerContext {
