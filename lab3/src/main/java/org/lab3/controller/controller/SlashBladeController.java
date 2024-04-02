@@ -1,12 +1,9 @@
 package org.lab3.controller.controller;
 
-import com.sun.source.util.TaskListener;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.JFrameObject;
 import org.lab3.view.View;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,20 +70,34 @@ public class SlashBladeController implements Controller {
     }
 
     private void createAndGetTimeCreateFrame(TimerContext timerContext) {
-        timerContext.currentFrameTimeStart = System.currentTimeMillis();
-        timerContext.currentFPS = 1000 / (timerContext.timeMakeFrame + maxWaitingTime);
+        timerContext.createFrameTimeStart = System.currentTimeMillis();
+        timerContext.timeMakeFrame = timerContext.createFrameTimeEnd - timerContext.createFrameTimeStart;
+        timerContext.changeDelayBeforeCreateNextFrame();
+        timerContext.currentFPS = 1000 / (timerContext.delayBeforeCreateNextFrame + timerContext.timeMakeFrame);
+
+        /*-----------------*/
 
         slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
         view.changeViewScreen(jFrameObject);
 
-        timerContext.currentFrameTimeEnd = System.currentTimeMillis();
-        timerContext.timeMakeFrame = timerContext.currentFrameTimeEnd - timerContext.currentFrameTimeStart;
+        /*-----------------*/
+
+
+        timerContext.createFrameTimeEnd = System.currentTimeMillis();
     }
 
-    class TimerContext {
-        long currentFrameTimeStart = 0;
-        long currentFrameTimeEnd = 0;
+    private class TimerContext {
+        long delayBeforeCreateNextFrame;
+        long createFrameTimeStart = 0;
+        long createFrameTimeEnd = 0;
         long timeMakeFrame = 0;
         double currentFPS = 0;
+
+        public void changeDelayBeforeCreateNextFrame() {
+            delayBeforeCreateNextFrame = maxWaitingTime - timeMakeFrame;
+            if (delayBeforeCreateNextFrame < 0) {
+                delayBeforeCreateNextFrame = 0;
+            }
+        }
     }
 }
