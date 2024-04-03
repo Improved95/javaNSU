@@ -99,15 +99,17 @@ public class Level implements GameMode {
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
         playerAction(currentFPS, frameSize);
-
-        SamuraiV1 enemy = enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
-
-
+        enemyAction(currentFPS, frameSize);
     }
 
     private void playerAction(double currentFPS, FrameSize frameSize) {
         playerMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
         playerMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
+    }
+
+    private void enemyAction(double currentFPS, FrameSize frameSize) {
+        enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext.getPlayer(), currentFPS, frameSize);
+        enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
 
     private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {

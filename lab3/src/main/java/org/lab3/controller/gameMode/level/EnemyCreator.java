@@ -16,7 +16,7 @@ public class EnemyCreator {
         timerCreateDelay = createDelay;
     }
 
-    public SamuraiV1 create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
+    public void create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
@@ -34,11 +34,10 @@ public class EnemyCreator {
 
             enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
             enemyList.add(enemy);
+
             timerCreateDelay = createDelay;
-            return enemy;
         } else {
             timerCreateDelay -= 1000 / currentFPS;
-            return null;
         }
     }
 }

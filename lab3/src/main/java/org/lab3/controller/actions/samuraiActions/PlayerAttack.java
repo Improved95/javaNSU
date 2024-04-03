@@ -1,6 +1,5 @@
 package org.lab3.controller.actions.samuraiActions;
 
-import org.lab3.controller.actions.ActionAbstract;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
