@@ -29,9 +29,9 @@ public class EnemyCreator {
 
             Random random = new Random();
             if (random.nextInt() % 2 == 1) {
-                enemy.setInGamePosition(100, 0);
+                enemy.setInGamePosition(-100, 0);
             } else {
-                enemy.setInGamePosition(frameSize.getWidth() - 100, 0);
+                enemy.setInGamePosition(frameSize.getWidth() + 100, 0);
                 enemy.changeDirection(-1);
             }
 

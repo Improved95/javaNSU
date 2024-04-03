@@ -1,8 +1,10 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.ActionController;
-import org.lab3.controller.actions.samuraiActions.SlashBladeCharacterCharacterAttack;
-import org.lab3.controller.actions.samuraiActions.SlashBladeCharacterCharacterMoveX;
+import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
+import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
+import org.lab3.controller.actions.samuraiActions.PlayerAttack;
+import org.lab3.controller.actions.samuraiActions.PlayerMove;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -15,7 +17,6 @@ import org.lab3.slashBlade.JFrameObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Level implements GameMode {
     private Model model;
@@ -28,13 +29,13 @@ public class Level implements GameMode {
 
     private EnemyCreator enemyCreator = new EnemyCreator();
 
-    private Map<String, ActionController> characterMovementList = new HashMap<>();
+    private Map<String, PlayerActionAbstract> playerMovementList = new HashMap<>();
+    private Map<String, EnemyActionAbstract> enemyMovementList = new HashMap<>();
 
     private Level(Model model, JFrameObject jFrameObject) {
         this.model = model;
         this.model.setGameModeObjectsContext(levelObjectsContext);
         this.jFrameObject = jFrameObject;
-        fillMovementList();
     }
 
     @Override
@@ -50,6 +51,8 @@ public class Level implements GameMode {
         enemyImagesResources = new ResourcesContext();
         enemyImagesResources.addImage("samurai/enemy.png");
 
+        fillPlayerMovementList();
+
         setPlayer(levelObjectsContext.getPlayer());
         setBackground(levelObjectsContext.getBackground());
         enemyCreator.setCreateDelay(1000);
@@ -61,12 +64,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(1, -1);
+                playerMovementList.get("PLAYER_MOVE_X").changeMoveX(1, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 1);
+                playerMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 1);
         }
     }
 
@@ -76,12 +79,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(0, -1);
+                playerMovementList.get("PLAYER_MOVE_X").changeMoveX(0, -1);
                 break;
             case 83:
                 break;
             case 68:
-                characterMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 0);
+                playerMovementList.get("PLAYER_MOVE_X").changeMoveX(-1, 0);
                 break;
         }
     }
@@ -89,7 +92,7 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-            characterMovementList.get("PLAYER_ATTACK").attack();
+            playerMovementList.get("PLAYER_ATTACK").attack();
         }
     }
 
@@ -103,8 +106,8 @@ public class Level implements GameMode {
     }
 
     private void playerAction(double currentFPS, FrameSize frameSize) {
-        characterMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
-        characterMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
+        playerMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
+        playerMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
     }
 
     private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
@@ -120,8 +123,9 @@ public class Level implements GameMode {
         slashBladeObject.setScreenSize(115);
     }
 
-    private void fillMovementList() {
-        characterMovementList.put("PLAYER_MOVE_X", new SlashBladeCharacterCharacterMoveX(levelObjectsContext.getPlayer()));
-        characterMovementList.put("PLAYER_ATTACK", new SlashBladeCharacterCharacterAttack(levelObjectsContext.getPlayer()));
+    private void fillPlayerMovementList() {
+        playerMovementList.put("PLAYER_MOVE_X", new PlayerMove(levelObjectsContext.getPlayer()));
+        playerMovementList.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
+//        characterMovementList.put("ENEMY_MOVE", new SlashBladeEnemyMove());
     }
 }

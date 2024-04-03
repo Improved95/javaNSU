@@ -1,13 +1,14 @@
 package org.lab3.controller.actions.samuraiActions;
 
+import org.lab3.controller.actions.ActionAbstract;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
-public class SlashBladeCharacterCharacterAttack extends SlashBladeCharacterActionControllerAbstract {
+public class PlayerAttack extends PlayerActionAbstract {
     private double attackDuration;
     private double attackDelay;
 
-    public SlashBladeCharacterCharacterAttack(SlashBladeCharacterAbstract character) {
+    public PlayerAttack(SlashBladeCharacterAbstract character) {
         super(character);
         this.attackDuration = character.getParametersContext().getAttackDuration();
         this.attackDelay = character.getParametersContext().getAttackDelay();

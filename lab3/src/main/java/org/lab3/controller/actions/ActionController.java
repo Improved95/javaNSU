@@ -8,8 +8,4 @@ public interface ActionController {
     void setExecuteStatus(boolean execute);
 
     void setBlockExecuteStatus(boolean isBlockExecute);
-
-    default void changeMoveX(int a, int d) {}
-
-    default void attack() {};
 }
