@@ -21,7 +21,7 @@ public class EnemyMoveX extends EnemyActionAbstract {
                 double enemyPosX = enemy.getInGamePosX();
                 double enemySpeed = enemy.getParametersContext().getSpeedOfMoveX();
                 double dx;
-                if (Math.abs(enemyPosX - playerPosX) > 5) {
+                if (Math.abs(enemyPosX - playerPosX) > 30) {
                     if (enemyPosX - playerPosX < 0) {
                         enemy.changeDirection(1);
                         dx = enemySpeed / currentFPS * frameSize.getReductionFactor();

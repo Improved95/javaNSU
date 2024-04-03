@@ -1,6 +1,7 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
+import org.lab3.controller.actions.enemyActions.EnemyCatchAttack;
 import org.lab3.controller.actions.enemyActions.EnemyMoveX;
 import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerAttack;
@@ -9,7 +10,6 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
-import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
@@ -98,17 +98,15 @@ public class Level implements GameMode {
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        playerAction(currentFPS, frameSize);
-        enemyAction(currentFPS, frameSize);
-    }
-
-    private void playerAction(double currentFPS, FrameSize frameSize) {
         playerMovementList.get("PLAYER_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
-        playerMovementList.get("PLAYER_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
-    }
-
-    private void enemyAction(double currentFPS, FrameSize frameSize) {
         enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
+
+        playerMovementList.get("PLAYER_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
+        enemyMovementList.get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
+
+//        enemyMovementList.get("ENEMY_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
+//        playerMovementList.get("PLAYER_CATCH_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
+
         enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
 
@@ -129,5 +127,6 @@ public class Level implements GameMode {
         playerMovementList.put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
         playerMovementList.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
         enemyMovementList.put("ENEMY_MOVE_X", new EnemyMoveX(levelObjectsContext.getEnemyList()));
+        enemyMovementList.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(levelObjectsContext.getEnemyList()));
     }
 }
