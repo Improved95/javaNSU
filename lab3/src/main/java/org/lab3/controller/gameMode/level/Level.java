@@ -103,12 +103,12 @@ public class Level implements GameMode {
     }
 
     private void playerAction(double currentFPS, FrameSize frameSize) {
-        playerMovementList.get("PLAYER_MOVE_X").execute(currentFPS, frameSize);
-        playerMovementList.get("PLAYER_ATTACK").execute(currentFPS, frameSize);
+        playerMovementList.get("PLAYER_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
+        playerMovementList.get("PLAYER_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
     }
 
     private void enemyAction(double currentFPS, FrameSize frameSize) {
-        enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext.getPlayer(), currentFPS, frameSize);
+        enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
         enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
 

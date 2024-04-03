@@ -22,6 +22,7 @@ public class EnemyCreator {
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setHealth(1);
             enemy.setScreenSize(90);
+            enemy.getParametersContext().setSpeedOfMoveX(500);
 
             Random random = new Random();
             if (random.nextInt() % 2 == 1) {
