@@ -4,6 +4,7 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.slashBlade.JFrameObject;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,6 +12,7 @@ class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
+    private JFrameObject jFrameObject;
 
     SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
@@ -20,9 +22,13 @@ class SlashBladeLogicController {
         this.model = model;
     }
 
+    public void setJFrameObject(JFrameObject jFrameObject) {
+        this.jFrameObject = jFrameObject;
+    }
+
     void initial() {
         try {
-            currentGameMode = gameModesFactory.create("LEVEL", model);
+            currentGameMode = gameModesFactory.create("LEVEL", model, jFrameObject);
         } catch (ClassNotFoundException | IllegalAccessException |
                     InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
 

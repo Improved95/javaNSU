@@ -51,7 +51,9 @@ public class SlashBladeController implements Controller {
     @Override
     public void initial() {
         slashBladeLogicController.setModel(model);
+        slashBladeLogicController.setJFrameObject(jFrameObject);
         slashBladeLogicController.initial();
+        view.setDrawing(true);
         generationTickTimer = new Timer();
     }
 

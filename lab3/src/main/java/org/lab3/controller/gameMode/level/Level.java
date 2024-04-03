@@ -11,6 +11,7 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.slashBlade.JFrameObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import java.util.Random;
 public class Level implements GameMode {
     private Model model;
     private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();
+    private JFrameObject jFrameObject;
 
     private ResourcesContext samuraiImagesResources;
     private ResourcesContext backgroundImagesResources;
@@ -28,9 +30,10 @@ public class Level implements GameMode {
 
     private Map<String, ActionController> characterMovementList = new HashMap<>();
 
-    private Level(Model model) {
+    private Level(Model model, JFrameObject jFrameObject) {
         this.model = model;
         this.model.setGameModeObjectsContext(levelObjectsContext);
+        this.jFrameObject = jFrameObject;
         fillMovementList();
     }
 
@@ -94,16 +97,8 @@ public class Level implements GameMode {
     public void execute(double currentFPS, FrameSize frameSize) {
         playerAction(currentFPS, frameSize);
 
-        SamuraiV1 enemy = enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, currentFPS);
-        if (enemy != null) {
-            System.out.println("new enemy");
+        SamuraiV1 enemy = enemyCreator.create(levelObjectsContext.getEnemyList(), enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
 
-            Random random = new Random();
-            if (random.nextInt() % 2 == 1) {
-                SamuraiV1 removedEnemy = levelObjectsContext.getEnemyList().remove(0);
-                System.out.println("remove enemy");
-            }
-        }
 
     }
 
@@ -115,7 +110,7 @@ public class Level implements GameMode {
     private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
         slashBladeCharacter.setScreenLayerLevel(1);
         slashBladeCharacter.getParametersContext().setHealth(3);
-        slashBladeCharacter.setInGamePosition(100, 0);
+        slashBladeCharacter.setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
         slashBladeCharacter.setScreenSize(90);
     }
 

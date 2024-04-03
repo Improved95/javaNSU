@@ -9,6 +9,8 @@ import java.awt.*;
 public interface View {
     void setModel(Model model);
 
+    void setDrawing(boolean drawing);
+
     void changeViewScreen(JFrameObject jFrameObject);
     void drawObject(Graphics2D g2, FrameSize frameSize);
 }

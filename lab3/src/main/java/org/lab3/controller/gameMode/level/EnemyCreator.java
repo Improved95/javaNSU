@@ -2,8 +2,10 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
+import org.lab3.slashBlade.FrameSize;
 
 import java.util.List;
+import java.util.Random;
 
 public class EnemyCreator {
     private double createDelay;
@@ -18,13 +20,21 @@ public class EnemyCreator {
         timerCreateDelay = createDelay;
     }
 
-    public SamuraiV1 create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, double currentFPS) {
+    public SamuraiV1 create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setHealth(1);
             enemy.setScreenSize(90);
-            enemy.setInGamePosition(500, 0);
+
+            Random random = new Random();
+            if (random.nextInt() % 2 == 1) {
+                enemy.setInGamePosition(100, 0);
+            } else {
+                enemy.setInGamePosition(frameSize.getWidth() - 100, 0);
+                enemy.changeDirection(-1);
+            }
+
             enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
             enemyList.add(enemy);
             timerCreateDelay = createDelay;
