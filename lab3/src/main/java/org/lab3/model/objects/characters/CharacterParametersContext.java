@@ -4,6 +4,8 @@ public class CharacterParametersContext {
     private int health = 0;
     private int inGameHorizontalDirection;
     private double speedOfMoveX;
+    private double radiusForwardAttack;
+    private double radiusBackwardAttack;
 
     private double attackDuration = 0;
     private double attackDelay = 0;
@@ -55,5 +57,21 @@ public class CharacterParametersContext {
 
     public void setAttackStatus(boolean attack) {
         this.attack = attack;
+    }
+
+    public double getRadiusForwardAttack() {
+        return radiusForwardAttack;
+    }
+
+    public void setRadiusForwardAttack(double radiusForwardAttack) {
+        this.radiusForwardAttack = radiusForwardAttack;
+    }
+
+    public double getRadiusBackwardAttack() {
+        return radiusBackwardAttack;
+    }
+
+    public void setRadiusBackwardAttack(double radiusBackwardAttack) {
+        this.radiusBackwardAttack = radiusBackwardAttack;
     }
 }

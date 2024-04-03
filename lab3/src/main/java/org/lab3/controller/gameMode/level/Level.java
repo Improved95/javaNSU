@@ -112,9 +112,7 @@ public class Level implements GameMode {
 
     private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
         slashBladeCharacter.setScreenLayerLevel(1);
-        slashBladeCharacter.getParametersContext().setHealth(3);
         slashBladeCharacter.setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
-        slashBladeCharacter.setScreenSize(90);
     }
 
     private void setBackground(SlashBladeObjectAbstract slashBladeObject) {

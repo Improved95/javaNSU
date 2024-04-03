@@ -20,8 +20,6 @@ public class EnemyCreator {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
-            enemy.getParametersContext().setHealth(1);
-            enemy.setScreenSize(90);
             enemy.getParametersContext().setSpeedOfMoveX(500);
 
             Random random = new Random();

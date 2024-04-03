@@ -4,12 +4,11 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class EnemyCatchAttack extends EnemyActionAbstract {
-    private double radiusForwardAttack = 100;
-    private double radiusBackwardAttack = 10;
 
     public EnemyCatchAttack(List<SamuraiV1> enemyList) {
         super(enemyList);
@@ -19,27 +18,34 @@ public class EnemyCatchAttack extends EnemyActionAbstract {
     @Override
     public void execute(LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
-            SamuraiV1 player = levelObjectsContext.getPlayer();
-            if (player.getParametersContext().isAttack()) {
 
-                List<SamuraiV1> deleteEnemyList = new ArrayList<>();
+            Set<SamuraiV1> deleteEnemySet = new HashSet<>();
 
-                for (SamuraiV1 enemy : enemyList) {
-                    double relativePos = player.getInGamePosX() - enemy.getInGamePosX();
-                    if (player.getParametersContext().getInGameHorizontalDirection() == 1) {
-                        if ((relativePos <= radiusForwardAttack && relativePos >= 0) || (relativePos >= -radiusBackwardAttack &&  relativePos <=  0)) {
-                            deleteEnemyList.add(enemy);
-                            System.out.println(player.getInGamePosX() + " " + enemy.getInGamePosX());
-                        }
-                    } else {
-                        if (() || ()) {
-                            deleteEnemyList.add(enemy);
-                        }
-                    }
+            for (SamuraiV1 enemy : enemyList) {
+                catchPlayerAttack(enemy, levelObjectsContext, deleteEnemySet);
+            }
+
+            levelObjectsContext.getEnemyList().removeAll(deleteEnemySet);
+
+        }
+    }
+
+    private void catchPlayerAttack(SamuraiV1 enemy, LevelObjectsContext levelObjectsContext, Set<SamuraiV1> deleteEnemySet) {
+        SamuraiV1 player = levelObjectsContext.getPlayer();
+        if (player.getParametersContext().isAttack()) {
+            double relativePos = enemy.getInGamePosX() - player.getInGamePosX();
+            double radiusForwardAttack = player.getParametersContext().getRadiusForwardAttack();
+            double radiusBackwardAttack = player.getParametersContext().getRadiusBackwardAttack();
+
+            if (player.getParametersContext().getInGameHorizontalDirection() == 1) {
+                if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
+                    deleteEnemySet.add(enemy);
+                    System.out.println(player.getInGamePosX() + " " + enemy.getInGamePosX());
                 }
-
-                levelObjectsContext.getEnemyList().removeAll(deleteEnemyList);
-
+            } else {
+                if (relativePos >= -radiusForwardAttack && relativePos <= radiusBackwardAttack) {
+                    deleteEnemySet.add(enemy);
+                }
             }
         }
     }
