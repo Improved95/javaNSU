@@ -1,10 +1,10 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.ActionController;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
+import org.lab3.controller.actions.enemyActions.EnemyMoveX;
 import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerAttack;
-import org.lab3.controller.actions.samuraiActions.PlayerMove;
+import org.lab3.controller.actions.samuraiActions.PlayerMoveX;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -124,8 +124,8 @@ public class Level implements GameMode {
     }
 
     private void fillPlayerMovementList() {
-        playerMovementList.put("PLAYER_MOVE_X", new PlayerMove(levelObjectsContext.getPlayer()));
+        playerMovementList.put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
         playerMovementList.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
-//        characterMovementList.put("ENEMY_MOVE", new SlashBladeEnemyMove());
+        enemyMovementList.put("ENEMY_MOVE_X", new EnemyMoveX(levelObjectsContext.getEnemyList()));
     }
 }

@@ -1,14 +1,13 @@
 package org.lab3.controller.actions.samuraiActions;
 
-import org.lab3.controller.actions.ActionAbstract;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
-public class PlayerMove extends PlayerActionAbstract {
+public class PlayerMoveX extends PlayerActionAbstract {
     private int aIsPress = 0;
     private int dIsPress = 0;
 
-    public PlayerMove(SlashBladeCharacterAbstract character) {
+    public PlayerMoveX(SlashBladeCharacterAbstract character) {
         super(character);
     }
 

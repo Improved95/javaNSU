@@ -10,6 +10,6 @@ public abstract class PlayerActionAbstract extends ActionAbstract {
         this.character = character;
     }
 
-    public void attack() {};
-    public void changeMoveX(int a, int d) {};
+    public void attack() {}
+    public void changeMoveX(int a, int d) {}
 }

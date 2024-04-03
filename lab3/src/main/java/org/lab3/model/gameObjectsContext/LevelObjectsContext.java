@@ -9,7 +9,7 @@ import java.util.*;
 public class LevelObjectsContext implements ObjectsContext {
     private SamuraiV1 player = new SamuraiV1();
     private Background  background = new Background();
-    private AbstractList<SamuraiV1> enemyList = new ArrayList();
+    private List<SamuraiV1> enemyList = new ArrayList();
 
     public SamuraiV1 getPlayer() {
         return player;
