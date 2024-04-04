@@ -4,10 +4,10 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.List;
+import java.util.Set;
 
 public class EnemyMoveX extends EnemyActionAbstract {
-    public EnemyMoveX(List<SamuraiV1> enemyList) {
+    public EnemyMoveX(Set<SamuraiV1> enemyList) {
         super(enemyList);
         this.isExecute = true;
     }

@@ -5,12 +5,11 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class EnemyCatchAttack extends EnemyActionAbstract {
 
-    public EnemyCatchAttack(List<SamuraiV1> enemyList) {
+    public EnemyCatchAttack(Set<SamuraiV1> enemyList) {
         super(enemyList);
         this.isExecute = true;
     }

@@ -4,13 +4,13 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.List;
+import java.util.Set;
 
 public class EnemyAttack extends EnemyActionAbstract {
     private double attackDuration;
     private double attackDelay;
 
-    public EnemyAttack(List<SamuraiV1> enemyList) {
+    public EnemyAttack(Set<SamuraiV1> enemyList) {
         super(enemyList);
         this.isExecute = true;
     }

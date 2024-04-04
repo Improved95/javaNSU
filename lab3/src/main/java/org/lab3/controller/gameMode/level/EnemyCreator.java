@@ -4,8 +4,8 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class EnemyCreator {
     private double createDelay;
@@ -16,7 +16,7 @@ public class EnemyCreator {
         timerCreateDelay = createDelay;
     }
 
-    public void create(List<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
+    public void create(Set<SamuraiV1> enemyList, ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
