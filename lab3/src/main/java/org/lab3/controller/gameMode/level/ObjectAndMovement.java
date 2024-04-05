@@ -1,8 +1,8 @@
 package org.lab3.controller.gameMode.level;
 
 public class ObjectAndMovement<T, E> {
-     private T gameObject;
-     private E ActionController;
+    private T gameObject;
+    private E ActionController;
 
     public T getGameObject() {
         return gameObject;
