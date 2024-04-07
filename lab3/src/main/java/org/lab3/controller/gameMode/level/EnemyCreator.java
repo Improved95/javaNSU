@@ -53,10 +53,10 @@ public class EnemyCreator {
     }
 
     private void fillEnemyMovement(AllCharactersActionsContext actionsContext, SamuraiV1 enemy) {
-        Map<String, EnemyActionAbstract> enemyMovementList = new HashMap<>();
-        enemyMovementList.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
-        enemyMovementList.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
-        enemyMovementList.put("ENEMY_ATTACK", new EnemyAttack(enemy));
-        actionsContext.getEnemyMovementList().add(enemyMovementList);
+        Map<String, EnemyActionAbstract> enemyMovement = new HashMap<>();
+        enemyMovement.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
+        enemyMovement.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
+        enemyMovement.put("ENEMY_ATTACK", new EnemyAttack(enemy));
+        actionsContext.getEnemyAndMovementList().add(enemyMovement);
     }
 }

@@ -43,12 +43,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                actionsContext.getPlayerMovement().get("PLAYER_MOVE_X").changeMoveX(1, -1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(1, -1);
                 break;
             case 83:
                 break;
             case 68:
-                actionsContext.getPlayerMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 1);
         }
     }
 
@@ -58,12 +58,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                actionsContext.getPlayerMovement().get("PLAYER_MOVE_X").changeMoveX(0, -1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(0, -1);
                 break;
             case 83:
                 break;
             case 68:
-                actionsContext.getPlayerMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 0);
+                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 0);
                 break;
         }
     }
@@ -71,20 +71,20 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-            actionsContext.getPlayerMovement().get("PLAYER_ATTACK").attack();
+            actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").attack();
         }
     }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        actionsContext.getPlayerMovement().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        actionsContext.getPlayerMovement().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
 
-        for (Map<String, EnemyActionAbstract> enemyMovementList : actionsContext.getEnemyMovementList()) {
+        /*for (Map<String, EnemyActionAbstract> enemyMovementList : actionsContext.getEnemyMovementList()) {
             enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
             enemyMovementList.get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
             enemyMovementList.get("ENEMY_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        }
+        }*/
 
         enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
@@ -124,6 +124,6 @@ public class Level implements GameMode {
         Map<String, PlayerActionAbstract> playerMovement = new HashMap<>();
         playerMovement.put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
         playerMovement.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
-        actionsContext.setPlayerMovement(playerMovement);
+        actionsContext.getPlayerAndMovement().setObjectMovement(playerMovement);
     }
 }
