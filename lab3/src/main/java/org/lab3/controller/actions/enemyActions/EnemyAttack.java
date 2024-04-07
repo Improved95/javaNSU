@@ -20,6 +20,23 @@ public class EnemyAttack extends EnemyActionAbstract {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double playerPosX = player.getInGamePosX();
 
+
+        }
+    }
+
+    private void attack(double currentFPS) {
+        if (attackDuration > 0) {
+            character.getParametersContext().setAttackStatus(true);
+            attackDuration -= 1000 / currentFPS;
+        } else {
+            if (attackDelay > 0) {
+                attackDelay -= 1000 / currentFPS;
+                character.getParametersContext().setAttackStatus(false);
+            } else {
+                isExecute = false;
+                attackDuration = character.getParametersContext().getAttackDuration();
+                attackDelay = character.getParametersContext().getAttackDelay();
+            }
         }
     }
 }
