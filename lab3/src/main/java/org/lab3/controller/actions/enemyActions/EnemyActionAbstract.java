@@ -1,13 +1,13 @@
 package org.lab3.controller.actions.enemyActions;
 
 import org.lab3.controller.actions.ActionControllerAbstract;
-import org.lab3.model.objects.characters.SamuraiV1;
-import java.util.Set;
+import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
+
 
 public abstract class EnemyActionAbstract extends ActionControllerAbstract {
-    protected Set<SamuraiV1> enemyList;
+    protected SlashBladeCharacterAbstract character;
 
-    public EnemyActionAbstract(Set<SamuraiV1> enemyList) {
-        this.enemyList = enemyList;
+    public EnemyActionAbstract(SlashBladeCharacterAbstract character) {
+        this.character = character;
     }
 }

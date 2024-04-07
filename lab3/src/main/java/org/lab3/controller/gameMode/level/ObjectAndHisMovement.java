@@ -1,22 +1,29 @@
 package org.lab3.controller.gameMode.level;
 
-public class ObjectAndMovement<T, E> {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ObjectAndHisMovement<T, E> {
      private T gameObject;
-     private E ActionController;
+     private Map<String, E> ActionControllers = new HashMap<>();
 
-    public T getGameObject() {
-        return gameObject;
-    }
+     public ObjectAndHisMovement(T gameObject) {
+         this.gameObject = gameObject;
+     }
 
-    public void setGameObject(T gameObject) {
-        this.gameObject = gameObject;
-    }
+     public T getGameObject() {
+         return gameObject;
+     }
 
-    public E getActionController() {
-        return ActionController;
-    }
+     public void setGameObject(T gameObject) {
+         this.gameObject = gameObject;
+     }
 
-    public void setActionController(E actionController) {
-        ActionController = actionController;
-    }
+     public Map<String, E> getActionControllers() {
+         return ActionControllers;
+     }
+
+     public void setActionControllers(Map<String, E> actionControllers) {
+         ActionControllers = actionControllers;
+     }
 }

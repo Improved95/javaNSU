@@ -9,7 +9,7 @@ import java.util.*;
 public class LevelObjectsContext implements ObjectsContext {
     private SamuraiV1 player = new SamuraiV1();
     private Background  background = new Background();
-    private Set<SamuraiV1> enemyList = new HashSet<>();
+    private List<SamuraiV1> enemyList = new ArrayList<>();
 
     public SamuraiV1 getPlayer() {
         return player;
@@ -27,11 +27,11 @@ public class LevelObjectsContext implements ObjectsContext {
         this.background = background;
     }
 
-    public Set<SamuraiV1> getEnemyList() {
+    public List<SamuraiV1> getEnemyList() {
         return enemyList;
     }
 
-    public void setEnemyList(Set<SamuraiV1> enemyList) {
+    public void setEnemyList(List<SamuraiV1> enemyList) {
         this.enemyList = enemyList;
     }
 
