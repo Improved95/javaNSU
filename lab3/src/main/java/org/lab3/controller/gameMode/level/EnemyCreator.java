@@ -9,8 +9,7 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class EnemyCreator {
     private double createDelay;
@@ -42,9 +41,7 @@ public class EnemyCreator {
 
             enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
-            ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement = new ObjectAndHisMovement<>(enemy);
-            fillEnemyMovement(enemyMovement, enemy);
-            actionsContext.getEnemyMovementList().add(enemyMovement);
+            fillEnemyMovement(actionsContext, enemy);
             enemyList.add(enemy);
 
             timerCreateDelay = createDelay;
@@ -53,9 +50,11 @@ public class EnemyCreator {
         }
     }
 
-    private void fillEnemyMovement(ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement, SamuraiV1 enemy) {
-        enemyMovement.getActionControllers().put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
-        enemyMovement.getActionControllers().put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
-        enemyMovement.getActionControllers().put("ENEMY_ATTACK", new EnemyAttack(enemy));
+    private void fillEnemyMovement(AllCharactersActionsContext actionsContext, SamuraiV1 enemy) {
+        Map<String, EnemyActionAbstract> enemyMovementList = new HashMap<>();
+        enemyMovementList.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
+        enemyMovementList.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
+        enemyMovementList.put("ENEMY_ATTACK", new EnemyAttack(enemy));
+        actionsContext.getEnemyMovementList().add(enemyMovementList);
     }
 }
