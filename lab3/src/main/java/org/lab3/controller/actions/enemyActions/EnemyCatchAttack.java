@@ -21,7 +21,7 @@ public class EnemyCatchAttack extends EnemyActionAbstract {
     public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             Set<SamuraiV1> deleteEnemySet = new HashSet<>();
-            Set<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> deleteMovementSet = new HashSet<>();
+//            Set<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> deleteMovementSet = new HashSet<>();
 
             SamuraiV1 player = levelObjectsContext.getPlayer();
             if (player.getParametersContext().isAttack()) {
@@ -32,7 +32,7 @@ public class EnemyCatchAttack extends EnemyActionAbstract {
                     if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
                         deleteEnemySet.add((SamuraiV1) character);
 
-                        actionsContext.getEnemyMovementList().indexOf();
+//                        actionsContext.getEnemyMovementList().indexOf();
 //                        deleteMovementSet.add();
                     }
                 } else {

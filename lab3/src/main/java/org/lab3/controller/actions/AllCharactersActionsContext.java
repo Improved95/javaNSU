@@ -2,29 +2,28 @@ package org.lab3.controller.actions;
 
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
-import org.lab3.controller.gameMode.level.ObjectAndHisMovement;
-import org.lab3.model.objects.characters.SamuraiV1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AllCharactersActionsContext {
-    private ObjectAndHisMovement<SamuraiV1, PlayerActionAbstract> playerMovement;
-    private List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyMovementList = new ArrayList<>();
+    private Map<String, PlayerActionAbstract> playerMovement;
+    private List<Map<String, EnemyActionAbstract>> enemyMovementList = new ArrayList<>();
 
-    public ObjectAndHisMovement<SamuraiV1, PlayerActionAbstract> getPlayerMovement() {
+    public Map<String, PlayerActionAbstract> getPlayerMovement() {
         return playerMovement;
     }
 
-    public void setPlayerMovement(ObjectAndHisMovement<SamuraiV1, PlayerActionAbstract> playerMovement) {
+    public void setPlayerMovement(Map<String, PlayerActionAbstract> playerMovement) {
         this.playerMovement = playerMovement;
     }
 
-    public List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> getEnemyMovementList() {
+    public List<Map<String, EnemyActionAbstract>> getEnemyMovementList() {
         return enemyMovementList;
     }
 
-    public void setEnemyMovementList(List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyMovementList) {
+    public void setEnemyMovementList(List<Map<String, EnemyActionAbstract>> enemyMovementList) {
         this.enemyMovementList = enemyMovementList;
     }
 }
