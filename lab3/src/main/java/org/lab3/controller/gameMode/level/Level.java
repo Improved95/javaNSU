@@ -1,7 +1,7 @@
 package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.actions.AllCharactersActionsContext;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
-import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerAttack;
 import org.lab3.controller.actions.samuraiActions.PlayerMoveX;
 import org.lab3.controller.gameMode.GameMode;
@@ -14,9 +14,6 @@ import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Level implements GameMode {
     private Model model;
     private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();
@@ -28,8 +25,10 @@ public class Level implements GameMode {
 
     private EnemyCreator enemyCreator = new EnemyCreator();
 
-    private ObjectAndHisMovement<SamuraiV1, PlayerActionAbstract> playerMovement;
-    private List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyMovementList = new ArrayList<>();
+//    private ObjectAndHisMovement<SamuraiV1, PlayerActionAbstract> playerMovement;
+//    private List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyMovementList = new ArrayList<>();
+
+    private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
 
     private Level(Model model, JFrameObject jFrameObject) {
         this.model = model;
@@ -44,12 +43,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                playerMovement.getActionControllers().get("PLAYER_MOVE_X").changeMoveX(1, -1);
+                actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").changeMoveX(1, -1);
                 break;
             case 83:
                 break;
             case 68:
-                playerMovement.getActionControllers().get("PLAYER_MOVE_X").changeMoveX(-1, 1);
+                actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").changeMoveX(-1, 1);
         }
     }
 
@@ -59,12 +58,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-                playerMovement.getActionControllers().get("PLAYER_MOVE_X").changeMoveX(0, -1);
+                actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").changeMoveX(0, -1);
                 break;
             case 83:
                 break;
             case 68:
-               playerMovement.getActionControllers().get("PLAYER_MOVE_X").changeMoveX(-1, 0);
+                actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").changeMoveX(-1, 0);
                 break;
         }
     }
@@ -72,21 +71,21 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-            playerMovement.getActionControllers().get("PLAYER_ATTACK").attack();
+            actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_ATTACK").attack();
         }
     }
 
     @Override
     public void execute(double currentFPS, FrameSize frameSize) {
-        playerMovement.getActionControllers().get("PLAYER_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
-        playerMovement.getActionControllers().get("PLAYER_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
+        actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
 
-        for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement : enemyMovementList) {
+        /*for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement : enemyMovementList) {
             enemyMovement.getActionControllers().get("ENEMY_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
             enemyMovement.getActionControllers().get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
-        }
+        }*/
 
-        enemyCreator.create(levelObjectsContext.getEnemyList(), enemyMovementList, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
+        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
 
     @Override
@@ -121,8 +120,8 @@ public class Level implements GameMode {
     }
 
     private void fillPlayerMovementList() {
-        playerMovement = new ObjectAndHisMovement(levelObjectsContext.getPlayer());
-        playerMovement.getActionControllers().put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
-        playerMovement.getActionControllers().put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
+        actionsContext.setPlayerMovement(new ObjectAndHisMovement(levelObjectsContext.getPlayer()));
+        actionsContext.getPlayerMovement().getActionControllers().put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
+        actionsContext.getPlayerMovement().getActionControllers().put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
     }
 }

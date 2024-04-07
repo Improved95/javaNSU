@@ -1,5 +1,6 @@
 package org.lab3.controller.actions.enemyActions;
 
+import org.lab3.controller.actions.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
@@ -16,7 +17,7 @@ public class EnemyCatchAttack extends EnemyActionAbstract {
     }
 
     @Override
-    public void execute(LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize) {
+    public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             Set<SamuraiV1> deleteEnemySet = new HashSet<>();
 

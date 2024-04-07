@@ -1,5 +1,6 @@
 package org.lab3.controller.actions.samuraiActions;
 
+import org.lab3.controller.actions.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
@@ -49,7 +50,7 @@ public class PlayerMoveX extends PlayerActionAbstract {
     }
 
     @Override
-    public void execute(LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize) {
+    public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             double speedOfMoveX = character.getParametersContext().getSpeedOfMoveX();
             double reductionFactor = frameSize.getReductionFactor();

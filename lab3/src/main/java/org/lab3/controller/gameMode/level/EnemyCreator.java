@@ -1,5 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.actions.AllCharactersActionsContext;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
 import org.lab3.controller.actions.enemyActions.EnemyCatchAttack;
 import org.lab3.controller.actions.enemyActions.EnemyMoveX;
@@ -19,7 +20,7 @@ public class EnemyCreator {
         timerCreateDelay = createDelay;
     }
 
-    public void create(List<SamuraiV1> enemyList, List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyMovementList,
+    public void create(List<SamuraiV1> enemyList, AllCharactersActionsContext actionsContext,
                        ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
 
         if (timerCreateDelay <= 0) {
@@ -40,7 +41,7 @@ public class EnemyCreator {
 
             ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement = new ObjectAndHisMovement<>(enemy);
             fillEnemyMovement(enemyMovement, enemy);
-            enemyMovementList.add(enemyMovement);
+            actionsContext.getEnemyMovementList().add(enemyMovement);
             enemyList.add(enemy);
 
             timerCreateDelay = createDelay;

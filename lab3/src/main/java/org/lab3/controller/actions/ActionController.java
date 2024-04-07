@@ -8,5 +8,5 @@ public interface ActionController {
 
     void setBlockExecuteStatus(boolean isBlockExecute);
 
-    void execute(LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize);
+    void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize);
 }
