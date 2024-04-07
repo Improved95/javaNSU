@@ -13,6 +13,8 @@ public class EnemyAttack extends EnemyActionAbstract {
     public EnemyAttack(SlashBladeCharacterAbstract character) {
         super(character);
         this.isExecute = true;
+        this.attackDuration = character.getParametersContext().getAttackDuration();
+        this.attackDelay = character.getParametersContext().getAttackDelay();
     }
 
     @Override
@@ -21,29 +23,23 @@ public class EnemyAttack extends EnemyActionAbstract {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double relativePos = player.getInGamePosX() - character.getInGamePosX();
             double radiusForwardAttack = character.getParametersContext().getRadiusForwardAttack();
-            double radiusBackwardAttack = character.getParametersContext().getRadiusBackwardAttack();
-            if (character.getParametersContext().getInGameHorizontalDirection() == 1) {
-                if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
-                    System.out.println(character + " enemy attack");
-                }
-            } else {
-                if (relativePos >= -radiusForwardAttack && relativePos <= radiusBackwardAttack) {
-                    System.out.println(character + " enemy attack");
-                }
+            if (Math.abs(relativePos) <= radiusForwardAttack) {
+                attack(currentFPS);
             }
         }
     }
 
     private void attack(double currentFPS) {
         if (attackDuration > 0) {
+            System.out.println("enemy attack");
             character.getParametersContext().setAttackStatus(true);
             attackDuration -= 1000 / currentFPS;
         } else {
             if (attackDelay > 0) {
                 attackDelay -= 1000 / currentFPS;
                 character.getParametersContext().setAttackStatus(false);
+                System.out.println("enemy attack stop");
             } else {
-                isExecute = false;
                 attackDuration = character.getParametersContext().getAttackDuration();
                 attackDelay = character.getParametersContext().getAttackDelay();
             }
