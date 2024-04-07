@@ -19,9 +19,18 @@ public class EnemyAttack extends EnemyActionAbstract {
     public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
-            double playerPosX = player.getInGamePosX();
-
-
+            double relativePos = player.getInGamePosX() - character.getInGamePosX();
+            double radiusForwardAttack = character.getParametersContext().getRadiusForwardAttack();
+            double radiusBackwardAttack = character.getParametersContext().getRadiusBackwardAttack();
+            if (character.getParametersContext().getInGameHorizontalDirection() == 1) {
+                if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
+                    System.out.println(character + " enemy attack");
+                }
+            } else {
+                if (relativePos >= -radiusForwardAttack && relativePos <= radiusBackwardAttack) {
+                    System.out.println(character + " enemy attack");
+                }
+            }
         }
     }
 

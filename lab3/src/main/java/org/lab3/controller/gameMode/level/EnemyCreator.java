@@ -2,6 +2,7 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.AllCharactersActionsContext;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
+import org.lab3.controller.actions.enemyActions.EnemyAttack;
 import org.lab3.controller.actions.enemyActions.EnemyCatchAttack;
 import org.lab3.controller.actions.enemyActions.EnemyMoveX;
 import org.lab3.model.objects.characters.SamuraiV1;
@@ -27,6 +28,8 @@ public class EnemyCreator {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setSpeedOfMoveX(500);
+            enemy.getParametersContext().setRadiusForwardAttack(95);
+            enemy.getParametersContext().setRadiusBackwardAttack(15);
 
             Random random = new Random();
             if (random.nextInt() % 2 == 1) {
@@ -53,5 +56,6 @@ public class EnemyCreator {
     private void fillEnemyMovement(ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement, SamuraiV1 enemy) {
         enemyMovement.getActionControllers().put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
         enemyMovement.getActionControllers().put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
+        enemyMovement.getActionControllers().put("ENEMY_ATTACK", new EnemyAttack(enemy));
     }
 }

@@ -80,10 +80,11 @@ public class Level implements GameMode {
         actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
         actionsContext.getPlayerMovement().getActionControllers().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
 
-        /*for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement : enemyMovementList) {
-            enemyMovement.getActionControllers().get("ENEMY_MOVE_X").execute(levelObjectsContext, currentFPS, frameSize);
-            enemyMovement.getActionControllers().get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, currentFPS, frameSize);
-        }*/
+        for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovement : actionsContext.getEnemyMovementList()) {
+            enemyMovement.getActionControllers().get("ENEMY_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+            enemyMovement.getActionControllers().get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+            enemyMovement.getActionControllers().get("ENEMY_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        }
 
         enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
