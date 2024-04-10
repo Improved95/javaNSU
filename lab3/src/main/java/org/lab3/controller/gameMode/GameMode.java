@@ -6,7 +6,7 @@ import org.lab3.slashBlade.FrameSize;
 public interface GameMode {
     void initial();
 
-    void execute(double currentFPS, FrameSize frameSize);
+    int execute(double currentFPS, FrameSize frameSize);
 
     void actionOnKeyPressed(int keyCode);
 

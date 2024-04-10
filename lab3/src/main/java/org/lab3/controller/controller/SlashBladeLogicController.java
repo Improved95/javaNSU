@@ -49,7 +49,10 @@ class SlashBladeLogicController {
         currentGameMode.actionOnMousePressed(keyCode);
     }
 
-    void calculateFrame(double currentFPS, FrameSize frameSize) {
-        currentGameMode.execute(currentFPS, frameSize);
+    int calculateFrame(double currentFPS, FrameSize frameSize) {
+        if (currentGameMode.execute(currentFPS, frameSize) == 1) {
+            return 1;
+        }
+        return 0;
     }
 }

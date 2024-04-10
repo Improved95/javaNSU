@@ -17,6 +17,11 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         this.jFrame = getFrame();
     }
 
+    @Override
+    public JFrame getJFrame() {
+        return jFrame;
+    }
+
     public FrameSize getFrameSize() {
         return frameSize;
     }

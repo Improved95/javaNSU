@@ -79,8 +79,13 @@ public class SlashBladeController implements Controller {
 
         /*-----------------*/
 
-        slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
+        int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
         view.changeViewScreen(jFrameObject);
+
+        if (returnValue == 1) {
+            generationTickTimer.cancel();
+            jFrameObject.getJFrame().dispose();
+        }
 
         /*-----------------*/
 

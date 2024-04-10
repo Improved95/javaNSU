@@ -80,7 +80,7 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void execute(double currentFPS, FrameSize frameSize) {
+    public int execute(double currentFPS, FrameSize frameSize) {
         actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
         actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
         actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
@@ -103,15 +103,15 @@ public class Level implements GameMode {
                 }
             }
         }
-        //вуху n^2
         levelObjectsContext.getEnemyList().removeAll(deleteEnemyList);
         actionsContext.getEnemyAndMovementList().removeAll(deleteEnemyActionList);
 
-        if (levelObjectsContext.getPlayer().getParametersContext().getHealth() == 0) {
-            System.out.println("zero hp, end game");
+        if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
+            return 1;
         }
 
         enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
+        return 0;
     }
 
     @Override
