@@ -1,6 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.AllCharactersActionsContext;
+import org.lab3.controller.actions.ObjectAndHisMovement;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
 import org.lab3.controller.actions.enemyActions.EnemyAttack;
 import org.lab3.controller.actions.enemyActions.EnemyCatchAttack;
@@ -27,8 +27,8 @@ public class EnemyCreator {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setSpeedOfMoveX(500);
-            enemy.getParametersContext().setRadiusForwardAttack(95);
-            enemy.getParametersContext().setRadiusBackwardAttack(15);
+            enemy.getParametersContext().setRadiusForwardAttack(60);
+            enemy.getParametersContext().setRadiusBackwardAttack(10);
             enemy.getParametersContext().setAttackDuration(50);
             enemy.getParametersContext().setAttackDelay(200);
 
@@ -53,10 +53,16 @@ public class EnemyCreator {
     }
 
     private void fillEnemyMovement(AllCharactersActionsContext actionsContext, SamuraiV1 enemy) {
+        ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> objectAndHisMovement = new ObjectAndHisMovement();
+
         Map<String, EnemyActionAbstract> enemyMovement = new HashMap<>();
         enemyMovement.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
         enemyMovement.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
         enemyMovement.put("ENEMY_ATTACK", new EnemyAttack(enemy));
-        actionsContext.getEnemyAndMovementList().add(enemyMovement);
+
+        objectAndHisMovement.setGameObject(enemy);
+        objectAndHisMovement.setObjectMovement(enemyMovement);
+
+        actionsContext.getEnemyAndMovementList().add(objectAndHisMovement);
     }
 }

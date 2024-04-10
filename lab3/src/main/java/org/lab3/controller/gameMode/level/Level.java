@@ -1,20 +1,24 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.AllCharactersActionsContext;
+import org.lab3.controller.actions.ObjectAndHisMovement;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
 import org.lab3.controller.actions.samuraiActions.PlayerAttack;
+import org.lab3.controller.actions.samuraiActions.PlayerCatchAttack;
 import org.lab3.controller.actions.samuraiActions.PlayerMoveX;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
+import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Level implements GameMode {
@@ -79,12 +83,33 @@ public class Level implements GameMode {
     public void execute(double currentFPS, FrameSize frameSize) {
         actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
         actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
 
-        /*for (Map<String, EnemyActionAbstract> enemyMovementList : actionsContext.getEnemyMovementList()) {
-            enemyMovementList.get("ENEMY_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-            enemyMovementList.get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-            enemyMovementList.get("ENEMY_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        }*/
+        for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovementList : actionsContext.getEnemyAndMovementList()) {
+            enemyMovementList.getObjectMovement().get("ENEMY_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+            enemyMovementList.getObjectMovement().get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+            enemyMovementList.getObjectMovement().get("ENEMY_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        }
+
+        List<SamuraiV1> deleteEnemyList = new ArrayList<>();
+        List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> deleteEnemyActionList = new ArrayList<>();
+        for (SamuraiV1 enemy : levelObjectsContext.getEnemyList()) {
+            if (enemy.getParametersContext().getHealth() <= 0) {
+                deleteEnemyList.add(enemy);
+                for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyAction : actionsContext.getEnemyAndMovementList()) {
+                    if (enemyAction.getGameObject().equals(enemy)) {
+                        deleteEnemyActionList.add(enemyAction);
+                    }
+                }
+            }
+        }
+        //вуху n^2
+        levelObjectsContext.getEnemyList().removeAll(deleteEnemyList);
+        actionsContext.getEnemyAndMovementList().removeAll(deleteEnemyActionList);
+
+        if (levelObjectsContext.getPlayer().getParametersContext().getHealth() == 0) {
+            System.out.println("zero hp, end game");
+        }
 
         enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
     }
@@ -124,6 +149,7 @@ public class Level implements GameMode {
         Map<String, PlayerActionAbstract> playerMovement = new HashMap<>();
         playerMovement.put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
         playerMovement.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
+        playerMovement.put("PLAYER_CATCH_ATTACK", new PlayerCatchAttack(levelObjectsContext.getPlayer()));
         actionsContext.getPlayerAndMovement().setObjectMovement(playerMovement);
     }
 }

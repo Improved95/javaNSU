@@ -1,7 +1,5 @@
 package org.lab3.controller.actions;
 
-import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
-
 import java.util.HashMap;
 import java.util.Map;
 

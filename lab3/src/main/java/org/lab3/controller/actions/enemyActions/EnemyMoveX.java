@@ -1,6 +1,6 @@
 package org.lab3.controller.actions.enemyActions;
 
-import org.lab3.controller.actions.AllCharactersActionsContext;
+import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
@@ -30,7 +30,6 @@ public class EnemyMoveX extends EnemyActionAbstract {
                 }
                 character.changeInGamePos(dx, 0);
             }
-
         }
     }
 }
