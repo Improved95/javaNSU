@@ -57,8 +57,7 @@ public class SlashBladeController implements Controller {
         generationTickTimer = new Timer();
     }
 
-    /*надо бы придумать как уменьшить задержку в случае долгого создания кадра,
-    * а может и не надо*/
+    /*надо бы придумать как уменьшить задержку в случае долгого создания кадра*/
     @Override
     public void executeCalculateGame() {
         generationTickTimer.scheduleAtFixedRate(new MyTask(), 0, maxWaitingTime);
