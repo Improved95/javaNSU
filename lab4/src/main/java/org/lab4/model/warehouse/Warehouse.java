@@ -1,12 +1,17 @@
 package org.lab4.model.warehouse;
 
-public interface Warehouse {
+import org.lab4.model.details.Detail;
 
+import java.util.List;
+
+public interface Warehouse {
     int getSize();
 
     int getFillSize();
 
-    void addItem();
+    List<Detail> getDetailsList();
 
-    void pickUpItem();
+    void addDetail(Detail detail);
+
+    void pickUpDetail();
 }
