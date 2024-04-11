@@ -1,6 +1,6 @@
 package org.lab4.controller.factory;
 
-import org.lab4.JFrameObject;
+import org.lab4.jframe.JFrameObject;
 import org.lab4.model.FactoryModel;
 
 import java.io.IOException;
