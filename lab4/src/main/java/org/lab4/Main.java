@@ -1,7 +1,10 @@
 package org.lab4;
 
+import org.lab4.carFactory.FactoryWorkflow;
+
 public class Main {
     public static void main(String argv[]) {
-        System.out.println("Hello world!");
+        FactoryWorkflow factoryWorkflow = new FactoryWorkflow();
+        factoryWorkflow.execute();
     }
 }
