@@ -10,27 +10,28 @@ public class JFrameObject {
     private final int frameHeight = 500;
 
     private JFrame frame;
-    private List<Slider> scrollBarList = new ArrayList<>();
+    private List<SliderLabel> scrollBarList = new ArrayList<>();
 
     public JFrameObject() {
         this.frame = getJFrame();
         setSliders();
-
-
-
         initial();
     }
 
     private void initial() {
-        for (Slider slider : scrollBarList) {
-            frame.add(slider);
+        for (SliderLabel sliderLabel : scrollBarList) {
+            frame.add(sliderLabel);
         }
 
         frame.repaint();
     }
 
     private void setSliders() {
-        scrollBarList.add(new Slider(400, 0, 1000));
+        int sliderHeight = 350;
+        scrollBarList.add(new SliderLabel(frameWidth - 80, frameHeight - sliderHeight, sliderHeight, 0, 2000));
+        scrollBarList.add(new SliderLabel(frameWidth - 160, frameHeight - sliderHeight, sliderHeight, 0, 2000));
+        scrollBarList.add(new SliderLabel(frameWidth - 240, frameHeight - sliderHeight, sliderHeight, 0, 2000));
+        scrollBarList.add(new SliderLabel(frameWidth - 320, frameHeight - sliderHeight, sliderHeight, 0, 2000));
     }
 
     private JFrame getJFrame() {
