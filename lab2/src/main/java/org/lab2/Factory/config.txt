@@ -1,0 +1,9 @@
+DEFINE=org.lab2.commands.controls.Define
+POP=org.lab2.commands.controls.Pop
+PRINT=org.lab2.commands.controls.Print
+PUSH=org.lab2.commands.controls.Push
+ADD=org.lab2.commands.mathematical.Add
+DIV=org.lab2.commands.mathematical.Div
+MUL=org.lab2.commands.mathematical.Mul
+SQRT=org.lab2.commands.mathematical.Sqrt
+SUB=org.lab2.commands.mathematical.Sub
