@@ -1,4 +1,4 @@
-package org.lab4.carFactory;
+package org.lab4;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,11 @@ public class JFrameObject {
     private JFrame jFrame;
 
     public JFrameObject() {
-        this.jFrame = getJFrame();
+        initial();
+    }
+
+    private void initial() {
+        jFrame = getJFrame();
     }
 
     private JFrame getJFrame() {
