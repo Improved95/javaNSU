@@ -28,10 +28,12 @@ public class JFrameObject {
 
     private void setSliders() {
         int sliderHeight = 350;
-        scrollBarList.add(new SliderLabel(frameWidth - 80, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 160, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 240, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 320, frameHeight - sliderHeight, sliderHeight, 0, 2000));
+        int sliderMinValue = 0;
+        int sliderMaxValue = 2000;
+        scrollBarList.add(new SliderLabel(frameWidth - 80, frameHeight - sliderHeight, sliderHeight, sliderMinValue, sliderMaxValue));
+        scrollBarList.add(new SliderLabel(frameWidth - 320, frameHeight - sliderHeight, sliderHeight, sliderMinValue, sliderMaxValue));
+        scrollBarList.add(new SliderLabel(frameWidth - 240, frameHeight - sliderHeight, sliderHeight, sliderMinValue, sliderMaxValue));
+        scrollBarList.add(new SliderLabel(frameWidth - 160, frameHeight - sliderHeight, sliderHeight, sliderMinValue, sliderMaxValue));
     }
 
     private JFrame getJFrame() {

@@ -16,7 +16,7 @@ public class SliderLabel extends JLabel {
 
         this.add(new slider(height, minValue, maxValue));
 
-        this.setBounds(posX, posY, labelWidth, height);
+        this.setBounds(posX, posY - 40, labelWidth, height);
         this.setVisible(true);
     }
 
