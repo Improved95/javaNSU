@@ -65,7 +65,7 @@ public class JFrameObject {
                 "Waiting detail number on Engine warehouse: ",
                 "Detail number on Accessory warehouse: ",
                 "Waiting detail number on Accessory warehouse: ",
-                "Created car number: ",
+                "Ready car number: ",
                 "Car number on Cars warehouse: ",
         };
 

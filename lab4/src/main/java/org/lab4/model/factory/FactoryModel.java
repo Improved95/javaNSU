@@ -1,6 +1,6 @@
-package org.lab4.model;
+package org.lab4.model.factory;
 
-import org.lab4.model.providers.Provider;
+import org.lab4.controller.providers.Provider;
 import org.lab4.model.warehouse.Warehouse;
 
 import java.util.HashMap;
@@ -9,16 +9,16 @@ import java.util.Map;
 import java.util.Properties;
 
 public class FactoryModel {
-    private Properties factoryConfig;
+    private Properties factoryProperties;
     private Map<String, List<Provider>> providersMap = new HashMap<>();
     private Map<String, List<Warehouse>> warehousesMap = new HashMap<>();
 
-    public Properties getFactoryConfig() {
-        return factoryConfig;
+    public Properties getFactoryProperties() {
+        return factoryProperties;
     }
 
-    public void setFactoryConfig(Properties factoryConfig) {
-        this.factoryConfig = factoryConfig;
+    public void setFactoryProperties(Properties factoryProperties) {
+        this.factoryProperties = factoryProperties;
     }
 
     public Map<String, List<Provider>> getProvidersMap() {

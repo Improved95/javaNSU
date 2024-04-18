@@ -1,18 +1,19 @@
 package org.lab4.model.warehouse;
 
+import org.lab4.model.dataStruct.MyConcurrentQueue;
 import org.lab4.model.details.Detail;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AbstractWarehouse implements Warehouse {
     private final int size;
-    private int fillSize = 0;
+    private AtomicInteger fillSize = new AtomicInteger();
 
-    private List<Detail> detailsList = new ArrayList<>();
+    protected MyConcurrentQueue detailList;
 
     public AbstractWarehouse(int size) {
         this.size = size;
+        this.detailList = new MyConcurrentQueue<Detail>();
     }
 
     @Override
@@ -22,22 +23,16 @@ public class AbstractWarehouse implements Warehouse {
 
     @Override
     public int getFillSize() {
-        return fillSize;
-    }
-
-    @Override
-    public List<Detail> getDetailsList() {
-        return detailsList;
+        return fillSize.get();
     }
 
     @Override
     public void addDetail(Detail detail) {
-        detailsList.add(detail);
-        fillSize += 1;
+        detailList.add(detail);
     }
 
     @Override
     public void pickUpDetail() {
-        fillSize -= 1;
+        detailList.removeLast();
     }
 }

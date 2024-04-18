@@ -1,7 +1,7 @@
 package org.lab4.controller.factory;
 
 import org.lab4.jframe.JFrameObject;
-import org.lab4.model.FactoryModel;
+import org.lab4.model.factory.FactoryModel;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,10 +22,11 @@ public class FactoryWorkflow {
         jFrameObject = new JFrameObject();
 
         try (InputStream config = this.getClass().getResourceAsStream("../../../../config")) {
-            factoryModel.setFactoryConfig(ConfigParser.parse(config));
+            factoryModel.setFactoryProperties(ConfigParser.parse(config));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
 
 
     }
