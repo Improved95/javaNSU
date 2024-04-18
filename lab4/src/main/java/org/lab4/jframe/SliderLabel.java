@@ -1,11 +1,8 @@
 package org.lab4.jframe;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SliderLabel extends JPanel {
-    private int posX;
-    private int posY;
     private int width;
     private int height;
     private int minValue;
@@ -14,8 +11,6 @@ public class SliderLabel extends JPanel {
     private int textWidth = 160;
 
     public SliderLabel(int posX, int posY, int width, int height, int minValue, int maxValue, String sliderDesc) {
-        this.posX = posX;
-        this.posY = posY;
         this.width = width;
         this.height = height;
         this.minValue = minValue;
