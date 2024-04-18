@@ -43,6 +43,7 @@ public class JFrameObject {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - frameWidth / 2, dimension.height / 2 - frameHeight / 2, frameWidth, frameHeight);
+        jFrame.setLayout(null);
         return jFrame;
     }
 }
