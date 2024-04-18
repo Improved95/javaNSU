@@ -1,26 +1,27 @@
 package org.lab4.controller.providers;
 
-import static java.lang.Thread.sleep;
+import org.lab4.jframe.JFrameObject;
+import org.lab4.model.warehouse.Warehouse;
 
-public class AbstractProvider implements Provider {
-    private ProvidersParametersContext parametersContext = new ProvidersParametersContext();
-    private int sleepTime;
+
+public abstract class AbstractProvider implements Provider {
+//    protected ProvidersParametersContext parametersContext = new ProvidersParametersContext();
+    protected Warehouse warehouse;
+    protected JFrameObject jFrameObject;
+    protected int sleepTime;
+
+//    @Override
+//    public ProvidersParametersContext getParametersContext() {
+//        return parametersContext;
+//    }
 
     @Override
-    public void run() {
-        while (true) {
-            System.out.println("car body provider");
-            sleepTime = parametersContext.getJFrameObject().getCarBodyProviderSleepTime();
-            try {
-                sleep(sleepTime);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 
     @Override
-    public ProvidersParametersContext getParametersContext() {
-        return parametersContext;
+    public void setJFrameObject(JFrameObject jFrameObject) {
+        this.jFrameObject = jFrameObject;
     }
 }

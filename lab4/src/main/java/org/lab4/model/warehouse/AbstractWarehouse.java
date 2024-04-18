@@ -27,12 +27,17 @@ public class AbstractWarehouse implements Warehouse {
     }
 
     @Override
-    public void addDetail(Detail detail) {
+    public synchronized void addDetail(Detail detail) throws InterruptedException {
+        while (fillSize.get() >= size) {
+            wait();
+        }
+        fillSize.incrementAndGet();
         detailList.add(detail);
     }
 
     @Override
-    public void pickUpDetail() {
+    public synchronized void pickUpDetail() {
         detailList.removeLast();
+        notifyAll();
     }
 }

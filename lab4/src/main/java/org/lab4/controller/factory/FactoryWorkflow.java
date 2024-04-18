@@ -24,9 +24,10 @@ public class FactoryWorkflow {
 
     private void initialCarBodyProvider() {
         Provider carBodyProvider = new CarBodyProvider();
-        carBodyProvider.getParametersContext().setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
-        carBodyProvider.getParametersContext().setjFrameObject(jFrameObject);
+        carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
+        carBodyProvider.setJFrameObject(jFrameObject);
         new Thread(carBodyProvider).start();
+//        new Thread(carBodyProvider).start();
     }
 
     private void initial() {

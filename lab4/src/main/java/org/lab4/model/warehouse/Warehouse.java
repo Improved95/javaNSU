@@ -8,7 +8,7 @@ public interface Warehouse {
 
     int getFillSize();
 
-    void addDetail(Detail detail);
+    void addDetail(Detail detail) throws InterruptedException;
 
     void pickUpDetail();
 }
