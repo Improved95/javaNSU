@@ -7,5 +7,4 @@ public interface Provider extends Runnable {
     void setWarehouse(Warehouse warehouse);
 
     void setJFrameObject(JFrameObject jFrameObject);
-//    ProvidersParametersContext getParametersContext();
 }
