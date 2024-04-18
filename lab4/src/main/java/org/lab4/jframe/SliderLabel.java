@@ -8,6 +8,8 @@ public class SliderLabel extends JPanel {
     private int minValue;
     private int maxValue;
 
+    JSlider slider;
+
     private int textWidth = 160;
 
     public SliderLabel(int posX, int posY, int width, int height, int minValue, int maxValue, String sliderDesc) {
@@ -26,6 +28,10 @@ public class SliderLabel extends JPanel {
         setVisible(true);
     }
 
+    public int getSliderValue() {
+        return slider.getValue();
+    }
+
     private void addText(String sliderDesc) {
         JLabel text = new JLabel();
         text.setText(sliderDesc);
@@ -37,7 +43,7 @@ public class SliderLabel extends JPanel {
     }
 
     private void addSlider() {
-        JSlider slider = new JSlider();
+        slider = new JSlider();
         slider.setBounds(textWidth, 0, width, height);
 
         slider.setMinimum(minValue);

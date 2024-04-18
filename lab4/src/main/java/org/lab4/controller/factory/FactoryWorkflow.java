@@ -1,10 +1,14 @@
 package org.lab4.controller.factory;
 
+import org.lab4.controller.providers.CarBodyProvider;
+import org.lab4.controller.providers.Provider;
 import org.lab4.jframe.JFrameObject;
 import org.lab4.model.factory.FactoryModel;
+import org.lab4.model.warehouse.CarBodyWarehouse;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 public class FactoryWorkflow {
     private JFrameObject jFrameObject;
@@ -15,7 +19,14 @@ public class FactoryWorkflow {
     }
 
     public void execute() {
+        initialCarBodyProvider();
+    }
 
+    private void initialCarBodyProvider() {
+        Provider carBodyProvider = new CarBodyProvider();
+        carBodyProvider.getParametersContext().setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
+        carBodyProvider.getParametersContext().setjFrameObject(jFrameObject);
+        new Thread(carBodyProvider).start();
     }
 
     private void initial() {
@@ -28,6 +39,10 @@ public class FactoryWorkflow {
         }
 
 
-
+        Properties factoryProperty = factoryModel.getFactoryProperties();
+        factoryModel.getWarehousesMap().put("CarBody", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("carBodyWarehouseSize"))));
+        factoryModel.getWarehousesMap().put("Engine", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("engineWarehouseSize"))));
+        factoryModel.getWarehousesMap().put("Accessory", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("accessoryWarehouseSize"))));
+        factoryModel.getWarehousesMap().put("ReadyCar", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("readyCarWarehouseSize"))));
     }
 }

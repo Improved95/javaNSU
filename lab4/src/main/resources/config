@@ -1,6 +1,6 @@
 carBodyWarehouseSize=100
-accessoryWarehouseSize=100
 engineWarehouseSize=100
+accessoryWarehouseSize=100
 readyCarWarehouseSize=100
 accessoryProvidersNumber=5
 buildersNumber=10

@@ -20,6 +20,10 @@ public class JFrameObject {
         initial();
     }
 
+    public int getCarBodyProviderSleepTime() {
+        return slidersList.get(0).getSliderValue();
+    }
+
     private void initial() {
         for (SliderLabel sliderLabel : slidersList) {
             frame.add(sliderLabel);
