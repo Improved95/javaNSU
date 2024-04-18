@@ -6,36 +6,49 @@ import java.awt.*;
 public class SliderLabel extends JLabel {
     private int posX;
     private int posY;
+    private int width;
     private int height;
-    private int labelWidth = 60;
 
-    public SliderLabel(int posX, int posY, int height, int minValue, int maxValue) {
+    public SliderLabel(int posX, int posY, int width, int height, int minValue, int maxValue, String sliderDesc) {
         this.posX = posX;
         this.posY = posY;
+        this.width = width;
         this.height = height;
 
-        this.add(new slider(height, minValue, maxValue));
+        setLayout(new BorderLayout());
+        setBounds(posX, posY, width + 500, height);
 
-        this.setBounds(posX, posY, labelWidth, height);
-        this.setVisible(true);
+        // Создаем метку с текстом
+        JLabel text = new JLabel();
+        text.setText(sliderDesc);
+        text.setHorizontalAlignment(JLabel.CENTER);
+        text.setVerticalAlignment(JLabel.TOP);
+
+        add(text, BorderLayout.CENTER);
+
+        setBackground(Color.gray);
+        setOpaque(true);
+//        add(new slider(height, minValue, maxValue));
+
+        setVisible(true);
     }
 
     class slider extends JSlider {
         public slider(int height, int minValue, int maxValue) {
-            this.setMinimum(minValue);
-            this.setMaximum(maxValue);
+            setMinimum(minValue);
+            setMaximum(maxValue);
 
-            this.setOrientation(JSlider.VERTICAL);
-            this.setSize(labelWidth, height);
-            this.setValue(0);
+            setOrientation(JSlider.HORIZONTAL);
+            setSize(width, height);
+            setValue(maxValue);
 
-            this.setPaintTicks(true);
-            this.setPaintLabels(true);
+            setPaintTicks(true);
+            setPaintLabels(true);
 
-            this.setMajorTickSpacing(maxValue / 8);
-//        this.setMinorTickSpacing(50);
+            setMajorTickSpacing(maxValue / 4);
+//        setMinorTickSpacing(50);
 
-            this.setVisible(true);
+            setVisible(true);
         }
     }
 }

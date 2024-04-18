@@ -10,7 +10,7 @@ public class JFrameObject {
     private final int frameHeight = 500;
 
     private JFrame frame;
-    private List<SliderLabel> scrollBarList = new ArrayList<>();
+    private List<SliderLabel> slidersList = new ArrayList<>();
 
     public JFrameObject() {
         this.frame = getJFrame();
@@ -19,19 +19,21 @@ public class JFrameObject {
     }
 
     private void initial() {
-        for (SliderLabel sliderLabel : scrollBarList) {
+        for (SliderLabel sliderLabel : slidersList) {
             frame.add(sliderLabel);
         }
-
         frame.repaint();
     }
 
+
+
     private void setSliders() {
-        int sliderHeight = 350;
-        scrollBarList.add(new SliderLabel(frameWidth - 80, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 160, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 240, frameHeight - sliderHeight, sliderHeight, 0, 2000));
-        scrollBarList.add(new SliderLabel(frameWidth - 320, frameHeight - sliderHeight, sliderHeight, 0, 2000));
+        int sliderWidth = 50;
+        int sliderHeight = 50;
+        slidersList.add(new SliderLabel(20, 20, sliderWidth, sliderHeight, 0, 1000, "Accessory provider speed:"));
+//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
+//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
+//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
     }
 
     private JFrame getJFrame() {
