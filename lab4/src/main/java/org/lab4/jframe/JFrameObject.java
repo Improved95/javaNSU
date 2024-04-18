@@ -28,12 +28,12 @@ public class JFrameObject {
 
 
     private void setSliders() {
-        int sliderWidth = 50;
+        int sliderWidth = 300;
         int sliderHeight = 50;
-        slidersList.add(new SliderLabel(20, 20, sliderWidth, sliderHeight, 0, 1000, "Accessory provider speed:"));
-//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
-//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
-//        slidersList.add(new SliderLabel(20, 20, sliderHeight, 0, 2000));
+        slidersList.add(new SliderLabel(20, 20, sliderWidth, sliderHeight, 0, 1000, "CarBody provider delay:"));
+        slidersList.add(new SliderLabel(20, 20 + 50, sliderWidth, sliderHeight, 0, 1000, "Engine provider delay:"));
+        slidersList.add(new SliderLabel(20, 20 + 100, sliderWidth, sliderHeight, 0, 1000, "Accessory provider delay:"));
+        slidersList.add(new SliderLabel(20, 20 + 150, sliderWidth, sliderHeight, 0, 1000, "Dealers request delay:"));
     }
 
     private JFrame getJFrame() {

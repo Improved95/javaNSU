@@ -11,6 +11,8 @@ public class SliderLabel extends JPanel {
     private int minValue;
     private int maxValue;
 
+    private int textWidth = 160;
+
     public SliderLabel(int posX, int posY, int width, int height, int minValue, int maxValue, String sliderDesc) {
         this.posX = posX;
         this.posY = posY;
@@ -19,36 +21,30 @@ public class SliderLabel extends JPanel {
         this.minValue = minValue;
         this.maxValue = maxValue;
 
+        setBounds(posX, posY, width + textWidth, height);
+
         setLayout(null);
-        setBounds(posX, posY, width + 100, height);
 
         addText(sliderDesc);
-//        addSlider();
+        addSlider();
 
         setVisible(true);
     }
 
     private void addText(String sliderDesc) {
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BorderLayout());
-        textPanel.setBounds(posX, posY, 150, height);
-
         JLabel text = new JLabel();
         text.setText(sliderDesc);
         text.setVerticalAlignment(JLabel.TOP);
         text.setHorizontalAlignment(JLabel.LEFT);
-
-        textPanel.add(text);
-
-        add(textPanel);
+        text.setBounds(0, 10, textWidth, height);
+        text.setOpaque(false);
+        add(text);
     }
 
     private void addSlider() {
-        JPanel sliderPanel = new JPanel();
-        sliderPanel.setLayout(new BorderLayout());
-        sliderPanel.setBounds(posX + 100, posY, width, height);
-
         JSlider slider = new JSlider();
+        slider.setBounds(textWidth, 0, width, height);
+
         slider.setMinimum(minValue);
         slider.setMaximum(maxValue);
 
@@ -62,9 +58,9 @@ public class SliderLabel extends JPanel {
         slider.setMajorTickSpacing(maxValue / 4);
 //        setMinorTickSpacing(50);
 
-        sliderPanel.add(slider);
+        slider.setOpaque(false);
 
-        add(sliderPanel);
+        add(slider);
     }
 
 }
