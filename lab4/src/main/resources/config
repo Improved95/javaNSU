@@ -1,8 +1,8 @@
-carBodyWarehouseSize=100
-engineWarehouseSize=100
-accessoryWarehouseSize=100
-readyCarWarehouseSize=100
-accessoryProvidersNumber=5
+carBodyWarehouseSize=10
+engineWarehouseSize=10
+accessoryWarehouseSize=10
+readyCarWarehouseSize=10
+accessoryProvidersNumber=2
 buildersNumber=10
 dealersNumber=20
 isLogging=false

@@ -20,8 +20,17 @@ public class JFrameObject {
         initial();
     }
 
-    public int getCarBodyProviderSleepTime() {
+    public int getCarBodyProviderDelay() {
         return slidersList.get(0).getSliderValue();
+    }
+    public int getEngineProviderDelay() {
+        return slidersList.get(1).getSliderValue();
+    }
+    public int getAccessoryProviderDelay() {
+        return slidersList.get(2).getSliderValue();
+    }
+    public int getDealersRequestDelay() {
+        return slidersList.get(3).getSliderValue();
     }
 
     private void initial() {

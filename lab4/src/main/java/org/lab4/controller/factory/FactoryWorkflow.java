@@ -1,6 +1,8 @@
 package org.lab4.controller.factory;
 
+import org.lab4.controller.providers.AccessoryProvider;
 import org.lab4.controller.providers.CarBodyProvider;
+import org.lab4.controller.providers.EngineProvider;
 import org.lab4.controller.providers.Provider;
 import org.lab4.jframe.JFrameObject;
 import org.lab4.model.factory.FactoryModel;
@@ -20,6 +22,8 @@ public class FactoryWorkflow {
 
     public void execute() {
         initialCarBodyProvider();
+        initialEngineProvider();
+        initialAccessoryProvider();
     }
 
     private void initialCarBodyProvider() {
@@ -27,7 +31,24 @@ public class FactoryWorkflow {
         carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
         carBodyProvider.setJFrameObject(jFrameObject);
         new Thread(carBodyProvider).start();
-//        new Thread(carBodyProvider).start();
+    }
+
+    private void initialEngineProvider() {
+        Provider engineProvider = new EngineProvider();
+        engineProvider.setWarehouse(factoryModel.getWarehousesMap().get("Engine"));
+        engineProvider.setJFrameObject(jFrameObject);
+        new Thread(engineProvider).start();
+    }
+
+    private void initialAccessoryProvider() {
+        Provider accessoryProvider = new AccessoryProvider();
+        accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
+        accessoryProvider.setJFrameObject(jFrameObject);
+
+        int accessoryProviderNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
+        for (int i = 0; i < accessoryProviderNumber; i++) {
+            new Thread(accessoryProvider).start();
+        }
     }
 
     private void initial() {
@@ -38,7 +59,6 @@ public class FactoryWorkflow {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
 
         Properties factoryProperty = factoryModel.getFactoryProperties();
         factoryModel.getWarehousesMap().put("CarBody", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("carBodyWarehouseSize"))));

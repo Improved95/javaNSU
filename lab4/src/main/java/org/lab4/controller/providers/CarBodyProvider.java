@@ -8,15 +8,14 @@ public class CarBodyProvider extends AbstractProvider {
     @Override
     public void run() {
         while (true) {
-            System.out.println("car body provider");
-
             try {
                 warehouse.addDetail(new CarBody());
+                System.out.println("car body provider");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
-            sleepTime = jFrameObject.getCarBodyProviderSleepTime();
+            sleepTime = jFrameObject.getCarBodyProviderDelay();
             try {
                 sleep(sleepTime);
             } catch (InterruptedException e) {
