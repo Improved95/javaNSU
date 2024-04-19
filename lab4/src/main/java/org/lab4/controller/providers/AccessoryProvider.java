@@ -10,11 +10,11 @@ public class AccessoryProvider extends AbstractProvider {
         while (true) {
             try {
                 warehouse.addDetail(new Accessory());
-                System.out.println("Accessory provider");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
+            System.out.println("Accessory provider");
             sleepTime = jFrameObject.getAccessoryProviderDelay();
             try {
                 sleep(sleepTime);

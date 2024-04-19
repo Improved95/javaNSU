@@ -10,11 +10,11 @@ public class EngineProvider extends AbstractProvider {
         while (true) {
             try {
                 warehouse.addDetail(new Engine());
-                System.out.println("Engine provider");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
+            System.out.println("Engine provider");
             sleepTime = jFrameObject.getEngineProviderDelay();
             try {
                 sleep(sleepTime);

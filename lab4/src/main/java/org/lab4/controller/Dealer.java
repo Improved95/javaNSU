@@ -27,11 +27,11 @@ public class Dealer implements Runnable {
         while (true) {
             try {
                 readyCarWarehouse.pickUpDetail();
-                System.out.println("dealer");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
+            System.out.println("dealer");
             sleepTime = jFrameObject.getDealersRequestDelay();
             try {
                 sleep(sleepTime);

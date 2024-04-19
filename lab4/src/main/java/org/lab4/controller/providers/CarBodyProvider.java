@@ -10,11 +10,11 @@ public class CarBodyProvider extends AbstractProvider {
         while (true) {
             try {
                 warehouse.addDetail(new CarBody());
-                System.out.println("car body provider");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
+            System.out.println("car body provider");
             sleepTime = jFrameObject.getCarBodyProviderDelay();
             try {
                 sleep(sleepTime);

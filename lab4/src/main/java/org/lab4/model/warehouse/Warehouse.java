@@ -8,6 +8,8 @@ public interface Warehouse {
 
     int getFillSize();
 
+    void isFilled() throws InterruptedException;
+
     void addDetail(Detail detail) throws InterruptedException;
 
     Detail pickUpDetail() throws InterruptedException;

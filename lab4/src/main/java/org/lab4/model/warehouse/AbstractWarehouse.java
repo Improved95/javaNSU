@@ -4,8 +4,8 @@ import org.lab4.model.dataStruct.MyConcurrentQueue;
 import org.lab4.model.details.Detail;
 
 public class AbstractWarehouse implements Warehouse {
-    private final int size;
-    private int fillSize;
+    protected final int size;
+    protected int fillSize;
 
     protected MyConcurrentQueue detailList;
 
@@ -22,6 +22,10 @@ public class AbstractWarehouse implements Warehouse {
     @Override
     public int getFillSize() {
         return fillSize;
+    }
+
+    @Override
+    public synchronized void isFilled() throws InterruptedException {
     }
 
     @Override
