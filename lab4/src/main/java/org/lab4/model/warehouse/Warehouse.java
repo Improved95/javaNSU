@@ -10,5 +10,5 @@ public interface Warehouse {
 
     void addDetail(Detail detail) throws InterruptedException;
 
-    void pickUpDetail();
+    Detail pickUpDetail() throws InterruptedException;
 }

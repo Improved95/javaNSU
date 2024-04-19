@@ -3,11 +3,9 @@ package org.lab4.model.warehouse;
 import org.lab4.model.dataStruct.MyConcurrentQueue;
 import org.lab4.model.details.Detail;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class AbstractWarehouse implements Warehouse {
     private final int size;
-    private AtomicInteger fillSize = new AtomicInteger();
+    private int fillSize;
 
     protected MyConcurrentQueue detailList;
 
@@ -23,21 +21,26 @@ public class AbstractWarehouse implements Warehouse {
 
     @Override
     public int getFillSize() {
-        return fillSize.get();
+        return fillSize;
     }
 
     @Override
     public synchronized void addDetail(Detail detail) throws InterruptedException {
-        while (fillSize.get() >= size) {
+        while (fillSize >= size) {
             wait();
         }
-        fillSize.incrementAndGet();
+        fillSize++;
         detailList.add(detail);
+        notifyAll();
     }
 
     @Override
-    public synchronized void pickUpDetail() {
-        detailList.removeLast();
+    public synchronized Detail pickUpDetail() throws InterruptedException {
+        while (fillSize <= 0) {
+            wait();
+        }
+        fillSize--;
         notifyAll();
+        return (Detail) detailList.removeLast();
     }
 }
