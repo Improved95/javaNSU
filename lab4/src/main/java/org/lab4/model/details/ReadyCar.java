@@ -8,4 +8,12 @@ public class ReadyCar extends AbstractDetail {
         this.detailId = nextUniqueId;
         nextUniqueId++;
     }
+
+    public DetailsContext getDetailsContext() {
+        return detailsContext;
+    }
+
+    public void setDetailsContext(DetailsContext detailsContext) {
+        this.detailsContext = detailsContext;
+    }
 }

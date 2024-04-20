@@ -1,9 +1,6 @@
 package org.lab4.controller;
 
-import org.lab4.model.details.Accessory;
-import org.lab4.model.details.CarBody;
-import org.lab4.model.details.DetailsContext;
-import org.lab4.model.details.Engine;
+import org.lab4.model.details.*;
 import org.lab4.model.warehouse.AccessoryWarehouse;
 import org.lab4.model.warehouse.CarBodyWarehouse;
 import org.lab4.model.warehouse.EngineWarehouse;
@@ -42,7 +39,13 @@ public class Worker implements Runnable {
             throw new RuntimeException(e);
         }
 
+        ReadyCar readyCar = new ReadyCar();
+        readyCar.setDetailsContext(detailsContext);
 
-
+        try {
+            readyCarWarehouse.addDetail(readyCar);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
