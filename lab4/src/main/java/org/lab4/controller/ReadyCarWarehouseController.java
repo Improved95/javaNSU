@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class ReadyCarWarehouseController implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
-    private boolean isLogging = false;
+    private boolean isLogging;
 
     private Worker worker;
     private ThreadPoolExecutor workersThreadPool;

@@ -5,11 +5,13 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Time;
+
 import static java.lang.Thread.sleep;
 
 public class Dealer implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
-    private boolean isLogging = false;
+    private boolean isLogging;
 
     private JFrameObject jFrameObject;
     private ReadyCarWarehouse readyCarWarehouse;
@@ -36,7 +38,10 @@ public class Dealer implements Runnable {
                 ex.printStackTrace();
             }
 
-            System.out.println("dealer");
+            if (isLogging) {
+                log.info("Time: {}, Dealer {}, Auto: {}, (Body: {}, Engine: {}, Accessory: {}).", );
+            }
+
             sleepTime = jFrameObject.getDealersRequestDelay();
             try {
                 sleep(sleepTime);

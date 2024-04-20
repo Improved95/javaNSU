@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class Worker implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
-    private boolean isLogging = false;
+    private boolean isLogging;
 
     private CarBodyWarehouse carBodyWarehouse;
     private EngineWarehouse engineWarehouse;
