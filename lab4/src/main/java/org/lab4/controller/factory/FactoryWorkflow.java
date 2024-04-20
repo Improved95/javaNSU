@@ -1,11 +1,12 @@
 package org.lab4.controller.factory;
 
 import org.lab4.controller.Dealer;
+import org.lab4.controller.Worker;
 import org.lab4.controller.providers.AccessoryProvider;
 import org.lab4.controller.providers.CarBodyProvider;
 import org.lab4.controller.providers.EngineProvider;
 import org.lab4.controller.providers.Provider;
-import org.lab4.controller.warehouse.ReadyCarWarehouseController;
+import org.lab4.controller.ReadyCarWarehouseController;
 import org.lab4.jframe.JFrameObject;
 import org.lab4.model.factory.FactoryModel;
 import org.lab4.model.warehouse.AccessoryWarehouse;
@@ -16,7 +17,6 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -28,7 +28,9 @@ public class FactoryWorkflow {
     private Provider engineProvider;
     private Provider accessoryProvider;
 
+    private Worker worker;
     private ThreadPoolExecutor workersThreadPool;
+
     private ReadyCarWarehouseController readyCarWarehouseController;
     private Dealer dealer;
 
@@ -71,6 +73,7 @@ public class FactoryWorkflow {
         initialCarBodyProvider();
         initialEngineProvider();
         initialAccessoryProvider();
+        initialWorker();
         initialWorkersThreadPool();
         initialReadyCarWarehouseController();
         initialDealers();
@@ -92,6 +95,14 @@ public class FactoryWorkflow {
         accessoryProvider = new AccessoryProvider();
         accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
         accessoryProvider.setJFrameObject(jFrameObject);
+    }
+
+    private void initialWorker() {
+        worker = new Worker();
+        worker.setCarBodyWarehouse((CarBodyWarehouse) factoryModel.getWarehousesMap().get("CarBody"));
+        worker.setEngineWarehouse((EngineWarehouse) factoryModel.getWarehousesMap().get("Engine"));
+        worker.setAccessoryWarehouse((AccessoryWarehouse) factoryModel.getWarehousesMap().get("Accessory"));
+        worker.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
     }
 
     private void initialWorkersThreadPool() {

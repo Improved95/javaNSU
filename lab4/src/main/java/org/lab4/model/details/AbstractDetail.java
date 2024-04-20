@@ -1,13 +1,7 @@
 package org.lab4.model.details;
 
 public class AbstractDetail implements Detail {
-    private static int detailIdNextUnique = 0;
-    private int detailId;
-
-    public AbstractDetail() {
-        this.detailId = detailIdNextUnique;
-        detailIdNextUnique++;
-    }
+    protected int detailId;
 
     @Override
     public int getDetailId() {

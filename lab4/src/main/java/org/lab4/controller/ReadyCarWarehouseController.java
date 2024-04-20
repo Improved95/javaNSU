@@ -1,4 +1,4 @@
-package org.lab4.controller.warehouse;
+package org.lab4.controller;
 
 import org.lab4.model.warehouse.ReadyCarWarehouse;
 
