@@ -8,11 +8,16 @@ import org.slf4j.LoggerFactory;
 import static java.lang.Thread.sleep;
 
 public class Dealer implements Runnable {
-//    private static final Logger log = LoggerFactory.getLogger(Dealer.class);
+    private static final Logger log = LoggerFactory.getLogger(Dealer.class);
+    private boolean isLogging = false;
 
     private JFrameObject jFrameObject;
     private ReadyCarWarehouse readyCarWarehouse;
     private int sleepTime;
+
+    public Dealer(boolean isLogging) {
+        this.isLogging = isLogging;
+    }
 
     public void setJFrameObject(JFrameObject jFrameObject) {
         this.jFrameObject = jFrameObject;

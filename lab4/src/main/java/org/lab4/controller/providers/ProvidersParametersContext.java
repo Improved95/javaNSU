@@ -19,7 +19,7 @@ public class ProvidersParametersContext {
         return jFrameObject;
     }
 
-    public void setjFrameObject(JFrameObject jFrameObject) {
+    public void setJFrameObject(JFrameObject jFrameObject) {
         this.jFrameObject = jFrameObject;
     }
 }

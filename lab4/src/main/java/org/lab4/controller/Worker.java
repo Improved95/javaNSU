@@ -5,12 +5,21 @@ import org.lab4.model.warehouse.AccessoryWarehouse;
 import org.lab4.model.warehouse.CarBodyWarehouse;
 import org.lab4.model.warehouse.EngineWarehouse;
 import org.lab4.model.warehouse.ReadyCarWarehouse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Worker implements Runnable {
+    private static final Logger log = LoggerFactory.getLogger(Dealer.class);
+    private boolean isLogging = false;
+
     private CarBodyWarehouse carBodyWarehouse;
     private EngineWarehouse engineWarehouse;
     private AccessoryWarehouse accessoryWarehouse;
     private ReadyCarWarehouse readyCarWarehouse;
+
+    public Worker(boolean isLogging) {
+        this.isLogging = isLogging;
+    }
 
     public void setCarBodyWarehouse(CarBodyWarehouse carBodyWarehouse) {
         this.carBodyWarehouse = carBodyWarehouse;

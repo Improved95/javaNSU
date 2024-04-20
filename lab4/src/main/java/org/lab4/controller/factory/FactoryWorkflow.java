@@ -80,25 +80,33 @@ public class FactoryWorkflow {
     }
 
     private void initialCarBodyProvider() {
-        carBodyProvider = new CarBodyProvider();
+        carBodyProvider = new CarBodyProvider(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
         carBodyProvider.setJFrameObject(jFrameObject);
     }
 
     private void initialEngineProvider() {
-        engineProvider = new EngineProvider();
+        engineProvider = new EngineProvider(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         engineProvider.setWarehouse(factoryModel.getWarehousesMap().get("Engine"));
         engineProvider.setJFrameObject(jFrameObject);
     }
 
     private void initialAccessoryProvider() {
-        accessoryProvider = new AccessoryProvider();
+        accessoryProvider = new AccessoryProvider(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
         accessoryProvider.setJFrameObject(jFrameObject);
     }
 
     private void initialWorker() {
-        worker = new Worker();
+        worker = new Worker(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         worker.setCarBodyWarehouse((CarBodyWarehouse) factoryModel.getWarehousesMap().get("CarBody"));
         worker.setEngineWarehouse((EngineWarehouse) factoryModel.getWarehousesMap().get("Engine"));
         worker.setAccessoryWarehouse((AccessoryWarehouse) factoryModel.getWarehousesMap().get("Accessory"));
@@ -106,18 +114,24 @@ public class FactoryWorkflow {
     }
 
     private void initialWorkersThreadPool() {
-        workersThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber")));
+        workersThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+                Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber"))
+        );
     }
 
     private void initialReadyCarWarehouseController() {
-        readyCarWarehouseController = new ReadyCarWarehouseController();
+        readyCarWarehouseController = new ReadyCarWarehouseController(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         readyCarWarehouseController.setWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
         readyCarWarehouseController.setWorkersThreadPool(workersThreadPool);
         readyCarWarehouseController.setWorker(worker);
     }
 
     private void initialDealers() {
-        dealer = new Dealer();
+        dealer = new Dealer(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         dealer.setJFrameObject(jFrameObject);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
     }

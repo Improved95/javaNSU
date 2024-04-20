@@ -5,6 +5,10 @@ import org.lab4.model.details.Accessory;
 import static java.lang.Thread.sleep;
 
 public class AccessoryProvider extends AbstractProvider {
+    public AccessoryProvider(boolean isLogging) {
+        super(isLogging);
+    }
+
     @Override
     public void run() {
         while (true) {

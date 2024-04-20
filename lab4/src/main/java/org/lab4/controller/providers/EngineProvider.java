@@ -5,6 +5,10 @@ import org.lab4.model.details.Engine;
 import static java.lang.Thread.sleep;
 
 public class EngineProvider extends AbstractProvider {
+    public EngineProvider(boolean isLogging) {
+        super(isLogging);
+    }
+
     @Override
     public void run() {
         while (true) {

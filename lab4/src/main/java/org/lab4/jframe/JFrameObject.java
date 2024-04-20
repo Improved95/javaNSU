@@ -7,7 +7,7 @@ import java.util.List;
 
 public class JFrameObject {
     private final int frameWidth = 600;
-    private final int frameHeight = 500;
+    private final int frameHeight = 530;
 
     private JFrame frame;
     private List<SliderLabel> slidersList;
@@ -65,7 +65,7 @@ public class JFrameObject {
     }
 
     private List<InfoField> setInfoFields() {
-        int infoFieldWidth = 300;
+        int infoFieldWidth = 350;
         int infoFieldHeight = 30;
         int posX = 20;
         int posY = 20 + 50 * 4 + 30;
