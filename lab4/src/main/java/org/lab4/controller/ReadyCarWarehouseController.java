@@ -47,7 +47,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 throw new RuntimeException(ex);
             }
 
-            System.out.println("controller ready car warehouse");
+            System.out.println("rcwc1");
             workersThreadPool.submit(() -> {
                worker.run();
             });

@@ -4,9 +4,9 @@ import org.lab4.model.details.Detail;
 
 
 public interface Warehouse {
-    int getSize();
+    int getCapacity();
 
-    int getFillSize();
+    int getSize();
 
     void isFilled() throws InterruptedException;
 

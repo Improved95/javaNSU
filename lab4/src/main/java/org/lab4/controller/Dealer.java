@@ -7,7 +7,6 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Time;
 import java.util.Date;
 
 import static java.lang.Thread.sleep;

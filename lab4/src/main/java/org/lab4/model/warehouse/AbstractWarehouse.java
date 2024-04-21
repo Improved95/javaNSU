@@ -4,14 +4,19 @@ import org.lab4.model.dataStruct.MyConcurrentQueue;
 import org.lab4.model.details.Detail;
 
 public class AbstractWarehouse implements Warehouse {
-    protected final int size;
-    protected int fillSize;
+    protected final int capacity;
+    protected int size;
 
     protected MyConcurrentQueue detailList;
 
-    public AbstractWarehouse(int size) {
-        this.size = size;
+    public AbstractWarehouse(int capacity) {
+        this.capacity = capacity;
         this.detailList = new MyConcurrentQueue<Detail>();
+    }
+
+    @Override
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override
@@ -20,30 +25,30 @@ public class AbstractWarehouse implements Warehouse {
     }
 
     @Override
-    public int getFillSize() {
-        return fillSize;
-    }
-
-    @Override
     public synchronized void isFilled() throws InterruptedException {
+        while (size >= capacity) {
+            System.out.println("stop aw");
+            wait();
+            System.out.println("wake up wa");
+        }
     }
 
     @Override
     public synchronized void addDetail(Detail detail) throws InterruptedException {
-        while (fillSize >= size) {
+        while (size >= capacity) {
             wait();
         }
-        fillSize++;
+        size++;
         detailList.add(detail);
         notifyAll();
     }
 
     @Override
     public synchronized Detail pickUpDetail() throws InterruptedException {
-        while (fillSize <= 0) {
+        while (size <= 0) {
             wait();
         }
-        fillSize--;
+        size--;
         notifyAll();
         return (Detail) detailList.removeLast();
     }

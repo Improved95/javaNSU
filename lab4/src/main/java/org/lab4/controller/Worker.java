@@ -45,7 +45,9 @@ public class Worker implements Runnable {
 
     public synchronized void freeThreadsIsExist() throws InterruptedException {
         while(busyThreadsNumber.get() >= threadsNumber) {
+            System.out.println("stop freeThreadsIsExist");
             wait();
+            System.out.println("wake up freeThreadsIsExist");
         }
     }
 
@@ -74,7 +76,7 @@ public class Worker implements Runnable {
             throw new RuntimeException(ex);
         }
 
-        busyThreadsNumber.getAndDecrement();
+        System.out.println(busyThreadsNumber.decrementAndGet());
         notifyAll();
     }
 }
