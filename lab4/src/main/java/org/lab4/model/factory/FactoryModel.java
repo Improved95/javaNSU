@@ -13,7 +13,11 @@ public class FactoryModel {
     private Map<String, Provider> providersMap = new HashMap<>();
     private Map<String, Warehouse> warehousesMap = new HashMap<>();
 
-    AtomicInteger readyCarNumber = new AtomicInteger(0);
+    /*AtomicInteger detailNumberOnCarBodyWarehouse = new AtomicInteger(0);
+    AtomicInteger detailNumberOnEngineWarehouse = new AtomicInteger(0);
+    AtomicInteger detailNumberOnAccessoryWarehouse = new AtomicInteger(0);
+    AtomicInteger detailNumberOnReadyCarWarehouse = new AtomicInteger(0);
+    AtomicInteger readyCarNumber = new AtomicInteger(0);*/
 
     public Properties getFactoryProperties() {
         return factoryProperties;

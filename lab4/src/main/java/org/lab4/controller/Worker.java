@@ -8,6 +8,8 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Worker implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
@@ -17,7 +19,11 @@ public class Worker implements Runnable {
     private AccessoryWarehouse accessoryWarehouse;
     private ReadyCarWarehouse readyCarWarehouse;
 
-    public Worker(boolean isLogging) {
+    private final int threadsNumber;
+    AtomicInteger busyThreadsNumber = new AtomicInteger(0);
+
+    public Worker(int threadsNumber, boolean isLogging) {
+        this.threadsNumber = threadsNumber;
         this.isLogging = isLogging;
     }
 
@@ -37,8 +43,16 @@ public class Worker implements Runnable {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
+    public synchronized void freeThreadsIsExist() throws InterruptedException {
+        while(busyThreadsNumber.get() >= threadsNumber) {
+            wait();
+        }
+    }
+
     @Override
     public void run() {
+        busyThreadsNumber.getAndIncrement();
+
         DetailsContext detailsContext = new DetailsContext();
         try {
             detailsContext.setCarBody((CarBody) carBodyWarehouse.pickUpDetail());
@@ -59,5 +73,8 @@ public class Worker implements Runnable {
             if (isLogging) { log.error("Worker: ", ex); }
             throw new RuntimeException(ex);
         }
+
+        busyThreadsNumber.getAndDecrement();
+        notifyAll();
     }
 }

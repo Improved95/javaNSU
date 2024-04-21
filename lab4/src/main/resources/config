@@ -3,6 +3,6 @@ engineWarehouseSize=15
 accessoryWarehouseSize=15
 readyCarWarehouseSize=15
 accessoryProvidersNumber=2
-workersNumber=3
+workersNumber=20
 dealersNumber=2
 isLogging=false

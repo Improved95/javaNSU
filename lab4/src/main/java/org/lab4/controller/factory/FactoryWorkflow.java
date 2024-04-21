@@ -105,6 +105,7 @@ public class FactoryWorkflow {
 
     private void initialWorker() {
         worker = new Worker(
+                Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber")),
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
         worker.setCarBodyWarehouse((CarBodyWarehouse) factoryModel.getWarehousesMap().get("CarBody"));

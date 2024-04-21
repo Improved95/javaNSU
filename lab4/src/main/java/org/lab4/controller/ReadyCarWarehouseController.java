@@ -36,10 +36,21 @@ public class ReadyCarWarehouseController implements Runnable {
             try {
                 readyCarWarehouse.isFilled();
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+                throw new RuntimeException(ex);
             }
 
+            try {
+                worker.freeThreadsIsExist();
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+                throw new RuntimeException(ex);
+            }
 
+            System.out.println("controller ready car warehouse");
+            workersThreadPool.submit(() -> {
+               worker.run();
+            });
         }
     }
 }

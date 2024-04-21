@@ -2,27 +2,27 @@
 <Configuration status="WARN">
     <Appenders>
 
-        <File name="CalculatorLogTRACE" fileName="lab2/src/logs/calculatorLogTRACE.log" append="false">
+        <File name="factoryLogTRACE" fileName="lab2/src/logs/factoryLogTRACE.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="CalculatorLogDEBUG" fileName="lab2/src/logs/calculatorLogDEDUG.log" append="false">
+        <File name="factoryLogDEBUG" fileName="lab2/src/logs/factoryLogDEDUG.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="CalculatorLogINFO" fileName="lab2/src/logs/calculatorLogINFO.log" append="false">
+        <File name="factoryLogINFO" fileName="lab2/src/logs/factoryLogINFO.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="CalculatorLogWARN" fileName="lab2/src/logs/calculatorLogWARN.log" append="false">
+        <File name="factoryLogWARN" fileName="lab2/src/logs/factoryLogWARN.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="CalculatorLogERROR" fileName="lab2/src/logs/calculatorLogERROR.log" append="false">
+        <File name="factoryLogERROR" fileName="lab2/src/logs/factoryLogERROR.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
@@ -33,11 +33,11 @@
     <Loggers>
 
         <Root level="info">
-            <AppenderRef ref="CalculatorLogTRACE" level="trace"/>
-            <AppenderRef ref="CalculatorLogDEBUG" level="debug"/>
-            <AppenderRef ref="CalculatorLogINFO" level="info"/>
-            <AppenderRef ref="CalculatorLogWARN" level="warn"/>
-            <AppenderRef ref="CalculatorLogERROR" level="error"/>
+            <AppenderRef ref="factoryLogTRACE" level="trace"/>
+            <AppenderRef ref="factoryLogDEBUG" level="debug"/>
+            <AppenderRef ref="factoryLogINFO" level="info"/>
+            <AppenderRef ref="factoryLogWARN" level="warn"/>
+            <AppenderRef ref="factoryLogERROR" level="error"/>
         </Root>
 
     </Loggers>
