@@ -13,17 +13,20 @@ public class CarBodyProvider extends AbstractProvider {
     public void run() {
         while (true) {
             try {
-                warehouse.addDetail(new CarBody());
+                CarBody carBody = new CarBody();
+                warehouse.addDetail(carBody);
+                if (isLogging) { log.info("CarBodyProvider: add new carBody with id: {}", carBody.getDetailId()); }
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                if (isLogging) { log.error("CarBodyProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
 
-            System.out.println("car body provider");
             sleepTime = jFrameObject.getCarBodyProviderDelay();
             try {
                 sleep(sleepTime);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("CarBodyProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
         }
     }

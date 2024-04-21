@@ -1,11 +1,14 @@
 package org.lab4.controller;
 
 import org.lab4.jframe.JFrameObject;
+import org.lab4.model.details.DetailsContext;
+import org.lab4.model.details.ReadyCar;
 import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Time;
+import java.util.Date;
 
 import static java.lang.Thread.sleep;
 
@@ -32,21 +35,26 @@ public class Dealer implements Runnable {
     @Override
     public void run() {
         while (true) {
+            ReadyCar readyCar;
             try {
-                readyCarWarehouse.pickUpDetail();
+                readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                if (isLogging) { log.error("Dealer: ", ex); }
+                throw new RuntimeException(ex);
             }
 
             if (isLogging) {
-                log.info("Time: {}, Dealer {}, Auto: {}, (Body: {}, Engine: {}, Accessory: {}).", );
+                DetailsContext detailsContext = readyCar.getDetailsContext();
+                log.info("Time: {}, Dealer {}, Auto: {}, (Body: {}, Engine: {}, Accessory: {}).", new Date(), 1, readyCar.getDetailId(),
+                        detailsContext.getCarBody().getDetailId(), detailsContext.getEngine().getDetailId(), detailsContext.getAccessory().getDetailId());
             }
 
             sleepTime = jFrameObject.getDealersRequestDelay();
             try {
                 sleep(sleepTime);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("Dealer with id: {}", 1, ex); }
+                throw new RuntimeException(ex);
             }
         }
     }

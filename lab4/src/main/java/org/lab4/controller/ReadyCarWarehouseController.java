@@ -39,9 +39,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 ex.printStackTrace();
             }
 
-            workersThreadPool.submit(() -> {
-                worker.run();
-            });
+
         }
     }
 }

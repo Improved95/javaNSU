@@ -13,17 +13,20 @@ public class AccessoryProvider extends AbstractProvider {
     public void run() {
         while (true) {
             try {
-                warehouse.addDetail(new Accessory());
+                Accessory accessory = new Accessory();
+                warehouse.addDetail(accessory);
+                if (isLogging) { log.info("AccessoryProvider: add new accessory with id: {}", accessory.getDetailId()); }
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                if (isLogging) { log.error("AccessoryProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
 
-            System.out.println("Accessory provider");
             sleepTime = jFrameObject.getAccessoryProviderDelay();
             try {
                 sleep(sleepTime);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("AccessoryProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
         }
     }

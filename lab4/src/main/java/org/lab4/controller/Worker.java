@@ -44,8 +44,9 @@ public class Worker implements Runnable {
             detailsContext.setCarBody((CarBody) carBodyWarehouse.pickUpDetail());
             detailsContext.setEngine((Engine) engineWarehouse.pickUpDetail());
             detailsContext.setAccessory((Accessory) accessoryWarehouse.pickUpDetail());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException ex) {
+            if (isLogging) { log.error("Worker: ", ex); }
+            throw new RuntimeException(ex);
         }
 
         ReadyCar readyCar = new ReadyCar();
@@ -53,8 +54,10 @@ public class Worker implements Runnable {
 
         try {
             readyCarWarehouse.addDetail(readyCar);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
+        } catch (InterruptedException ex) {
+            if (isLogging) { log.error("Worker: ", ex); }
+            throw new RuntimeException(ex);
         }
     }
 }

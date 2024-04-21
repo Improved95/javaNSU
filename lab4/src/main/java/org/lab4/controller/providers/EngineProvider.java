@@ -13,17 +13,20 @@ public class EngineProvider extends AbstractProvider {
     public void run() {
         while (true) {
             try {
-                warehouse.addDetail(new Engine());
+                Engine engine = new Engine();
+                warehouse.addDetail(engine);
+                if (isLogging) { log.info("EngineProvider: add new Engine with id: {}", engine.getDetailId()); }
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                if (isLogging) { log.error("EngineProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
 
-            System.out.println("Engine provider");
             sleepTime = jFrameObject.getEngineProviderDelay();
             try {
                 sleep(sleepTime);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("CarBodyProvider: ", ex); }
+                throw new RuntimeException(ex);
             }
         }
     }
