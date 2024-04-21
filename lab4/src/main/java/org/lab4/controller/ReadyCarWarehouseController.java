@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static java.lang.Thread.sleep;
+
 public class ReadyCarWarehouseController implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
@@ -41,12 +43,14 @@ public class ReadyCarWarehouseController implements Runnable {
                 throw new RuntimeException(ex);
             }
 
-            CompletableFuture<Void> completableFuture = new CompletableFuture();
-
-            /*System.out.println("rcwc1");
-            workersThreadPool.submit(() -> {
-               worker.run();
-            });*/
+//            System.out.println("rcwc1 " + readyCarWarehouse.getSize());
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+//            new Thread(worker).start();
+            workersThreadPool.execute(() -> worker.run());
         }
     }
 }

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Worker implements Runnable {
+public class Worker extends Thread {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
 
@@ -19,11 +19,11 @@ public class Worker implements Runnable {
     private AccessoryWarehouse accessoryWarehouse;
     private ReadyCarWarehouse readyCarWarehouse;
 
-    private final int threadsNumber;
-    AtomicInteger busyThreadsNumber = new AtomicInteger(0);
+//    private final int threadsNumber;
+    private AtomicInteger callNumber = new AtomicInteger(0);
 
     public Worker(int threadsNumber, boolean isLogging) {
-        this.threadsNumber = threadsNumber;
+//        this.threadsNumber = threadsNumber;
         this.isLogging = isLogging;
     }
 
@@ -45,8 +45,6 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        busyThreadsNumber.getAndIncrement();
-
         DetailsContext detailsContext = new DetailsContext();
         try {
             detailsContext.setCarBody((CarBody) carBodyWarehouse.pickUpDetail());
@@ -61,14 +59,12 @@ public class Worker implements Runnable {
         readyCar.setDetailsContext(detailsContext);
 
         try {
+            System.out.println("worker " + readyCarWarehouse.getSize() + " " + callNumber.getAndIncrement());
             readyCarWarehouse.addDetail(readyCar);
             if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
         } catch (InterruptedException ex) {
             if (isLogging) { log.error("Worker: ", ex); }
             throw new RuntimeException(ex);
         }
-
-        busyThreadsNumber.decrementAndGet();
-        notifyAll();
     }
 }
