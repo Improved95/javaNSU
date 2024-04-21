@@ -4,7 +4,6 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import static java.lang.Thread.sleep;
