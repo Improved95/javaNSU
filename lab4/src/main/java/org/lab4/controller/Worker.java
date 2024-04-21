@@ -1,5 +1,6 @@
 package org.lab4.controller;
 
+import org.lab4.jframe.JFrameObject;
 import org.lab4.model.details.*;
 import org.lab4.model.warehouse.AccessoryWarehouse;
 import org.lab4.model.warehouse.CarBodyWarehouse;
@@ -18,6 +19,8 @@ public class Worker extends Thread {
     private EngineWarehouse engineWarehouse;
     private AccessoryWarehouse accessoryWarehouse;
     private ReadyCarWarehouse readyCarWarehouse;
+
+    private JFrameObject jFrameObject;
 
 //    private final int threadsNumber;
     private AtomicInteger callNumber = new AtomicInteger(0);
@@ -41,6 +44,10 @@ public class Worker extends Thread {
 
     public void setReadyCarWarehouse(ReadyCarWarehouse readyCarWarehouse) {
         this.readyCarWarehouse = readyCarWarehouse;
+    }
+
+    public void setJFrameObject(JFrameObject jFrameObject) {
+        this.jFrameObject = jFrameObject;
     }
 
     @Override

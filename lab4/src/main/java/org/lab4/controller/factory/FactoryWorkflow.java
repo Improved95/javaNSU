@@ -112,6 +112,7 @@ public class FactoryWorkflow {
         worker.setEngineWarehouse((EngineWarehouse) factoryModel.getWarehousesMap().get("Engine"));
         worker.setAccessoryWarehouse((AccessoryWarehouse) factoryModel.getWarehousesMap().get("Accessory"));
         worker.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
+        worker.setJFrameObject(jFrameObject);
     }
 
     private void initialWorkersThreadPool() {
