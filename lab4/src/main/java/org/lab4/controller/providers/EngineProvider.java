@@ -14,11 +14,8 @@ public class EngineProvider extends AbstractProvider {
         while (true) {
             try {
                 Engine engine = new Engine();
+                factoryModel.getTotalImportedDetailsNumberOnEngineWarehouse().incrementAndGet();
                 warehouse.addDetail(engine);
-
-                jFrameObject.setEngineProviderTotalImportedDetailsNumber(totalImportedDetailsNumber.incrementAndGet());
-                jFrameObject.setEngineWarehouseSize(warehouse.getSize());
-
                 if (isLogging) { log.info("EngineProvider: add new Engine with id: {}", engine.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("EngineProvider: ", ex); }

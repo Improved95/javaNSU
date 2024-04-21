@@ -37,9 +37,6 @@ public class Dealer implements Runnable {
             ReadyCar readyCar;
             try {
                 readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
-
-                jFrameObject.setReadyCarWarehouseSize(readyCarWarehouse.getSize());
-
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("Dealer: ", ex); }
                 throw new RuntimeException(ex);

@@ -15,8 +15,6 @@ public class JFrameObject {
     private List<SliderLabel> slidersList;
     private List<InfoField> infoFieldList;
 
-    private FactoryModel factoryModel;
-
     public JFrameObject() {
         this.frame = getJFrame();
         this.slidersList = setSliders();
@@ -24,8 +22,8 @@ public class JFrameObject {
         initial();
     }
 
-    public void setFactoryModel(FactoryModel factoryModel) {
-        this.factoryModel = factoryModel;
+    public JFrame getFrame() {
+        return frame;
     }
 
     public int getCarBodyProviderDelay() {
@@ -41,13 +39,6 @@ public class JFrameObject {
         return slidersList.get(3).getSliderValue();
     }
 
-    public void repaint() {
-        infoFieldList.get(1).updateValue(factoryModel.getTotalImportedDetailsNumberOnCarBodyWarehouse().get());
-        infoFieldList.get(3).updateValue(factoryModel.getTotalImportedDetailsNumberOnEngineWarehouse().get());
-        infoFieldList.get(5).updateValue(factoryModel.getTotalImportedDetailsNumberOnAccessoryWarehouse().get());
-        infoFieldList.get(7).updateValue(factoryModel.getTotalCreatedCarNumber().get());
-        frame.repaint();
-    }
     public synchronized void setCarBodyWarehouseSize(int value) {
         infoFieldList.get(0).updateValue(value);
         frame.repaint();

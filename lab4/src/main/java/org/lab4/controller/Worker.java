@@ -2,6 +2,7 @@ package org.lab4.controller;
 
 import org.lab4.jframe.JFrameObject;
 import org.lab4.model.details.*;
+import org.lab4.model.factory.FactoryModel;
 import org.lab4.model.warehouse.AccessoryWarehouse;
 import org.lab4.model.warehouse.CarBodyWarehouse;
 import org.lab4.model.warehouse.EngineWarehouse;
@@ -20,13 +21,11 @@ public class Worker extends Thread {
     private AccessoryWarehouse accessoryWarehouse;
     private ReadyCarWarehouse readyCarWarehouse;
 
-    private JFrameObject jFrameObject;
+    private FactoryModel factoryModel;
 
-//    private final int threadsNumber;
     private AtomicInteger callNumber = new AtomicInteger(0);
 
-    public Worker(int threadsNumber, boolean isLogging) {
-//        this.threadsNumber = threadsNumber;
+    public Worker(boolean isLogging) {
         this.isLogging = isLogging;
     }
 
@@ -46,8 +45,8 @@ public class Worker extends Thread {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
-    public void setJFrameObject(JFrameObject jFrameObject) {
-        this.jFrameObject = jFrameObject;
+    public void setFactoryModel(FactoryModel factoryModel) {
+        this.factoryModel = factoryModel;
     }
 
     @Override
@@ -64,6 +63,7 @@ public class Worker extends Thread {
 
         ReadyCar readyCar = new ReadyCar();
         readyCar.setDetailsContext(detailsContext);
+        factoryModel.getTotalCreatedCarNumber().incrementAndGet();
 
         try {
             readyCarWarehouse.addDetail(readyCar);

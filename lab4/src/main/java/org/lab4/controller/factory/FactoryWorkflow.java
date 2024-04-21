@@ -13,7 +13,9 @@ import org.lab4.model.warehouse.AccessoryWarehouse;
 import org.lab4.model.warehouse.CarBodyWarehouse;
 import org.lab4.model.warehouse.EngineWarehouse;
 import org.lab4.model.warehouse.ReadyCarWarehouse;
+import org.lab4.view.FactoryView;
 
+import javax.swing.text.View;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -23,6 +25,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class FactoryWorkflow {
     private JFrameObject jFrameObject;
     private FactoryModel factoryModel = new FactoryModel();
+    private FactoryView view;
 
     private Provider carBodyProvider;
     private Provider engineProvider;
@@ -53,6 +56,8 @@ public class FactoryWorkflow {
         for (int i = 0; i < dealersNumber; i++) {
             new Thread(dealer).start();
         }
+
+        new Thread(view).start();
     }
 
     private void initial() {
@@ -77,6 +82,7 @@ public class FactoryWorkflow {
         initialWorkersThreadPool();
         initialReadyCarWarehouseController();
         initialDealers();
+        initialView();
     }
 
     private void initialCarBodyProvider() {
@@ -85,6 +91,7 @@ public class FactoryWorkflow {
         );
         carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
         carBodyProvider.setJFrameObject(jFrameObject);
+        carBodyProvider.setFactoryModel(factoryModel);
     }
 
     private void initialEngineProvider() {
@@ -93,6 +100,7 @@ public class FactoryWorkflow {
         );
         engineProvider.setWarehouse(factoryModel.getWarehousesMap().get("Engine"));
         engineProvider.setJFrameObject(jFrameObject);
+        engineProvider.setFactoryModel(factoryModel);
     }
 
     private void initialAccessoryProvider() {
@@ -101,18 +109,18 @@ public class FactoryWorkflow {
         );
         accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
         accessoryProvider.setJFrameObject(jFrameObject);
+        accessoryProvider.setFactoryModel(factoryModel);
     }
 
     private void initialWorker() {
         worker = new Worker(
-                Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber")),
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
         worker.setCarBodyWarehouse((CarBodyWarehouse) factoryModel.getWarehousesMap().get("CarBody"));
         worker.setEngineWarehouse((EngineWarehouse) factoryModel.getWarehousesMap().get("Engine"));
         worker.setAccessoryWarehouse((AccessoryWarehouse) factoryModel.getWarehousesMap().get("Accessory"));
         worker.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
-        worker.setJFrameObject(jFrameObject);
+        worker.setFactoryModel(factoryModel);
     }
 
     private void initialWorkersThreadPool() {
@@ -136,5 +144,11 @@ public class FactoryWorkflow {
         );
         dealer.setJFrameObject(jFrameObject);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
+    }
+
+    private void initialView() {
+        view = new FactoryView();
+        view.setJFrameObject(jFrameObject);
+        view.setFactoryModel(factoryModel);
     }
 }
