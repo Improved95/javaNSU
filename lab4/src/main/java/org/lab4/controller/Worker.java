@@ -43,14 +43,6 @@ public class Worker implements Runnable {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
-    public synchronized void freeThreadsIsExist() throws InterruptedException {
-        while(busyThreadsNumber.get() >= threadsNumber) {
-            System.out.println("stop freeThreadsIsExist");
-            wait();
-            System.out.println("wake up freeThreadsIsExist");
-        }
-    }
-
     @Override
     public void run() {
         busyThreadsNumber.getAndIncrement();
@@ -76,7 +68,7 @@ public class Worker implements Runnable {
             throw new RuntimeException(ex);
         }
 
-        System.out.println(busyThreadsNumber.decrementAndGet());
+        busyThreadsNumber.decrementAndGet();
         notifyAll();
     }
 }
