@@ -15,6 +15,6 @@ public class MyConcurrentQueue<T> {
     }
 
     public synchronized T removeLast() {
-        return queue.removeLast();
+        return queue.removeFirst();
     }
 }

@@ -12,10 +12,13 @@ public class AccessoryProvider extends AbstractProvider {
     @Override
     public void run() {
         while (true) {
-            Accessory accessory = new Accessory();
             try {
-//                System.out.println("Accessory: " + warehouse.getSize());
+                Accessory accessory = new Accessory();
                 warehouse.addDetail(accessory);
+
+                jFrameObject.setAccessoryProviderTotalImportedDetailsNumber(totalImportedDetailsNumber.incrementAndGet());
+                jFrameObject.setAccessoryWarehouseSize(warehouse.getSize());
+
                 if (isLogging) { log.info("AccessoryProvider: add new accessory with id: {}", accessory.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("AccessoryProvider: ", ex); }

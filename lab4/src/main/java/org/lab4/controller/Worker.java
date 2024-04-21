@@ -59,7 +59,6 @@ public class Worker extends Thread {
         readyCar.setDetailsContext(detailsContext);
 
         try {
-            System.out.println("worker " + readyCarWarehouse.getSize() + " " + callNumber.getAndIncrement());
             readyCarWarehouse.addDetail(readyCar);
             if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
         } catch (InterruptedException ex) {

@@ -6,7 +6,7 @@ public class InfoField extends JPanel {
     private int width;
     private int height;
 
-    private int valueTextWidth = 20;
+    private int valueTextWidth = 150;
     private String fieldText;
     private JLabel valueText;
 
@@ -24,8 +24,8 @@ public class InfoField extends JPanel {
         setVisible(true);
     }
 
-    public void updateValue(String value) {
-        valueText.setText(value);
+    public void updateValue(int value) {
+        valueText.setText(Integer.toString(value));
     }
 
     private void addField() {

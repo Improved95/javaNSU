@@ -6,18 +6,11 @@ import org.lab4.model.warehouse.Warehouse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class FactoryModel {
     private Properties factoryProperties;
     private Map<String, Provider> providersMap = new HashMap<>();
     private Map<String, Warehouse> warehousesMap = new HashMap<>();
-
-    /*AtomicInteger detailNumberOnCarBodyWarehouse = new AtomicInteger(0);
-    AtomicInteger detailNumberOnEngineWarehouse = new AtomicInteger(0);
-    AtomicInteger detailNumberOnAccessoryWarehouse = new AtomicInteger(0);
-    AtomicInteger detailNumberOnReadyCarWarehouse = new AtomicInteger(0);
-    AtomicInteger readyCarNumber = new AtomicInteger(0);*/
 
     public Properties getFactoryProperties() {
         return factoryProperties;

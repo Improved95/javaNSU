@@ -33,6 +33,46 @@ public class JFrameObject {
         return slidersList.get(3).getSliderValue();
     }
 
+    public synchronized void setCarBodyWarehouseSize(int value) {
+        infoFieldList.get(0).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setCarBodyProviderTotalImportedDetailsNumber(int value) {
+        infoFieldList.get(1).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setEngineWarehouseSize(int value) {
+        infoFieldList.get(2).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setEngineProviderTotalImportedDetailsNumber(int value) {
+        infoFieldList.get(3).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setAccessoryWarehouseSize(int value) {
+        infoFieldList.get(4).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setAccessoryProviderTotalImportedDetailsNumber(int value) {
+        infoFieldList.get(5).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setReadyCarWarehouseSize(int value) {
+        infoFieldList.get(6).updateValue(value);
+        frame.repaint();
+    }
+
+    public synchronized void setTotalReadyCarCreatedNumber(int value) {
+        infoFieldList.get(7).updateValue(value);
+        frame.repaint();
+    }
+
     private void initial() {
         for (SliderLabel sliderLabel : slidersList) {
             frame.add(sliderLabel);
@@ -73,13 +113,13 @@ public class JFrameObject {
 
         String[] fieldsText = {
                 "Detail number on CarBody warehouse: ",
-                "Waiting detail number on CarBody warehouse: ",
+                "Total CarBody imported number: ",
                 "Detail number on Engine warehouse: ",
-                "Waiting detail number on Engine warehouse: ",
+                "Total Engine imported number: ",
                 "Detail number on Accessory warehouse: ",
-                "Waiting detail number on Accessory warehouse: ",
-                "Ready car number: ",
-                "Car number on Cars warehouse: ",
+                "Total Accessory imported number: ",
+                "Detail number on ReadyCar warehouse: ",
+                "Total ReadyCar created number: ",
         };
 
         for (int i = 0; i < 8; i++) {

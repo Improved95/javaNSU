@@ -23,7 +23,7 @@ public class AbstractWarehouse implements Warehouse {
     }
 
     @Override
-    public int getSize() {
+    public synchronized int getSize() {
         return size.get();
     }
 
@@ -36,12 +36,12 @@ public class AbstractWarehouse implements Warehouse {
 
     @Override
     public synchronized void addDetail(Detail detail) throws InterruptedException {
-        while (size.getAndIncrement() >= capacity) {
+        while (size.get() >= capacity) {
             wait();
         }
         detailList.add(detail);
         size.incrementAndGet();
-        notifyAll();
+        notify();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AbstractWarehouse implements Warehouse {
         }
         Detail detail = (Detail) detailList.removeLast();
         size.decrementAndGet();
-        notifyAll();
+        notify();
         return detail;
     }
 }

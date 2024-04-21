@@ -43,13 +43,12 @@ public class ReadyCarWarehouseController implements Runnable {
                 throw new RuntimeException(ex);
             }
 
-//            System.out.println("rcwc1 " + readyCarWarehouse.getSize());
             try {
-                sleep(500);
+                sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-//            new Thread(worker).start();
+
             workersThreadPool.execute(() -> worker.run());
         }
     }

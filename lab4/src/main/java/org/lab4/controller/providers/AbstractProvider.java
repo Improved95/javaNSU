@@ -6,13 +6,18 @@ import org.lab4.model.warehouse.Warehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 public abstract class AbstractProvider implements Provider {
     protected static final Logger log = LoggerFactory.getLogger(Dealer.class);
     protected boolean isLogging = false;
 
-    protected Warehouse warehouse;
     protected JFrameObject jFrameObject;
+
+    protected Warehouse warehouse;
+    protected AtomicInteger totalImportedDetailsNumber = new AtomicInteger(0);
+
     protected int sleepTime;
 
     public AbstractProvider(boolean isLogging) {

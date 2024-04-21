@@ -15,6 +15,10 @@ public class CarBodyProvider extends AbstractProvider {
             try {
                 CarBody carBody = new CarBody();
                 warehouse.addDetail(carBody);
+
+                jFrameObject.setCarBodyProviderTotalImportedDetailsNumber(totalImportedDetailsNumber.incrementAndGet());
+                jFrameObject.setCarBodyWarehouseSize(warehouse.getSize());
+
                 if (isLogging) { log.info("CarBodyProvider: add new carBody with id: {}", carBody.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }
