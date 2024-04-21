@@ -4,6 +4,7 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class ReadyCarWarehouseController implements Runnable {
@@ -39,6 +40,8 @@ public class ReadyCarWarehouseController implements Runnable {
                 if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
                 throw new RuntimeException(ex);
             }
+
+            CompletableFuture<Void> completableFuture = new CompletableFuture();
 
             /*System.out.println("rcwc1");
             workersThreadPool.submit(() -> {
