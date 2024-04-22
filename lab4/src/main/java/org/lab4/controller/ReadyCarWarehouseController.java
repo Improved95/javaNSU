@@ -47,6 +47,15 @@ public class ReadyCarWarehouseController implements Runnable {
 
     public synchronized void sendNewTaskToWorker() {
         notifyAll();
+
+        try {
+            readyCarWarehouse.isFilled();
+        } catch (InterruptedException ex) {
+            if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+            throw new RuntimeException(ex);
+        }
+
+        workersThreadPool.execute(() -> worker.run());
     }
 
     @Override
@@ -54,15 +63,6 @@ public class ReadyCarWarehouseController implements Runnable {
         while (true) {
             waitTask();
             System.out.println("ReadyCarWarehouseController");
-
-            try {
-                readyCarWarehouse.isFilled();
-            } catch (InterruptedException ex) {
-                if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
-                throw new RuntimeException(ex);
-            }
-
-            workersThreadPool.execute(() -> worker.run());
         }
     }
 }
