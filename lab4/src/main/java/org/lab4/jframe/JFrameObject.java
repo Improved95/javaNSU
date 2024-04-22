@@ -1,7 +1,5 @@
 package org.lab4.jframe;
 
-import org.lab4.model.factory.FactoryModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

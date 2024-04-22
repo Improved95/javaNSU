@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AbstractWarehouse implements Warehouse {
     protected final int capacity;
-//    protected int size;
-    AtomicInteger size = new AtomicInteger(0);
+    protected int size;
+//    AtomicInteger size = new AtomicInteger(0);
 
     protected MyConcurrentQueue detailList;
 
@@ -24,34 +24,34 @@ public class AbstractWarehouse implements Warehouse {
 
     @Override
     public synchronized int getSize() {
-        return size.get();
+        return size;
     }
 
     @Override
     public synchronized void isFilled() throws InterruptedException {
-        while (size.get() >= capacity) {
+        while (size >= capacity) {
             wait();
         }
     }
 
     @Override
     public synchronized void addDetail(Detail detail) throws InterruptedException {
-        while (size.get() >= capacity) {
+        while (size >= capacity) {
             wait();
         }
         detailList.add(detail);
-        size.incrementAndGet();
-        notify();
+        size++;
+        notifyAll();
     }
 
     @Override
     public synchronized Detail pickUpDetail() throws InterruptedException {
-        while (size.get() <= 0) {
+        while (size <= 0) {
             wait();
         }
         Detail detail = (Detail) detailList.removeLast();
-        size.decrementAndGet();
-        notify();
+        size--;
+        notifyAll();
         return detail;
     }
 }
