@@ -23,12 +23,6 @@ public class FactoryView implements Runnable {
     @Override
     public void run() {
         while (true) {
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
             Map<String, Warehouse> warehouseMap = factoryModel.getWarehousesMap();
 
             jFrameObject.setCarBodyWarehouseSize(warehouseMap.get("CarBody").getSize());
@@ -49,6 +43,12 @@ public class FactoryView implements Runnable {
             factoryModel.setDealersRequestDelay(jFrameObject.getDealersRequestDelay());
 
             jFrameObject.getFrame().repaint();
+
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

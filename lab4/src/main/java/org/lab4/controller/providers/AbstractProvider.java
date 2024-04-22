@@ -1,7 +1,6 @@
 package org.lab4.controller.providers;
 
 import org.lab4.controller.Dealer;
-import org.lab4.jframe.JFrameObject;
 import org.lab4.model.factory.FactoryModel;
 import org.lab4.model.warehouse.Warehouse;
 import org.slf4j.Logger;

@@ -63,10 +63,10 @@ public class Worker extends Thread {
 
         ReadyCar readyCar = new ReadyCar();
         readyCar.setDetailsContext(detailsContext);
-        factoryModel.getTotalCreatedCarNumber().incrementAndGet();
 
         try {
             readyCarWarehouse.addDetail(readyCar);
+            factoryModel.getTotalCreatedCarNumber().incrementAndGet();
             if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
         } catch (InterruptedException ex) {
             if (isLogging) { log.error("Worker: ", ex); }

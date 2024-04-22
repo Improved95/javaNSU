@@ -14,8 +14,8 @@ public class CarBodyProvider extends AbstractProvider {
         while (true) {
             try {
                 CarBody carBody = new CarBody();
-                factoryModel.getTotalImportedDetailsNumberOnCarBodyWarehouse().incrementAndGet();
                 warehouse.addDetail(carBody);
+                factoryModel.getTotalImportedDetailsNumberOnCarBodyWarehouse().incrementAndGet();
                 if (isLogging) { log.info("CarBodyProvider: add new carBody with id: {}", carBody.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }

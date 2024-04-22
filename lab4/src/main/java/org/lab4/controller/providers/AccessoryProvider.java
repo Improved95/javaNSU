@@ -14,8 +14,8 @@ public class AccessoryProvider extends AbstractProvider {
         while (true) {
             try {
                 Accessory accessory = new Accessory();
-                factoryModel.getTotalImportedDetailsNumberOnAccessoryWarehouse().incrementAndGet();
                 warehouse.addDetail(accessory);
+                factoryModel.getTotalImportedDetailsNumberOnAccessoryWarehouse().incrementAndGet();
                 if (isLogging) { log.info("AccessoryProvider: add new accessory with id: {}", accessory.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("AccessoryProvider: ", ex); }

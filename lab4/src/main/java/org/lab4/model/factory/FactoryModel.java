@@ -18,10 +18,10 @@ public class FactoryModel {
     AtomicInteger totalImportedDetailsNumberOnAccessoryWarehouse = new AtomicInteger(0);
     AtomicInteger totalCreatedCarNumber = new AtomicInteger(0);
 
-    int carBodyProviderDelay;
-    int engineProviderDelay;
-    int accessoryProviderDelay;
-    int dealersRequestDelay;
+    int carBodyProviderDelay = Integer.MAX_VALUE;
+    int engineProviderDelay = 1000;
+    int accessoryProviderDelay = 1000;
+    int dealersRequestDelay = 1000;
 
     public Properties getFactoryProperties() {
         return factoryProperties;

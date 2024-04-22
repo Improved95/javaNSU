@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
-import static java.lang.Thread.sleep;
-
 public class ReadyCarWarehouseController implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
@@ -34,6 +32,8 @@ public class ReadyCarWarehouseController implements Runnable {
 
     @Override
     public void run() {
+
+
         while (true) {
             try {
                 readyCarWarehouse.isFilled();
@@ -42,13 +42,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 throw new RuntimeException(ex);
             }
 
-            try {
-                sleep(10);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            workersThreadPool.execute(() -> worker.run());
+//            workersThreadPool.execute(() -> worker.run());
         }
     }
 }
