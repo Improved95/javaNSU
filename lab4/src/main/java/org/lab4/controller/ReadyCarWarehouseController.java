@@ -12,6 +12,8 @@ public class ReadyCarWarehouseController implements Runnable {
 
     private Worker worker;
     private ThreadPoolExecutor workersThreadPool;
+
+    private Dealer dealer;
     private ReadyCarWarehouse readyCarWarehouse;
 
     public ReadyCarWarehouseController(boolean isLogging) {
@@ -26,15 +28,33 @@ public class ReadyCarWarehouseController implements Runnable {
         this.workersThreadPool = workersThreadPool;
     }
 
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
+
     public void setWarehouse(ReadyCarWarehouse readyCarWarehouse) {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
+    private synchronized void waitTask() {
+        try {
+            wait();
+        } catch (InterruptedException ex) {
+            if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public synchronized void sendNewTaskToWorker() {
+        notifyAll();
+    }
+
     @Override
     public void run() {
-
-
         while (true) {
+            waitTask();
+            System.out.println("ReadyCarWarehouseController");
+
             try {
                 readyCarWarehouse.isFilled();
             } catch (InterruptedException ex) {
@@ -42,7 +62,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 throw new RuntimeException(ex);
             }
 
-//            workersThreadPool.execute(() -> worker.run());
+            workersThreadPool.execute(() -> worker.run());
         }
     }
 }

@@ -17,6 +17,7 @@ public class Dealer implements Runnable {
 
     private FactoryModel factoryModel;
 
+    private ReadyCarWarehouseController readyCarWarehouseController;
     private ReadyCarWarehouse readyCarWarehouse;
 
     public Dealer(boolean isLogging) {
@@ -27,15 +28,20 @@ public class Dealer implements Runnable {
         this.factoryModel = factoryModel;
     }
 
+    public void setReadyCarWarehouseController(ReadyCarWarehouseController readyCarWarehouseController) {
+        this.readyCarWarehouseController = readyCarWarehouseController;
+    }
+
     public void setReadyCarWarehouse(ReadyCarWarehouse readyCarWarehouse) {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         while (true) {
             ReadyCar readyCar;
             try {
+                readyCarWarehouseController.sendNewTaskToWorker();
                 readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("Dealer: ", ex); }

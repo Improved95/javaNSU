@@ -134,6 +134,7 @@ public class FactoryWorkflow {
         readyCarWarehouseController.setWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
         readyCarWarehouseController.setWorkersThreadPool(workersThreadPool);
         readyCarWarehouseController.setWorker(worker);
+        readyCarWarehouseController.setDealer(dealer);
     }
 
     private void initialDealers() {
@@ -142,6 +143,7 @@ public class FactoryWorkflow {
         );
         dealer.setFactoryModel(factoryModel);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
+        dealer.setReadyCarWarehouseController(readyCarWarehouseController);
     }
 
     private void initialView() {
