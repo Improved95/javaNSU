@@ -2,27 +2,27 @@
 <Configuration status="WARN">
     <Appenders>
 
-        <File name="factoryLogTRACE" fileName="lab2/src/logs/factoryLogTRACE.log" append="false">
+        <File name="factoryLogTRACE" fileName="lab4/src/logs/factoryLogTRACE.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="factoryLogDEBUG" fileName="lab2/src/logs/factoryLogDEDUG.log" append="false">
+        <File name="factoryLogDEBUG" fileName="lab4/src/logs/factoryLogDEDUG.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="factoryLogINFO" fileName="lab2/src/logs/factoryLogINFO.log" append="false">
+        <File name="factoryLogINFO" fileName="lab4/src/logs/factoryLogINFO.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="factoryLogWARN" fileName="lab2/src/logs/factoryLogWARN.log" append="false">
+        <File name="factoryLogWARN" fileName="lab4/src/logs/factoryLogWARN.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="factoryLogERROR" fileName="lab2/src/logs/factoryLogERROR.log" append="false">
+        <File name="factoryLogERROR" fileName="lab4/src/logs/factoryLogERROR.log" append="false">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>

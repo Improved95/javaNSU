@@ -47,7 +47,6 @@ public class FactoryWorkflow {
         new Thread(carBodyProvider).start();
         new Thread(engineProvider).start();
 
-        new Thread(readyCarWarehouseController).start();
 
         int accessoryProvidersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
         for (int i = 0; i < accessoryProvidersNumber; i++) {
@@ -58,6 +57,8 @@ public class FactoryWorkflow {
         for (int i = 0; i < dealersNumber; i++) {
             new Thread(dealer).start();
         }
+
+        new Thread(readyCarWarehouseController).start();
     }
 
     private void initial() {
@@ -134,7 +135,6 @@ public class FactoryWorkflow {
         readyCarWarehouseController.setWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
         readyCarWarehouseController.setWorkersThreadPool(workersThreadPool);
         readyCarWarehouseController.setWorker(worker);
-        readyCarWarehouseController.setDealer(dealer);
     }
 
     private void initialDealers() {
@@ -143,7 +143,6 @@ public class FactoryWorkflow {
         );
         dealer.setFactoryModel(factoryModel);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
-        dealer.setReadyCarWarehouseController(readyCarWarehouseController);
     }
 
     private void initialView() {

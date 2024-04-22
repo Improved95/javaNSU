@@ -13,7 +13,6 @@ public class ReadyCarWarehouseController implements Runnable {
     private Worker worker;
     private ThreadPoolExecutor workersThreadPool;
 
-    private Dealer dealer;
     private ReadyCarWarehouse readyCarWarehouse;
 
     public ReadyCarWarehouseController(boolean isLogging) {
@@ -28,41 +27,30 @@ public class ReadyCarWarehouseController implements Runnable {
         this.workersThreadPool = workersThreadPool;
     }
 
-    public void setDealer(Dealer dealer) {
-        this.dealer = dealer;
-    }
-
     public void setWarehouse(ReadyCarWarehouse readyCarWarehouse) {
         this.readyCarWarehouse = readyCarWarehouse;
-    }
-
-    private synchronized void waitTask() {
-        try {
-            wait();
-        } catch (InterruptedException ex) {
-            if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
-            throw new RuntimeException(ex);
-        }
-    }
-
-    public synchronized void sendNewTaskToWorker() {
-        notifyAll();
-
-        try {
-            readyCarWarehouse.isFilled();
-        } catch (InterruptedException ex) {
-            if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
-            throw new RuntimeException(ex);
-        }
-
-        workersThreadPool.execute(() -> worker.run());
     }
 
     @Override
     public void run() {
         while (true) {
-            waitTask();
+            try {
+//                readyCarWarehouse.waitPickUpDetail();
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+                throw new RuntimeException(ex);
+            }
+
             System.out.println("ReadyCarWarehouseController");
+
+            try {
+                readyCarWarehouse.isFilled();
+            } catch (InterruptedException ex) {
+                if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
+                throw new RuntimeException(ex);
+            }
+
+            workersThreadPool.execute(() -> worker.run());
         }
     }
 }
