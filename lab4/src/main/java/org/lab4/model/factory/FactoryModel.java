@@ -18,6 +18,11 @@ public class FactoryModel {
     AtomicInteger totalImportedDetailsNumberOnAccessoryWarehouse = new AtomicInteger(0);
     AtomicInteger totalCreatedCarNumber = new AtomicInteger(0);
 
+    int carBodyProviderDelay;
+    int engineProviderDelay;
+    int accessoryProviderDelay;
+    int dealersRequestDelay;
+
     public Properties getFactoryProperties() {
         return factoryProperties;
     }
@@ -56,5 +61,37 @@ public class FactoryModel {
 
     public AtomicInteger getTotalCreatedCarNumber() {
         return totalCreatedCarNumber;
+    }
+
+    public int getCarBodyProviderDelay() {
+        return carBodyProviderDelay;
+    }
+
+    public void setCarBodyProviderDelay(int carBodyProviderDelay) {
+        this.carBodyProviderDelay = carBodyProviderDelay;
+    }
+
+    public int getEngineProviderDelay() {
+        return engineProviderDelay;
+    }
+
+    public void setEngineProviderDelay(int engineProviderDelay) {
+        this.engineProviderDelay = engineProviderDelay;
+    }
+
+    public int getAccessoryProviderDelay() {
+        return accessoryProviderDelay;
+    }
+
+    public void setAccessoryProviderDelay(int accessoryProviderDelay) {
+        this.accessoryProviderDelay = accessoryProviderDelay;
+    }
+
+    public int getDealersRequestDelay() {
+        return dealersRequestDelay;
+    }
+
+    public void setDealersRequestDelay(int dealersRequestDelay) {
+        this.dealersRequestDelay = dealersRequestDelay;
     }
 }

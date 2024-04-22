@@ -22,9 +22,8 @@ public class CarBodyProvider extends AbstractProvider {
                 throw new RuntimeException(ex);
             }
 
-            sleepTime = jFrameObject.getCarBodyProviderDelay();
             try {
-                sleep(sleepTime);
+                sleep(factoryModel.getCarBodyProviderDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }
                 throw new RuntimeException(ex);

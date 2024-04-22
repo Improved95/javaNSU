@@ -62,6 +62,7 @@ public class FactoryWorkflow {
 
     private void initial() {
         jFrameObject = new JFrameObject();
+        jFrameObject.setFactoryModel(factoryModel);
 
         try (InputStream config = this.getClass().getResourceAsStream("../../../../config")) {
             factoryModel.setFactoryProperties(ConfigParser.parse(config));
@@ -90,7 +91,6 @@ public class FactoryWorkflow {
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
         carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
-        carBodyProvider.setJFrameObject(jFrameObject);
         carBodyProvider.setFactoryModel(factoryModel);
     }
 
@@ -99,7 +99,6 @@ public class FactoryWorkflow {
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
         engineProvider.setWarehouse(factoryModel.getWarehousesMap().get("Engine"));
-        engineProvider.setJFrameObject(jFrameObject);
         engineProvider.setFactoryModel(factoryModel);
     }
 
@@ -108,7 +107,6 @@ public class FactoryWorkflow {
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
         accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
-        accessoryProvider.setJFrameObject(jFrameObject);
         accessoryProvider.setFactoryModel(factoryModel);
     }
 
@@ -142,7 +140,7 @@ public class FactoryWorkflow {
         dealer = new Dealer(
                 Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
         );
-        dealer.setJFrameObject(jFrameObject);
+        dealer.setFactoryModel(factoryModel);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
     }
 

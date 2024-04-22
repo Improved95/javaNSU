@@ -43,6 +43,11 @@ public class FactoryView implements Runnable {
             jFrameObject.setReadyCarWarehouseSize(warehouseMap.get("ReadyCar").getSize());
             jFrameObject.setTotalReadyCarCreatedNumber(factoryModel.getTotalCreatedCarNumber().get());
 
+            factoryModel.setCarBodyProviderDelay(jFrameObject.getCarBodyProviderDelay());
+            factoryModel.setEngineProviderDelay(jFrameObject.getEngineProviderDelay());
+            factoryModel.setAccessoryProviderDelay(jFrameObject.getAccessoryProviderDelay());
+            factoryModel.setDealersRequestDelay(jFrameObject.getDealersRequestDelay());
+
             jFrameObject.getFrame().repaint();
         }
     }

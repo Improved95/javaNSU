@@ -22,9 +22,8 @@ public class AccessoryProvider extends AbstractProvider {
                 throw new RuntimeException(ex);
             }
 
-            sleepTime = jFrameObject.getAccessoryProviderDelay();
             try {
-                sleep(sleepTime);
+                sleep(factoryModel.getAccessoryProviderDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("AccessoryProvider: ", ex); }
                 throw new RuntimeException(ex);

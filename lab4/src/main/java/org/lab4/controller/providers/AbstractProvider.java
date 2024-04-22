@@ -7,25 +7,16 @@ import org.lab4.model.warehouse.Warehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public abstract class AbstractProvider implements Provider {
     protected static final Logger log = LoggerFactory.getLogger(Dealer.class);
     protected boolean isLogging;
 
-    protected JFrameObject jFrameObject;
     protected FactoryModel factoryModel;
 
     protected Warehouse warehouse;
 
-    protected int sleepTime;
-
     public AbstractProvider(boolean isLogging) {
         this.isLogging = isLogging;
-    }
-
-    @Override
-    public void setJFrameObject(JFrameObject jFrameObject) {
-        this.jFrameObject = jFrameObject;
     }
 
     @Override

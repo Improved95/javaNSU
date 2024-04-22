@@ -1,5 +1,7 @@
 package org.lab4.jframe;
 
+import org.lab4.model.factory.FactoryModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ public class JFrameObject {
     private List<SliderLabel> slidersList;
     private List<InfoField> infoFieldList;
 
+    private FactoryModel factoryModel;
+
     public JFrameObject() {
         this.frame = getJFrame();
         this.slidersList = setSliders();
@@ -22,6 +26,10 @@ public class JFrameObject {
 
     public JFrame getFrame() {
         return frame;
+    }
+
+    public void setFactoryModel(FactoryModel factoryModel) {
+        this.factoryModel = factoryModel;
     }
 
     public int getCarBodyProviderDelay() {
