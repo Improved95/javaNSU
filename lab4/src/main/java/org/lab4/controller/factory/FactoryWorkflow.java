@@ -14,15 +14,21 @@ import org.lab4.model.warehouse.CarBodyWarehouse;
 import org.lab4.model.warehouse.EngineWarehouse;
 import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.lab4.view.FactoryView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class FactoryWorkflow {
+    protected static final Logger log = LoggerFactory.getLogger(Dealer.class);
+    protected boolean isLogging;
+
     private JFrameObject jFrameObject;
     private FactoryModel factoryModel = new FactoryModel();
     private FactoryView view;
@@ -32,42 +38,73 @@ public class FactoryWorkflow {
     private Provider accessoryProvider;
 
     private Worker worker;
-    private ThreadPoolExecutor workersThreadPool;
-
     private ReadyCarWarehouseController readyCarWarehouseController;
     private Dealer dealer;
+
+    private Thread viewThread;
+    private Thread carBodyProviderThread;
+    private Thread engineProviderThread;
+    private List<Thread> accessoryProvidersThreadsList = new ArrayList<>();
+    private Thread readyCarWarehouseControllerThread;
+    private List<Thread> dealersThreadsList = new ArrayList<>();
+    private ThreadPoolExecutor workersThreadPool;
 
     public FactoryWorkflow() {
         initial();
     }
 
     public void execute() {
-        new Thread(view).start();
+        viewThread.start();
 
-        new Thread(carBodyProvider).start();
-        new Thread(engineProvider).start();
+        carBodyProviderThread.start();
+        engineProviderThread.start();
 
         int accessoryProvidersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
         for (int i = 0; i < accessoryProvidersNumber; i++) {
-            new Thread(accessoryProvider).start();
+            accessoryProvidersThreadsList.get(i).start();
         }
+
+        readyCarWarehouseControllerThread.start();
 
         int dealersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
         for (int i = 0; i < dealersNumber; i++) {
-            new Thread(dealer).start();
+            dealersThreadsList.get(i).start();
         }
 
-        new Thread(readyCarWarehouseController).start();
+        if (isLogging) { log.info("All threads started"); }
+    }
+
+    public void stopThreads() {
+        viewThread.interrupt();
+        carBodyProviderThread.interrupt();
+        engineProviderThread.interrupt();
+        int accessoryProvidersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
+        for (int i = 0; i < accessoryProvidersNumber; i++) {
+            accessoryProvidersThreadsList.get(i).interrupt();
+        }
+
+        readyCarWarehouseControllerThread.interrupt();
+
+        int dealersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
+        for (int i = 0; i < dealersNumber; i++) {
+            dealersThreadsList.get(i).interrupt();
+        }
+
+        if (isLogging) { log.info("All threads interrupted by close window"); }
     }
 
     private void initial() {
         jFrameObject = new JFrameObject();
+        jFrameObject.setFactoryWorkflow(this);
 
         try (InputStream config = this.getClass().getResourceAsStream("../../../../config")) {
             factoryModel.setFactoryProperties(ConfigParser.parse(config));
         } catch (IOException ex) {
+            log.error("Factory workflow: ", ex);
             ex.printStackTrace();
         }
+
+        this.isLogging = Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"));
 
         Properties factoryProperty = factoryModel.getFactoryProperties();
         factoryModel.getWarehousesMap().put("CarBody", new CarBodyWarehouse(Integer.parseInt(factoryProperty.getProperty("carBodyWarehouseSize"))));
@@ -84,6 +121,8 @@ public class FactoryWorkflow {
         initialWorkersThreadPool();
         initialReadyCarWarehouseController();
         initialDealers();
+
+        if (isLogging) { log.info("Initialed all components."); }
     }
 
     private void initialCarBodyProvider() {
@@ -92,6 +131,8 @@ public class FactoryWorkflow {
         );
         carBodyProvider.setWarehouse(factoryModel.getWarehousesMap().get("CarBody"));
         carBodyProvider.setFactoryModel(factoryModel);
+
+        carBodyProviderThread = new Thread(carBodyProvider);
     }
 
     private void initialEngineProvider() {
@@ -100,6 +141,8 @@ public class FactoryWorkflow {
         );
         engineProvider.setWarehouse(factoryModel.getWarehousesMap().get("Engine"));
         engineProvider.setFactoryModel(factoryModel);
+
+        engineProviderThread = new Thread(engineProvider);
     }
 
     private void initialAccessoryProvider() {
@@ -108,6 +151,11 @@ public class FactoryWorkflow {
         );
         accessoryProvider.setWarehouse(factoryModel.getWarehousesMap().get("Accessory"));
         accessoryProvider.setFactoryModel(factoryModel);
+
+        int accessoryProvidersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
+        for (int i = 0; i < accessoryProvidersNumber; i++) {
+            accessoryProvidersThreadsList.add(i, new Thread(accessoryProvider));
+        }
     }
 
     private void initialWorker() {
@@ -134,6 +182,8 @@ public class FactoryWorkflow {
         readyCarWarehouseController.setWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
         readyCarWarehouseController.setWorkersThreadPool(workersThreadPool);
         readyCarWarehouseController.setWorker(worker);
+
+        readyCarWarehouseControllerThread = new Thread(readyCarWarehouseController);
     }
 
     private void initialDealers() {
@@ -143,11 +193,20 @@ public class FactoryWorkflow {
         dealer.setFactoryModel(factoryModel);
         dealer.setReadyCarWarehouse((ReadyCarWarehouse) factoryModel.getWarehousesMap().get("ReadyCar"));
         dealer.setReadyCarWarehouseController(readyCarWarehouseController);
+
+        int dealersNumber = Integer.parseInt(factoryModel.getFactoryProperties().getProperty("accessoryProvidersNumber"));
+        for (int i = 0; i < dealersNumber; i++) {
+            dealersThreadsList.add(i, new Thread(dealer));
+        }
     }
 
     private void initialView() {
-        view = new FactoryView();
+        view = new FactoryView(
+                Boolean.getBoolean(factoryModel.getFactoryProperties().getProperty("isLogging"))
+        );
         view.setJFrameObject(jFrameObject);
         view.setFactoryModel(factoryModel);
+
+        viewThread = new Thread(view);
     }
 }

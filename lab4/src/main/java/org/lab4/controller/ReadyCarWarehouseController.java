@@ -51,7 +51,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 waitNewTask();
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
 
             System.out.println("ReadyCarWarehouseController");
@@ -60,7 +60,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 readyCarWarehouse.isFilled();
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
 
             workersThreadPool.execute(() -> worker.run());

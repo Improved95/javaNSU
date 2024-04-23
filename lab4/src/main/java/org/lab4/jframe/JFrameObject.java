@@ -1,7 +1,10 @@
 package org.lab4.jframe;
 
+import org.lab4.controller.factory.FactoryWorkflow;
+
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,9 @@ public class JFrameObject {
     private JFrame frame;
     private List<SliderLabel> slidersList;
     private List<InfoField> infoFieldList;
+
+    private FactoryWorkflow factoryWorkflow;
+
     public JFrameObject() {
         this.frame = getJFrame();
         this.slidersList = setSliders();
@@ -21,6 +27,10 @@ public class JFrameObject {
 
     public JFrame getFrame() {
         return frame;
+    }
+
+    public void setFactoryWorkflow(FactoryWorkflow factoryWorkflow) {
+        this.factoryWorkflow = factoryWorkflow;
     }
 
     public int getCarBodyProviderDelay() {
@@ -140,6 +150,15 @@ public class JFrameObject {
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - frameWidth / 2, dimension.height / 2 - frameHeight / 2, frameWidth, frameHeight);
         jFrame.setLayout(null);
+
+        jFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                factoryWorkflow.stopThreads();
+                System.exit(0);
+            }
+        });
+
         return jFrame;
     }
 }

@@ -58,7 +58,7 @@ public class Worker extends Thread {
             detailsContext.setAccessory((Accessory) accessoryWarehouse.pickUpDetail());
         } catch (InterruptedException ex) {
             if (isLogging) { log.error("Worker: ", ex); }
-            throw new RuntimeException(ex);
+            return;
         }
 
         ReadyCar readyCar = new ReadyCar();
@@ -70,7 +70,6 @@ public class Worker extends Thread {
             if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
         } catch (InterruptedException ex) {
             if (isLogging) { log.error("Worker: ", ex); }
-            throw new RuntimeException(ex);
         }
     }
 }

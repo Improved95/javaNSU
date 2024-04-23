@@ -39,13 +39,13 @@ public class Dealer implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
-            ReadyCar readyCar;
+            ReadyCar readyCar = null;
             try {
                 readyCarWarehouseController.setNewTaskExist();
                 readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("Dealer: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
 
             if (isLogging) {
@@ -58,7 +58,7 @@ public class Dealer implements Runnable {
                 sleep(factoryModel.getDealersRequestDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("Dealer with id: {}", 1, ex); }
-                throw new RuntimeException(ex);
+                return;
             }
         }
     }

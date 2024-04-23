@@ -19,14 +19,14 @@ public class EngineProvider extends AbstractProvider {
                 if (isLogging) { log.info("EngineProvider: add new Engine with id: {}", engine.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("EngineProvider: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
 
             try {
                 sleep(factoryModel.getEngineProviderDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
         }
     }

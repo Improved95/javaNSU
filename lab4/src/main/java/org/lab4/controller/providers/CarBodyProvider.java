@@ -19,14 +19,14 @@ public class CarBodyProvider extends AbstractProvider {
                 if (isLogging) { log.info("CarBodyProvider: add new carBody with id: {}", carBody.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
 
             try {
                 sleep(factoryModel.getCarBodyProviderDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("CarBodyProvider: ", ex); }
-                throw new RuntimeException(ex);
+                return;
             }
         }
     }
