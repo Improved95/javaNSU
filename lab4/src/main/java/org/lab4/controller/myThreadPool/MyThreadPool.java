@@ -3,6 +3,7 @@ package org.lab4.controller.myThreadPool;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyThreadPool {
     private final int threadPoolSize;
@@ -10,12 +11,14 @@ public class MyThreadPool {
     BlockingQueue<RunnableThread> availableThreads;
     BlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>();
 
+    AtomicInteger taskQueueSize = new AtomicInteger(0);
+
     public MyThreadPool(int threadPoolSize) {
         this.threadPoolSize = threadPoolSize;
         this.availableThreads = new ArrayBlockingQueue<>(threadPoolSize);
 
         for (int i = 0; i < threadPoolSize; i++) {
-            availableThreads.offer(new RunnableThread(taskQueue));
+            availableThreads.offer(new RunnableThread(taskQueue, taskQueueSize));
         }
 
         for (RunnableThread thread : availableThreads) {
@@ -25,7 +28,7 @@ public class MyThreadPool {
 
     public void addTask(Runnable task) {
         taskQueue.offer(task);
-        System.out.println(taskQueue.size());
+        taskQueueSize.incrementAndGet();
     }
 
     public void interrupt() {
@@ -35,6 +38,6 @@ public class MyThreadPool {
     }
 
     public int getTaskQueueSize() {
-        return taskQueue.size();
+        return taskQueueSize.get();
     }
 }

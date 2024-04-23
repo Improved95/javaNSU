@@ -4,13 +4,12 @@ import org.lab4.controller.factory.FactoryWorkflow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JFrameObject {
     private final int frameWidth = 600;
-    private final int frameHeight = 550;
+    private final int frameHeight = 560;
 
     private JFrame frame;
     private List<SliderLabel> slidersList;
@@ -77,7 +76,7 @@ public class JFrameObject {
     }
 
     public synchronized void setQueueOfCreatingCarSize(int value) {
-        infoFieldList.get(7).updateValue(value);
+        infoFieldList.get(6).updateValue(value);
         frame.repaint();
     }
 

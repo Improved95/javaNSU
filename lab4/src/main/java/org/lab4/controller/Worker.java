@@ -65,7 +65,7 @@ Worker extends Thread {
         readyCar.setDetailsContext(detailsContext);
 
         try {
-            sleep(2000); /* полезная нагрузка */
+//            sleep(2000); /* "полезная нагрузка" */
 
             readyCarWarehouse.addDetail(readyCar);
             factoryModel.getTotalCreatedCarNumber().incrementAndGet();

@@ -5,8 +5,6 @@ import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ThreadPoolExecutor;
-
 public class ReadyCarWarehouseController implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
