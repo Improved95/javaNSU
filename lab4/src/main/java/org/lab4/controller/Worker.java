@@ -67,6 +67,9 @@ Worker extends Thread {
         try {
             readyCarWarehouse.addDetail(readyCar);
             factoryModel.getTotalCreatedCarNumber().incrementAndGet();
+
+            sleep(1000); /* полезная нагрузка */
+
             if (isLogging) { log.info("Worker with id {}: add new car with id {}", 1, readyCar.getDetailId()); }
         } catch (InterruptedException ex) {
             if (isLogging) { log.error("Worker: ", ex); }

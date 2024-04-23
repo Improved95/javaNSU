@@ -23,8 +23,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class FactoryWorkflow {
     protected static final Logger log = LoggerFactory.getLogger(Dealer.class);
@@ -48,7 +46,6 @@ public class FactoryWorkflow {
     private List<Thread> accessoryProvidersThreadsList = new ArrayList<>();
     private Thread readyCarWarehouseControllerThread;
     private List<Thread> dealersThreadsList = new ArrayList<>();
-//    private ThreadPoolExecutor workersThreadPool;
     private MyThreadPool workersThreadPool;
 
     public FactoryWorkflow() {
@@ -92,6 +89,8 @@ public class FactoryWorkflow {
             dealersThreadsList.get(i).interrupt();
         }
 
+        workersThreadPool.interrupt();
+
         if (isLogging) { log.info("All threads interrupted by close window"); }
     }
 
@@ -114,13 +113,13 @@ public class FactoryWorkflow {
         factoryModel.getWarehousesMap().put("Accessory", new AccessoryWarehouse(Integer.parseInt(factoryProperty.getProperty("accessoryWarehouseSize"))));
         factoryModel.getWarehousesMap().put("ReadyCar", new ReadyCarWarehouse(Integer.parseInt(factoryProperty.getProperty("readyCarWarehouseSize"))));
 
+        initialWorkersThreadPool();
         initialView();
 
         initialCarBodyProvider();
         initialEngineProvider();
         initialAccessoryProvider();
         initialWorker();
-        initialWorkersThreadPool();
         initialReadyCarWarehouseController();
         initialDealers();
 
@@ -172,9 +171,6 @@ public class FactoryWorkflow {
     }
 
     private void initialWorkersThreadPool() {
-        /*workersThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(
-                Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber"))
-        );*/
         workersThreadPool = new MyThreadPool(
                 Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber"))
         );
@@ -211,6 +207,7 @@ public class FactoryWorkflow {
         );
         view.setJFrameObject(jFrameObject);
         view.setFactoryModel(factoryModel);
+        view.setThreadPool(workersThreadPool);
 
         viewThread = new Thread(view);
     }

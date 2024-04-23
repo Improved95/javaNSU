@@ -17,6 +17,10 @@ public class MyThreadPool {
         for (int i = 0; i < threadPoolSize; i++) {
             availableThreads.offer(new RunnableThread(taskQueue));
         }
+
+        for (RunnableThread thread : availableThreads) {
+            new Thread(thread).start();
+        }
     }
 
     public void addTask(Runnable task) {

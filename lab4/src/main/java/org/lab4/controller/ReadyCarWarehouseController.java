@@ -55,8 +55,6 @@ public class ReadyCarWarehouseController implements Runnable {
                 return;
             }
 
-            System.out.println("ReadyCarWarehouseController");
-
             try {
                 readyCarWarehouse.isFilled();
             } catch (InterruptedException ex) {

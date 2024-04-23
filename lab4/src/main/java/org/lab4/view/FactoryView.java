@@ -1,6 +1,7 @@
 package org.lab4.view;
 
 import org.lab4.controller.Dealer;
+import org.lab4.controller.myThreadPool.MyThreadPool;
 import org.lab4.jframe.JFrameObject;
 import org.lab4.model.factory.FactoryModel;
 import org.lab4.model.warehouse.Warehouse;
@@ -17,6 +18,7 @@ public class FactoryView implements Runnable {
 
     private JFrameObject jFrameObject;
     private FactoryModel factoryModel;
+    private MyThreadPool threadPool;
 
     public FactoryView(boolean isLogging) {
         this.isLogging = isLogging;
@@ -28,6 +30,10 @@ public class FactoryView implements Runnable {
 
     public void setFactoryModel(FactoryModel factoryModel) {
         this.factoryModel = factoryModel;
+    }
+
+    public void setThreadPool(MyThreadPool threadPool) {
+        this.threadPool = threadPool;
     }
 
     @Override
@@ -43,6 +49,8 @@ public class FactoryView implements Runnable {
 
             jFrameObject.setAccessoryWarehouseSize(warehouseMap.get("Accessory").getSize());
             jFrameObject.setAccessoryProviderTotalImportedDetailsNumber(factoryModel.getTotalImportedDetailsNumberOnAccessoryWarehouse().get());
+
+            jFrameObject.setQueueOfCreatingCarSize(threadPool.getTaskQueueSize());
 
             jFrameObject.setReadyCarWarehouseSize(warehouseMap.get("ReadyCar").getSize());
             jFrameObject.setTotalReadyCarCreatedNumber(factoryModel.getTotalCreatedCarNumber().get());

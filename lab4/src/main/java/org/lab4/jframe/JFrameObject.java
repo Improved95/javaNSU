@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JFrameObject {
     private final int frameWidth = 600;
-    private final int frameHeight = 530;
+    private final int frameHeight = 550;
 
     private JFrame frame;
     private List<SliderLabel> slidersList;
@@ -76,13 +76,18 @@ public class JFrameObject {
         frame.repaint();
     }
 
+    public synchronized void setQueueOfCreatingCarSize(int value) {
+        infoFieldList.get(7).updateValue(value);
+        frame.repaint();
+    }
+
     public synchronized void setReadyCarWarehouseSize(int value) {
-        infoFieldList.get(6).updateValue(value);
+        infoFieldList.get(7).updateValue(value);
         frame.repaint();
     }
 
     public synchronized void setTotalReadyCarCreatedNumber(int value) {
-        infoFieldList.get(7).updateValue(value);
+        infoFieldList.get(8).updateValue(value);
         frame.repaint();
     }
 
@@ -131,11 +136,12 @@ public class JFrameObject {
                 "Total Engine imported number: ",
                 "Detail number on Accessory warehouse: ",
                 "Total Accessory imported number: ",
+                "Queue of creating car size: ",
                 "Detail number on ReadyCar warehouse: ",
                 "Total ReadyCar created number: ",
         };
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             infoFieldList.add(new InfoField(posX, posY + infoFieldHeight * i, infoFieldWidth, infoFieldHeight, fieldsText[i]));
         }
 
