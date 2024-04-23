@@ -1,6 +1,5 @@
 package org.lab4.controller;
 
-import org.lab4.jframe.JFrameObject;
 import org.lab4.model.details.*;
 import org.lab4.model.factory.FactoryModel;
 import org.lab4.model.warehouse.AccessoryWarehouse;
