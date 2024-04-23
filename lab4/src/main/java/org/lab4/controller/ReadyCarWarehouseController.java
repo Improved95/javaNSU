@@ -13,6 +13,7 @@ public class ReadyCarWarehouseController implements Runnable {
     private Worker worker;
     private ThreadPoolExecutor workersThreadPool;
 
+    boolean newTaskIsExist = false;
     private ReadyCarWarehouse readyCarWarehouse;
 
     public ReadyCarWarehouseController(boolean isLogging) {
@@ -31,11 +32,23 @@ public class ReadyCarWarehouseController implements Runnable {
         this.readyCarWarehouse = readyCarWarehouse;
     }
 
+    private synchronized void waitNewTask() throws InterruptedException {
+        while (!newTaskIsExist) {
+            wait();
+        }
+        this.newTaskIsExist = false;
+    }
+
+    public synchronized void setNewTaskExist() {
+        this.newTaskIsExist = true;
+        notifyAll();
+    }
+
     @Override
     public void run() {
         while (true) {
             try {
-//                readyCarWarehouse.waitPickUpDetail();
+                waitNewTask();
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("ReadyCarWarehouseController: ", ex); }
                 throw new RuntimeException(ex);
