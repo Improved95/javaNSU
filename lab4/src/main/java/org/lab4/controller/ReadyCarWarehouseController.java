@@ -63,6 +63,7 @@ public class ReadyCarWarehouseController implements Runnable {
             }
 
             workersThreadPool.addTask(() -> worker.run());
+            workersThreadPool.addTask(() -> worker.run());
         }
     }
 }

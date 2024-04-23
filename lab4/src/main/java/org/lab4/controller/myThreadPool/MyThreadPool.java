@@ -25,6 +25,7 @@ public class MyThreadPool {
 
     public void addTask(Runnable task) {
         taskQueue.offer(task);
+        System.out.println(taskQueue.size());
     }
 
     public void interrupt() {
