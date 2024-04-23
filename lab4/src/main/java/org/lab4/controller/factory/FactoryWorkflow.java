@@ -2,6 +2,7 @@ package org.lab4.controller.factory;
 
 import org.lab4.controller.Dealer;
 import org.lab4.controller.Worker;
+import org.lab4.controller.myThreadPool.MyThreadPool;
 import org.lab4.controller.providers.AccessoryProvider;
 import org.lab4.controller.providers.CarBodyProvider;
 import org.lab4.controller.providers.EngineProvider;
@@ -47,7 +48,8 @@ public class FactoryWorkflow {
     private List<Thread> accessoryProvidersThreadsList = new ArrayList<>();
     private Thread readyCarWarehouseControllerThread;
     private List<Thread> dealersThreadsList = new ArrayList<>();
-    private ThreadPoolExecutor workersThreadPool;
+//    private ThreadPoolExecutor workersThreadPool;
+    private MyThreadPool workersThreadPool;
 
     public FactoryWorkflow() {
         initial();
@@ -170,7 +172,10 @@ public class FactoryWorkflow {
     }
 
     private void initialWorkersThreadPool() {
-        workersThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+        /*workersThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+                Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber"))
+        );*/
+        workersThreadPool = new MyThreadPool(
                 Integer.parseInt(factoryModel.getFactoryProperties().getProperty("workersNumber"))
         );
     }

@@ -15,12 +15,18 @@ public class MyThreadPool {
         this.availableThreads = new ArrayBlockingQueue<>(threadPoolSize);
 
         for (int i = 0; i < threadPoolSize; i++) {
-            availableThreads.offer(new RunnableThread());
+            availableThreads.offer(new RunnableThread(taskQueue));
         }
     }
 
     public void addTask(Runnable task) {
         taskQueue.offer(task);
+    }
+
+    public void interrupt() {
+        for (RunnableThread thread : availableThreads) {
+            thread.interrupt();
+        }
     }
 
     public int getTaskQueueSize() {

@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Worker extends Thread {
+public class
+Worker extends Thread {
     private static final Logger log = LoggerFactory.getLogger(Dealer.class);
     private boolean isLogging;
 

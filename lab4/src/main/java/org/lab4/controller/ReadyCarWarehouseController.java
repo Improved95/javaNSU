@@ -1,5 +1,6 @@
 package org.lab4.controller;
 
+import org.lab4.controller.myThreadPool.MyThreadPool;
 import org.lab4.model.warehouse.ReadyCarWarehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ public class ReadyCarWarehouseController implements Runnable {
     private boolean isLogging;
 
     private Worker worker;
-    private ThreadPoolExecutor workersThreadPool;
+    private MyThreadPool workersThreadPool;
 
     boolean newTaskIsExist = false;
     private ReadyCarWarehouse readyCarWarehouse;
@@ -24,7 +25,7 @@ public class ReadyCarWarehouseController implements Runnable {
         this.worker = worker;
     }
 
-    public void setWorkersThreadPool(ThreadPoolExecutor workersThreadPool) {
+    public void setWorkersThreadPool(MyThreadPool workersThreadPool) {
         this.workersThreadPool = workersThreadPool;
     }
 
@@ -63,7 +64,7 @@ public class ReadyCarWarehouseController implements Runnable {
                 return;
             }
 
-            workersThreadPool.execute(() -> worker.run());
+            workersThreadPool.addTask(() -> worker.run());
         }
     }
 }
