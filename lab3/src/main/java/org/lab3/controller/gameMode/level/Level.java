@@ -6,11 +6,8 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
-import org.lab3.model.objects.SlashBladeObjectAbstract;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
-import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
@@ -22,9 +19,7 @@ public class Level implements GameMode {
     private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();
     private JFrameObject jFrameObject;
 
-    private ResourcesContext samuraiImagesResources;
-    private ResourcesContext backgroundImagesResources;
-    private ResourcesContext enemyImagesResources;
+    private LevelResourcesContext levelResourcesContext = new LevelResourcesContext();
 
     private EnemyCreator enemyCreator = new EnemyCreator();
 
@@ -81,7 +76,7 @@ public class Level implements GameMode {
             enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
         }
 
-        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
+        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, levelResourcesContext.getEnemyImagesResources(), jFrameObject.getFrameSize(), currentFPS);
 
         deleteObjectsFromGame();
 
@@ -111,23 +106,22 @@ public class Level implements GameMode {
 
     @Override
     public void initial() {
-        this.samuraiImagesResources = new ResourcesContext();
-        samuraiImagesResources.addImage("samurai/zero.png");
-
-        this.backgroundImagesResources = new ResourcesContext();
-        backgroundImagesResources.addImage("bg/bg1.jpg");
-
-        enemyImagesResources = new ResourcesContext();
-        enemyImagesResources.addImage("samurai/enemy.png");
-
+        openResources();
         setPlayer();
         setBackground();
         enemyCreator.setCreateDelay(2000);
     }
 
+    private void openResources() {
+        levelResourcesContext.getPlayerImagesResources().addImage("samurai/zero.png");
+        levelResourcesContext.getBackgroundImagesResources().addImage("bg/bg1.jpg");
+        levelResourcesContext.getEnemyImagesResources().addImage("samurai/enemy.png");
+        levelResourcesContext.getEnemyImagesResources().addImage("fx/slash.png");
+    }
+
     private void setPlayer() {
         levelObjectsContext.setPlayer(new SamuraiV1());
-        levelObjectsContext.getPlayer().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.getPlayer().setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
 
         actionsContext.setPlayerActionController(new PlayerAction(levelObjectsContext.getPlayer()));
 
@@ -137,7 +131,7 @@ public class Level implements GameMode {
 
     private void setBackground() {
         levelObjectsContext.setBackground(new Background());
-        levelObjectsContext.getBackground().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.getBackground().setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
 
         levelObjectsContext.getBackground().setScreenLayerLevel(0);
         levelObjectsContext.getBackground().setInGamePosition(0, -170);
