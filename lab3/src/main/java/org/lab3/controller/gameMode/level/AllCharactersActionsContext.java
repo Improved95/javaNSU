@@ -2,7 +2,7 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.ObjectAndHisMovement;
 import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
-import org.lab3.controller.actions.samuraiActions.PlayerActionAbstract;
+import org.lab3.controller.actions.playerActions.PlayerActionAbstract;
 import org.lab3.model.objects.characters.SamuraiV1;
 
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ public class EnemyMoveX extends EnemyActionAbstract {
         this.isExecute = true;
     }
 
-    @Override
+    /*@Override
     public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
@@ -31,5 +31,5 @@ public class EnemyMoveX extends EnemyActionAbstract {
                 character.changeInGamePos(dx, 0);
             }
         }
-    }
+    }*/
 }

@@ -53,7 +53,7 @@ public class EnemyCreator {
     }
 
     private void fillEnemyMovement(AllCharactersActionsContext actionsContext, SamuraiV1 enemy) {
-        ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> objectAndHisMovement = new ObjectAndHisMovement();
+        /*ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> objectAndHisMovement = new ObjectAndHisMovement();
 
         Map<String, EnemyActionAbstract> enemyMovement = new HashMap<>();
         enemyMovement.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
@@ -63,6 +63,6 @@ public class EnemyCreator {
         objectAndHisMovement.setGameObject(enemy);
         objectAndHisMovement.setObjectMovement(enemyMovement);
 
-        actionsContext.getEnemyAndMovementList().add(objectAndHisMovement);
+        actionsContext.getEnemyAndMovementList().add(objectAndHisMovement);*/
     }
 }

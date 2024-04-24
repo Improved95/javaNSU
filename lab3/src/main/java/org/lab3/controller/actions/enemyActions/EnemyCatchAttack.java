@@ -6,9 +6,9 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
-public class EnemyCatchAttack extends EnemyActionAbstract {
+public class EnemyCatchAttack  {
 
-    public EnemyCatchAttack(SlashBladeCharacterAbstract character) {
+    /*public EnemyCatchAttack(SlashBladeCharacterAbstract character) {
         super(character);
         this.isExecute = true;
     }
@@ -32,5 +32,5 @@ public class EnemyCatchAttack extends EnemyActionAbstract {
                 }
             }
         }
-    }
+    }   */
 }

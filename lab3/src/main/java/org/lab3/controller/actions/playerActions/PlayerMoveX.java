@@ -1,20 +1,14 @@
-package org.lab3.controller.actions.samuraiActions;
+package org.lab3.controller.actions.playerActions;
 
-import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
-import org.lab3.model.gameObjectsContext.LevelObjectsContext;
-import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
+import org.lab3.controller.actions.ActionExecuteAbstract;
+import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
-public class PlayerMoveX extends PlayerActionAbstract {
+public class PlayerMoveX extends ActionExecuteAbstract {
     private int aIsPress = 0;
     private int dIsPress = 0;
 
-    public PlayerMoveX(SlashBladeCharacterAbstract character) {
-        super(character);
-    }
-
-    @Override
-    public void changeMoveX(int a, int d) {
+    public void changeMoveX(SamuraiV1 character, int a, int d) {
         if (a == 1) {
             if (dIsPress != 1) {
                 character.changeDirection(-1);
@@ -49,8 +43,7 @@ public class PlayerMoveX extends PlayerActionAbstract {
         }
     }
 
-    @Override
-    public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
+    public void execute(SamuraiV1 character, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             double speedOfMoveX = character.getParametersContext().getSpeedOfMoveX();
             double reductionFactor = frameSize.getReductionFactor();

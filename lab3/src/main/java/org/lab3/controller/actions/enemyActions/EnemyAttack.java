@@ -17,7 +17,7 @@ public class EnemyAttack extends EnemyActionAbstract {
         this.attackDelay = character.getParametersContext().getAttackDelay();
     }
 
-    @Override
+    /*@Override
     public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
@@ -27,7 +27,7 @@ public class EnemyAttack extends EnemyActionAbstract {
                 attack(currentFPS);
             }
         }
-    }
+    }*/
 
     private void attack(double currentFPS) {
         if (attackDuration > 0) {

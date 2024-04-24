@@ -1,15 +1,13 @@
 package org.lab3.controller.actions;
 
-public abstract class ActionControllerAbstract implements ActionController {
+public abstract class ActionExecuteAbstract {
     protected boolean isExecute = false;
     protected boolean isBlockExecute = false;
 
-    @Override
     public void setExecuteStatus(boolean isExecute) {
         this.isExecute = isExecute;
     }
 
-    @Override
     public void setBlockExecuteStatus(boolean isBlockExecute) {
         this.isBlockExecute = isBlockExecute;
     }
