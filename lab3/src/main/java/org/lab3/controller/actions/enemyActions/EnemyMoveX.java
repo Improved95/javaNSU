@@ -1,19 +1,16 @@
 package org.lab3.controller.actions.enemyActions;
 
-import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
+import org.lab3.controller.actions.ActionExecuteAbstract;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.slashBlade.FrameSize;
 
-public class EnemyMoveX extends EnemyActionAbstract {
-    public EnemyMoveX(SlashBladeCharacterAbstract character) {
-        super(character);
+public class EnemyMoveX extends ActionExecuteAbstract {
+    public EnemyMoveX() {
         this.isExecute = true;
     }
 
-    /*@Override
-    public void execute(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext, double currentFPS, FrameSize frameSize) {
+    public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double playerPosX = player.getInGamePosX();
@@ -31,5 +28,5 @@ public class EnemyMoveX extends EnemyActionAbstract {
                 character.changeInGamePos(dx, 0);
             }
         }
-    }*/
+    }
 }

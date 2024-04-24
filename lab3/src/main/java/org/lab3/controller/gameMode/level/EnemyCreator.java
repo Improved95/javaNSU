@@ -1,10 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.ObjectAndHisMovement;
-import org.lab3.controller.actions.enemyActions.EnemyActionAbstract;
-import org.lab3.controller.actions.enemyActions.EnemyAttack;
-import org.lab3.controller.actions.enemyActions.EnemyCatchAttack;
-import org.lab3.controller.actions.enemyActions.EnemyMoveX;
+import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
@@ -53,16 +49,6 @@ public class EnemyCreator {
     }
 
     private void fillEnemyMovement(AllCharactersActionsContext actionsContext, SamuraiV1 enemy) {
-        /*ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> objectAndHisMovement = new ObjectAndHisMovement();
-
-        Map<String, EnemyActionAbstract> enemyMovement = new HashMap<>();
-        enemyMovement.put("ENEMY_MOVE_X", new EnemyMoveX(enemy));
-        enemyMovement.put("ENEMY_CATCH_ATTACK", new EnemyCatchAttack(enemy));
-        enemyMovement.put("ENEMY_ATTACK", new EnemyAttack(enemy));
-
-        objectAndHisMovement.setGameObject(enemy);
-        objectAndHisMovement.setObjectMovement(enemyMovement);
-
-        actionsContext.getEnemyAndMovementList().add(objectAndHisMovement);*/
+        actionsContext.getEnemyActionsControllers().add(new EnemyAction(enemy));
     }
 }

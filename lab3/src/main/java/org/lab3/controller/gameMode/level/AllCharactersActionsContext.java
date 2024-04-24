@@ -1,14 +1,24 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.ObjectAndHisMovement;
+import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
-import org.lab3.model.objects.characters.SamuraiV1;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllCharactersActionsContext {
-    private ObjectAndHisMovement<SamuraiV1, PlayerAction> playerAndMovement = new ObjectAndHisMovement<>();
-//    private List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> enemyAndMovementList = new ArrayList<>();
+    private PlayerAction playerActionController;
+    private List<EnemyAction> enemyActionsControllers = new ArrayList<>();
 
-    public ObjectAndHisMovement<SamuraiV1, PlayerAction> getPlayerAndMovement() {
-        return playerAndMovement;
+    public PlayerAction getPlayerActionController() {
+        return playerActionController;
+    }
+
+    public void setPlayerActionController(PlayerAction playerActionController) {
+        this.playerActionController = playerActionController;
+    }
+
+    public List<EnemyAction> getEnemyActionsControllers() {
+        return enemyActionsControllers;
     }
 }

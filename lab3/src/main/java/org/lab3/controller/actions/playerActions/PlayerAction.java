@@ -7,11 +7,11 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
 public class PlayerAction implements ActionController {
-    private static SamuraiV1 character;
+    private SamuraiV1 character;
 
-    private static PlayerCatchAttack playerCatchAttack;
-    private static PlayerMoveX playerMoveX;
-    private static PlayerAttack playerAttack;
+    private PlayerCatchAttack playerCatchAttack;
+    private PlayerMoveX playerMoveX;
+    private PlayerAttack playerAttack;
 
     public PlayerAction(SamuraiV1 character) {
         this.character = character;
@@ -20,15 +20,19 @@ public class PlayerAction implements ActionController {
         playerCatchAttack = new PlayerCatchAttack();
     }
 
-    public static PlayerCatchAttack getPlayerCatchAttack() {
+    public SamuraiV1 getCharacter() {
+        return character;
+    }
+
+    public PlayerCatchAttack getPlayerCatchAttack() {
         return playerCatchAttack;
     }
 
-    public static PlayerMoveX getPlayerMoveX() {
+    public PlayerMoveX getPlayerMoveX() {
         return playerMoveX;
     }
 
-    public static PlayerAttack getPlayerAttack() {
+    public PlayerAttack getPlayerAttack() {
         return playerAttack;
     }
 
