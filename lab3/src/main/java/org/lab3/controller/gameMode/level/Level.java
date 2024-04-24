@@ -5,11 +5,17 @@ import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
+import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
+import org.lab3.model.objects.backgrounds.Background;
+import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Level implements GameMode {
     private Model model;
@@ -75,62 +81,66 @@ public class Level implements GameMode {
             enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
         }
 
-        /*
-        List<SamuraiV1> deleteEnemyList = new ArrayList<>();
-        List<ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract>> deleteEnemyActionList = new ArrayList<>();
-        for (SamuraiV1 enemy : levelObjectsContext.getEnemyList()) {
-            if (enemy.getParametersContext().getHealth() <= 0) {
+        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
+
+        deleteObjectsFromGame();
+
+        if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    private void deleteObjectsFromGame() {
+        List<SlashBladeObject> deleteEnemyList = new ArrayList<>();
+        List<EnemyAction> deleteEnemyActionControllersList = new ArrayList<>();
+        for (SlashBladeObject enemy : levelObjectsContext.getEnemyList()) {
+            if (!enemy.isGameObjectIsExist()) {
                 deleteEnemyList.add(enemy);
-                for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyAction : actionsContext.getEnemyAndMovementList()) {
-                    if (enemyAction.getGameObject().equals(enemy)) {
-                        deleteEnemyActionList.add(enemyAction);
+                for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
+                    if (enemyActionController.getCharacter().equals(enemy)) {
+                        deleteEnemyActionControllersList.add(enemyActionController);
                     }
                 }
             }
         }
         levelObjectsContext.getEnemyList().removeAll(deleteEnemyList);
-        actionsContext.getEnemyAndMovementList().removeAll(deleteEnemyActionList);
-
-        if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
-            return 1;
-        }*/
-
-        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, enemyImagesResources, jFrameObject.getFrameSize(), currentFPS);
-        return 0;
+        actionsContext.getEnemyActionsControllers().removeAll(deleteEnemyActionControllersList);
     }
 
     @Override
     public void initial() {
         this.samuraiImagesResources = new ResourcesContext();
         samuraiImagesResources.addImage("samurai/zero.png");
-        levelObjectsContext.getPlayer().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         this.backgroundImagesResources = new ResourcesContext();
         backgroundImagesResources.addImage("bg/bg1.jpg");
-        levelObjectsContext.getBackground().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
         enemyImagesResources = new ResourcesContext();
         enemyImagesResources.addImage("samurai/enemy.png");
 
-        fillPlayerMovementList();
-
-        setPlayer(levelObjectsContext.getPlayer());
-        setBackground(levelObjectsContext.getBackground());
+        setPlayer();
+        setBackground();
         enemyCreator.setCreateDelay(2000);
     }
 
-    private void setPlayer(SlashBladeCharacterAbstract slashBladeCharacter) {
-        slashBladeCharacter.setScreenLayerLevel(1);
-        slashBladeCharacter.setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
-    }
+    private void setPlayer() {
+        levelObjectsContext.setPlayer(new SamuraiV1());
+        levelObjectsContext.getPlayer().setImage(samuraiImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
-    private void setBackground(SlashBladeObjectAbstract slashBladeObject) {
-        slashBladeObject.setScreenLayerLevel(0);
-        slashBladeObject.setInGamePosition(0, -170);
-        slashBladeObject.setScreenSize(115);
-    }
-
-    private void fillPlayerMovementList() {
         actionsContext.setPlayerActionController(new PlayerAction(levelObjectsContext.getPlayer()));
+
+        levelObjectsContext.getPlayer().setScreenLayerLevel(1);
+        levelObjectsContext.getPlayer().setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
+    }
+
+    private void setBackground() {
+        levelObjectsContext.setBackground(new Background());
+        levelObjectsContext.getBackground().setImage(backgroundImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
+
+        levelObjectsContext.getBackground().setScreenLayerLevel(0);
+        levelObjectsContext.getBackground().setInGamePosition(0, -170);
+        levelObjectsContext.getBackground().setScreenSize(115);
     }
 }

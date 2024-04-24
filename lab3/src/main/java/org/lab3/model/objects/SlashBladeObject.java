@@ -12,4 +12,8 @@ public interface SlashBladeObject {
     void setInGamePosition(double x, double y);
 
     void changeInGamePos(double dx, double dy);
+
+    boolean isGameObjectIsExist();
+
+    void setGameObjectIsExist(boolean gameObjectIsExist);
 }

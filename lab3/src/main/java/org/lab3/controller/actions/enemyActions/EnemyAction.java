@@ -41,5 +41,9 @@ public class EnemyAction implements ActionController {
         enemyMoveX.execute(character, levelObjectsContext, currentFPS, frameSize);
         enemyAttack.execute(character, levelObjectsContext, currentFPS);
         enemyCatchAttack.execute(character, levelObjectsContext);
+
+        if (character.getParametersContext().getHealth() <= 0) {
+            character.setGameObjectIsExist(false);
+        }
     }
 }

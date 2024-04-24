@@ -3,6 +3,7 @@ package org.lab3.model.objects;
 public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
+    protected boolean gameObjectIsExist = true;
 
     @Override
     public double getInGamePosX() {
@@ -34,5 +35,15 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     public void changeInGamePos(double dx, double dy) {
         this.inGamePosX += dx;
         this.inGamePosY += dy;
+    }
+
+    @Override
+    public boolean isGameObjectIsExist() {
+        return gameObjectIsExist;
+    }
+
+    @Override
+    public void setGameObjectIsExist(boolean gameObjectIsExist) {
+        this.gameObjectIsExist = gameObjectIsExist;
     }
 }
