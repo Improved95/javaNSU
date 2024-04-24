@@ -11,9 +11,19 @@ public class SlashFXController implements ActionController {
 
     private SlashFXFollowPlayer slashFXFollowPlayer;
 
-    public SlashFXController(SlashFX slashFX) {
-        this.fx = slashFX;
+    public SlashFXController(SlashFX fx) {
+        this.fx = fx;
         this.slashFXFollowPlayer = new SlashFXFollowPlayer();
+        slashFXFollowPlayer.setExecuteStatus(true);
+        slashFXFollowPlayer.setBlockExecuteStatus(false);
+    }
+
+    public SlashFX getFx() {
+        return fx;
+    }
+
+    public SlashFXFollowPlayer getSlashFXFollowPlayer() {
+        return slashFXFollowPlayer;
     }
 
     @Override

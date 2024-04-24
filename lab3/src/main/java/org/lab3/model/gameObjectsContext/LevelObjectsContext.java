@@ -50,7 +50,7 @@ public class LevelObjectsContext implements ObjectsContext {
         AbstractList<DrawObject> objectsList = new ArrayList<>();
 
         objectsList.add(player);
-        objectsList.add(background);
+//        objectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
             objectsList.add(enemy);
         }

@@ -19,19 +19,21 @@ public class PlayerAttack extends ActionExecuteAbstract {
     }
 
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS) {
-        if (attackDuration > 0) {
-            character.getParametersContext().setAttackStatus(true);
-            levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
-            attackDuration -= 1000 / currentFPS;
-        } else {
-            if (attackDelay > 0) {
-                attackDelay -= 1000 / currentFPS;
-                character.getParametersContext().setAttackStatus(false);
-                levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
+        if (isExecute && !isBlockExecute) {
+            if (attackDuration > 0) {
+                character.getParametersContext().setAttackStatus(true);
+                levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
+                attackDuration -= 1000 / currentFPS;
             } else {
-                isExecute = false;
-                attackDuration = character.getParametersContext().getAttackDuration();
-                attackDelay = character.getParametersContext().getAttackDelay();
+                if (attackDelay > 0) {
+                    attackDelay -= 1000 / currentFPS;
+                    character.getParametersContext().setAttackStatus(false);
+                    levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
+                } else {
+                    isExecute = false;
+                    attackDuration = character.getParametersContext().getAttackDuration();
+                    attackDelay = character.getParametersContext().getAttackDelay();
+                }
             }
         }
     }

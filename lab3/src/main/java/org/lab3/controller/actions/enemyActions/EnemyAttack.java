@@ -29,14 +29,12 @@ public class EnemyAttack extends ActionExecuteAbstract {
 
     private void attack(SamuraiV1 character, double currentFPS) {
         if (attackDuration > 0) {
-            System.out.println("enemy attack");
             character.getParametersContext().setAttackStatus(true);
             attackDuration -= 1000 / currentFPS;
         } else {
             if (attackDelay > 0) {
                 attackDelay -= 1000 / currentFPS;
                 character.getParametersContext().setAttackStatus(false);
-                System.out.println("enemy attack stop");
             } else {
                 attackDuration = character.getParametersContext().getAttackDuration();
                 attackDelay = character.getParametersContext().getAttackDelay();

@@ -10,8 +10,7 @@ public class SlashFXFollowPlayer extends ActionExecuteAbstract {
         if (fx.isGameObjectIsExist()) {
             if (isExecute && !isBlockExecute) {
                 SlashBladeObjectAbstract player = levelObjectsContext.getPlayer();
-                fx.setInGamePosX(player.getInGamePosX());
-                fx.setInGamePosY(player.getInGamePosY());
+                fx.setInGamePosition(player.getInGamePosX() + 30 * player.getScreenHorizontalDirection(), player.getInGamePosY() + 35);
                 fx.setScreenHorizontalDirection(player.getScreenHorizontalDirection());
                 fx.setScreenLayerLevel(player.getScreenLayerLevel() + 1);
             }

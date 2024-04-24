@@ -74,6 +74,7 @@ public class Level implements GameMode {
     @Override
     public int execute(double currentFPS, FrameSize frameSize) {
         actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
         for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
             enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
         }
@@ -119,7 +120,7 @@ public class Level implements GameMode {
         levelResourcesContext.getPlayerImagesResources().addImage("samurai/zero.png");
         levelResourcesContext.getBackgroundImagesResources().addImage("bg/bg1.jpg");
         levelResourcesContext.getEnemyImagesResources().addImage("samurai/enemy.png");
-        levelResourcesContext.getEnemyImagesResources().addImage("fx/slash.png");
+        levelResourcesContext.getSlashFxImageResources().addImage("fx/slash.png");
     }
 
     private void setPlayer() {
@@ -144,6 +145,12 @@ public class Level implements GameMode {
     private void setFx() {
         levelObjectsContext.setSlashFX(new SlashFX());
         levelObjectsContext.getSlashFX().setImage(levelResourcesContext.getSlashFxImageResources().getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
+
+        levelObjectsContext.getSlashFX().setScreenLayerLevel(2);
+        levelObjectsContext.getSlashFX().setInGamePosition(50, 50);
+        levelObjectsContext.getSlashFX().setScreenSize(70);
+        levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
 
         actionsContext.setSlashFXController(new SlashFXController(levelObjectsContext.getSlashFX()));
     }
