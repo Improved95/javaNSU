@@ -48,7 +48,7 @@ public class PlayerAction implements ActionController {
     public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, FrameSize frameSize) {
 
-        playerAttack.execute(character, currentFPS);
+        playerAttack.execute(character, levelObjectsContext, currentFPS);
         playerCatchAttack.execute(character, levelObjectsContext);
         playerMoveX.execute(character, currentFPS, frameSize);
     }

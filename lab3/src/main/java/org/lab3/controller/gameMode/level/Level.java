@@ -1,5 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.actions.SlashFX.SlashFXController;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
@@ -8,6 +9,7 @@ import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.slashFX.SlashFX;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
 
@@ -109,6 +111,7 @@ public class Level implements GameMode {
         openResources();
         setPlayer();
         setBackground();
+        setFx();
         enemyCreator.setCreateDelay(2000);
     }
 
@@ -136,5 +139,12 @@ public class Level implements GameMode {
         levelObjectsContext.getBackground().setScreenLayerLevel(0);
         levelObjectsContext.getBackground().setInGamePosition(0, -170);
         levelObjectsContext.getBackground().setScreenSize(115);
+    }
+
+    private void setFx() {
+        levelObjectsContext.setSlashFX(new SlashFX());
+        levelObjectsContext.getSlashFX().setImage(levelResourcesContext.getSlashFxImageResources().getOpenedResourcesList().get(0).getOpenedImage());
+
+        actionsContext.setSlashFXController(new SlashFXController(levelObjectsContext.getSlashFX()));
     }
 }
