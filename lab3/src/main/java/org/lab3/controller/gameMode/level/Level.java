@@ -1,5 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
+import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -20,7 +21,7 @@ public class Level implements GameMode {
 
     private EnemyCreator enemyCreator = new EnemyCreator();
 
-//    private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
+    private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
 
     private Level(Model model, JFrameObject jFrameObject) {
         this.model = model;
@@ -28,19 +29,18 @@ public class Level implements GameMode {
         this.jFrameObject = jFrameObject;
     }
 
-
     @Override
     public void actionOnKeyPressed(int keyCode) {
         switch (keyCode) {
             case 87:
                 break;
             case 65:
-//                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(1, -1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().changeMoveX(1, -1);
                 break;
             case 83:
                 break;
             case 68:
-//                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().changeMoveX(-1, 1);
         }
     }
 
@@ -50,12 +50,12 @@ public class Level implements GameMode {
             case 87:
                 break;
             case 65:
-//                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(0, -1);
+                actionsContext.getPlayerAndMovement().getObjectMovement().changeMoveX(0, -1);
                 break;
             case 83:
                 break;
             case 68:
-//                actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").changeMoveX(-1, 0);
+                actionsContext.getPlayerAndMovement().getObjectMovement().changeMoveX(-1, 0);
                 break;
         }
     }
@@ -63,16 +63,14 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode) {
         if (mouseKeyCode == 1) {
-//            actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").attack();
+            actionsContext.getPlayerAndMovement().getObjectMovement().attack();
         }
     }
 
     @Override
     public int execute(double currentFPS, FrameSize frameSize) {
-        /*actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        actionsContext.getPlayerAndMovement().getObjectMovement().get("PLAYER_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
-
+        actionsContext.getPlayerAndMovement().getObjectMovement().nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
+        /*
         for (ObjectAndHisMovement<SamuraiV1, EnemyActionAbstract> enemyMovementList : actionsContext.getEnemyAndMovementList()) {
             enemyMovementList.getObjectMovement().get("ENEMY_MOVE_X").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
             enemyMovementList.getObjectMovement().get("ENEMY_CATCH_ATTACK").execute(levelObjectsContext, actionsContext, currentFPS, frameSize);
@@ -134,10 +132,7 @@ public class Level implements GameMode {
     }
 
     private void fillPlayerMovementList() {
-        /*Map<String, PlayerActionAbstract> playerMovement = new HashMap<>();
-        playerMovement.put("PLAYER_MOVE_X", new PlayerMoveX(levelObjectsContext.getPlayer()));
-        playerMovement.put("PLAYER_ATTACK", new PlayerAttack(levelObjectsContext.getPlayer()));
-        playerMovement.put("PLAYER_CATCH_ATTACK", new PlayerCatchAttack(levelObjectsContext.getPlayer()));
-        actionsContext.getPlayerAndMovement().setObjectMovement(playerMovement);*/
+        actionsContext.getPlayerAndMovement().setGameObject(levelObjectsContext.getPlayer());
+        actionsContext.getPlayerAndMovement().setObjectMovement(new PlayerAction(levelObjectsContext.getPlayer()));
     }
 }

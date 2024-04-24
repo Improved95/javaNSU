@@ -9,12 +9,15 @@ import org.lab3.slashBlade.FrameSize;
 public class PlayerAction implements ActionController {
     private static SamuraiV1 character;
 
-    private static PlayerCatchAttack playerCatchAttack = new PlayerCatchAttack();
-    private static PlayerMoveX playerMoveX = new PlayerMoveX();
-    private static PlayerAttack playerAttack = new PlayerAttack(character);
+    private static PlayerCatchAttack playerCatchAttack;
+    private static PlayerMoveX playerMoveX;
+    private static PlayerAttack playerAttack;
 
     public PlayerAction(SamuraiV1 character) {
         this.character = character;
+        playerMoveX = new PlayerMoveX();
+        playerAttack = new PlayerAttack(character);
+        playerCatchAttack = new PlayerCatchAttack();
     }
 
     public static PlayerCatchAttack getPlayerCatchAttack() {
@@ -27,6 +30,14 @@ public class PlayerAction implements ActionController {
 
     public static PlayerAttack getPlayerAttack() {
         return playerAttack;
+    }
+
+    public void changeMoveX(int a, int d) {
+        playerMoveX.changeMoveX(character, a, d);
+    }
+
+    public void attack() {
+        playerAttack.initialAttack();
     }
 
     @Override
