@@ -131,6 +131,8 @@ public class Level implements GameMode {
 
         levelObjectsContext.getPlayer().setScreenLayerLevel(1);
         levelObjectsContext.getPlayer().setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
+        levelObjectsContext.getPlayer().getParametersContext().setRadiusForwardAttack(100);
+        levelObjectsContext.getPlayer().getParametersContext().setRadiusBackwardAttack(10);
     }
 
     private void setBackground() {
@@ -147,8 +149,6 @@ public class Level implements GameMode {
         levelObjectsContext.getSlashFX().setImage(levelResourcesContext.getSlashFxImageResources().getOpenedResourcesList().get(0).getOpenedImage());
         levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
 
-        levelObjectsContext.getSlashFX().setScreenLayerLevel(2);
-        levelObjectsContext.getSlashFX().setInGamePosition(50, 50);
         levelObjectsContext.getSlashFX().setScreenSize(70);
         levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
 

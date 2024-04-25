@@ -23,7 +23,7 @@ public class EnemyCreator {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setSpeedOfMoveX(500);
-            enemy.getParametersContext().setRadiusForwardAttack(60);
+            enemy.getParametersContext().setRadiusForwardAttack(80);
             enemy.getParametersContext().setRadiusBackwardAttack(10);
             enemy.getParametersContext().setAttackDuration(50);
             enemy.getParametersContext().setAttackDelay(200);
