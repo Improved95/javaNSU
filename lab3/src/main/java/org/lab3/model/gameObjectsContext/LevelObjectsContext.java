@@ -13,6 +13,8 @@ public class LevelObjectsContext implements ObjectsContext {
     private List<SamuraiV1> enemyList = new ArrayList<>();
     private SlashFX slashFX;
 
+    private int score = 0;
+
     public SamuraiV1 getPlayer() {
         return player;
     }
@@ -45,12 +47,20 @@ public class LevelObjectsContext implements ObjectsContext {
         this.slashFX = slashFX;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public AbstractList<DrawObject> getDrawObjectsList() {
         AbstractList<DrawObject> objectsList = new ArrayList<>();
 
         objectsList.add(player);
-//        objectsList.add(background);
+        objectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
             objectsList.add(enemy);
         }

@@ -12,7 +12,6 @@ class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
-//    private JFrameObject jFrameObject;
 
     SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
@@ -21,10 +20,6 @@ class SlashBladeLogicController {
     public void setModel(Model model) {
         this.model = model;
     }
-
-//    public void setJFrameObject(JFrameObject jFrameObject) {
-//        this.jFrameObject = jFrameObject;
-//    }
 
     void initial() {
         try {
@@ -50,7 +45,8 @@ class SlashBladeLogicController {
     }
 
     int calculateFrame(double currentFPS) {
-        if (currentGameMode.execute(currentFPS) == 1) {
+        int returnValue = currentGameMode.execute(currentFPS);
+        if (returnValue == 1) {
             return 1;
         }
         return 0;

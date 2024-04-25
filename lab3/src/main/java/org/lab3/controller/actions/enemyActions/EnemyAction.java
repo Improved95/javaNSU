@@ -3,9 +3,9 @@ package org.lab3.controller.actions.enemyActions;
 import org.lab3.controller.actions.ActionController;
 import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
+import org.lab3.model.gameObjectsContext.ObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.slashBlade.FrameSize;
 
 public class EnemyAction implements ActionController {
     private SamuraiV1 character;
@@ -46,6 +46,7 @@ public class EnemyAction implements ActionController {
         enemyCatchAttack.execute(character, levelObjectsContext);
 
         if (character.getParametersContext().getHealth() <= 0) {
+            levelObjectsContext.setScore(levelObjectsContext.getScore() + 1);
             character.setGameObjectIsExist(false);
         }
     }

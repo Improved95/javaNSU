@@ -14,7 +14,8 @@ public class EditedImage {
 
     public EditedImage(DrawObject oldImage, FrameSize frameSize) {
         this.oldImage = oldImage;
-        resizingImage(frameSize);
+//        resizingImage(frameSize);
+        newImage = oldImage.getImage();
         replaceImage(frameSize);
     }
 
@@ -43,7 +44,7 @@ public class EditedImage {
 
         this.newImage = Scalr.resize(oldImage.getImage(), Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
                 (int)newImageWidthByScreenSize, (int)newImageHeightByScreenSize, Scalr.OP_ANTIALIAS);
-
+//        this.newImage = oldImage.getImage();
     }
 
     public void replaceImage(FrameSize frameSize) {

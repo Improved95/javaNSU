@@ -29,7 +29,7 @@ public class SlashBladeView implements View {
     }
 
     @Override
-    public void drawObject(Graphics2D g2, FrameSize frameSize) {
+    public void drawObject(Graphics g, FrameSize frameSize) {
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
             drawObjectsList.sort((o1, o2) -> {
@@ -41,7 +41,7 @@ public class SlashBladeView implements View {
 
             for (DrawObject drawObject : drawObjectsList) {
                 EditedImage imageEditor = new EditedImage(drawObject, frameSize);
-                g2.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
+                g.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
                         drawObject.getScreenHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
             }
         }

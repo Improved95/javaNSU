@@ -12,5 +12,5 @@ public interface View {
     void setDrawing(boolean drawing);
 
     void changeViewScreen(JFrameObject jFrameObject);
-    void drawObject(Graphics2D g2, FrameSize frameSize);
+    void drawObject(Graphics g, FrameSize frameSize);
 }

@@ -5,7 +5,6 @@ import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.slashFX.SlashFX;
-import org.lab3.slashBlade.FrameSize;
 
 public class SlashFXController implements ActionController {
     private SlashFX fx;

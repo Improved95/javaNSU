@@ -10,8 +10,6 @@ import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.slashFX.SlashFX;
-import org.lab3.slashBlade.FrameSize;
-import org.lab3.slashBlade.JFrameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.List;
 public class Level implements GameMode {
     private Model model;
     private LevelObjectsContext levelObjectsContext;
-//    private JFrameObject jFrameObject;
 
     private LevelResourcesContext levelResourcesContext = new LevelResourcesContext();
 
@@ -86,6 +83,10 @@ public class Level implements GameMode {
 
         if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
             return 1;
+        }
+
+        if (levelObjectsContext.getScore() >= 3) {
+            return 2;
         }
 
         return 0;

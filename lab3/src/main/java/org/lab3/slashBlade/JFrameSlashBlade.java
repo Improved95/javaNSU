@@ -43,9 +43,8 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
 
         @Override
         protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            view.drawObject(g2, frameSize);
-            g2.dispose();
+            view.drawObject(g, frameSize);
+            g.dispose();
         }
     }
 
