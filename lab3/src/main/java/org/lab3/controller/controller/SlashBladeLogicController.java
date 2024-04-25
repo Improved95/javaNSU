@@ -12,7 +12,7 @@ class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
-    private JFrameObject jFrameObject;
+//    private JFrameObject jFrameObject;
 
     SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
@@ -22,13 +22,13 @@ class SlashBladeLogicController {
         this.model = model;
     }
 
-    public void setJFrameObject(JFrameObject jFrameObject) {
-        this.jFrameObject = jFrameObject;
-    }
+//    public void setJFrameObject(JFrameObject jFrameObject) {
+//        this.jFrameObject = jFrameObject;
+//    }
 
     void initial() {
         try {
-            currentGameMode = gameModesFactory.create("LEVEL", model, jFrameObject);
+            currentGameMode = gameModesFactory.create("LEVEL", model);
         } catch (ClassNotFoundException | IllegalAccessException |
                     InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
 
@@ -49,8 +49,8 @@ class SlashBladeLogicController {
         currentGameMode.actionOnMousePressed(keyCode);
     }
 
-    int calculateFrame(double currentFPS, FrameSize frameSize) {
-        if (currentGameMode.execute(currentFPS, frameSize) == 1) {
+    int calculateFrame(double currentFPS) {
+        if (currentGameMode.execute(currentFPS) == 1) {
             return 1;
         }
         return 0;

@@ -18,8 +18,8 @@ import java.util.List;
 
 public class Level implements GameMode {
     private Model model;
-    private LevelObjectsContext levelObjectsContext = new LevelObjectsContext();
-    private JFrameObject jFrameObject;
+    private LevelObjectsContext levelObjectsContext;
+//    private JFrameObject jFrameObject;
 
     private LevelResourcesContext levelResourcesContext = new LevelResourcesContext();
 
@@ -27,10 +27,10 @@ public class Level implements GameMode {
 
     private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
 
-    private Level(Model model, JFrameObject jFrameObject) {
+    private Level(Model model) {
         this.model = model;
+        levelObjectsContext  = new LevelObjectsContext();
         this.model.setGameModeObjectsContext(levelObjectsContext);
-        this.jFrameObject = jFrameObject;
     }
 
     @Override
@@ -72,14 +72,15 @@ public class Level implements GameMode {
     }
 
     @Override
-    public int execute(double currentFPS, FrameSize frameSize) {
-        actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
-        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
+    public int execute(double currentFPS) {
+        actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
+        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
-            enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, frameSize);
+            enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         }
 
-        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, levelResourcesContext.getEnemyImagesResources(), jFrameObject.getFrameSize(), currentFPS);
+        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext,
+                levelResourcesContext.getEnemyImagesResources(), model.getFrameSize(), currentFPS);
 
         deleteObjectsFromGame();
 
@@ -130,7 +131,7 @@ public class Level implements GameMode {
         actionsContext.setPlayerActionController(new PlayerAction(levelObjectsContext.getPlayer()));
 
         levelObjectsContext.getPlayer().setScreenLayerLevel(1);
-        levelObjectsContext.getPlayer().setInGamePosition(jFrameObject.getFrameSize().getWidth() / 2, 0);
+        levelObjectsContext.getPlayer().setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
         levelObjectsContext.getPlayer().getParametersContext().setRadiusForwardAttack(100);
         levelObjectsContext.getPlayer().getParametersContext().setRadiusBackwardAttack(10);
     }

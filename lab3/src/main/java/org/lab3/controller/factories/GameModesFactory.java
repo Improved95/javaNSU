@@ -15,13 +15,13 @@ public class GameModesFactory {
         this.gameModesProperty = setGameModesProperty();
     }
 
-    public GameMode create(String modeName, Model model, JFrameObject jFrameObject) throws ClassNotFoundException, IllegalAccessException,
+    public GameMode create(String modeName, Model model) throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, NoSuchMethodException, InvocationTargetException {
 
         Class classObject = Class.forName(gameModesProperty.getProperty(modeName));
-        Constructor ctor = classObject.getDeclaredConstructor(Model.class, JFrameObject.class);
+        Constructor ctor = classObject.getDeclaredConstructor(Model.class);
         ctor.setAccessible(true);
-        GameMode gameMode = (GameMode)ctor.newInstance(model, jFrameObject);
+        GameMode gameMode = (GameMode)ctor.newInstance(model);
         return gameMode;
     }
 

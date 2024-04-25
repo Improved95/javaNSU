@@ -3,6 +3,7 @@ package org.lab3.controller.actions.playerActions;
 import org.lab3.controller.actions.ActionController;
 import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
+import org.lab3.model.model.Model;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 
@@ -46,10 +47,10 @@ public class PlayerAction implements ActionController {
 
     @Override
     public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
-                         double currentFPS, FrameSize frameSize) {
+                         double currentFPS, Model model) {
 
         playerAttack.execute(character, levelObjectsContext, currentFPS);
         playerCatchAttack.execute(character, levelObjectsContext);
-        playerMoveX.execute(character, currentFPS, frameSize);
+        playerMoveX.execute(character, currentFPS, model.getFrameSize());
     }
 }

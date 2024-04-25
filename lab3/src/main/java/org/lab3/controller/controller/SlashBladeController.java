@@ -51,7 +51,7 @@ public class SlashBladeController implements Controller {
     @Override
     public void initial() {
         slashBladeLogicController.setModel(model);
-        slashBladeLogicController.setJFrameObject(jFrameObject);
+//        slashBladeLogicController.setJFrameObject(jFrameObject);
         slashBladeLogicController.initial();
         view.setDrawing(true);
         generationTickTimer = new Timer();
@@ -78,7 +78,7 @@ public class SlashBladeController implements Controller {
 
         /*-----------------*/
 
-        int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS, jFrameObject.getFrameSize());
+        int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
         view.changeViewScreen(jFrameObject);
 
         if (returnValue == 1) {
