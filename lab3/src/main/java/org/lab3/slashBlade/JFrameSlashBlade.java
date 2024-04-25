@@ -9,7 +9,7 @@ import java.awt.*;
 public class JFrameSlashBlade extends JFrame implements JFrameObject {
     private FrameSize frameSize = new FrameSize();
     private JFrame jFrame;
-    private MyComponent myComponent;
+    private GamePanel gamePanel;
 
     public JFrameSlashBlade(int width) {
         this.frameSize.setWidth(width);
@@ -28,29 +28,15 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
 
     @Override
     public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
-        myComponent = new MyComponent(view);
         jFrame.addKeyListener(keyListenerController);
         jFrame.addMouseListener(keyListenerController);
-        jFrame.add(myComponent);
-    }
-
-    class MyComponent extends JComponent {
-        private View view;
-
-        public MyComponent(View view) {
-            this.view = view;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            view.drawObject(g, frameSize);
-            g.dispose();
-        }
+        this.gamePanel = new GamePanel(view, frameSize);
+        jFrame.add(gamePanel);
     }
 
     @Override
     public void repaintObjects() {
-        myComponent.repaint();
+        gamePanel.repaint();
     }
 
     private int getHeightByWidth() {
@@ -61,6 +47,8 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         JFrame jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setResizable(false);
+        jFrame.pack();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - frameSize.getWidth() / 2, dimension.height / 2 - frameSize.getHeight() / 2, frameSize.getWidth(), frameSize.getHeight());
