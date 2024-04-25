@@ -22,7 +22,7 @@ public class SlashBlade {
         slashBladeModel = new SlashBladeModel();
         slashBladeView = new SlashBladeView();
 
-        jFrameSlashBlade = new JFrameSlashBlade(1700);
+        jFrameSlashBlade = new JFrameSlashBlade(1650);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, SlashBladeController.getSlashBladeKeyListenerController());
 
         slashBladeModel.setFrameSize(jFrameSlashBlade.getFrameSize());

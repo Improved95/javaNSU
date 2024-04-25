@@ -82,7 +82,7 @@ public class Level implements GameMode {
         deleteObjectsFromGame();
 
         if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
-            return 1;
+//            return 1;
         }
 
         if (levelObjectsContext.getScore() >= 3) {
@@ -131,10 +131,14 @@ public class Level implements GameMode {
 
         actionsContext.setPlayerActionController(new PlayerAction(levelObjectsContext.getPlayer()));
 
-        levelObjectsContext.getPlayer().setScreenLayerLevel(1);
+        levelObjectsContext.getPlayer().getParametersContext().setInGameHorizontalDirection(1);
         levelObjectsContext.getPlayer().setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
+        levelObjectsContext.getPlayer().getParametersContext().setSpeedOfMoveX(700);
+        levelObjectsContext.getPlayer().getParametersContext().setAttackDuration(50);
+        levelObjectsContext.getPlayer().getParametersContext().setAttackDelay(200);
         levelObjectsContext.getPlayer().getParametersContext().setRadiusForwardAttack(100);
-        levelObjectsContext.getPlayer().getParametersContext().setRadiusBackwardAttack(10);
+        levelObjectsContext.getPlayer().getParametersContext().setRadiusBackwardAttack(35);
+        levelObjectsContext.getPlayer().setScreenLayerLevel(2);
     }
 
     private void setBackground() {

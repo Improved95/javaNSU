@@ -27,9 +27,10 @@ public class EnemyCreator {
             enemy.getParametersContext().setRadiusBackwardAttack(10);
             enemy.getParametersContext().setAttackDuration(50);
             enemy.getParametersContext().setAttackDelay(200);
+            enemy.setScreenLayerLevel(1);
 
             Random random = new Random();
-            if (random.nextInt() % 2 == 1) {
+            if (random.nextBoolean()) {
                 enemy.setInGamePosition(-100, 0);
                 enemy.changeDirection(1);
             } else {
