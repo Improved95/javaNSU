@@ -40,9 +40,8 @@ public class SlashBladeView implements View {
             });
 
             for (DrawObject drawObject : drawObjectsList) {
-                EditedImage imageEditor = new EditedImage(drawObject, frameSize);
-                g.drawImage(imageEditor.getNewImage(), (int)imageEditor.getNewPosX(), (int)imageEditor.getNewPosY(),
-                        drawObject.getScreenHorizontalDirection() * imageEditor.getNewImage().getWidth(), imageEditor.getNewImage().getHeight(), null);
+                EditedImage.editImage(drawObject, frameSize);
+                g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY, EditedImage.newImageWidth, EditedImage.newImageHeight, null);
             }
         }
     }
