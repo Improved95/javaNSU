@@ -19,8 +19,6 @@ public class Level implements GameMode {
     private Model model;
     private LevelObjectsContext levelObjectsContext;
 
-    private LevelResourcesContext levelResourcesContext = new LevelResourcesContext();
-
     private EnemyCreator enemyCreator = new EnemyCreator();
 
     private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
@@ -112,25 +110,16 @@ public class Level implements GameMode {
 
     @Override
     public void initial() {
-        openResources();
         setPlayer();
         setBackground();
         setFx();
         enemyCreator.setCreateDelay(2000);
     }
 
-    private void openResources() {
-        levelResourcesContext.getPlayerImagesResources().addImage("samurai/zero.png");
-        levelResourcesContext.getBackgroundImagesResources().addImage("bg/bg1.jpg");
-        levelResourcesContext.getEnemyImagesResources().addImage("samurai/enemy.png");
-        levelResourcesContext.getSlashFxImageResources().addImage("fx/slash.png");
-    }
-
     private void setPlayer() {
         levelObjectsContext.setPlayer(new SamuraiV1(Constants.PlayerConstants.ZERO_ATLAS));
 
         SamuraiV1 player = levelObjectsContext.getPlayer();
-//        player.setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
         player.getParametersContext().setInGameHorizontalDirection(1);
         player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
         player.getParametersContext().setSpeedOfMoveX(700);
@@ -147,7 +136,6 @@ public class Level implements GameMode {
     private void setBackground() {
         levelObjectsContext.setBackground(new Background(Constants.BackgroundConstants.BACKGROUND_ATLAS));
         Background bg = levelObjectsContext.getBackground();
-//        bg.setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
         bg.setScreenLayerLevel(0);
         bg.setInGamePosition(0, -170);
         bg.setObjectSize(115);
