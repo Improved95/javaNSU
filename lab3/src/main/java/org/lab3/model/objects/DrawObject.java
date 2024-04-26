@@ -35,5 +35,5 @@ public interface DrawObject {
 
     BufferedImage getImage();
 
-    void setImage(BufferedImage image);
+    void setImage();
 }

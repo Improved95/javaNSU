@@ -1,6 +1,7 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.enemyActions.EnemyAction;
+import org.lab3.model.Constants;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
@@ -17,10 +18,10 @@ public class EnemyCreator {
     }
 
     public void create(List<SamuraiV1> enemyList, AllCharactersActionsContext actionsContext,
-                       ResourcesContext enemyImagesResources, FrameSize frameSize, double currentFPS) {
+                       FrameSize frameSize, double currentFPS) {
 
         if (timerCreateDelay <= 0) {
-            SamuraiV1 enemy = new SamuraiV1();
+            SamuraiV1 enemy = new SamuraiV1(Constants.EnemyConstants.ENEMY_ATLAS);
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setSpeedOfMoveX(500);
             enemy.getParametersContext().setRadiusForwardAttack(80);
@@ -38,8 +39,6 @@ public class EnemyCreator {
                 enemy.setInGamePosition(frameSize.getWidth() + 100, 0);
                 enemy.changeDirection(-1);
             }
-
-            enemy.setImage(enemyImagesResources.getOpenedResourcesList().get(0).getOpenedImage());
 
             fillEnemyMovement(actionsContext, enemy);
             enemyList.add(enemy);

@@ -1,5 +1,7 @@
 package org.lab3.model.objects;
 
+import org.lab3.resources.ResourcesContext;
+
 import java.awt.image.BufferedImage;
 
 public abstract class DrawObjectAbstract implements DrawObject {
@@ -11,7 +13,13 @@ public abstract class DrawObjectAbstract implements DrawObject {
     protected int screenLayerLevel = 0;
     protected int screenWidth;
     protected int screenHeight;
+    protected ResourcesContext resourcesContext;
     protected BufferedImage image;
+
+    public DrawObjectAbstract(String atlas) {
+        resourcesContext = new ResourcesContext();
+        resourcesContext.addImage(atlas);
+    }
 
     @Override
     public double getScreenPosX() {
@@ -93,8 +101,9 @@ public abstract class DrawObjectAbstract implements DrawObject {
         return image;
     }
 
+    /*
     @Override
     public void setImage(BufferedImage image) {
         this.image = image;
-    }
+    }*/
 }

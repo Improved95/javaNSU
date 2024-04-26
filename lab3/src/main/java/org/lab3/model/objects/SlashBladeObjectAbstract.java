@@ -7,7 +7,8 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     protected int height;
     protected boolean gameObjectIsExist = true;
 
-    public SlashBladeObjectAbstract() {
+    public SlashBladeObjectAbstract(String atlas) {
+        super(atlas);
         setObjectSize(100);
     }
 

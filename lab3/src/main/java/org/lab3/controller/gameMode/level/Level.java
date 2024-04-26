@@ -4,6 +4,7 @@ import org.lab3.controller.actions.SlashFX.SlashFXController;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
+import org.lab3.model.Constants;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
@@ -77,7 +78,7 @@ public class Level implements GameMode {
         }
 
         enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext,
-                levelResourcesContext.getEnemyImagesResources(), model.getFrameSize(), currentFPS);
+                model.getFrameSize(), currentFPS);
 
         deleteObjectsFromGame();
 
@@ -126,10 +127,10 @@ public class Level implements GameMode {
     }
 
     private void setPlayer() {
-        levelObjectsContext.setPlayer(new SamuraiV1());
+        levelObjectsContext.setPlayer(new SamuraiV1(Constants.PlayerConstants.ZERO_ATLAS));
 
         SamuraiV1 player = levelObjectsContext.getPlayer();
-        player.setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
+//        player.setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
         player.getParametersContext().setInGameHorizontalDirection(1);
         player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
         player.getParametersContext().setSpeedOfMoveX(700);
@@ -144,17 +145,16 @@ public class Level implements GameMode {
     }
 
     private void setBackground() {
-        levelObjectsContext.setBackground(new Background());
+        levelObjectsContext.setBackground(new Background(Constants.BackgroundConstants.BACKGROUND_ATLAS));
         Background bg = levelObjectsContext.getBackground();
-        bg.setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
+//        bg.setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
         bg.setScreenLayerLevel(0);
         bg.setInGamePosition(0, -170);
         bg.setObjectSize(115);
     }
 
     private void setFx() {
-        levelObjectsContext.setSlashFX(new SlashFX());
-        levelObjectsContext.getSlashFX().setImage(levelResourcesContext.getSlashFxImageResources().getOpenedResourcesList().get(0).getOpenedImage());
+        levelObjectsContext.setSlashFX(new SlashFX(Constants.FXConstants.SLASH_FX_ATLAS));
         levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
 
         levelObjectsContext.getSlashFX().setObjectSize(70);
