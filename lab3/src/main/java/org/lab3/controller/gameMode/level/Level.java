@@ -127,27 +127,29 @@ public class Level implements GameMode {
 
     private void setPlayer() {
         levelObjectsContext.setPlayer(new SamuraiV1());
-        levelObjectsContext.getPlayer().setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
 
-        actionsContext.setPlayerActionController(new PlayerAction(levelObjectsContext.getPlayer()));
+        SamuraiV1 player = levelObjectsContext.getPlayer();
+        player.setImage(levelResourcesContext.getPlayerImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
+        player.getParametersContext().setInGameHorizontalDirection(1);
+        player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
+        player.getParametersContext().setSpeedOfMoveX(700);
+        player.getParametersContext().setAttackDuration(50);
+        player.getParametersContext().setAttackDelay(200);
+        player.getParametersContext().setRadiusForwardAttack(100);
+        player.getParametersContext().setRadiusBackwardAttack(35);
+        player.setObjectSize(90);
+        player.setScreenLayerLevel(2);
 
-        levelObjectsContext.getPlayer().getParametersContext().setInGameHorizontalDirection(1);
-        levelObjectsContext.getPlayer().setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
-        levelObjectsContext.getPlayer().getParametersContext().setSpeedOfMoveX(700);
-        levelObjectsContext.getPlayer().getParametersContext().setAttackDuration(50);
-        levelObjectsContext.getPlayer().getParametersContext().setAttackDelay(200);
-        levelObjectsContext.getPlayer().getParametersContext().setRadiusForwardAttack(100);
-        levelObjectsContext.getPlayer().getParametersContext().setRadiusBackwardAttack(35);
-        levelObjectsContext.getPlayer().setScreenLayerLevel(2);
+        actionsContext.setPlayerActionController(new PlayerAction(player));
     }
 
     private void setBackground() {
         levelObjectsContext.setBackground(new Background());
-        levelObjectsContext.getBackground().setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
-
-        levelObjectsContext.getBackground().setScreenLayerLevel(0);
-        levelObjectsContext.getBackground().setInGamePosition(0, -170);
-        levelObjectsContext.getBackground().setScreenSize(115);
+        Background bg = levelObjectsContext.getBackground();
+        bg.setImage(levelResourcesContext.getBackgroundImagesResources().getOpenedResourcesList().get(0).getOpenedImage());
+        bg.setScreenLayerLevel(0);
+        bg.setInGamePosition(0, -170);
+        bg.setObjectSize(115);
     }
 
     private void setFx() {
@@ -155,7 +157,7 @@ public class Level implements GameMode {
         levelObjectsContext.getSlashFX().setImage(levelResourcesContext.getSlashFxImageResources().getOpenedResourcesList().get(0).getOpenedImage());
         levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
 
-        levelObjectsContext.getSlashFX().setScreenSize(70);
+        levelObjectsContext.getSlashFX().setObjectSize(70);
         levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
 
         actionsContext.setSlashFXController(new SlashFXController(levelObjectsContext.getSlashFX()));

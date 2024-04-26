@@ -27,6 +27,7 @@ public class EnemyCreator {
             enemy.getParametersContext().setRadiusBackwardAttack(10);
             enemy.getParametersContext().setAttackDuration(50);
             enemy.getParametersContext().setAttackDelay(200);
+            enemy.setObjectSize(90);
             enemy.setScreenLayerLevel(1);
 
             Random random = new Random();

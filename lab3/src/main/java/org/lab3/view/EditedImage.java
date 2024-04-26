@@ -10,7 +10,7 @@ public class EditedImage {
     public static int newImageHeight;
 
     public static void editImage(DrawObject oldImage, FrameSize frameSize) {
-        resizingImage(oldImage, oldImage.getScreenSize());
+//        resizingImage(oldImage, oldImage.getScreenSize());
         replaceImage(oldImage, frameSize);
     }
 
@@ -27,9 +27,9 @@ public class EditedImage {
         newPosX = 0;
         newPosY = 0;
         if (oldImage.isDrawImageOnMiddle()) {
-            newPosX -= (newImageWidth * oldImage.getScreenHorizontalDirection() * oldImage.getScreenHorizontalDirection()) / 2;
+            newPosX -= (oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection()) / 2;
         }
         newPosX += oldImage.getScreenPosX();
-        newPosY += frameSize.getHeight() - (  39 + newImageHeight + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
+        newPosY += frameSize.getHeight() - (  39 + oldImage.getScreenHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
     }
 }

@@ -13,6 +13,18 @@ public interface SlashBladeObject {
 
     void changeInGamePos(double dx, double dy);
 
+    double getObjectSize();
+
+    void setObjectSize(double screenSize);
+
+    int getWidth();
+
+    void setWidth(int width);
+
+    int getHeight();
+
+    void setHeight(int height);
+
     boolean isGameObjectIsExist();
 
     void setGameObjectIsExist(boolean gameObjectIsExist);

@@ -41,7 +41,11 @@ public class SlashBladeView implements View {
 
             for (DrawObject drawObject : drawObjectsList) {
                 EditedImage.editImage(drawObject, frameSize);
-                g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY, EditedImage.newImageWidth, EditedImage.newImageHeight, null);
+//                g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY,
+//                        EditedImage.newImageWidth, EditedImage.newImageHeight, null);
+                g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY,
+                        drawObject.getScreenWidth() * drawObject.getScreenHorizontalDirection(),
+                        drawObject.getScreenHeight(), null);
             }
         }
     }

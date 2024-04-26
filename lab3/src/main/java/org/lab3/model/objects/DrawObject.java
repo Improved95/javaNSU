@@ -11,10 +11,6 @@ public interface DrawObject {
 
     void setScreenPosY(double screenPosY);
 
-    double getScreenSize();
-
-    void setScreenSize(double screenSize);
-
     int getScreenHorizontalDirection();
 
     void setScreenHorizontalDirection(int horizontalDirection);
@@ -26,6 +22,16 @@ public interface DrawObject {
     int getScreenLayerLevel();
 
     void setScreenLayerLevel(int screenLayerLevel);
+
+    double getScreenSize();
+
+    int getScreenWidth();
+
+    void setScreenWidth(int screenWidth);
+
+    int getScreenHeight();
+
+    void setScreenHeight(int screenHeight);
 
     BufferedImage getImage();
 

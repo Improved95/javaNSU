@@ -3,13 +3,15 @@ package org.lab3.model.objects;
 import java.awt.image.BufferedImage;
 
 public abstract class DrawObjectAbstract implements DrawObject {
-    private double screenPosX;
-    private double screenPosY;
-    private double screenSize = 100;
-    private int screenHorizontalDirection = 1;
-    private boolean drawImageOnMiddle = false;
-    private int screenLayerLevel = 0;
-    private BufferedImage image;
+    protected double screenPosX;
+    protected double screenPosY;
+    protected double screenSize = 100;
+    protected int screenHorizontalDirection = 1;
+    protected boolean drawImageOnMiddle = false;
+    protected int screenLayerLevel = 0;
+    protected int screenWidth;
+    protected int screenHeight;
+    protected BufferedImage image;
 
     @Override
     public double getScreenPosX() {
@@ -29,16 +31,6 @@ public abstract class DrawObjectAbstract implements DrawObject {
     @Override
     public void setScreenPosY(double screenPosY) {
         this.screenPosY = screenPosY;
-    }
-
-    @Override
-    public double getScreenSize() {
-        return screenSize;
-    }
-
-    @Override
-    public void setScreenSize(double screenSize) {
-        this.screenSize = screenSize;
     }
 
     @Override
@@ -69,6 +61,31 @@ public abstract class DrawObjectAbstract implements DrawObject {
     @Override
     public void setScreenLayerLevel(int screenLayerLevel) {
         this.screenLayerLevel = screenLayerLevel;
+    }
+
+    @Override
+    public double getScreenSize() {
+        return screenSize;
+    }
+
+    @Override
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    @Override
+    public void setScreenWidth(int screenWidth) {
+        this.screenWidth = screenWidth;
+    }
+
+    @Override
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    @Override
+    public void setScreenHeight(int screenHeight) {
+        this.screenHeight = screenHeight;
     }
 
     @Override
