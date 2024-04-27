@@ -9,6 +9,11 @@ public class Menu implements GameMode {
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public void actionOnKeyPressed(int keyCode) {
 
     }

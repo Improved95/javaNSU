@@ -44,6 +44,12 @@ public class PlayerAction implements ActionController {
         playerAttack.initialAttack();
     }
 
+    public void initial() {
+        playerMoveX.initial();
+        playerAttack.initial(character);
+        playerCatchAttack.initial();
+    }
+
     @Override
     public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {

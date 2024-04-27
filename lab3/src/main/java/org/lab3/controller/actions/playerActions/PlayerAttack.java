@@ -10,6 +10,10 @@ public class PlayerAttack extends ActionExecuteAbstract {
     private double attackDelay;
 
     public PlayerAttack(SlashBladeCharacterAbstract character) {
+        initial(character);
+    }
+
+    public void initial(SlashBladeCharacterAbstract character) {
         this.attackDuration = character.getParametersContext().getAttackDuration();
         this.attackDelay = character.getParametersContext().getAttackDelay();
     }

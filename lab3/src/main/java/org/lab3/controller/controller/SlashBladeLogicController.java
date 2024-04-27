@@ -10,7 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
-    private GameMode subGameMode;
     private Model model;
 
     SlashBladeLogicController() {
@@ -29,7 +28,6 @@ class SlashBladeLogicController {
 
             ex.printStackTrace();
         }
-        currentGameMode.initial();
     }
 
     void keyPressedObserver(int keyCode) {

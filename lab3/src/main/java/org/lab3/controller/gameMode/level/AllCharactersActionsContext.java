@@ -1,16 +1,15 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.SlashFX.SlashFXController;
+import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllCharactersActionsContext {
     private PlayerAction playerActionController;
-    private List<EnemyAction> enemyActionsControllers = new ArrayList<>();
-    private SlashFXController slashFXController;
+    private List<EnemyAction> enemyActionsControllers;
+    private SlashFXAction slashFXAction;
 
     public PlayerAction getPlayerActionController() {
         return playerActionController;
@@ -24,11 +23,15 @@ public class AllCharactersActionsContext {
         return enemyActionsControllers;
     }
 
-    public SlashFXController getSlashFXController() {
-        return slashFXController;
+    public void setEnemyActionsControllers(List<EnemyAction> enemyActionsControllers) {
+        this.enemyActionsControllers = enemyActionsControllers;
     }
 
-    public void setSlashFXController(SlashFXController slashFXController) {
-        this.slashFXController = slashFXController;
+    public SlashFXAction getSlashFXController() {
+        return slashFXAction;
+    }
+
+    public void setSlashFXController(SlashFXAction slashFXAction) {
+        this.slashFXAction = slashFXAction;
     }
 }

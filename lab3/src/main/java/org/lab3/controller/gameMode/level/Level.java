@@ -1,6 +1,6 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.SlashFX.SlashFXController;
+import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
@@ -20,17 +20,13 @@ import java.util.List;
 public class Level implements GameMode {
     private Model model;
     private LevelObjectsContext levelObjectsContext;
-
     private EnemyCreator enemyCreator = new EnemyCreator();
-
-    private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
-
+    private AllCharactersActionsContext actionsContext;
     private PauseOverlay endGameMenu = new EndGameMenu();
 
     private Level(Model model) {
         this.model = model;
-        levelObjectsContext  = new LevelObjectsContext();
-        this.model.setGameModeObjectsContext(levelObjectsContext);
+        initial();
     }
 
     @Override
@@ -85,7 +81,7 @@ public class Level implements GameMode {
         deleteObjectsFromGame();
 
         if (levelObjectsContext.getPlayer().getParametersContext().getHealth() <= 0) {
-            return 1;
+//            return 1;
         }
 
         if (levelObjectsContext.getScore() >= 3) {
@@ -114,15 +110,35 @@ public class Level implements GameMode {
 
     @Override
     public void initial() {
+        this.levelObjectsContext = new LevelObjectsContext();
+        this.model.setGameModeObjectsContext(levelObjectsContext);
+        this.actionsContext = new AllCharactersActionsContext();
         setPlayer();
+        setPlayerZeroState();
         setBackground();
+        setBackgroundZeroState();
         setFx();
+        setFxZeroState();
+        actionsContext.setEnemyActionsControllers(new ArrayList<>());
         enemyCreator.setCreateDelay(2000);
+    }
+
+    @Override
+    public void reset() {
+        setPlayerZeroState();
+        setBackgroundZeroState();
+        setFxZeroState();
+        actionsContext.setEnemyActionsControllers(new ArrayList<>());
     }
 
     private void setPlayer() {
         levelObjectsContext.setPlayer(new SamuraiV1(Constants.PlayerConstants.ZERO_ATLAS));
 
+        SamuraiV1 player = levelObjectsContext.getPlayer();
+        actionsContext.setPlayerActionController(new PlayerAction(player));
+    }
+
+    private void setPlayerZeroState() {
         SamuraiV1 player = levelObjectsContext.getPlayer();
         player.setInGameHorizontalDirection(1);
         player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
@@ -133,12 +149,13 @@ public class Level implements GameMode {
         player.getParametersContext().setRadiusBackwardAttack(35);
         player.setObjectSize(90);
         player.setScreenLayerLevel(2);
-
-        actionsContext.setPlayerActionController(new PlayerAction(player));
     }
 
     private void setBackground() {
         levelObjectsContext.setBackground(new Background(Constants.BackgroundConstants.BACKGROUND_ATLAS));
+    }
+
+    private void setBackgroundZeroState() {
         Background bg = levelObjectsContext.getBackground();
         bg.setScreenLayerLevel(0);
         bg.setInGamePosition(0, -170);
@@ -147,11 +164,14 @@ public class Level implements GameMode {
 
     private void setFx() {
         levelObjectsContext.setSlashFX(new SlashFX(Constants.FXConstants.SLASH_FX_ATLAS));
-        levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
+        actionsContext.setSlashFXController(new SlashFXAction(levelObjectsContext.getSlashFX()));
+    }
 
-        levelObjectsContext.getSlashFX().setObjectSize(70);
-//        levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
-
-        actionsContext.setSlashFXController(new SlashFXController(levelObjectsContext.getSlashFX()));
+    private void setFxZeroState() {
+        SlashFX slashFX = levelObjectsContext.getSlashFX();
+        slashFX.setGameObjectIsExist(false);
+        slashFX.setObjectSize(70);
+        actionsContext.getSlashFXController().initial();
+//        slashFX.setDrawImageOnMiddle(true);
     }
 }

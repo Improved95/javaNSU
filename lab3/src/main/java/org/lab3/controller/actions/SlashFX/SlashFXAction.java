@@ -6,16 +6,14 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.slashFX.SlashFX;
 
-public class SlashFXController implements ActionController {
+public class SlashFXAction implements ActionController {
     private SlashFX fx;
 
     private SlashFXFollowPlayer slashFXFollowPlayer;
 
-    public SlashFXController(SlashFX fx) {
+    public SlashFXAction(SlashFX fx) {
         this.fx = fx;
         this.slashFXFollowPlayer = new SlashFXFollowPlayer();
-        slashFXFollowPlayer.setExecuteStatus(true);
-        slashFXFollowPlayer.setBlockExecuteStatus(false);
     }
 
     public SlashFX getFx() {
@@ -24,6 +22,11 @@ public class SlashFXController implements ActionController {
 
     public SlashFXFollowPlayer getSlashFXFollowPlayer() {
         return slashFXFollowPlayer;
+    }
+
+    public void initial() {
+        slashFXFollowPlayer.setExecuteStatus(true);
+        slashFXFollowPlayer.setBlockExecuteStatus(false);
     }
 
     @Override

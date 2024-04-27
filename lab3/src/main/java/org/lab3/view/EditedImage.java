@@ -6,6 +6,7 @@ import org.lab3.slashBlade.FrameSize;
 public class EditedImage {
     public static double newPosX;
     public static double newPosY;
+    public static int newWidth;
 
     public static void editImage(DrawObject oldImage, FrameSize frameSize) {
         replaceImage(oldImage, frameSize);
@@ -14,6 +15,10 @@ public class EditedImage {
     private static void replaceImage(DrawObject oldImage, FrameSize frameSize) {
         newPosX = 0;
         newPosY = 0;
+        if (oldImage.getScreenHorizontalDirection() == -1) {
+            newPosX += oldImage.getScreenWidth();
+        }
+        newWidth = oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection();
         /*if (oldImage.isDrawImageOnMiddle()) {
             newPosX -= (oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection()) / 2;
         }*/

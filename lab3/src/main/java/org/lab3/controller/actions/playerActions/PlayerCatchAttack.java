@@ -13,6 +13,10 @@ public class PlayerCatchAttack extends ActionExecuteAbstract {
         this.isExecute = true;
     }
 
+    public void initial() {
+
+    }
+
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext) {
         if (isExecute && !isBlockExecute) {
             for (SamuraiV1 enemy : levelObjectsContext.getEnemyList()) {

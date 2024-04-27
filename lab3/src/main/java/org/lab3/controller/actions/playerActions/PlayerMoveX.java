@@ -8,6 +8,11 @@ public class PlayerMoveX extends ActionExecuteAbstract {
     private int aIsPress = 0;
     private int dIsPress = 0;
 
+    public void initial() {
+        aIsPress = 0;
+        dIsPress = 0;
+    }
+
     public void changeMoveX(SamuraiV1 character, int a, int d) {
         if (a == 1) {
             if (dIsPress != 1) {
