@@ -8,7 +8,7 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     public SlashBladeCharacterAbstract(String atlas) {
         super(atlas);
         this.parametersContext = new CharacterParametersContext();
-        setDrawImageOnMiddle(true);
+//        setDrawImageOnMiddle(true);
     }
 
     @Override
@@ -39,11 +39,5 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     @Override
     public void attack() {
 
-    }
-
-    @Override
-    public void changeDirection(int direction) {
-        parametersContext.setInGameHorizontalDirection(direction);
-        setScreenHorizontalDirection(direction);
     }
 }

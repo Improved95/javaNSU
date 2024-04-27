@@ -13,6 +13,12 @@ public interface SlashBladeObject {
 
     void changeInGamePos(double dx, double dy);
 
+    int getInGameHorizontalDirection();
+
+    void setInGameHorizontalDirection(int inGameHorizontalDirection);
+
+    void changeDirection(int direction);
+
     double getObjectSize();
 
     void setObjectSize(double screenSize);

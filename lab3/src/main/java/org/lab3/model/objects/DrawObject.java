@@ -15,9 +15,9 @@ public interface DrawObject {
 
     void setScreenHorizontalDirection(int horizontalDirection);
 
-    boolean isDrawImageOnMiddle();
+    /*boolean isDrawImageOnMiddle();
 
-    void setDrawImageOnMiddle(boolean drawImageOnMiddle);
+    void setDrawImageOnMiddle(boolean drawImageOnMiddle);*/
 
     int getScreenLayerLevel();
 

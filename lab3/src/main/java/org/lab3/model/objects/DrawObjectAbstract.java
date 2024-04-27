@@ -9,7 +9,7 @@ public abstract class DrawObjectAbstract implements DrawObject {
     protected double screenPosY;
     protected double screenSize = 100;
     protected int screenHorizontalDirection = 1;
-    protected boolean drawImageOnMiddle = false;
+//    protected boolean drawImageOnMiddle = false;
     protected int screenLayerLevel = 0;
     protected int screenWidth;
     protected int screenHeight;
@@ -51,7 +51,7 @@ public abstract class DrawObjectAbstract implements DrawObject {
         this.screenHorizontalDirection = screenHorizontalDirection;
     }
 
-    @Override
+    /*@Override
     public boolean isDrawImageOnMiddle() {
         return drawImageOnMiddle;
     }
@@ -59,7 +59,7 @@ public abstract class DrawObjectAbstract implements DrawObject {
     @Override
     public void setDrawImageOnMiddle(boolean drawImageOnMiddle) {
         this.drawImageOnMiddle = drawImageOnMiddle;
-    }
+    }*/
 
     @Override
     public int getScreenLayerLevel() {

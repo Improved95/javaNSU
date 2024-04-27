@@ -47,7 +47,7 @@ public class PlayerMoveX extends ActionExecuteAbstract {
         if (isExecute && !isBlockExecute) {
             double speedOfMoveX = character.getParametersContext().getSpeedOfMoveX();
             double reductionFactor = frameSize.getReductionFactor();
-            int direction = character.getParametersContext().getInGameHorizontalDirection();
+            int direction = character.getInGameHorizontalDirection();
             character.changeInGamePos(speedOfMoveX * reductionFactor * direction / currentFPS, 0);
         }
     }

@@ -17,7 +17,7 @@ public class EnemyCatchAttack extends ActionExecuteAbstract {
                 double relativePos = character.getInGamePosX() - player.getInGamePosX();
                 double radiusForwardAttack = player.getParametersContext().getRadiusForwardAttack();
                 double radiusBackwardAttack = player.getParametersContext().getRadiusBackwardAttack();
-                if (player.getParametersContext().getInGameHorizontalDirection() == 1) {
+                if (player.getInGameHorizontalDirection() == 1) {
                     if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
                         character.getParametersContext().setHealth(character.getParametersContext().getHealth() - 1);
                     }

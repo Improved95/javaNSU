@@ -5,6 +5,7 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     protected double inGamePosY;
     protected int width;
     protected int height;
+    protected int inGameHorizontalDirection;
     protected boolean gameObjectIsExist = true;
 
     public SlashBladeObjectAbstract(String atlas) {
@@ -65,6 +66,23 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     }
 
     @Override
+    public int getInGameHorizontalDirection() {
+        return inGameHorizontalDirection;
+    }
+
+    @Override
+    public void setInGameHorizontalDirection(int inGameHorizontalDirection) {
+        this.inGameHorizontalDirection = inGameHorizontalDirection;
+    }
+
+    @Override
+    public void changeDirection(int direction) {
+        setInGameHorizontalDirection(direction);
+        setScreenHorizontalDirection(direction);
+    }
+
+
+    @Override
     public double getObjectSize() {
         return screenSize;
     }
@@ -75,7 +93,7 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
         width = (int)(width * newSize);
         height = (int)(height * newSize);
 
-        setScreenWidth(width * getScreenHorizontalDirection() * getScreenHorizontalDirection());
+        setScreenWidth(width);
         setScreenHeight(height);
 
         this.screenSize = screenSize;

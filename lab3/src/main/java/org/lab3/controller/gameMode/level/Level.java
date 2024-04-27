@@ -124,7 +124,7 @@ public class Level implements GameMode {
         levelObjectsContext.setPlayer(new SamuraiV1(Constants.PlayerConstants.ZERO_ATLAS));
 
         SamuraiV1 player = levelObjectsContext.getPlayer();
-        player.getParametersContext().setInGameHorizontalDirection(1);
+        player.setInGameHorizontalDirection(1);
         player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
         player.getParametersContext().setSpeedOfMoveX(700);
         player.getParametersContext().setAttackDuration(50);
@@ -150,7 +150,7 @@ public class Level implements GameMode {
         levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
 
         levelObjectsContext.getSlashFX().setObjectSize(70);
-        levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
+//        levelObjectsContext.getSlashFX().setDrawImageOnMiddle(true);
 
         actionsContext.setSlashFXController(new SlashFXController(levelObjectsContext.getSlashFX()));
     }

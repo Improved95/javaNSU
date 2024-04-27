@@ -1,15 +1,14 @@
 package org.lab3.model.objects.characters;
 
 public class CharacterParametersContext {
-    private int health = 0;
-    private int inGameHorizontalDirection;
-    private double speedOfMoveX;
-    private double radiusForwardAttack;
-    private double radiusBackwardAttack;
+    protected int health = 0;
+    protected double speedOfMoveX;
+    protected double radiusForwardAttack;
+    protected double radiusBackwardAttack;
 
-    private double attackDuration = 0;
-    private double attackDelay = 0;
-    private boolean attack = false;
+    protected double attackDuration = 0;
+    protected double attackDelay = 0;
+    protected boolean attack = false;
 
     public int getHealth() {
         return health;
@@ -17,14 +16,6 @@ public class CharacterParametersContext {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public int getInGameHorizontalDirection() {
-        return inGameHorizontalDirection;
-    }
-
-    public void setInGameHorizontalDirection(int inGameHorizontalDirection) {
-        this.inGameHorizontalDirection = inGameHorizontalDirection;
     }
 
     public double getSpeedOfMoveX() {
