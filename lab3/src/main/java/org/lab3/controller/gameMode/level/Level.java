@@ -172,6 +172,5 @@ public class Level implements GameMode {
         slashFX.setGameObjectIsExist(false);
         slashFX.setObjectSize(70);
         actionsContext.getSlashFXController().initial();
-//        slashFX.setDrawImageOnMiddle(true);
     }
 }

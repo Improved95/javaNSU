@@ -8,7 +8,6 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     public SlashBladeCharacterAbstract(String atlas) {
         super(atlas);
         this.parametersContext = new CharacterParametersContext();
-//        setDrawImageOnMiddle(true);
     }
 
     @Override

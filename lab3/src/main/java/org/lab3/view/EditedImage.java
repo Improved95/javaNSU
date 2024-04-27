@@ -19,10 +19,6 @@ public class EditedImage {
             newPosX += oldImage.getScreenWidth();
         }
         newWidth = oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection();
-        /*if (oldImage.isDrawImageOnMiddle()) {
-            newPosX -= (oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection()) / 2;
-        }*/
-//        newPosX -= (oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection()) / 2;
         newPosX += oldImage.getScreenPosX();
         newPosY += frameSize.getHeight() - (  39 + oldImage.getScreenHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
     }
