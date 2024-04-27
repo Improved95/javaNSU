@@ -1,9 +1,5 @@
 package org.lab3.model.objects;
 
-import org.lab3.resources.ResourcesContext;
-
-import java.awt.image.BufferedImage;
-
 public abstract class DrawObjectAbstract implements DrawObject {
     protected double screenPosX;
     protected double screenPosY;
@@ -12,12 +8,14 @@ public abstract class DrawObjectAbstract implements DrawObject {
     protected int screenLayerLevel = 0;
     protected int screenWidth;
     protected int screenHeight;
-    protected ResourcesContext resourcesContext;
-    protected BufferedImage image;
+    protected int resourcesIndexInResourcesList;
+    protected int currentImageIndex;
+//    protected ResourcesContext resourcesContext;
+//    protected BufferedImage image;
 
     public DrawObjectAbstract(String atlas) {
-        resourcesContext = new ResourcesContext();
-        resourcesContext.addImage(atlas);
+//        resourcesContext = new ResourcesContext();
+//        resourcesContext.addImage(atlas);
     }
 
     @Override
@@ -86,7 +84,27 @@ public abstract class DrawObjectAbstract implements DrawObject {
     }
 
     @Override
+    public int getResourcesIndexInResourcesList() {
+        return resourcesIndexInResourcesList;
+    }
+
+    @Override
+    public void setResourcesIndexInResourcesList(int resourcesIndexInResourcesList) {
+        this.resourcesIndexInResourcesList = resourcesIndexInResourcesList;
+    }
+
+    @Override
+    public int getCurrentImageIndex() {
+        return currentImageIndex;
+    }
+
+    @Override
+    public void setCurrentImageIndex(int currentImageIndex) {
+        this.currentImageIndex = currentImageIndex;
+    }
+
+    /*@Override
     public BufferedImage getImage() {
         return image;
-    }
+    }*/
 }

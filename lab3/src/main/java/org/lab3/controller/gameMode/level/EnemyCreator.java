@@ -1,9 +1,8 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.enemyActions.EnemyAction;
-import org.lab3.model.Constants;
+import org.lab3.view.Constants;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.resources.ResourcesContext;
 import org.lab3.slashBlade.FrameSize;
 
 import java.util.*;
@@ -30,6 +29,8 @@ public class EnemyCreator {
             enemy.getParametersContext().setAttackDelay(200);
             enemy.setObjectSize(90);
             enemy.setScreenLayerLevel(1);
+            enemy.setResourcesIndexInResourcesList(Constants.EnemyConstants.ENEMY_ATLAS_INDEX);
+            enemy.setCurrentImageIndex(0);
 
             Random random = new Random();
             if (random.nextBoolean()) {

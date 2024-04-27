@@ -29,7 +29,15 @@ public interface DrawObject {
 
     void setScreenHeight(int screenHeight);
 
-    BufferedImage getImage();
+    int getResourcesIndexInResourcesList();
 
-    void setImage();
+    void setResourcesIndexInResourcesList(int resourcesIndexInResourcesList);
+
+    int getCurrentImageIndex();
+
+    void setCurrentImageIndex(int currentImageIndex);
+
+    /*BufferedImage getImage();
+
+    void setImage();*/
 }

@@ -1,6 +1,6 @@
 package org.lab3.model.objects.backgrounds;
 
-import org.lab3.model.Constants;
+import org.lab3.view.Constants;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
 
 public class Background extends SlashBladeObjectAbstract {
@@ -9,14 +9,16 @@ public class Background extends SlashBladeObjectAbstract {
 
         setWidth(Constants.BackgroundConstants.BACKGROUND_WIDTH);
         setHeight(Constants.BackgroundConstants.BACKGROUND_HEIGHT);
+        setResourcesIndexInResourcesList(Constants.BackgroundConstants.BACKGROUND_ATLAS_INDEX);
+        setCurrentImageIndex(0);
 
-        setImage();
+//        setImage();
     }
 
-    @Override
-    public void setImage() {
-        this.image = resourcesContext.getOpenedResourcesList().get(0).getOpenedImage();
-    }
+//    @Override
+//    public void setImage() {
+//        this.image = resourcesContext.getOpenedResourcesList().get(0).getOpenedImage();
+//    }
 
     @Override
     public double getScreenPosX() {

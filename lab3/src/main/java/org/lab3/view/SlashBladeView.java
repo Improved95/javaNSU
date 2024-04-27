@@ -4,14 +4,18 @@ import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.slashBlade.JFrameObject;
+import org.lab3.view.openedResources.Level1Resources;
+import org.lab3.view.openedResources.OpenedResources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
 public class SlashBladeView implements View {
     private Model model;
     private boolean drawing = false;
+    private OpenedResources openedResources;
 
     @Override
     public void setModel(Model model) {
@@ -29,6 +33,17 @@ public class SlashBladeView implements View {
     }
 
     @Override
+    public void switchGameStateResources() {
+        switch (model.getGameState()) {
+            case LEVEL1:
+                openedResources = new Level1Resources();
+                break;
+            case MENU:
+                break;
+        }
+    }
+
+    @Override
     public void drawObject(Graphics g, FrameSize frameSize) {
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
@@ -41,7 +56,11 @@ public class SlashBladeView implements View {
 
             for (DrawObject drawObject : drawObjectsList) {
                 EditedImage.editImage(drawObject, frameSize);
-                g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY,
+                /*g.drawImage(drawObject.getImage(), (int)EditedImage.newPosX, (int)EditedImage.newPosY,
+                        EditedImage.newWidth, drawObject.getScreenHeight(), null);*/
+                BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList())
+                        .getOpenedResourcesList().get(drawObject.getCurrentImageIndex()).getOpenedImage();
+                g.drawImage(image, (int)EditedImage.newPosX, (int)EditedImage.newPosY,
                         EditedImage.newWidth, drawObject.getScreenHeight(), null);
             }
         }

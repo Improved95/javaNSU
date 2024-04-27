@@ -1,5 +1,6 @@
 package org.lab3.model.model;
 
+import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.gameObjectsContext.ObjectsContext;
 import org.lab3.slashBlade.FrameSize;
 
@@ -8,9 +9,9 @@ public interface Model {
 
     void setFrameSize(FrameSize frameSize);
 
-    String getCurrentGameMode();
+    GameState getGameState();
 
-    void setCurrentGameMode(String currentGameMode);
+    void setGameState(GameState gameState);
 
     ObjectsContext getGameModeObjectsContext();
 

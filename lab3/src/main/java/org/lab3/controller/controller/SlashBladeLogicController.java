@@ -4,6 +4,7 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.model.Model;
+import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,6 +12,7 @@ class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
+    private View view;
 
     SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
@@ -18,6 +20,10 @@ class SlashBladeLogicController {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    public void setView(View view) {
+        this.view = view;
     }
 
     void initial() {
@@ -28,6 +34,8 @@ class SlashBladeLogicController {
 
             ex.printStackTrace();
         }
+        model.setGameState(GameState.LEVEL1);
+        view.switchGameStateResources();
     }
 
     void keyPressedObserver(int keyCode) {

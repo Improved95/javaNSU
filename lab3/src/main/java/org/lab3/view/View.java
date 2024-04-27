@@ -12,5 +12,8 @@ public interface View {
     void setDrawing(boolean drawing);
 
     void changeViewScreen(JFrameObject jFrameObject);
+
+    void switchGameStateResources();
+
     void drawObject(Graphics g, FrameSize frameSize);
 }

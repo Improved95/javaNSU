@@ -8,7 +8,7 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     protected int width;
     protected int height;
     protected int inGameHorizontalDirection;
-    protected Rectangle hitbox;
+//    protected Rectangle hitbox;
     protected boolean gameObjectIsExist = true;
 
     public SlashBladeObjectAbstract(String atlas) {

@@ -1,11 +1,12 @@
 package org.lab3.model.model;
 
+import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.gameObjectsContext.ObjectsContext;
 import org.lab3.slashBlade.FrameSize;
 
 public class SlashBladeModel implements Model {
     private FrameSize frameSize;
-    private String currentGameMode;
+    private GameState gameState;
     private ObjectsContext gameModeObjectsContext;
 
     @Override
@@ -19,13 +20,13 @@ public class SlashBladeModel implements Model {
     }
 
     @Override
-    public String getCurrentGameMode() {
-        return currentGameMode;
+    public GameState getGameState() {
+        return gameState;
     }
 
     @Override
-    public void setCurrentGameMode(String currentGameMode) {
-        this.currentGameMode = currentGameMode;
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     @Override
