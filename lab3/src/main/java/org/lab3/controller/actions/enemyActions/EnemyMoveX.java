@@ -16,16 +16,16 @@ public class EnemyMoveX extends ActionExecuteAbstract {
             double playerPosX = player.getInGamePosX();
             double enemyPosX = character.getInGamePosX();
             double enemySpeed = character.getParametersContext().getSpeedOfMoveX();
-            double dx;
             if (Math.abs(enemyPosX - playerPosX) > 30) {
                 if (enemyPosX - playerPosX < 0) {
                     character.changeDirection(1);
-                    dx = enemySpeed / currentFPS * frameSize.getReductionFactor();
+                    character.setCurrentSpeedX(enemySpeed / currentFPS * frameSize.getReductionFactor());
                 } else {
                     character.changeDirection(-1);
-                    dx = enemySpeed / currentFPS * frameSize.getReductionFactor() * -1;
+                    character.setCurrentSpeedX(enemySpeed / currentFPS * frameSize.getReductionFactor() * -1);
                 }
-                character.changeInGamePos(dx, 0);
+            } else {
+                character.setCurrentSpeedX(0);
             }
         }
     }

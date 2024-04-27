@@ -34,4 +34,12 @@ public interface SlashBladeObject {
     boolean isGameObjectIsExist();
 
     void setGameObjectIsExist(boolean gameObjectIsExist);
+
+    double getCurrentSpeedX();
+
+    void setCurrentSpeedX(double currentSpeedX);
+
+    double getCurrentSpeedY();
+
+    void setCurrentSpeedY(double currentSpeedY);
 }

@@ -44,6 +44,8 @@ public class EnemyAction implements ActionController {
         enemyAttack.execute(character, levelObjectsContext, currentFPS);
         enemyCatchAttack.execute(character, levelObjectsContext);
 
+        character.changeInGamePos(character.getCurrentSpeedX(), character.getCurrentSpeedY());
+
         if (character.getParametersContext().getHealth() <= 0) {
             levelObjectsContext.setScore(levelObjectsContext.getScore() + 1);
             character.setGameObjectIsExist(false);

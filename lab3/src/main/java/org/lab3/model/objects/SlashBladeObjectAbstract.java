@@ -6,8 +6,10 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     protected int width;
     protected int height;
     protected int inGameHorizontalDirection;
-//    protected Rectangle hitbox;
     protected boolean gameObjectIsExist = true;
+
+    protected double currentSpeedX;
+    protected double currentSpeedY;
 
     public SlashBladeObjectAbstract() {
         setObjectSize(100);
@@ -107,5 +109,25 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     @Override
     public void setGameObjectIsExist(boolean gameObjectIsExist) {
         this.gameObjectIsExist = gameObjectIsExist;
+    }
+
+    @Override
+    public double getCurrentSpeedX() {
+        return currentSpeedX;
+    }
+
+    @Override
+    public void setCurrentSpeedX(double currentSpeedX) {
+        this.currentSpeedX = currentSpeedX;
+    }
+
+    @Override
+    public double getCurrentSpeedY() {
+        return currentSpeedY;
+    }
+
+    @Override
+    public void setCurrentSpeedY(double currentSpeedY) {
+        this.currentSpeedY = currentSpeedY;
     }
 }
