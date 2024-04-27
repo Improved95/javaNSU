@@ -132,7 +132,7 @@ public class Level implements GameMode {
     }
 
     private void setPlayer() {
-        levelObjectsContext.setPlayer(new SamuraiV1(Constants.PlayerConstants.ZERO_ATLAS));
+        levelObjectsContext.setPlayer(new SamuraiV1());
 
         SamuraiV1 player = levelObjectsContext.getPlayer();
         actionsContext.setPlayerActionController(new PlayerAction(player));
@@ -152,7 +152,7 @@ public class Level implements GameMode {
     }
 
     private void setBackground() {
-        levelObjectsContext.setBackground(new Background(Constants.BackgroundConstants.BACKGROUND_ATLAS));
+        levelObjectsContext.setBackground(new Background());
     }
 
     private void setBackgroundZeroState() {
@@ -163,7 +163,7 @@ public class Level implements GameMode {
     }
 
     private void setFx() {
-        levelObjectsContext.setSlashFX(new SlashFX(Constants.FXConstants.SLASH_FX_ATLAS));
+        levelObjectsContext.setSlashFX(new SlashFX());
         actionsContext.setSlashFXController(new SlashFXAction(levelObjectsContext.getSlashFX()));
     }
 

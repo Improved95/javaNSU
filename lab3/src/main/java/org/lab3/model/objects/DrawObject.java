@@ -1,7 +1,5 @@
 package org.lab3.model.objects;
 
-import java.awt.image.BufferedImage;
-
 public interface DrawObject {
     double getScreenPosX();
 
@@ -36,8 +34,4 @@ public interface DrawObject {
     int getCurrentImageIndex();
 
     void setCurrentImageIndex(int currentImageIndex);
-
-    /*BufferedImage getImage();
-
-    void setImage();*/
 }

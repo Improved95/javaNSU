@@ -1,7 +1,5 @@
 package org.lab3.model.objects;
 
-import java.awt.*;
-
 public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
@@ -11,8 +9,7 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
 //    protected Rectangle hitbox;
     protected boolean gameObjectIsExist = true;
 
-    public SlashBladeObjectAbstract(String atlas) {
-        super(atlas);
+    public SlashBladeObjectAbstract() {
         setObjectSize(100);
     }
 

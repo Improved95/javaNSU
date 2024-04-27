@@ -20,7 +20,7 @@ public class EnemyCreator {
                        FrameSize frameSize, double currentFPS) {
 
         if (timerCreateDelay <= 0) {
-            SamuraiV1 enemy = new SamuraiV1(Constants.EnemyConstants.ENEMY_ATLAS);
+            SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
             enemy.getParametersContext().setSpeedOfMoveX(500);
             enemy.getParametersContext().setRadiusForwardAttack(80);

@@ -5,8 +5,7 @@ import org.lab3.model.objects.SlashBladeObjectAbstract;
 public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstract implements SlashBladeCharacter {
     protected CharacterParametersContext parametersContext;
 
-    public SlashBladeCharacterAbstract(String atlas) {
-        super(atlas);
+    public SlashBladeCharacterAbstract() {
         this.parametersContext = new CharacterParametersContext();
     }
 

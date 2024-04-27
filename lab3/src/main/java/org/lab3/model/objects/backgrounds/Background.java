@@ -4,21 +4,12 @@ import org.lab3.view.Constants;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
 
 public class Background extends SlashBladeObjectAbstract {
-    public Background(String atlas) {
-        super(atlas);
-
+    public Background() {
         setWidth(Constants.BackgroundConstants.BACKGROUND_WIDTH);
         setHeight(Constants.BackgroundConstants.BACKGROUND_HEIGHT);
         setResourcesIndexInResourcesList(Constants.BackgroundConstants.BACKGROUND_ATLAS_INDEX);
         setCurrentImageIndex(0);
-
-//        setImage();
     }
-
-//    @Override
-//    public void setImage() {
-//        this.image = resourcesContext.getOpenedResourcesList().get(0).getOpenedImage();
-//    }
 
     @Override
     public double getScreenPosX() {

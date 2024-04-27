@@ -10,13 +10,6 @@ public abstract class DrawObjectAbstract implements DrawObject {
     protected int screenHeight;
     protected int resourcesIndexInResourcesList;
     protected int currentImageIndex;
-//    protected ResourcesContext resourcesContext;
-//    protected BufferedImage image;
-
-    public DrawObjectAbstract(String atlas) {
-//        resourcesContext = new ResourcesContext();
-//        resourcesContext.addImage(atlas);
-    }
 
     @Override
     public double getScreenPosX() {

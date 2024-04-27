@@ -3,9 +3,7 @@ package org.lab3.model.objects.characters;
 import org.lab3.view.Constants;
 
 public class SamuraiV1 extends SlashBladeCharacterAbstract {
-    public SamuraiV1(String atlas) {
-        super(atlas);
-
+    public SamuraiV1() {
         parametersContext.setHealth(1);
         setScreenLayerLevel(1);
         setWidth(Constants.PlayerConstants.PLAYER_WIDTH);
@@ -13,11 +11,5 @@ public class SamuraiV1 extends SlashBladeCharacterAbstract {
         setObjectSize(100);
         setResourcesIndexInResourcesList(Constants.PlayerConstants.PLAYER_ATLAS_INDEX);
         setCurrentImageIndex(0);
-//        setImage();
     }
-
-//    @Override
-//    public void setImage() {
-//        this.image = resourcesContext.getOpenedResourcesList().get(0).getOpenedImage();
-//    }
 }
