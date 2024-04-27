@@ -4,6 +4,8 @@ import org.lab3.controller.actions.SlashFX.SlashFXController;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
+import org.lab3.controller.gameMode.pauseMenu.EndGameMenu;
+import org.lab3.controller.gameMode.pauseMenu.PauseOverlay;
 import org.lab3.model.Constants;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -22,6 +24,8 @@ public class Level implements GameMode {
     private EnemyCreator enemyCreator = new EnemyCreator();
 
     private AllCharactersActionsContext actionsContext = new AllCharactersActionsContext();
+
+    private PauseOverlay endGameMenu = new EndGameMenu();
 
     private Level(Model model) {
         this.model = model;
