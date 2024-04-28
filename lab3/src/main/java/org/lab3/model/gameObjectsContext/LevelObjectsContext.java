@@ -1,6 +1,5 @@
 package org.lab3.model.gameObjectsContext;
 
-import org.lab3.model.Debug.DebugObject;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;

@@ -1,12 +1,7 @@
 package org.lab3.model.objects;
-
-import org.lab3.model.Debug.DebugObject;
-import org.lab3.model.Debug.DebugType;
-
 import java.awt.*;
 
 public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
-    protected DebugType debugType;
     protected double inGamePosX;
     protected double inGamePosY;
     protected int objectWidth;
@@ -16,10 +11,6 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     protected double currentSpeedX;
     protected double currentSpeedY;
     protected Rectangle hitbox = new Rectangle();
-
-    public SlashBladeObjectAbstract() {
-        debugType = DebugType.NO_DEBUG;
-    }
 
     @Override
     public double getInGamePosX() {
@@ -137,10 +128,5 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     @Override
     public void setCurrentSpeedY(double currentSpeedY) {
         this.currentSpeedY = currentSpeedY;
-    }
-
-    @Override
-    public DebugObject getDebugDrawObjects() {
-        return null;
     }
 }

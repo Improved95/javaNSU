@@ -1,6 +1,5 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.model.Debug.DebugObject;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
 
 import java.awt.*;
@@ -66,17 +65,5 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     @Override
     public double getScreenPosY() {
         return inGamePosY;
-    }
-
-    @Override
-    public DebugObject getDebugDrawObjects() {
-        DebugObject debugObject = new DebugObject(hitbox);
-        debugObject.setScreenWidth(getScreenWidth());
-        debugObject.setScreenHeight(getScreenHeight());
-
-        debugObject.setScreenPosX(getScreenPosX());
-        debugObject.setScreenPosY(getScreenPosY());
-
-        return debugObject;
     }
 }
