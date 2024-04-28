@@ -80,7 +80,7 @@ public class Level implements GameMode {
         deleteObjectsFromGame();
 
         if (levelObjectsContext.getPlayer().getHealth() <= 0) {
-//            return 1;
+            return 1;
         }
 
         if (levelObjectsContext.getScore() >= 3) {

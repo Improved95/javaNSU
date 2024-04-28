@@ -30,13 +30,6 @@ public class EnemyCatchAttack extends ActionExecuteAbstract {
                 }
             }*/
             if (player.isAttack()) {
-                System.out.println(character.getHitbox().x + " " + character.getHitbox().y + " " +
-                        character.getHitbox().width + " " + character.getHitbox().height);
-
-                Rectangle ph = player.getAttackHitbox();
-                System.out.println(ph.x + " " + ph.y + " " +
-                        ph.width + " " + ph.height);
-
                 if (character.getHitbox().intersects(player.getAttackHitbox())) {
                     character.setHealth(character.getHealth() - 1);
                 }

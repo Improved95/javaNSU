@@ -25,6 +25,7 @@ public class EnemyCreator {
             enemy.setSpeedOfMoveX(500);
             enemy.setRadiusForwardAttack(80);
             enemy.setRadiusBackwardAttack(10);
+            enemy.setAttackHeight(30);
             enemy.setAttackDuration(50);
             enemy.setAttackDelay(200);
             enemy.setObjectSize(90);
