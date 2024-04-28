@@ -131,4 +131,14 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     public void setCurrentSpeedY(double currentSpeedY) {
         this.currentSpeedY = currentSpeedY;
     }
+
+    @Override
+    public double getScreenPosX() {
+        return inGamePosX;
+    }
+
+    @Override
+    public double getScreenPosY() {
+        return inGamePosY;
+    }
 }

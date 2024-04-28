@@ -21,11 +21,12 @@ public class PauseResources implements ObjectResources {
             int pauseButtonWidth = Constants.PauseConstants.PAUSE_BUTTON_WIDTH;
             int pauseButtonHeight = Constants.PauseConstants.PAUSE_BUTTON_HEIGHT;
 
-            image[1][0] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, fullImageHeight - pauseButtonHeight * 1,
+
+            image[1][0] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, 0,
                     pauseButtonWidth, pauseButtonHeight);
-            image[1][1] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, fullImageHeight - pauseButtonHeight * 2,
+            image[1][1] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, pauseButtonHeight,
                     pauseButtonWidth, pauseButtonHeight);
-            image[1][2] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, fullImageHeight - pauseButtonHeight * 3,
+            image[1][2] = fullImage.getSubimage(fullImageWidth - pauseButtonWidth, pauseButtonHeight * 2,
                     pauseButtonWidth, pauseButtonHeight);
 
         } catch (IOException ex) {

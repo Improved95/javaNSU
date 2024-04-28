@@ -135,11 +135,16 @@ public class Level implements GameMode {
         this.actionsContext = new AllCharactersActionsContext();
         setPlayer();
         setPlayerZeroState();
+
         setBackground();
         setBackgroundZeroState();
+
         setFx();
         setFxZeroState();
+
         setPauseLayout();
+        setPauseLayoutZeroState();
+
         actionsContext.setEnemyActionsControllers(new ArrayList<>());
         enemyCreator.setCreateDelay(2000);
     }
@@ -197,7 +202,11 @@ public class Level implements GameMode {
     }
 
     private void setPauseLayout() {
-        Pause pause = new Pause(model.getFrameSize());
-        levelObjectsContext.setLevelPause(pause);
+        levelObjectsContext.setLevelPause(new Pause(model.getFrameSize()));
+    }
+
+    private void setPauseLayoutZeroState() {
+        Pause pause = levelObjectsContext.getLevelPause();
+        pause.setGameObjectIsExist(false);
     }
 }

@@ -10,14 +10,4 @@ public class SlashFX extends SlashBladeObjectAbstract {
         setResourcesIndexInResourcesList(Constants.FXConstants.SLASH_FX_ATLAS_INDEX);
         setCurrentImageIndex(0, 0);
     }
-
-    @Override
-    public double getScreenPosX() {
-        return inGamePosX;
-    }
-
-    @Override
-    public double getScreenPosY() {
-        return inGamePosY;
-    }
 }

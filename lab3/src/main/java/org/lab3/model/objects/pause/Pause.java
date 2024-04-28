@@ -15,11 +15,13 @@ public class Pause extends SlashBladeObjectAbstract {
         setResourcesIndexInResourcesList(Constants.PauseConstants.PAUSE_FX_ATLAS_INDEX);
         setScreenLayerLevel(10);
         setCurrentImageIndex(0, 0);
-        setInGamePosition(frameSize.getWidth() / 2 - objectWidth / 2, frameSize.getHeight() / 2 - objectHeight / 2);
+        setInGamePosition(frameSize.getWidth() / 2F - objectWidth / 2F, frameSize.getHeight() / 2F - objectHeight / 2F);
+        setObjectSize(100);
 
-        resume.setInGamePosition(inGamePosX / 2 - resume.getWidth() / 2, inGamePosY / 4 - resume.getHeight() / 2);
-        reset.setInGamePosition(inGamePosX / 2 - resume.getWidth() / 2, inGamePosY / 4 * 2 - resume.getHeight() / 2);
-        exit.setInGamePosition(inGamePosX / 2 - resume.getWidth() / 2, inGamePosY / 4  * 3 - resume.getHeight() / 2);
+        double buttonsPosX = inGamePosX + objectWidth / 2F - resume.getWidth() / 2F;
+        resume.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 3 + 20);
+        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 2);
+        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F - 20);
 
         setGameObjectIsExist(false);
     }

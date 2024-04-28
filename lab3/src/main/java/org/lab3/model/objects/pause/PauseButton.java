@@ -9,6 +9,7 @@ public class PauseButton extends SlashBladeObjectAbstract {
         setHeight(Constants.PauseConstants.PAUSE_BUTTON_HEIGHT);
         setResourcesIndexInResourcesList(Constants.PauseConstants.PAUSE_FX_ATLAS_INDEX);
         setCurrentImageIndex(i1, i2);
+        setObjectSize(100);
         setScreenLayerLevel(11);
     }
 }

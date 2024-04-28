@@ -32,14 +32,4 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     public Rectangle getAttackHitbox() {
         return attackHitbox;
     }
-
-    @Override
-    public double getScreenPosX() {
-        return inGamePosX;
-    }
-
-    @Override
-    public double getScreenPosY() {
-        return inGamePosY;
-    }
 }
