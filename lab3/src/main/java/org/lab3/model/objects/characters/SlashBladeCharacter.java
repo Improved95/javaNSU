@@ -6,6 +6,4 @@ public interface SlashBladeCharacter {
     void moveX(double dx);
 
     void moveY(double dy);
-
-    void attack();
 }

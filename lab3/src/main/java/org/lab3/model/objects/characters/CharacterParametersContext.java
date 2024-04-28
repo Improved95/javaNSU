@@ -5,6 +5,7 @@ public class CharacterParametersContext {
     protected double speedOfMoveX;
     protected double radiusForwardAttack;
     protected double radiusBackwardAttack;
+    protected double attackHeight;
 
     protected double attackDuration = 0;
     protected double attackDelay = 0;
@@ -64,5 +65,13 @@ public class CharacterParametersContext {
 
     public void setRadiusBackwardAttack(double radiusBackwardAttack) {
         this.radiusBackwardAttack = radiusBackwardAttack;
+    }
+
+    public double getAttackHeight() {
+        return attackHeight;
+    }
+
+    public void setAttackHeight(double attackHeight) {
+        this.attackHeight = attackHeight;
     }
 }

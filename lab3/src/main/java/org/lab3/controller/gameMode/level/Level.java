@@ -10,6 +10,7 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
+import org.lab3.model.objects.characters.CharacterParametersContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.slashFX.SlashFX;
 
@@ -141,11 +142,13 @@ public class Level implements GameMode {
         SamuraiV1 player = levelObjectsContext.getPlayer();
         player.setInGameHorizontalDirection(1);
         player.setInGamePosition(model.getFrameSize().getWidth() / 2, 0);
-        player.getParametersContext().setSpeedOfMoveX(700);
-        player.getParametersContext().setAttackDuration(50);
-        player.getParametersContext().setAttackDelay(200);
-        player.getParametersContext().setRadiusForwardAttack(100);
-        player.getParametersContext().setRadiusBackwardAttack(35);
+        CharacterParametersContext parametersContext = player.getParametersContext();
+        parametersContext.setSpeedOfMoveX(700);
+        parametersContext.setAttackDuration(50);
+        parametersContext.setAttackDelay(200);
+        parametersContext.setRadiusForwardAttack(100);
+        parametersContext.setRadiusBackwardAttack(35);
+        parametersContext.setAttackHeight(30);
         player.setObjectSize(90);
         player.setScreenLayerLevel(2);
     }
