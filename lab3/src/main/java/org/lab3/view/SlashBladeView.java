@@ -59,7 +59,7 @@ public class SlashBladeView implements View {
 //                        .getOpenedResourcesList().get(drawObject.getCurrentImageIndex()).getOpenedImage();
 
                 BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
-                        getImage()[0][0];
+                        getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
 
                 g.drawImage(image, (int)EditedImage.newPosX, (int)EditedImage.newPosY,
                         EditedImage.newWidth, drawObject.getScreenHeight(), null);

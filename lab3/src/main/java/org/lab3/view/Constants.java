@@ -39,7 +39,7 @@ public class Constants {
     }
 
     public static class PauseConstants {
-        public static final String PAUSE_ATLAS = "pause/menu.png";
+        public static final String PAUSE_ATLAS = "pause/pause.png";
 
         public static final int PAUSE_FX_WIDTH = 731;
         public static final int PAUSE_FX_HEIGHT = 325;

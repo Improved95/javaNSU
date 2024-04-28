@@ -31,7 +31,7 @@ public class EnemyCreator {
             enemy.setObjectSize(90);
             enemy.setScreenLayerLevel(1);
             enemy.setResourcesIndexInResourcesList(Constants.EnemyConstants.ENEMY_ATLAS_INDEX);
-            enemy.setCurrentImageIndex(0);
+            enemy.setCurrentImageIndex(0, 0);
 
             Random random = new Random();
             if (random.nextBoolean()) {

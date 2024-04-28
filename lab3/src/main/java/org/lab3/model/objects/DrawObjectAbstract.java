@@ -1,5 +1,7 @@
 package org.lab3.model.objects;
 
+import org.lab3.resources.ImageIndex;
+
 import javax.swing.*;
 
 public abstract class DrawObjectAbstract extends JPanel implements DrawObject  {
@@ -11,7 +13,7 @@ public abstract class DrawObjectAbstract extends JPanel implements DrawObject  {
     protected int screenWidth;
     protected int screenHeight;
     protected int resourcesIndexInResourcesList;
-    protected int currentImageIndex;
+    protected ImageIndex currentImageIndex = new ImageIndex();
 
     @Override
     public double getScreenPosX() {
@@ -89,13 +91,14 @@ public abstract class DrawObjectAbstract extends JPanel implements DrawObject  {
     }
 
     @Override
-    public int getCurrentImageIndex() {
+    public ImageIndex getCurrentImageIndex() {
         return currentImageIndex;
     }
 
     @Override
-    public void setCurrentImageIndex(int currentImageIndex) {
-        this.currentImageIndex = currentImageIndex;
+    public void setCurrentImageIndex(int i1, int i2) {
+        currentImageIndex.setI1(i1);
+        currentImageIndex.setI2(i2);
     }
 
     /*@Override

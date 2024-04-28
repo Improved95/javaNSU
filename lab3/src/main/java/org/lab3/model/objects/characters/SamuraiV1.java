@@ -17,7 +17,7 @@ public class SamuraiV1 extends SlashBladeCharacterAbstract {
         setHeight(Constants.PlayerConstants.PLAYER_HEIGHT);
         setObjectSize(100);
         setResourcesIndexInResourcesList(Constants.PlayerConstants.PLAYER_ATLAS_INDEX);
-        setCurrentImageIndex(0);
+        setCurrentImageIndex(0, 0);
     }
 
     @Override

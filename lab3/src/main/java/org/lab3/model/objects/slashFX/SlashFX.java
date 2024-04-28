@@ -8,7 +8,7 @@ public class SlashFX extends SlashBladeObjectAbstract {
         setWidth(Constants.FXConstants.SLASH_FX_WIDTH);
         setHeight(Constants.FXConstants.SLASH_FX_HEIGHT);
         setResourcesIndexInResourcesList(Constants.FXConstants.SLASH_FX_ATLAS_INDEX);
-        setCurrentImageIndex(0);
+        setCurrentImageIndex(0, 0);
     }
 
     @Override

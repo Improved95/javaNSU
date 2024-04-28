@@ -1,5 +1,7 @@
 package org.lab3.model.objects;
 
+import org.lab3.resources.ImageIndex;
+
 public interface DrawObject {
     double getScreenPosX();
 
@@ -31,7 +33,7 @@ public interface DrawObject {
 
     void setResourcesIndexInResourcesList(int resourcesIndexInResourcesList);
 
-    int getCurrentImageIndex();
+    ImageIndex getCurrentImageIndex();
 
-    void setCurrentImageIndex(int currentImageIndex);
+    void setCurrentImageIndex(int i1, int i2);
 }

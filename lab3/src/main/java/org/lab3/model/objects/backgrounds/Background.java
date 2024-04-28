@@ -8,7 +8,7 @@ public class Background extends SlashBladeObjectAbstract {
         setWidth(Constants.BackgroundConstants.BACKGROUND_WIDTH);
         setHeight(Constants.BackgroundConstants.BACKGROUND_HEIGHT);
         setResourcesIndexInResourcesList(Constants.BackgroundConstants.BACKGROUND_ATLAS_INDEX);
-        setCurrentImageIndex(0);
+        setCurrentImageIndex(0, 0);
     }
 
     @Override
