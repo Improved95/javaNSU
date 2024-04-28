@@ -1,6 +1,6 @@
 package org.lab3.model.objects.backgrounds;
 
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
 
 public class Background extends SlashBladeObjectAbstract {

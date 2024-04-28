@@ -1,7 +1,7 @@
 package org.lab3.model.objects.pause;
 
 import org.lab3.model.objects.SlashBladeObjectAbstract;
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 
 public class PauseButton extends SlashBladeObjectAbstract {
     public PauseButton(int i1, int i2) {

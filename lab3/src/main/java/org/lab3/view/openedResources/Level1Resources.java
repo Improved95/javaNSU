@@ -1,7 +1,7 @@
 package org.lab3.view.openedResources;
 
 import org.lab3.resources.*;
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

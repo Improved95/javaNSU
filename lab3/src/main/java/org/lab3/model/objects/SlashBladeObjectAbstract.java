@@ -132,6 +132,10 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
         this.currentSpeedY = currentSpeedY;
     }
 
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
     @Override
     public double getScreenPosX() {
         return inGamePosX;

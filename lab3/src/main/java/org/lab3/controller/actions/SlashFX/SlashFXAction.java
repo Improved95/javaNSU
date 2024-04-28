@@ -30,9 +30,11 @@ public class SlashFXAction implements ActionController {
     }
 
     @Override
-    public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
+    public int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {
 
         slashFXFollowPlayer.execute(fx, levelObjectsContext);
+
+        return 0;
     }
 }

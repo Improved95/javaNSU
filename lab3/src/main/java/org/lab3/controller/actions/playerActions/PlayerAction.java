@@ -51,7 +51,7 @@ public class PlayerAction implements ActionController {
     }
 
     @Override
-    public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
+    public int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {
 
         playerAttack.execute(character, levelObjectsContext, currentFPS);
@@ -59,5 +59,7 @@ public class PlayerAction implements ActionController {
         playerMoveX.execute(character, currentFPS, model.getFrameSize());
 
         character.changeInGamePosition(character.getCurrentSpeedX(), character.getCurrentSpeedY());
+
+        return 0;
     }
 }

@@ -1,6 +1,6 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 
 public class SamuraiV1 extends SlashBladeCharacterAbstract {
     protected double radiusForwardAttack;

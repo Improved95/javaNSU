@@ -1,7 +1,7 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.enemyActions.EnemyAction;
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.slashBlade.FrameSize;
 

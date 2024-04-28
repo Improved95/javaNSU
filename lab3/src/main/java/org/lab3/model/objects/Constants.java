@@ -1,4 +1,6 @@
-package org.lab3.view;
+package org.lab3.model.objects;
+
+import java.security.PublicKey;
 
 public class Constants {
     public static class PlayerConstants {
@@ -57,5 +59,9 @@ public class Constants {
         public static final int RESET_BUTTON_INDEX = 1;
         public static final int EXIT_BUTTON_INDEX = 2;
 
+        public static final int NOTHING_PRESS = 0;
+        public static final int RESUME_PRESS = 1;
+        public static final int RESET_PRESS = 2;
+        public static final int EXIT_PRESS = 3;
     }
 }

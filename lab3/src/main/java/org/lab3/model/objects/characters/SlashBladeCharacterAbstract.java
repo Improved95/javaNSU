@@ -25,10 +25,6 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
         this.speedOfMoveX = speedOfMoveX;
     }
 
-    public Rectangle getHitbox() {
-        return hitbox;
-    }
-
     public Rectangle getAttackHitbox() {
         return attackHitbox;
     }

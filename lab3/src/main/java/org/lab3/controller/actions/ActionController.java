@@ -6,6 +6,7 @@ import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 
 public interface ActionController {
-    void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
+    int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                   double currentFPS, Model model);
+    void initial();
 }

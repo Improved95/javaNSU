@@ -20,6 +20,11 @@ public class EnemyAction implements ActionController {
         enemyCatchAttack = new EnemyCatchAttack();
     }
 
+    @Override
+    public void initial() {
+
+    }
+
     public SamuraiV1 getCharacter() {
         return character;
     }
@@ -37,7 +42,7 @@ public class EnemyAction implements ActionController {
     }
 
     @Override
-    public void nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
+    public int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {
 
         enemyMoveX.execute(character, levelObjectsContext, currentFPS, model.getFrameSize());
@@ -50,5 +55,7 @@ public class EnemyAction implements ActionController {
             levelObjectsContext.setScore(levelObjectsContext.getScore() + 1);
             character.setGameObjectIsExist(false);
         }
+
+        return 0;
     }
 }

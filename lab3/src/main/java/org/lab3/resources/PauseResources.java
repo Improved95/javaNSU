@@ -1,6 +1,6 @@
 package org.lab3.resources;
 
-import org.lab3.view.Constants;
+import org.lab3.model.objects.Constants;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

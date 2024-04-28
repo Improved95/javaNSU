@@ -2,10 +2,12 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
+import org.lab3.controller.actions.pause.PauseAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
+import org.lab3.model.objects.Constants;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
@@ -41,8 +43,8 @@ public class Level implements GameMode {
                 actionsContext.getPlayerActionController().changeMoveX(-1, 1);
                 break;
             case 27:
-                levelObjectsContext.getLevelPause().setGameObjectIsExist(true);
-                isPause = true;
+                putOnPause();
+                break;
         }
     }
 
@@ -70,7 +72,7 @@ public class Level implements GameMode {
             }
         } else {
             if (mouseKeyCode == 1) {
-
+                actionsContext.getPauseAction().mousePressed(posX, posY);
             }
         }
     }
@@ -80,7 +82,20 @@ public class Level implements GameMode {
         if (!isPause) {
             return mainActionInLevel(currentFPS);
         } else {
-            return 0;
+            int returnValue = pauseActionsInLevel(currentFPS);
+            switch (returnValue) {
+                case Constants.PauseConstants.RESUME_PRESS -> {
+                    removeFromPause();
+                }
+                case Constants.PauseConstants.RESET_PRESS -> {
+                    reset();
+                    removeFromPause();
+                }
+                case Constants.PauseConstants.EXIT_PRESS -> {
+                    return 1;
+                }
+            }
+            return Constants.PauseConstants.NOTHING_PRESS;
         }
     }
 
@@ -107,8 +122,8 @@ public class Level implements GameMode {
         return 0;
     }
 
-    private int pauseActionsInLevel() {
-        return 0;
+    private int pauseActionsInLevel(double currentFPS) {
+        return actionsContext.getPauseAction().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
     }
 
     private void deleteObjectsFromGame() {
@@ -126,6 +141,16 @@ public class Level implements GameMode {
         }
         levelObjectsContext.getEnemyList().removeAll(deleteEnemyList);
         actionsContext.getEnemyActionsControllers().removeAll(deleteEnemyActionControllersList);
+    }
+
+    private void putOnPause() {
+        levelObjectsContext.getLevelPause().setGameObjectIsExist(true);
+        isPause = true;
+    }
+
+    private void removeFromPause() {
+        levelObjectsContext.getLevelPause().setGameObjectIsExist(false);
+        isPause = false;
     }
 
     @Override
@@ -154,7 +179,10 @@ public class Level implements GameMode {
         setPlayerZeroState();
         setBackgroundZeroState();
         setFxZeroState();
-        actionsContext.setEnemyActionsControllers(new ArrayList<>());
+        setPauseLayoutZeroState();
+        isPause = false;
+        levelObjectsContext.getEnemyList().clear();
+        actionsContext.getEnemyActionsControllers().clear();
     }
 
     private void setPlayer() {
@@ -203,6 +231,7 @@ public class Level implements GameMode {
 
     private void setPauseLayout() {
         levelObjectsContext.setLevelPause(new Pause(model.getFrameSize()));
+        actionsContext.setPauseAction(new PauseAction(levelObjectsContext.getLevelPause()));
     }
 
     private void setPauseLayoutZeroState() {
