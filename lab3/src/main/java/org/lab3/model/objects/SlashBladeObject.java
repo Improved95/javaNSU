@@ -1,5 +1,7 @@
 package org.lab3.model.objects;
 
+import org.lab3.model.Debug.DebugObject;
+
 public interface SlashBladeObject {
     double getInGamePosX();
 
@@ -42,4 +44,6 @@ public interface SlashBladeObject {
     double getCurrentSpeedY();
 
     void setCurrentSpeedY(double currentSpeedY);
+
+    DebugObject getDebugDrawObjects();
 }

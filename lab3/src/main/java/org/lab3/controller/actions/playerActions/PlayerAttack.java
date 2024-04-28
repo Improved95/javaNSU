@@ -3,7 +3,6 @@ package org.lab3.controller.actions.playerActions;
 import org.lab3.controller.actions.ActionExecuteAbstract;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.model.objects.characters.SlashBladeCharacterAbstract;
 
 public class PlayerAttack extends ActionExecuteAbstract {
     private double attackDuration;

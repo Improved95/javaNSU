@@ -1,5 +1,6 @@
 package org.lab3.model.gameObjectsContext;
 
+import org.lab3.model.Debug.DebugObject;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
@@ -60,6 +61,7 @@ public class LevelObjectsContext implements ObjectsContext {
         AbstractList<DrawObject> objectsList = new ArrayList<>();
 
         objectsList.add(player);
+
         objectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
             objectsList.add(enemy);
