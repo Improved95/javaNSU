@@ -62,7 +62,7 @@ public class Constants {
         public static final int PAUSE_BUTTON_WIDTH = 333;
         public static final int PAUSE_BUTTON_HEIGHT = 54;
 
-        public static final int PAUSE_FX_ATLAS_INDEX = 4;
+        public static final int PAUSE_ATLAS_INDEX = 4;
 
         public static final int BUTTONS_INDEX = 1;
         public static final int RESUME_BUTTON_INDEX = 0;

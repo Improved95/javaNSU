@@ -2,6 +2,7 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
+import org.lab3.controller.actions.pause.EndGameMenuAction;
 import org.lab3.controller.actions.pause.PauseAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
@@ -11,6 +12,7 @@ import org.lab3.model.objects.Constants;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.pause.EndGamePause;
 import org.lab3.model.objects.pause.Pause;
 import org.lab3.model.objects.slashFX.SlashFX;
 
@@ -23,6 +25,7 @@ public class Level implements GameMode {
     private EnemyCreator enemyCreator = new EnemyCreator();
     private AllCharactersActionsContext actionsContext;
     private boolean isPause;
+    private boolean gameIsOver;
 
     private Level(Model model) {
         this.model = model;
@@ -66,37 +69,44 @@ public class Level implements GameMode {
 
     @Override
     public void actionOnMousePressed(int mouseKeyCode, int posX, int posY) {
-        if (!isPause) {
+        if (isPause) {
             if (mouseKeyCode == 1) {
-                actionsContext.getPlayerActionController().attack();
+                actionsContext.getPauseAction().mousePressed(posX, posY);
+            }
+        } else if (gameIsOver) {
+            if (mouseKeyCode == 1) {
+                actionsContext.getEndGameMenuAction().mousePressed(posX, posY);
             }
         } else {
             if (mouseKeyCode == 1) {
-                actionsContext.getPauseAction().mousePressed(posX, posY);
+                actionsContext.getPlayerActionController().attack();
             }
         }
     }
 
     @Override
     public int execute(double currentFPS) {
-        if (!isPause) {
-            return mainActionInLevel(currentFPS);
+        int returnValue;
+        if (isPause) {
+            returnValue = pauseActionsInLevel(currentFPS);
+        } else if (gameIsOver) {
+            returnValue = endGameActionsInLevel(currentFPS);
         } else {
-            int returnValue = pauseActionsInLevel(currentFPS);
-            switch (returnValue) {
-                case Constants.GameConstants.REMOVE_FROM_PAUSE -> {
-                    removeFromPause();
-                }
-                case Constants.GameConstants.RESET -> {
-                    reset();
-                    removeFromPause();
-                }
-                case Constants.GameConstants.EXIT_GAME -> {
-                    return Constants.GameConstants.EXIT_GAME;
-                }
-            }
-            return Constants.GameConstants.NOTHING_DOING;
+            returnValue = mainActionInLevel(currentFPS);
         }
+        switch (returnValue) {
+            case Constants.GameConstants.REMOVE_FROM_PAUSE -> {
+                removeFromPause();
+            }
+            case Constants.GameConstants.RESET -> {
+                reset();
+                removeFromPause();
+            }
+            case Constants.GameConstants.EXIT_GAME -> {
+                return Constants.GameConstants.EXIT_GAME;
+            }
+        }
+        return Constants.GameConstants.NOTHING_DOING;
     }
 
     private int mainActionInLevel(double currentFPS) {
@@ -112,18 +122,24 @@ public class Level implements GameMode {
         deleteObjectsFromGame();
 
         if (levelObjectsContext.getPlayer().getHealth() <= 0) {
-            return Constants.GameConstants.EXIT_GAME;
+            putOnEndScreen();
+            return Constants.GameConstants.NOTHING_DOING;
         }
 
         if (levelObjectsContext.getScore() >= 3) {
-            return Constants.GameConstants.EXIT_GAME;
+            putOnEndScreen();
+            return Constants.GameConstants.NOTHING_DOING;
         }
 
-        return 0;
+        return Constants.GameConstants.NOTHING_DOING;
     }
 
     private int pauseActionsInLevel(double currentFPS) {
         return actionsContext.getPauseAction().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
+    }
+
+    private int endGameActionsInLevel(double currentFPS) {
+        return actionsContext.getEndGameMenuAction().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
     }
 
     private void deleteObjectsFromGame() {
@@ -150,8 +166,16 @@ public class Level implements GameMode {
 
     private void removeFromPause() {
         levelObjectsContext.getLevelPause().setGameObjectIsExist(false);
+        levelObjectsContext.getEndGameMenu().setGameObjectIsExist(false);
         actionsContext.getPauseAction().initial();
+        actionsContext.getEndGameMenuAction().initial();
         isPause = false;
+        gameIsOver = false;
+    }
+
+    private void putOnEndScreen() {
+        levelObjectsContext.getEndGameMenu().setGameObjectIsExist(true);
+        gameIsOver = true;
     }
 
     @Override
@@ -182,8 +206,11 @@ public class Level implements GameMode {
         setFxZeroState();
         setPauseLayoutZeroState();
         isPause = false;
+        gameIsOver = false;
         levelObjectsContext.getEnemyList().clear();
         actionsContext.getEnemyActionsControllers().clear();
+        levelObjectsContext.setScore(0);
+        levelObjectsContext.getPlayer().setHealth(1);
     }
 
     private void setPlayer() {
@@ -235,10 +262,16 @@ public class Level implements GameMode {
     private void setPauseLayout() {
         levelObjectsContext.setLevelPause(new Pause(model.getFrameSize()));
         actionsContext.setPauseAction(new PauseAction(levelObjectsContext.getLevelPause()));
+
+        levelObjectsContext.setEndGameMenu(new EndGamePause(model.getFrameSize()));
+        actionsContext.setEndGameMenuAction(new EndGameMenuAction(levelObjectsContext.getEndGameMenu()));
     }
 
     private void setPauseLayoutZeroState() {
         Pause pause = levelObjectsContext.getLevelPause();
         pause.setGameObjectIsExist(false);
+
+        EndGamePause endGameMenu = levelObjectsContext.getEndGameMenu();
+        endGameMenu.setGameObjectIsExist(false);
     }
 }

@@ -2,9 +2,11 @@ package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
+import org.lab3.controller.actions.pause.EndGameMenuAction;
 import org.lab3.controller.actions.pause.PauseAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 
+import javax.xml.stream.events.EndDocument;
 import java.util.List;
 
 public class AllCharactersActionsContext {
@@ -12,6 +14,7 @@ public class AllCharactersActionsContext {
     private List<EnemyAction> enemyActionsControllers;
     private SlashFXAction slashFXAction;
     private PauseAction pauseAction;
+    private EndGameMenuAction endGameMenuAction;
 
     public PlayerAction getPlayerActionController() {
         return playerActionController;
@@ -43,5 +46,13 @@ public class AllCharactersActionsContext {
 
     public void setPauseAction(PauseAction pauseAction) {
         this.pauseAction = pauseAction;
+    }
+
+    public EndGameMenuAction getEndGameMenuAction() {
+        return endGameMenuAction;
+    }
+
+    public void setEndGameMenuAction(EndGameMenuAction endGameMenuAction) {
+        this.endGameMenuAction = endGameMenuAction;
     }
 }
