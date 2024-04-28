@@ -42,7 +42,7 @@ class SlashBladeKeyListener implements KeyListenerController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        slashBladeLogicController.mousePressedObserver(e.getButton());
+        slashBladeLogicController.mousePressedObserver(e.getButton(), e.getX(), e.getY());
     }
 
     @Override
@@ -70,6 +70,7 @@ class KeysIsPressedContext {
         keysStatusMap.put(83, new KeyStatus()); // s
         keysStatusMap.put(68, new KeyStatus()); // d
         keysStatusMap.put(32, new KeyStatus()); // space
+        keysStatusMap.put(27, new KeyStatus()); // escape
     }
 
     public int getKeyStatus(int keyCode) {

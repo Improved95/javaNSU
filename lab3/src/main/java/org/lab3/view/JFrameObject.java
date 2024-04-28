@@ -1,6 +1,7 @@
-package org.lab3.slashBlade;
+package org.lab3.view;
 
 import org.lab3.controller.controller.KeyListenerController;
+import org.lab3.slashBlade.FrameSize;
 import org.lab3.view.View;
 
 import javax.swing.*;

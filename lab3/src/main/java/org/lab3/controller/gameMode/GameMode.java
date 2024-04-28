@@ -12,7 +12,7 @@ public interface GameMode {
 
     void actionOnKeyReleased(int keyCode);
 
-    void actionOnMousePressed(int mouseKeyCode);
+    void actionOnMousePressed(int mouseKeyCode, int posX, int posY);
 
     void reset();
 }

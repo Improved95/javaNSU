@@ -13,6 +13,8 @@ public class LevelObjectsContext implements ObjectsContext {
     private List<SamuraiV1> enemyList = new ArrayList<>();
     private SlashFX slashFX;
 
+//    private
+
     private int score = 0;
 
     public SamuraiV1 getPlayer() {

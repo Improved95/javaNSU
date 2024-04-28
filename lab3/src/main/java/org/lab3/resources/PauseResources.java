@@ -5,19 +5,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SlashBladeResourcesView implements ResourcesView {
-    private BufferedImage image;
+public class PauseResources implements ObjectResources {
+    private BufferedImage[][] image = new BufferedImage[1][1];
 
-    public SlashBladeResourcesView(String path) {
+    @Override
+    public void openResource(String path) {
         try (InputStream imageStream = this.getClass().getResourceAsStream("../../../SlashBladeResources/" + path)) {
-            image = ImageIO.read(imageStream);
+            image[0][0] = ImageIO.read(imageStream);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     @Override
-    public BufferedImage getOpenedImage() {
+    public BufferedImage[][] getImage() {
         return image;
     }
 }

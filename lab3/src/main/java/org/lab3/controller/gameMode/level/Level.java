@@ -4,8 +4,8 @@ import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
-import org.lab3.controller.gameMode.pauseMenu.EndGameMenu;
-import org.lab3.controller.gameMode.pauseMenu.PauseOverlay;
+import org.lab3.controller.gameMode.pause.EndGameMenu;
+import org.lab3.controller.gameMode.pause.PauseOverlay;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
@@ -21,7 +21,9 @@ public class Level implements GameMode {
     private LevelObjectsContext levelObjectsContext;
     private EnemyCreator enemyCreator = new EnemyCreator();
     private AllCharactersActionsContext actionsContext;
-    private PauseOverlay endGameMenu = new EndGameMenu();
+
+    private PauseOverlay LevelPause = new EndGameMenu();
+    private boolean isPause;
 
     private Level(Model model) {
         this.model = model;
@@ -40,6 +42,9 @@ public class Level implements GameMode {
                 break;
             case 68:
                 actionsContext.getPlayerActionController().changeMoveX(-1, 1);
+                break;
+            case 27:
+                isPause = true;
         }
     }
 
@@ -60,14 +65,28 @@ public class Level implements GameMode {
     }
 
     @Override
-    public void actionOnMousePressed(int mouseKeyCode) {
-        if (mouseKeyCode == 1) {
-            actionsContext.getPlayerActionController().attack();
+    public void actionOnMousePressed(int mouseKeyCode, int posX, int posY) {
+        if (!isPause) {
+            if (mouseKeyCode == 1) {
+                actionsContext.getPlayerActionController().attack();
+            }
+        } else {
+            if (mouseKeyCode == 1) {
+
+            }
         }
     }
 
     @Override
     public int execute(double currentFPS) {
+        if (!isPause) {
+            return mainActionInLevel(currentFPS);
+        } else {
+            return 0;
+        }
+    }
+
+    private int mainActionInLevel(double currentFPS) {
         actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
@@ -87,6 +106,10 @@ public class Level implements GameMode {
             return 2;
         }
 
+        return 0;
+    }
+
+    private int pauseActionsInLevel() {
         return 0;
     }
 

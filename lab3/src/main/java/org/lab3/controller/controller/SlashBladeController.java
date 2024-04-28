@@ -1,7 +1,7 @@
 package org.lab3.controller.controller;
 
 import org.lab3.model.model.Model;
-import org.lab3.slashBlade.JFrameObject;
+import org.lab3.view.JFrameObject;
 import org.lab3.view.View;
 
 import java.util.Timer;

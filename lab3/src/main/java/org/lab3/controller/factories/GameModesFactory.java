@@ -2,7 +2,6 @@ package org.lab3.controller.factories;
 
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.model.Model;
-import org.lab3.slashBlade.JFrameObject;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

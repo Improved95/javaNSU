@@ -46,8 +46,8 @@ class SlashBladeLogicController {
         currentGameMode.actionOnKeyReleased(keyCode);
     }
 
-    void mousePressedObserver(int keyCode) {
-        currentGameMode.actionOnMousePressed(keyCode);
+    void mousePressedObserver(int keyCode, int posX, int posY) {
+        currentGameMode.actionOnMousePressed(keyCode, posX, posY);
     }
 
     int calculateFrame(double currentFPS) {

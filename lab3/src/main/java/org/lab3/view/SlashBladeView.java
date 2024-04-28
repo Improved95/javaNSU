@@ -3,7 +3,6 @@ package org.lab3.view;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.slashBlade.FrameSize;
-import org.lab3.slashBlade.JFrameObject;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
 
@@ -56,8 +55,11 @@ public class SlashBladeView implements View {
 
             for (DrawObject drawObject : drawObjectsList) {
                 EditedImage.editImage(drawObject, frameSize);
-                BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList())
-                        .getOpenedResourcesList().get(drawObject.getCurrentImageIndex()).getOpenedImage();
+//                BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList())
+//                        .getOpenedResourcesList().get(drawObject.getCurrentImageIndex()).getOpenedImage();
+
+                BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
+                        getImage()[0][0];
 
                 g.drawImage(image, (int)EditedImage.newPosX, (int)EditedImage.newPosY,
                         EditedImage.newWidth, drawObject.getScreenHeight(), null);
