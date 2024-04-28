@@ -3,6 +3,7 @@ package org.lab3.model.gameObjectsContext;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.pause.Pause;
 import org.lab3.model.objects.slashFX.SlashFX;
 
 import java.util.*;
@@ -12,8 +13,7 @@ public class LevelObjectsContext implements ObjectsContext {
     private Background  background;
     private List<SamuraiV1> enemyList = new ArrayList<>();
     private SlashFX slashFX;
-
-//    private
+    private Pause levelPause;
 
     private int score = 0;
 
@@ -57,6 +57,14 @@ public class LevelObjectsContext implements ObjectsContext {
         this.score = score;
     }
 
+    public Pause getLevelPause() {
+        return levelPause;
+    }
+
+    public void setLevelPause(Pause levelPause) {
+        this.levelPause = levelPause;
+    }
+
     @Override
     public AbstractList<DrawObject> getDrawObjectsList() {
         AbstractList<DrawObject> objectsList = new ArrayList<>();
@@ -70,6 +78,13 @@ public class LevelObjectsContext implements ObjectsContext {
 
         if (slashFX.isGameObjectIsExist()) {
             objectsList.add(slashFX);
+        }
+
+        if (levelPause.isGameObjectIsExist()) {
+            objectsList.add(levelPause);
+            objectsList.add(levelPause.getResume());
+            objectsList.add(levelPause.getReset());
+            objectsList.add(levelPause.getExit());
         }
 
         return objectsList;

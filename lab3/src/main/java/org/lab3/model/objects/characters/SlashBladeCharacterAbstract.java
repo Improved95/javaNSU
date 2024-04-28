@@ -34,30 +34,6 @@ public abstract class SlashBladeCharacterAbstract extends SlashBladeObjectAbstra
     }
 
     @Override
-    public void setObjectSize(double screenSize) {
-        double newSize = screenSize / 100;
-        setWidth((int)(objectWidth * newSize));
-        setHeight((int)(objectHeight * newSize));
-
-        setScreenWidth(objectWidth);
-        setScreenHeight(objectHeight);
-
-        this.screenSize = screenSize;
-    }
-
-    @Override
-    public void setWidth(int objectWidth) {
-        this.objectWidth = objectWidth;
-        this.hitbox.setSize(objectWidth, objectHeight);
-    }
-
-    @Override
-    public void setHeight(int objectHeight) {
-        this.objectHeight = objectHeight;
-        this.hitbox.setSize(objectWidth, objectHeight);
-    }
-
-    @Override
     public double getScreenPosX() {
         return inGamePosX;
     }

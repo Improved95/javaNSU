@@ -4,13 +4,12 @@ import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
-import org.lab3.model.objects.pause.EndGameMenu;
-import org.lab3.model.objects.pause.PauseOverlay;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.pause.Pause;
 import org.lab3.model.objects.slashFX.SlashFX;
 
 import java.util.ArrayList;
@@ -21,8 +20,6 @@ public class Level implements GameMode {
     private LevelObjectsContext levelObjectsContext;
     private EnemyCreator enemyCreator = new EnemyCreator();
     private AllCharactersActionsContext actionsContext;
-
-    private PauseOverlay LevelPause = new EndGameMenu();
     private boolean isPause;
 
     private Level(Model model) {
@@ -44,6 +41,7 @@ public class Level implements GameMode {
                 actionsContext.getPlayerActionController().changeMoveX(-1, 1);
                 break;
             case 27:
+                levelObjectsContext.getLevelPause().setGameObjectIsExist(true);
                 isPause = true;
         }
     }
@@ -141,6 +139,7 @@ public class Level implements GameMode {
         setBackgroundZeroState();
         setFx();
         setFxZeroState();
+        setPauseLayout();
         actionsContext.setEnemyActionsControllers(new ArrayList<>());
         enemyCreator.setCreateDelay(2000);
     }
@@ -195,5 +194,10 @@ public class Level implements GameMode {
         slashFX.setGameObjectIsExist(false);
         slashFX.setObjectSize(70);
         actionsContext.getSlashFXController().initial();
+    }
+
+    private void setPauseLayout() {
+        Pause pause = new Pause(model.getFrameSize());
+        levelObjectsContext.setLevelPause(pause);
     }
 }

@@ -52,18 +52,8 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     }
 
     @Override
-    public void setWidth(int objectWidth) {
-        this.objectWidth = objectWidth;
-    }
-
-    @Override
     public int getHeight() {
         return objectHeight;
-    }
-
-    @Override
-    public void setHeight(int objectHeight) {
-        this.objectHeight = objectHeight;
     }
 
     @Override
@@ -98,6 +88,18 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
         setScreenHeight(objectHeight);
 
         this.screenSize = screenSize;
+    }
+
+    @Override
+    public void setWidth(int objectWidth) {
+        this.objectWidth = objectWidth;
+        this.hitbox.setSize(objectWidth, objectHeight);
+    }
+
+    @Override
+    public void setHeight(int objectHeight) {
+        this.objectHeight = objectHeight;
+        this.hitbox.setSize(objectWidth, objectHeight);
     }
 
     @Override
