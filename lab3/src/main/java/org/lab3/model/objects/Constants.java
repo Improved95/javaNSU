@@ -3,6 +3,16 @@ package org.lab3.model.objects;
 import java.security.PublicKey;
 
 public class Constants {
+    public static class GameConstants {
+        public static final int NOTHING_DOING = 0;
+        public static final int EXIT_GAME = -1;
+        public static final int PUT_ON_PAUSE = 1;
+        public static final int REMOVE_FROM_PAUSE = 2;
+        public static final int RESET = 3;
+        public static final int SWITCH_GAME_STATE = 4;
+
+    }
+
     public static class PlayerConstants {
         public static final String ZERO_ATLAS = "samurai/zero.png";
         public static final String FIFTEEN_ATLAS = "samurai/fifteen.png";
@@ -58,10 +68,5 @@ public class Constants {
         public static final int RESUME_BUTTON_INDEX = 0;
         public static final int RESET_BUTTON_INDEX = 1;
         public static final int EXIT_BUTTON_INDEX = 2;
-
-        public static final int NOTHING_PRESS = 0;
-        public static final int RESUME_PRESS = 1;
-        public static final int RESET_PRESS = 2;
-        public static final int EXIT_PRESS = 3;
     }
 }

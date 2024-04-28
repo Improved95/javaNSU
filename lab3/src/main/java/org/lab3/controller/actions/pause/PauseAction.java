@@ -46,7 +46,7 @@ public class PauseAction implements ActionController {
 
         buttonHitbox = pauseLayout.getExit().getHitbox();
         if (buttonHitbox.contains(x, y)) {
-            System.out.println("reset press");
+            System.out.println("exit press");
             isExitPress = true;
         }
     }
@@ -56,11 +56,11 @@ public class PauseAction implements ActionController {
                         double currentFPS, Model model) {
 
         if (isResumePress)
-            return Constants.PauseConstants.RESUME_PRESS;
+            return Constants.GameConstants.REMOVE_FROM_PAUSE;
+        if (isResetPress)
+            return Constants.GameConstants.RESET;
         if (isExitPress)
-            return Constants.PauseConstants.RESET_PRESS;
-        if (isExitPress)
-            return Constants.PauseConstants.EXIT_PRESS;
-        return Constants.PauseConstants.NOTHING_PRESS;
+            return Constants.GameConstants.EXIT_GAME;
+        return Constants.GameConstants.NOTHING_DOING;
     }
 }

@@ -4,6 +4,7 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.model.Model;
+import org.lab3.model.objects.Constants;
 import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,9 +53,9 @@ class SlashBladeLogicController {
 
     int calculateFrame(double currentFPS) {
         int returnValue = currentGameMode.execute(currentFPS);
-        if (returnValue == 1) {
-            return 1;
+        if (returnValue == Constants.GameConstants.EXIT_GAME) {
+            return Constants.GameConstants.EXIT_GAME;
         }
-        return 0;
+        return Constants.GameConstants.NOTHING_DOING;
     }
 }

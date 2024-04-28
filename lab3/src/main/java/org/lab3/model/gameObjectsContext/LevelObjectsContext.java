@@ -14,6 +14,7 @@ public class LevelObjectsContext implements ObjectsContext {
     private List<SamuraiV1> enemyList = new ArrayList<>();
     private SlashFX slashFX;
     private Pause levelPause;
+    private Pause endGameScreen;
 
     private int score = 0;
 
