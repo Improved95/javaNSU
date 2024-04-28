@@ -26,17 +26,17 @@ public class PlayerCatchAttack extends ActionExecuteAbstract {
     }
 
     private void catchEnemyAttack(SamuraiV1 character, SamuraiV1 enemy) {
-        if (enemy.getParametersContext().isAttack()) {
+        if (enemy.isAttack()) {
             double relativePos = character.getInGamePosX() - enemy.getInGamePosX();
-            double radiusForwardAttack = enemy.getParametersContext().getRadiusForwardAttack();
-            double radiusBackwardAttack = enemy.getParametersContext().getRadiusBackwardAttack();
+            double radiusForwardAttack = enemy.getRadiusForwardAttack();
+            double radiusBackwardAttack = enemy.getRadiusBackwardAttack();
             if (enemy.getInGameHorizontalDirection() == 1) {
                 if (relativePos <= radiusForwardAttack && relativePos >= -radiusBackwardAttack) {
-                    character.getParametersContext().setHealth(character.getParametersContext().getHealth() - 1);
+                    character.setHealth(character.getHealth() - 1);
                 }
             } else {
                 if (relativePos >= -radiusForwardAttack && relativePos <= radiusBackwardAttack) {
-                    character.getParametersContext().setHealth(character.getParametersContext().getHealth() - 1);
+                    character.setHealth(character.getHealth() - 1);
                 }
             }
         }

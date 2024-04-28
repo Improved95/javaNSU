@@ -1,5 +1,7 @@
 package org.lab3.model.objects;
 
+import javax.swing.*;
+
 public interface DrawObject {
     double getScreenPosX();
 

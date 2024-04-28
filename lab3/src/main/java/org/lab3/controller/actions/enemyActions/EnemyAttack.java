@@ -9,10 +9,10 @@ public class EnemyAttack extends ActionExecuteAbstract {
     private double attackDuration;
     private double attackDelay;
 
-    public EnemyAttack(SlashBladeCharacterAbstract character) {
+    public EnemyAttack(SamuraiV1 character) {
         this.isExecute = true;
-        this.attackDuration = character.getParametersContext().getAttackDuration();
-        this.attackDelay = character.getParametersContext().getAttackDelay();
+        this.attackDuration = character.getAttackDuration();
+        this.attackDelay = character.getAttackDelay();
     }
 
 
@@ -20,7 +20,7 @@ public class EnemyAttack extends ActionExecuteAbstract {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double relativePos = player.getInGamePosX() - character.getInGamePosX();
-            double radiusForwardAttack = character.getParametersContext().getRadiusForwardAttack();
+            double radiusForwardAttack = character.getRadiusForwardAttack();
             if (Math.abs(relativePos) <= radiusForwardAttack) {
                 attack(character, currentFPS);
             }
@@ -29,15 +29,15 @@ public class EnemyAttack extends ActionExecuteAbstract {
 
     private void attack(SamuraiV1 character, double currentFPS) {
         if (attackDuration > 0) {
-            character.getParametersContext().setAttackStatus(true);
+            character.setAttack(true);
             attackDuration -= 1000 / currentFPS;
         } else {
             if (attackDelay > 0) {
                 attackDelay -= 1000 / currentFPS;
-                character.getParametersContext().setAttackStatus(false);
+                character.setAttack(false);
             } else {
-                attackDuration = character.getParametersContext().getAttackDuration();
-                attackDelay = character.getParametersContext().getAttackDelay();
+                attackDuration = character.getAttackDuration();
+                attackDelay = character.getAttackDelay();
             }
         }
     }

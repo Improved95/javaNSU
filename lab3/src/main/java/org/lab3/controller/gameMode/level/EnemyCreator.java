@@ -22,11 +22,11 @@ public class EnemyCreator {
         if (timerCreateDelay <= 0) {
             SamuraiV1 enemy = new SamuraiV1();
             enemy.setScreenLayerLevel(1);
-            enemy.getParametersContext().setSpeedOfMoveX(500);
-            enemy.getParametersContext().setRadiusForwardAttack(80);
-            enemy.getParametersContext().setRadiusBackwardAttack(10);
-            enemy.getParametersContext().setAttackDuration(50);
-            enemy.getParametersContext().setAttackDelay(200);
+            enemy.setSpeedOfMoveX(500);
+            enemy.setRadiusForwardAttack(80);
+            enemy.setRadiusBackwardAttack(10);
+            enemy.setAttackDuration(50);
+            enemy.setAttackDelay(200);
             enemy.setObjectSize(90);
             enemy.setScreenLayerLevel(1);
             enemy.setResourcesIndexInResourcesList(Constants.EnemyConstants.ENEMY_ATLAS_INDEX);

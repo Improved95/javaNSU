@@ -1,19 +1,17 @@
 package org.lab3.model.objects;
 
+import java.awt.*;
+
 public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
-    protected int width;
-    protected int height;
+    protected int objectWidth;
+    protected int objectHeight;
     protected int inGameHorizontalDirection;
     protected boolean gameObjectIsExist = true;
-
     protected double currentSpeedX;
     protected double currentSpeedY;
-
-    public SlashBladeObjectAbstract() {
-        setObjectSize(100);
-    }
+    protected Rectangle hitbox = new Rectangle();
 
     @Override
     public double getInGamePosX() {
@@ -39,32 +37,34 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     public void setInGamePosition(double x, double y) {
         this.inGamePosX = x;
         this.inGamePosY = y;
+        this.hitbox.setLocation((int)x, (int)y);
     }
 
     @Override
-    public void changeInGamePos(double dx, double dy) {
+    public void changeInGamePosition(double dx, double dy) {
         this.inGamePosX += dx;
         this.inGamePosY += dy;
+        this.hitbox.setLocation((int)(hitbox.getX() + dx), (int)(hitbox.getY() + dy));
     }
 
     @Override
     public int getWidth() {
-        return width;
+        return objectWidth;
     }
 
     @Override
-    public void setWidth(int width) {
-        this.width = width;
+    public void setWidth(int objectWidth) {
+        this.objectWidth = objectWidth;
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return objectHeight;
     }
 
     @Override
-    public void setHeight(int height) {
-        this.height = height;
+    public void setHeight(int objectHeight) {
+        this.objectHeight = objectHeight;
     }
 
     @Override
@@ -92,11 +92,11 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     @Override
     public void setObjectSize(double screenSize) {
         double newSize = screenSize / 100;
-        width = (int)(width * newSize);
-        height = (int)(height * newSize);
+        setWidth((int)(objectWidth * newSize));
+        setHeight((int)(objectHeight * newSize));
 
-        setScreenWidth(width);
-        setScreenHeight(height);
+        setScreenWidth(objectWidth);
+        setScreenHeight(objectHeight);
 
         this.screenSize = screenSize;
     }

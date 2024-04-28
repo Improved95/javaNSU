@@ -15,7 +15,7 @@ public class EnemyMoveX extends ActionExecuteAbstract {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double playerPosX = player.getInGamePosX();
             double enemyPosX = character.getInGamePosX();
-            double enemySpeed = character.getParametersContext().getSpeedOfMoveX();
+            double enemySpeed = character.getSpeedOfMoveX();
             if (Math.abs(enemyPosX - playerPosX) > 30) {
                 if (enemyPosX - playerPosX < 0) {
                     character.changeDirection(1);

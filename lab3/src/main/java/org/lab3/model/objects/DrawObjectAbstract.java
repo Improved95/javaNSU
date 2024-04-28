@@ -1,6 +1,8 @@
 package org.lab3.model.objects;
 
-public abstract class DrawObjectAbstract implements DrawObject {
+import javax.swing.*;
+
+public abstract class DrawObjectAbstract extends JPanel implements DrawObject  {
     protected double screenPosX;
     protected double screenPosY;
     protected double screenSize = 100;

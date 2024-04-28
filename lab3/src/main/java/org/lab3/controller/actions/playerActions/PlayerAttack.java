@@ -9,13 +9,13 @@ public class PlayerAttack extends ActionExecuteAbstract {
     private double attackDuration;
     private double attackDelay;
 
-    public PlayerAttack(SlashBladeCharacterAbstract character) {
+    public PlayerAttack(SamuraiV1 character) {
         initial(character);
     }
 
-    public void initial(SlashBladeCharacterAbstract character) {
-        this.attackDuration = character.getParametersContext().getAttackDuration();
-        this.attackDelay = character.getParametersContext().getAttackDelay();
+    public void initial(SamuraiV1 character) {
+        this.attackDuration = character.getAttackDuration();
+        this.attackDelay = character.getAttackDelay();
     }
 
     public void initialAttack() {
@@ -25,18 +25,18 @@ public class PlayerAttack extends ActionExecuteAbstract {
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS) {
         if (isExecute && !isBlockExecute) {
             if (attackDuration > 0) {
-                character.getParametersContext().setAttackStatus(true);
+                character.setAttack(true);
                 levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
                 attackDuration -= 1000 / currentFPS;
             } else {
                 if (attackDelay > 0) {
                     attackDelay -= 1000 / currentFPS;
-                    character.getParametersContext().setAttackStatus(false);
+                    character.setAttack(false);
                     levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
                 } else {
                     isExecute = false;
-                    attackDuration = character.getParametersContext().getAttackDuration();
-                    attackDelay = character.getParametersContext().getAttackDelay();
+                    attackDuration = character.getAttackDuration();
+                    attackDelay = character.getAttackDelay();
                 }
             }
         }

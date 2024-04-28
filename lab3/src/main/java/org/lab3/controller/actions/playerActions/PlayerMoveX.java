@@ -50,7 +50,7 @@ public class PlayerMoveX extends ActionExecuteAbstract {
 
     public void execute(SamuraiV1 character, double currentFPS, FrameSize frameSize) {
         if (isExecute && !isBlockExecute) {
-            double speedOfMoveX = character.getParametersContext().getSpeedOfMoveX();
+            double speedOfMoveX = character.getSpeedOfMoveX();
             double reductionFactor = frameSize.getReductionFactor();
             int direction = character.getInGameHorizontalDirection();
             character.setCurrentSpeedX(speedOfMoveX * reductionFactor * direction / currentFPS);

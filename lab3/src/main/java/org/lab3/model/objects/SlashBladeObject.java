@@ -11,7 +11,7 @@ public interface SlashBladeObject {
 
     void setInGamePosition(double x, double y);
 
-    void changeInGamePos(double dx, double dy);
+    void changeInGamePosition(double dx, double dy);
 
     int getInGameHorizontalDirection();
 
