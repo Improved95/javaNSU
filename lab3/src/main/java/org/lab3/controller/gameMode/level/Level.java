@@ -177,7 +177,6 @@ public class Level implements GameMode {
     private void putOnEndScreen() {
         levelObjectsContext.getEndGameMenu().setGameObjectIsExist(true);
         levelState = LevelState.END_GAME;
-//        gameIsOver = true;
     }
 
     @Override
