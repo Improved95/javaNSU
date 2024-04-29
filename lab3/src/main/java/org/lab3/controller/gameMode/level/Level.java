@@ -34,35 +34,40 @@ public class Level implements GameMode {
     @Override
     public void actionOnKeyPressed(int keyCode) {
         switch (keyCode) {
-            case 87:
-                break;
-            case 65:
-                actionsContext.getPlayerActionController().changeMoveX(1, -1);
-                break;
-            case 83:
-                break;
-            case 68:
-                actionsContext.getPlayerActionController().changeMoveX(-1, 1);
-                break;
-            case 27:
-                putOnPause();
-                break;
+            case 87 -> {}
+            case 65 -> {
+                if (levelState == LevelState.PLAY) {
+                    actionsContext.getPlayerActionController().changeMoveX(1, -1);
+                }
+            }
+            case 68 -> {
+                if (levelState == LevelState.PLAY) {
+                    actionsContext.getPlayerActionController().changeMoveX(-1, 1);
+                }
+            }
+            case 27 -> {
+                if (levelState == LevelState.PLAY) {
+                    putOnPause();
+                }
+            }
         }
     }
 
     @Override
     public void actionOnKeyReleased(int keyCode) {
         switch (keyCode) {
-            case 87:
-                break;
-            case 65:
-                actionsContext.getPlayerActionController().changeMoveX(0, -1);
-                break;
-            case 83:
-                break;
-            case 68:
-                actionsContext.getPlayerActionController().changeMoveX(-1, 0);
-                break;
+            case 87 -> {}
+            case 65 -> {
+                if (levelState == LevelState.PLAY) {
+                    actionsContext.getPlayerActionController().changeMoveX(0, -1);
+                }
+            }
+            case 83 -> {}
+            case 68 -> {
+                if (levelState == LevelState.PLAY) {
+                    actionsContext.getPlayerActionController().changeMoveX(-1, 0);
+                }
+            }
         }
     }
 
