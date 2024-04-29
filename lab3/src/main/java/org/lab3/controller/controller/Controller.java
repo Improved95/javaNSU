@@ -12,4 +12,6 @@ public interface Controller {
     void initial();
 
     void executeCalculateGame();
+
+    KeyListenerController getSlashBladeKeyListenerController();
 }

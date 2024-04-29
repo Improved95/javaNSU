@@ -24,8 +24,7 @@ public class Level implements GameMode {
     private LevelObjectsContext levelObjectsContext;
     private EnemyCreator enemyCreator = new EnemyCreator();
     private AllCharactersActionsContext actionsContext;
-    private boolean isPause;
-    private boolean gameIsOver;
+    private LevelState levelState;
 
     private Level(Model model) {
         this.model = model;
@@ -69,42 +68,40 @@ public class Level implements GameMode {
 
     @Override
     public void actionOnMousePressed(int mouseKeyCode, int posX, int posY) {
-        if (isPause) {
-            if (mouseKeyCode == 1) {
-                actionsContext.getPauseAction().mousePressed(posX, posY);
+        switch (levelState) {
+            case LevelState.PLAY -> {
+                if (mouseKeyCode == 1) {
+                    actionsContext.getPlayerActionController().attack();
+                }
             }
-        } else if (gameIsOver) {
-            if (mouseKeyCode == 1) {
-                actionsContext.getEndGameMenuAction().mousePressed(posX, posY);
+            case LevelState.PAUSE -> {
+                if (mouseKeyCode == 1) {
+                    actionsContext.getPauseAction().mousePressed(posX, posY);
+                }
             }
-        } else {
-            if (mouseKeyCode == 1) {
-                actionsContext.getPlayerActionController().attack();
+            case LevelState.END_GAME -> {
+                if (mouseKeyCode == 1) {
+                    actionsContext.getEndGameMenuAction().mousePressed(posX, posY);
+                }
             }
         }
     }
 
     @Override
     public int execute(double currentFPS) {
-        int returnValue;
-        if (isPause) {
-            returnValue = pauseActionsInLevel(currentFPS);
-        } else if (gameIsOver) {
-            returnValue = endGameActionsInLevel(currentFPS);
-        } else {
-            returnValue = mainActionInLevel(currentFPS);
+        int returnValue = 0;
+        switch (levelState) {
+            case LevelState.PLAY -> returnValue = mainActionInLevel(currentFPS);
+            case LevelState.PAUSE -> returnValue = pauseActionsInLevel(currentFPS);
+            case LevelState.END_GAME -> returnValue = endGameActionsInLevel(currentFPS);
         }
         switch (returnValue) {
-            case Constants.GameConstants.REMOVE_FROM_PAUSE -> {
-                removeFromPause();
-            }
+            case Constants.GameConstants.REMOVE_FROM_PAUSE -> removeFromPause();
             case Constants.GameConstants.RESET -> {
                 reset();
                 removeFromPause();
             }
-            case Constants.GameConstants.EXIT_GAME -> {
-                return Constants.GameConstants.EXIT_GAME;
-            }
+            case Constants.GameConstants.EXIT_GAME -> { return Constants.GameConstants.EXIT_GAME; }
         }
         return Constants.GameConstants.NOTHING_DOING;
     }
@@ -161,7 +158,7 @@ public class Level implements GameMode {
 
     private void putOnPause() {
         levelObjectsContext.getLevelPause().setGameObjectIsExist(true);
-        isPause = true;
+        levelState = LevelState.PAUSE;
     }
 
     private void removeFromPause() {
@@ -169,13 +166,13 @@ public class Level implements GameMode {
         levelObjectsContext.getEndGameMenu().setGameObjectIsExist(false);
         actionsContext.getPauseAction().initial();
         actionsContext.getEndGameMenuAction().initial();
-        isPause = false;
-        gameIsOver = false;
+        levelState = LevelState.PLAY;
     }
 
     private void putOnEndScreen() {
         levelObjectsContext.getEndGameMenu().setGameObjectIsExist(true);
-        gameIsOver = true;
+        levelState = LevelState.END_GAME;
+//        gameIsOver = true;
     }
 
     @Override
@@ -197,6 +194,7 @@ public class Level implements GameMode {
 
         actionsContext.setEnemyActionsControllers(new ArrayList<>());
         enemyCreator.setCreateDelay(2000);
+        levelState = LevelState.PLAY;
     }
 
     @Override
@@ -205,8 +203,7 @@ public class Level implements GameMode {
         setBackgroundZeroState();
         setFxZeroState();
         setPauseLayoutZeroState();
-        isPause = false;
-        gameIsOver = false;
+        levelState = LevelState.PLAY;
         levelObjectsContext.getEnemyList().clear();
         actionsContext.getEnemyActionsControllers().clear();
         levelObjectsContext.setScore(0);

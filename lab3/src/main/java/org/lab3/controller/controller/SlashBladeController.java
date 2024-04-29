@@ -12,8 +12,8 @@ public class SlashBladeController implements Controller {
     private final double maxFPS = 60;
     private final long maxWaitingTime = (long)(1000 / maxFPS);
 
-    private static SlashBladeLogicController slashBladeLogicController = new SlashBladeLogicController();
-    private static SlashBladeKeyListener slashBladeKeyListenerController  = new SlashBladeKeyListener(slashBladeLogicController);
+    private SlashBladeLogicController slashBladeLogicController;
+    private SlashBladeKeyListener slashBladeKeyListenerController;
 
     private JFrameObject jFrameObject;
     private Model model;
@@ -24,13 +24,16 @@ public class SlashBladeController implements Controller {
 
     public SlashBladeController() {
         timerContext = new TimerContext();
+        slashBladeLogicController = new SlashBladeLogicController();
+        slashBladeKeyListenerController  = new SlashBladeKeyListener(slashBladeLogicController);
     }
 
-    public static SlashBladeLogicController getSlashBladeController() {
+    public SlashBladeLogicController getSlashBladeLogicController() {
         return slashBladeLogicController;
     }
 
-    public static KeyListenerController getSlashBladeKeyListenerController() {
+    @Override
+    public KeyListenerController getSlashBladeKeyListenerController() {
         return slashBladeKeyListenerController;
     }
 
@@ -42,6 +45,7 @@ public class SlashBladeController implements Controller {
     @Override
     public void setModel(Model model) {
         this.model = model;
+        slashBladeKeyListenerController.setFrameSize(model.getFrameSize());
     }
 
     @Override

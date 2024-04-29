@@ -6,7 +6,7 @@ import org.lab3.model.objects.Constants;
 
 public class EndGamePause extends SlashBladeObjectAbstract {
     private PauseButton reset = new PauseButton(Constants.PauseConstants.BUTTONS_INDEX, Constants.PauseConstants.RESET_BUTTON_INDEX);
-    private PauseButton exit = new PauseButton(Constants.PauseConstants.BUTTONS_INDEX, Constants.PauseConstants.RESUME_BUTTON_INDEX);
+    private PauseButton exit = new PauseButton(Constants.PauseConstants.BUTTONS_INDEX, Constants.PauseConstants.EXIT_BUTTON_INDEX);
 
     public EndGamePause(FrameSize frameSize) {
         setWidth(Constants.PauseConstants.PAUSE_BG_WIDTH);
@@ -18,8 +18,8 @@ public class EndGamePause extends SlashBladeObjectAbstract {
         setObjectSize(100);
 
         double buttonsPosX = inGamePosX + objectWidth / 2F - reset.getWidth() / 2F;
-        reset.setInGamePosition(buttonsPosX, 300);
-        exit.setInGamePosition(buttonsPosX, 200);
+        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F * 2 + 20);
+        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F - 20);
 
         setGameObjectIsExist(false);
     }

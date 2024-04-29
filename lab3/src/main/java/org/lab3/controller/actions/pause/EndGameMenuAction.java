@@ -28,13 +28,10 @@ public class EndGameMenuAction implements ActionController {
         isResetPress = false;
         isExitPress = false;
 
-        System.out.println("End game " + x + " " + y);
-
         Rectangle buttonHitbox = layout.getReset().getHitbox();
         if (buttonHitbox.contains(x, y)) {
             isResetPress = true;
         }
-        System.out.println(buttonHitbox.x + " " + buttonHitbox.y);
 
         buttonHitbox = layout.getExit().getHitbox();
         if (buttonHitbox.contains(x, y)) {

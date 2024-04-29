@@ -1,17 +1,25 @@
 package org.lab3.controller.controller;
 
+import org.lab3.slashBlade.FrameSize;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
 class SlashBladeKeyListener implements KeyListenerController {
-    KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
+    private FrameSize frameSize;
+    private KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
 
-    SlashBladeLogicController slashBladeLogicController;
+    private SlashBladeLogicController slashBladeLogicController;
 
     SlashBladeKeyListener(SlashBladeLogicController slashBladeLogicController) {
         this.slashBladeLogicController = slashBladeLogicController;
+    }
+
+    public void setFrameSize(FrameSize frameSize) {
+        this.frameSize = frameSize;
     }
 
     @Override
@@ -42,7 +50,8 @@ class SlashBladeKeyListener implements KeyListenerController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        slashBladeLogicController.mousePressedObserver(e.getButton(), e.getX(), e.getY());
+        int newPosY = frameSize.getHeight() - e.getY() + 30;
+        slashBladeLogicController.mousePressedObserver(e.getButton(), e.getX(), newPosY);
     }
 
     @Override
