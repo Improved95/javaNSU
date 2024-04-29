@@ -52,4 +52,16 @@ public class AbstractWarehouse implements Warehouse {
         notifyAll();
         return detail;
     }
+
+    @Override
+    public synchronized Detail unblockPickUpDetail() {
+        if (size <= 0) {
+            return null;
+        }
+        Detail detail = (Detail) detailList.removeLast();
+        size--;
+        notifyAll();
+        return detail;
+    }
+
 }

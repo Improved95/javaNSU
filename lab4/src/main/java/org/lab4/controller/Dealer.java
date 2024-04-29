@@ -39,8 +39,9 @@ public class Dealer implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
-            ReadyCar readyCar = null;
+            ReadyCar readyCar;
             try {
+
                 readyCarWarehouseController.setNewTaskExist();
                 readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
             } catch (InterruptedException ex) {

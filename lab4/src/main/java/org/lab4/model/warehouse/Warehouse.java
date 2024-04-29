@@ -13,4 +13,6 @@ public interface Warehouse {
     void addDetail(Detail detail) throws InterruptedException;
 
     Detail pickUpDetail() throws InterruptedException;
+
+    Detail unblockPickUpDetail();
 }
