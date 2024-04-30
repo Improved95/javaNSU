@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SlashFxResources implements ObjectResources {
-    private BufferedImage[][] image = new BufferedImage[1][1];
+public class SlashFxResources extends ResourcesAbstract {
+    public SlashFxResources() {
+        super(1, 2);
+    }
 
     @Override
     public void openResource(String path) {

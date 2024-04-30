@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PlayerResources implements ObjectResources {
-    private BufferedImage[][] image = new BufferedImage[1][1];
+public class PlayerResources extends ResourcesAbstract {
+    public PlayerResources() {
+        super(1, 1);
+    }
 
     @Override
     public void openResource(String path) {

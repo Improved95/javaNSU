@@ -13,7 +13,7 @@ public class LevelObjectsContext implements ObjectsContext {
     private SamuraiV1 player;
     private Background  background;
     private List<SamuraiV1> enemyList = new ArrayList<>();
-    private SlashFX slashFX;
+//    private SlashFX slashFX;
     private Pause levelPause;
     private EndGamePause endGamePause;
 
@@ -43,13 +43,13 @@ public class LevelObjectsContext implements ObjectsContext {
         this.enemyList = enemyList;
     }
 
-    public SlashFX getSlashFX() {
-        return slashFX;
-    }
-
-    public void setSlashFX(SlashFX slashFX) {
-        this.slashFX = slashFX;
-    }
+//    public SlashFX getSlashFX() {
+//        return slashFX;
+//    }
+//
+//    public void setSlashFX(SlashFX slashFX) {
+//        this.slashFX = slashFX;
+//    }
 
     public int getScore() {
         return score;
@@ -80,15 +80,19 @@ public class LevelObjectsContext implements ObjectsContext {
         AbstractList<DrawObject> objectsList = new ArrayList<>();
 
         objectsList.add(player);
+        SlashFX slashFX = player.getSlashFX();
+        if (slashFX.isGameObjectIsExist()) {
+            objectsList.add(slashFX);
+        }
 
         objectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
             objectsList.add(enemy);
         }
 
-        if (slashFX.isGameObjectIsExist()) {
-            objectsList.add(slashFX);
-        }
+//        if (slashFX.isGameObjectIsExist()) {
+//            objectsList.add(slashFX);
+//        }
 
         if (levelPause.isGameObjectIsExist()) {
             objectsList.add(levelPause);

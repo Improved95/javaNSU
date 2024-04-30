@@ -25,13 +25,15 @@ public class PlayerAttack extends ActionExecuteAbstract {
         if (isExecute && !isBlockExecute) {
             if (attackDuration > 0) {
                 character.setAttack(true);
-                levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
+                character.getSlashFX().setGameObjectIsExist(true);
+//                levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
                 attackDuration -= 1000 / currentFPS;
             } else {
                 if (attackDelay > 0) {
                     attackDelay -= 1000 / currentFPS;
                     character.setAttack(false);
-                    levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
+                    character.getSlashFX().setGameObjectIsExist(false);
+//                    levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
                 } else {
                     isExecute = false;
                     attackDuration = character.getAttackDuration();

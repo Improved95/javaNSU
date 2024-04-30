@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PauseResources implements ObjectResources {
-    private BufferedImage[][] image = new BufferedImage[2][3];
+public class PauseResources extends ResourcesAbstract {
+    public PauseResources() {
+        super(2, 3);
+    }
 
     @Override
     public void openResource(String path) {

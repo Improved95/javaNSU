@@ -33,7 +33,7 @@ public class SlashFXAction implements ActionController {
     public int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {
 
-        slashFXFollowPlayer.execute(fx, levelObjectsContext);
+//        slashFXFollowPlayer.execute(fx, levelObjectsContext);
 
         return 0;
     }

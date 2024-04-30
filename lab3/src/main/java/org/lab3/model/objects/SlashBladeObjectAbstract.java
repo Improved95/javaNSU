@@ -4,6 +4,8 @@ import java.awt.*;
 public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implements SlashBladeObject {
     protected double inGamePosX;
     protected double inGamePosY;
+    protected int originalObjectWidth;
+    protected int originalObjectHeight;
     protected int objectWidth;
     protected int objectHeight;
     protected int inGameHorizontalDirection;
@@ -81,24 +83,26 @@ public abstract class SlashBladeObjectAbstract extends DrawObjectAbstract implem
     @Override
     public void setObjectSize(double screenSize) {
         double newSize = screenSize / 100;
-        setWidth((int)(objectWidth * newSize));
-        setHeight((int)(objectHeight * newSize));
+        setWidth((int)(originalObjectWidth * newSize));
+        setHeight((int)(originalObjectHeight * newSize));
 
-        setScreenWidth(objectWidth);
-        setScreenHeight(objectHeight);
+        setScreenWidth(originalObjectWidth);
+        setScreenHeight(originalObjectHeight);
 
         this.screenSize = screenSize;
     }
 
     @Override
     public void setWidth(int objectWidth) {
-        this.objectWidth = objectWidth;
+        this.originalObjectWidth = objectWidth;
+        this.objectWidth = originalObjectWidth;
         this.hitbox.setSize(objectWidth, objectHeight);
     }
 
     @Override
     public void setHeight(int objectHeight) {
-        this.objectHeight = objectHeight;
+        this.originalObjectHeight = objectHeight;
+        this.objectHeight = originalObjectHeight;
         this.hitbox.setSize(objectWidth, objectHeight);
     }
 

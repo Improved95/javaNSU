@@ -9,7 +9,7 @@ public class EnemyAttack extends ActionExecuteAbstract {
     private double attackDelay;
 
     public EnemyAttack(SamuraiV1 character) {
-        this.isExecute = true;
+        setExecuteStatus(true);
         this.attackDuration = character.getAttackDuration();
         this.attackDelay = character.getAttackDelay();
     }

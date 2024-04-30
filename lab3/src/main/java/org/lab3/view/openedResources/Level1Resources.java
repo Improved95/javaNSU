@@ -19,7 +19,8 @@ public class Level1Resources implements OpenedResources {
         player.openResource(Constants.PlayerConstants.ZERO_ATLAS);
         enemy.openResource(Constants.EnemyConstants.ENEMY_ATLAS);
         background.openResource(Constants.BackgroundConstants.BACKGROUND_ATLAS);
-        slashFX.openResource(Constants.FXConstants.SLASH_FX_ATLAS);
+        slashFX.openResource(Constants.FXConstants.BLUE_SLASH_FX_ATLAS);
+        slashFX.addImage(0, 1, Constants.FXConstants.RED_SLASH_FX_ATLAS);
         pause.openResource(Constants.PauseConstants.PAUSE_ATLAS);
 
         resourcesList.add(player);

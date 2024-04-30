@@ -1,14 +1,16 @@
 package org.lab3.model.objects.characters;
 
 import org.lab3.model.objects.Constants;
+import org.lab3.model.objects.slashFX.SlashFX;
 
 public class SamuraiV1 extends SlashBladeCharacterAbstract {
-    protected double radiusForwardAttack;
-    protected double radiusBackwardAttack;
-    protected double attackHeight;
-    protected double attackDuration = 0;
-    protected double attackDelay = 0;
-    protected boolean attack = false;
+    private double radiusForwardAttack;
+    private double radiusBackwardAttack;
+    private double attackHeight;
+    private double attackDuration = 0;
+    private double attackDelay = 0;
+    private boolean attack = false;
+    private SlashFX slashFX;
 
     public SamuraiV1() {
         setHealth(1);
@@ -102,5 +104,13 @@ public class SamuraiV1 extends SlashBladeCharacterAbstract {
 
     public void setAttack(boolean attack) {
         this.attack = attack;
+    }
+
+    public SlashFX getSlashFX() {
+        return slashFX;
+    }
+
+    public void setSlashFX(SlashFX slashFX) {
+        this.slashFX = slashFX;
     }
 }

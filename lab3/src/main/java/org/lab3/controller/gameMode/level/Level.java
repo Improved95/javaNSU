@@ -98,7 +98,10 @@ public class Level implements GameMode {
         switch (levelState) {
             case PLAY -> returnValue = mainActionInLevel(currentFPS);
             case PAUSE -> returnValue = pauseActionsInLevel(currentFPS);
-            case END_GAME -> returnValue = endGameActionsInLevel(currentFPS);
+            case END_GAME ->  {
+                mainActionInLevel(currentFPS);
+                returnValue = endGameActionsInLevel(currentFPS);
+            }
         }
         switch (returnValue) {
             case Constants.GameConstants.REMOVE_FROM_PAUSE -> removeFromPause();
@@ -113,13 +116,14 @@ public class Level implements GameMode {
 
     private int mainActionInLevel(double currentFPS) {
         actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
-        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
+//        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
             enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         }
 
-        enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext,
-                model.getFrameSize(), currentFPS);
+        if (levelState == LevelState.PLAY) {
+            enemyCreator.create(levelObjectsContext.getEnemyList(), actionsContext, model.getFrameSize(), currentFPS);
+        }
 
         deleteObjectsFromGame();
 
@@ -190,8 +194,8 @@ public class Level implements GameMode {
         setBackground();
         setBackgroundZeroState();
 
-        setFx();
-        setFxZeroState();
+//        setFx();
+//        setFxZeroState();
 
         setPauseLayout();
         setPauseLayoutZeroState();
@@ -205,7 +209,7 @@ public class Level implements GameMode {
     public void reset() {
         setPlayerZeroState();
         setBackgroundZeroState();
-        setFxZeroState();
+//        setFxZeroState();
         setPauseLayoutZeroState();
         levelState = LevelState.PLAY;
         levelObjectsContext.getEnemyList().clear();
@@ -217,6 +221,12 @@ public class Level implements GameMode {
     private void setPlayer() {
         SamuraiV1 player = new SamuraiV1();
         player.setObjectSize(90);
+
+        SlashFX slashFX = new SlashFX();
+        slashFX.setObjectSize(70);
+
+        player.setSlashFX(slashFX);
+
         levelObjectsContext.setPlayer(player);
         actionsContext.setPlayerActionController(new PlayerAction(player));
     }
@@ -233,6 +243,7 @@ public class Level implements GameMode {
         player.setAttackHeight(30);
         player.setObjectSize(100);
         player.setScreenLayerLevel(2);
+        player.getSlashFX().setGameObjectIsExist(false);
     }
 
     private void setBackground() {
@@ -248,16 +259,16 @@ public class Level implements GameMode {
     }
 
     private void setFx() {
-        SlashFX slashFX = new SlashFX();
-        slashFX.setObjectSize(70);
-        levelObjectsContext.setSlashFX(slashFX);
-        actionsContext.setSlashFXController(new SlashFXAction(slashFX));
+//        SlashFX slashFX = new SlashFX();
+//        slashFX.setObjectSize(70);
+//        levelObjectsContext.setSlashFX(slashFX);
+//        actionsContext.setSlashFXController(new SlashFXAction(slashFX));
     }
 
     private void setFxZeroState() {
-        SlashFX slashFX = levelObjectsContext.getSlashFX();
-        slashFX.setGameObjectIsExist(false);
-        actionsContext.getSlashFXController().initial();
+//        SlashFX slashFX = levelObjectsContext.getSlashFX();
+//        slashFX.setGameObjectIsExist(false);
+//        actionsContext.getSlashFXController().initial();
     }
 
     private void setPauseLayout() {

@@ -100,9 +100,4 @@ public abstract class DrawObjectAbstract extends JPanel implements DrawObject  {
         currentImageIndex.setI1(i1);
         currentImageIndex.setI2(i2);
     }
-
-    /*@Override
-    public BufferedImage getImage() {
-        return image;
-    }*/
 }

@@ -4,8 +4,8 @@ import java.security.PublicKey;
 
 public class Constants {
     public static class GameConstants {
-        public static final int NOTHING_DOING = 0;
         public static final int EXIT_GAME = -1;
+        public static final int NOTHING_DOING = 0;
         public static final int PUT_ON_PAUSE = 1;
         public static final int REMOVE_FROM_PAUSE = 2;
         public static final int RESET = 3;
@@ -42,7 +42,8 @@ public class Constants {
     }
 
     public static class FXConstants {
-        public static final String SLASH_FX_ATLAS = "fx/slash.png";
+        public static final String BLUE_SLASH_FX_ATLAS = "fx/blue_slash.png";
+        public static final String RED_SLASH_FX_ATLAS = "fx/red_slash.png";
 
         public static final int SLASH_FX_WIDTH = 290;
         public static final int SLASH_FX_HEIGHT = 70;

@@ -5,17 +5,17 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class BackgroundResources extends ResourcesAbstract {
-    protected int nextFreeImageSlot = 0;
+public abstract class ResourcesAbstract implements ObjectResources {
+    protected BufferedImage[][] image;
 
-    public BackgroundResources() {
-        super(1, 1);
+    public ResourcesAbstract(int s1, int s2) {
+        image = new BufferedImage[s1][s2];
     }
 
     @Override
-    public void openResource(String path) {
+    public void addImage(int i1, int i2, String path) {
         try (InputStream imageStream = this.getClass().getResourceAsStream("../../../SlashBladeResources/" + path)) {
-            image[0][0] = ImageIO.read(imageStream);
+            image[i1][i2] = ImageIO.read(imageStream);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

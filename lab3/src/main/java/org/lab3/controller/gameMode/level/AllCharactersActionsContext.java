@@ -12,7 +12,7 @@ import java.util.List;
 public class AllCharactersActionsContext {
     private PlayerAction playerActionController;
     private List<EnemyAction> enemyActionsControllers;
-    private SlashFXAction slashFXAction;
+//    private SlashFXAction slashFXAction;
     private PauseAction pauseAction;
     private EndGameMenuAction endGameMenuAction;
 
@@ -32,13 +32,13 @@ public class AllCharactersActionsContext {
         this.enemyActionsControllers = enemyActionsControllers;
     }
 
-    public SlashFXAction getSlashFXController() {
-        return slashFXAction;
-    }
-
-    public void setSlashFXController(SlashFXAction slashFXAction) {
-        this.slashFXAction = slashFXAction;
-    }
+//    public SlashFXAction getSlashFXController() {
+//        return slashFXAction;
+//    }
+//
+//    public void setSlashFXController(SlashFXAction slashFXAction) {
+//        this.slashFXAction = slashFXAction;
+//    }
 
     public PauseAction getPauseAction() {
         return pauseAction;
