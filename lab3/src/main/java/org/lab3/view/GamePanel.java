@@ -19,14 +19,12 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        view.drawObject(g, frameSize);
+        view.drawObject(g);
         g.dispose();
     }
 
     private void setPanelSize() {
         Dimension dimension = new Dimension(frameSize.getWidth(), frameSize.getHeight());
-        setMinimumSize(dimension);
         setPreferredSize(dimension);
-        setMaximumSize(dimension);
     }
 }

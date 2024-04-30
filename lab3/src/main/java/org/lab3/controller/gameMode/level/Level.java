@@ -74,17 +74,17 @@ public class Level implements GameMode {
     @Override
     public void actionOnMousePressed(int mouseKeyCode, int posX, int posY) {
         switch (levelState) {
-            case LevelState.PLAY -> {
+            case PLAY -> {
                 if (mouseKeyCode == 1) {
                     actionsContext.getPlayerActionController().attack();
                 }
             }
-            case LevelState.PAUSE -> {
+            case PAUSE -> {
                 if (mouseKeyCode == 1) {
                     actionsContext.getPauseAction().mousePressed(posX, posY);
                 }
             }
-            case LevelState.END_GAME -> {
+            case END_GAME -> {
                 if (mouseKeyCode == 1) {
                     actionsContext.getEndGameMenuAction().mousePressed(posX, posY);
                 }
@@ -96,9 +96,9 @@ public class Level implements GameMode {
     public int execute(double currentFPS) {
         int returnValue = 0;
         switch (levelState) {
-            case LevelState.PLAY -> returnValue = mainActionInLevel(currentFPS);
-            case LevelState.PAUSE -> returnValue = pauseActionsInLevel(currentFPS);
-            case LevelState.END_GAME -> returnValue = endGameActionsInLevel(currentFPS);
+            case PLAY -> returnValue = mainActionInLevel(currentFPS);
+            case PAUSE -> returnValue = pauseActionsInLevel(currentFPS);
+            case END_GAME -> returnValue = endGameActionsInLevel(currentFPS);
         }
         switch (returnValue) {
             case Constants.GameConstants.REMOVE_FROM_PAUSE -> removeFromPause();

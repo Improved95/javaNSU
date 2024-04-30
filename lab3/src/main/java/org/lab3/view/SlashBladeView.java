@@ -43,7 +43,7 @@ public class SlashBladeView implements View {
     }
 
     @Override
-    public void drawObject(Graphics g, FrameSize frameSize) {
+    public void drawObject(Graphics g) {
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
             drawObjectsList.sort((o1, o2) -> {
@@ -54,11 +54,11 @@ public class SlashBladeView implements View {
             });
 
             for (DrawObject drawObject : drawObjectsList) {
-                EditedImage.editImage(drawObject, frameSize);
-                BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
+                EditedImage.editImage(drawObject);
+                 BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
                         getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
 
-                g.drawImage(image, (int)EditedImage.newPosX, (int)EditedImage.newPosY,
+                g.drawImage(image, (int)EditedImage.newPosX, (int)drawObject.getScreenPosY(),
                         EditedImage.newWidth, drawObject.getScreenHeight(), null);
             }
         }

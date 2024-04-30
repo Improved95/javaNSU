@@ -14,5 +14,5 @@ public interface View {
 
     void switchGameStateResources();
 
-    void drawObject(Graphics g, FrameSize frameSize);
+    void drawObject(Graphics g);
 }

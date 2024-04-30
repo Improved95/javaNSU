@@ -18,8 +18,8 @@ public class EndGamePause extends SlashBladeObjectAbstract {
         setObjectSize(100);
 
         double buttonsPosX = inGamePosX + objectWidth / 2F - reset.getWidth() / 2F;
-        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F * 2 + 20);
-        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F - 20);
+        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F - reset.getHeight() / 2);
+        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 3F * 2 - exit.getHeight() / 2);
 
         setGameObjectIsExist(false);
     }

@@ -45,13 +45,17 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
 
     private JFrame getFrame() {
         JFrame jFrame = new JFrame();
-        jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         jFrame.setResizable(false);
-        jFrame.pack();
+        jFrame.setVisible(true);
+
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
-        jFrame.setBounds(dimension.width / 2 - frameSize.getWidth() / 2, dimension.height / 2 - frameSize.getHeight() / 2, frameSize.getWidth(), frameSize.getHeight());
+        jFrame.setBounds(dimension.width / 2 - frameSize.getWidth() / 2,
+                            dimension.height / 2 - frameSize.getHeight() / 2,
+                                frameSize.getWidth(), frameSize.getHeight());
+
         frameSize.setInsets(jFrame.getInsets());
         return jFrame;
     }

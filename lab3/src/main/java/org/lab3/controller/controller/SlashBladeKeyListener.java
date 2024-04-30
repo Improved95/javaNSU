@@ -49,8 +49,7 @@ class SlashBladeKeyListener implements KeyListenerController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int newPosY = frameSize.getHeight() - e.getY() + frameSize.getInsets().top;
-        System.out.println(e.getX() + " " + e.getY());
+        int newPosY = e.getY() - frameSize.getInsets().top;
         slashBladeLogicController.mousePressedObserver(e.getButton(), e.getX(), newPosY);
     }
 
