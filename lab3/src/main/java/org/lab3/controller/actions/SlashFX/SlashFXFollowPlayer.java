@@ -7,7 +7,7 @@ import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.slashFX.SlashFX;
 
 public class SlashFXFollowPlayer extends ActionExecuteAbstract {
-    public void initial() {
+    public SlashFXFollowPlayer() {
         this.isExecute = true;
         this.isBlockExecute = false;
     }
@@ -21,7 +21,7 @@ public class SlashFXFollowPlayer extends ActionExecuteAbstract {
 
                 fx.setInGamePosition(posX, posY);
                 fx.setScreenHorizontalDirection(player.getScreenHorizontalDirection());
-                fx.setScreenLayerLevel(player.getScreenLayerLevel() + 1);
+                fx.setScreenLayerLevel(player.getScreenLayerLevel() + 3);
             }
         }
     }

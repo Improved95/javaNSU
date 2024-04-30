@@ -3,6 +3,7 @@ package org.lab3.controller.gameMode.level;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.model.objects.Constants;
 import org.lab3.model.objects.characters.SamuraiV1;
+import org.lab3.model.objects.slashFX.SlashFX;
 import org.lab3.slashBlade.FrameSize;
 
 import java.util.*;
@@ -32,6 +33,11 @@ public class EnemyCreator {
             enemy.setScreenLayerLevel(1);
             enemy.setResourcesIndexInResourcesList(Constants.EnemyConstants.ENEMY_ATLAS_INDEX);
             enemy.setCurrentImageIndex(0, 0);
+
+            SlashFX slashFX = new SlashFX();
+            slashFX.setObjectSize(70);
+            slashFX.setCurrentImageIndex(0, 1);
+            enemy.setSlashFX(slashFX);
 
             Random random = new Random();
             if (random.nextBoolean()) {

@@ -8,7 +8,11 @@ public class PlayerMoveX extends ActionExecuteAbstract {
     private int aIsPress = 0;
     private int dIsPress = 0;
 
+    @Override
     public void initial() {
+        this.isExecute = false;
+        this.isBlockExecute = false;
+
         aIsPress = 0;
         dIsPress = 0;
     }

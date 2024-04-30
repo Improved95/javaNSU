@@ -1,6 +1,7 @@
 package org.lab3.controller.actions.enemyActions;
 
 import org.lab3.controller.actions.ActionController;
+import org.lab3.controller.actions.SlashFX.SlashFXFollowPlayer;
 import org.lab3.controller.gameMode.level.AllCharactersActionsContext;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
@@ -11,18 +12,24 @@ public class EnemyAction implements ActionController {
 
     private EnemyMoveX enemyMoveX;
     private EnemyAttack enemyAttack;
-    private  EnemyCatchAttack enemyCatchAttack;
+    private EnemyCatchAttack enemyCatchAttack;
+    private SlashFXFollowPlayer slashFXFollowPlayer;
 
     public EnemyAction(SamuraiV1 character) {
         this.character = character;
         enemyMoveX = new EnemyMoveX();
         enemyAttack = new EnemyAttack(character);
         enemyCatchAttack = new EnemyCatchAttack();
+        slashFXFollowPlayer = new SlashFXFollowPlayer();
+        initial();
     }
 
     @Override
     public void initial() {
-
+        enemyMoveX.initial();
+        enemyAttack.initial();
+        enemyCatchAttack.initial();
+        slashFXFollowPlayer.initial();
     }
 
     public SamuraiV1 getCharacter() {
@@ -48,6 +55,7 @@ public class EnemyAction implements ActionController {
         enemyMoveX.execute(character, levelObjectsContext, currentFPS);
         enemyAttack.execute(character, levelObjectsContext, currentFPS);
         enemyCatchAttack.execute(character, levelObjectsContext);
+        slashFXFollowPlayer.execute(character.getSlashFX(), character);
 
         character.changeInGamePosition(character.getCurrentSpeedX(), character.getCurrentSpeedY());
 

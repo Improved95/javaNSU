@@ -1,6 +1,5 @@
 package org.lab3.controller.gameMode.level;
 
-import org.lab3.controller.actions.SlashFX.SlashFXAction;
 import org.lab3.controller.actions.enemyActions.EnemyAction;
 import org.lab3.controller.actions.pause.EndGameMenuAction;
 import org.lab3.controller.actions.pause.PauseAction;
@@ -116,8 +115,10 @@ public class Level implements GameMode {
 
     private int mainActionInLevel(double currentFPS) {
         actionsContext.getPlayerActionController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
-//        actionsContext.getSlashFXController().nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         for (EnemyAction enemyActionController : actionsContext.getEnemyActionsControllers()) {
+            if (levelState == LevelState.END_GAME) {
+                enemyActionController.getEnemyAttack().setBlockExecuteStatus(true);
+            }
             enemyActionController.nextTick(levelObjectsContext, actionsContext, currentFPS, model);
         }
 
@@ -194,9 +195,6 @@ public class Level implements GameMode {
         setBackground();
         setBackgroundZeroState();
 
-//        setFx();
-//        setFxZeroState();
-
         setPauseLayout();
         setPauseLayoutZeroState();
 
@@ -209,7 +207,6 @@ public class Level implements GameMode {
     public void reset() {
         setPlayerZeroState();
         setBackgroundZeroState();
-//        setFxZeroState();
         setPauseLayoutZeroState();
         levelState = LevelState.PLAY;
         levelObjectsContext.getEnemyList().clear();
@@ -224,6 +221,7 @@ public class Level implements GameMode {
 
         SlashFX slashFX = new SlashFX();
         slashFX.setObjectSize(70);
+        slashFX.setScreenLayerLevel(5);
 
         player.setSlashFX(slashFX);
 
@@ -256,19 +254,6 @@ public class Level implements GameMode {
         Background bg = levelObjectsContext.getBackground();
         bg.setScreenLayerLevel(0);
         bg.setInGamePosition(0, -170);
-    }
-
-    private void setFx() {
-//        SlashFX slashFX = new SlashFX();
-//        slashFX.setObjectSize(70);
-//        levelObjectsContext.setSlashFX(slashFX);
-//        actionsContext.setSlashFXController(new SlashFXAction(slashFX));
-    }
-
-    private void setFxZeroState() {
-//        SlashFX slashFX = levelObjectsContext.getSlashFX();
-//        slashFX.setGameObjectIsExist(false);
-//        actionsContext.getSlashFXController().initial();
     }
 
     private void setPauseLayout() {

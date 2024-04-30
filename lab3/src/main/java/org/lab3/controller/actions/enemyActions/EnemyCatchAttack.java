@@ -5,11 +5,6 @@ import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
 
 public class EnemyCatchAttack extends ActionExecuteAbstract {
-
-    public EnemyCatchAttack() {
-        this.isExecute = true;
-    }
-
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();

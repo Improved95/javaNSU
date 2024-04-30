@@ -11,4 +11,17 @@ public abstract class ActionExecuteAbstract {
     public void setBlockExecuteStatus(boolean isBlockExecute) {
         this.isBlockExecute = isBlockExecute;
     }
+
+    public boolean isExecute() {
+        return isExecute;
+    }
+
+    public boolean isBlockExecute() {
+        return isBlockExecute;
+    }
+
+    public void initial() {
+        this.isExecute = true;
+        this.isBlockExecute = false;
+    }
 }

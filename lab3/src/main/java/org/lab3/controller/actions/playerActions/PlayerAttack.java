@@ -9,10 +9,6 @@ public class PlayerAttack extends ActionExecuteAbstract {
     private double attackDelay;
 
     public PlayerAttack(SamuraiV1 character) {
-        initial(character);
-    }
-
-    public void initial(SamuraiV1 character) {
         this.attackDuration = character.getAttackDuration();
         this.attackDelay = character.getAttackDelay();
     }
@@ -26,14 +22,12 @@ public class PlayerAttack extends ActionExecuteAbstract {
             if (attackDuration > 0) {
                 character.setAttack(true);
                 character.getSlashFX().setGameObjectIsExist(true);
-//                levelObjectsContext.getSlashFX().setGameObjectIsExist(true);
                 attackDuration -= 1000 / currentFPS;
             } else {
                 if (attackDelay > 0) {
                     attackDelay -= 1000 / currentFPS;
                     character.setAttack(false);
                     character.getSlashFX().setGameObjectIsExist(false);
-//                    levelObjectsContext.getSlashFX().setGameObjectIsExist(false);
                 } else {
                     isExecute = false;
                     attackDuration = character.getAttackDuration();

@@ -43,14 +43,6 @@ public class LevelObjectsContext implements ObjectsContext {
         this.enemyList = enemyList;
     }
 
-//    public SlashFX getSlashFX() {
-//        return slashFX;
-//    }
-//
-//    public void setSlashFX(SlashFX slashFX) {
-//        this.slashFX = slashFX;
-//    }
-
     public int getScore() {
         return score;
     }
@@ -88,11 +80,11 @@ public class LevelObjectsContext implements ObjectsContext {
         objectsList.add(background);
         for (SamuraiV1 enemy : enemyList) {
             objectsList.add(enemy);
+            slashFX = enemy.getSlashFX();
+            if (slashFX.isGameObjectIsExist()) {
+                objectsList.add(slashFX);
+            }
         }
-
-//        if (slashFX.isGameObjectIsExist()) {
-//            objectsList.add(slashFX);
-//        }
 
         if (levelPause.isGameObjectIsExist()) {
             objectsList.add(levelPause);

@@ -9,14 +9,12 @@ public class EnemyAttack extends ActionExecuteAbstract {
     private double attackDelay;
 
     public EnemyAttack(SamuraiV1 character) {
-        setExecuteStatus(true);
         this.attackDuration = character.getAttackDuration();
         this.attackDelay = character.getAttackDelay();
     }
 
-
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS) {
-        if (isExecute && !isBlockExecute) {
+        if (isExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double relativePos = player.getInGamePosX() - character.getInGamePosX();
             double radiusForwardAttack = character.getRadiusForwardAttack();
@@ -28,12 +26,16 @@ public class EnemyAttack extends ActionExecuteAbstract {
 
     private void attack(SamuraiV1 character, double currentFPS) {
         if (attackDuration > 0) {
-            character.setAttack(true);
-            attackDuration -= 1000 / currentFPS;
+            if (!isBlockExecute) {
+                character.setAttack(true);
+                character.getSlashFX().setGameObjectIsExist(true);
+                attackDuration -= 1000 / currentFPS;
+            }
         } else {
             if (attackDelay > 0) {
                 attackDelay -= 1000 / currentFPS;
                 character.setAttack(false);
+                character.getSlashFX().setGameObjectIsExist(false);
             } else {
                 attackDuration = character.getAttackDuration();
                 attackDelay = character.getAttackDelay();

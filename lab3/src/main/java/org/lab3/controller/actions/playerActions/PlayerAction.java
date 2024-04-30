@@ -48,9 +48,10 @@ public class PlayerAction implements ActionController {
         playerAttack.initialAttack();
     }
 
+    @Override
     public void initial() {
         playerMoveX.initial();
-        playerAttack.initial(character);
+        playerAttack.initial();
         playerCatchAttack.initial();
         slashFXFollowPlayer.initial();
     }
