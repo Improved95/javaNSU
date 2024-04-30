@@ -41,9 +41,10 @@ public class Dealer implements Runnable {
         while (true) {
             ReadyCar readyCar;
             try {
-
-                readyCarWarehouseController.setNewTaskExist();
-                readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
+                if ((readyCar = (ReadyCar) readyCarWarehouse.unblockPickUpDetail()) == null) {
+                    readyCarWarehouseController.setNewTaskExist();
+                    readyCar = (ReadyCar) readyCarWarehouse.pickUpDetail();
+                }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("Dealer: ", ex); }
                 return;
