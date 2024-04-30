@@ -29,8 +29,8 @@ public class EnemyAttack extends ActionExecuteAbstract {
             if (!isBlockExecute) {
                 character.setAttack(true);
                 character.getSlashFX().setGameObjectIsExist(true);
-                attackDuration -= 1000 / currentFPS;
             }
+            attackDuration -= 1000 / currentFPS;
         } else {
             if (attackDelay > 0) {
                 attackDelay -= 1000 / currentFPS;
