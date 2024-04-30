@@ -45,7 +45,7 @@ public class EnemyAction implements ActionController {
     public int nextTick(LevelObjectsContext levelObjectsContext, AllCharactersActionsContext actionsContext,
                          double currentFPS, Model model) {
 
-        enemyMoveX.execute(character, levelObjectsContext, currentFPS, model.getFrameSize());
+        enemyMoveX.execute(character, levelObjectsContext, currentFPS);
         enemyAttack.execute(character, levelObjectsContext, currentFPS);
         enemyCatchAttack.execute(character, levelObjectsContext);
 

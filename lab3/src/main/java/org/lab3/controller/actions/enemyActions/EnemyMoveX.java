@@ -10,7 +10,7 @@ public class EnemyMoveX extends ActionExecuteAbstract {
         this.isExecute = true;
     }
 
-    public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS, FrameSize frameSize) {
+    public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS) {
         if (isExecute && !isBlockExecute) {
             SamuraiV1 player = levelObjectsContext.getPlayer();
             double playerPosX = player.getInGamePosX();
@@ -19,10 +19,10 @@ public class EnemyMoveX extends ActionExecuteAbstract {
             if (Math.abs(enemyPosX - playerPosX) > 30) {
                 if (enemyPosX - playerPosX < 0) {
                     character.changeDirection(1);
-                    character.setCurrentSpeedX(enemySpeed / currentFPS * frameSize.getReductionFactor());
+                    character.setCurrentSpeedX(enemySpeed / currentFPS);
                 } else {
                     character.changeDirection(-1);
-                    character.setCurrentSpeedX(enemySpeed / currentFPS * frameSize.getReductionFactor() * -1);
+                    character.setCurrentSpeedX(enemySpeed / currentFPS * -1);
                 }
             } else {
                 character.setCurrentSpeedX(0);

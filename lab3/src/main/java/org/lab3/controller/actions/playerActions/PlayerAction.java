@@ -56,7 +56,7 @@ public class PlayerAction implements ActionController {
 
         playerAttack.execute(character, levelObjectsContext, currentFPS);
         playerCatchAttack.execute(character, levelObjectsContext);
-        playerMoveX.execute(character, currentFPS, model.getFrameSize());
+        playerMoveX.execute(character, currentFPS);
 
         character.changeInGamePosition(character.getCurrentSpeedX(), character.getCurrentSpeedY());
 

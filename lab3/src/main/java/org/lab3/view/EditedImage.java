@@ -20,6 +20,7 @@ public class EditedImage {
         }
         newWidth = oldImage.getScreenWidth() * oldImage.getScreenHorizontalDirection();
         newPosX += oldImage.getScreenPosX();
-        newPosY += frameSize.getHeight() - (  39 + oldImage.getScreenHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
+        newPosY += frameSize.getHeight() - frameSize.getInsets().top - ( oldImage.getScreenHeight() + oldImage.getScreenPosY());
+//        newPosY += frameSize.getHeight() - (  39 + oldImage.getScreenHeight() + ( oldImage.getScreenPosY() * frameSize.getReductionFactor() ) );
     }
 }

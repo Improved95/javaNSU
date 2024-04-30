@@ -19,9 +19,9 @@ public class Pause extends SlashBladeObjectAbstract {
         setObjectSize(100);
 
         double buttonsPosX = inGamePosX + objectWidth / 2F - resume.getWidth() / 2F;
-        resume.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 3 + 20);
-        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 2);
-        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F - 20);
+        resume.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 3 - resume.getHeight() / 2);
+        reset.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F * 2 - resume.getHeight() / 2);
+        exit.setInGamePosition(buttonsPosX, inGamePosY + objectHeight / 4F - resume.getHeight() / 2);
 
         setGameObjectIsExist(false);
     }

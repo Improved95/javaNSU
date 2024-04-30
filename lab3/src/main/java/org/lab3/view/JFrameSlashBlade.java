@@ -52,6 +52,7 @@ public class JFrameSlashBlade extends JFrame implements JFrameObject {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - frameSize.getWidth() / 2, dimension.height / 2 - frameSize.getHeight() / 2, frameSize.getWidth(), frameSize.getHeight());
+        frameSize.setInsets(jFrame.getInsets());
         return jFrame;
     }
 }
