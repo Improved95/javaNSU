@@ -19,14 +19,12 @@ public class AccessoryProvider extends AbstractProvider {
                 if (isLogging) { log.info("AccessoryProvider: add new accessory with id: {}", accessory.getDetailId()); }
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("AccessoryProvider: ", ex); }
-//                throw new RuntimeException(ex);
             }
 
             try {
                 sleep(factoryModel.getAccessoryProviderDelay());
             } catch (InterruptedException ex) {
                 if (isLogging) { log.error("AccessoryProvider: ", ex); }
-//                throw new RuntimeException(ex);
             }
         }
     }

@@ -6,7 +6,6 @@ import org.lab4.model.details.Detail;
 public class AbstractWarehouse implements Warehouse {
     protected final int capacity;
     protected int size;
-//    AtomicInteger size = new AtomicInteger(0);
 
     protected MyConcurrentQueue detailList;
 
@@ -63,5 +62,4 @@ public class AbstractWarehouse implements Warehouse {
         notifyAll();
         return detail;
     }
-
 }
