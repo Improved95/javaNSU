@@ -2,9 +2,6 @@ package org.lab3.view;
 
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
-import org.lab3.slashBlade.FrameSize;
-import org.lab3.view.EditedImage;
-import org.lab3.view.View;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
 import org.lab3.view.swing.JFrameObject;
