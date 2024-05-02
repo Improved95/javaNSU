@@ -40,7 +40,7 @@ out
 CMakeSettings.json
 **idea
 **.idea
-**cmake-build-debug
+**cmake-build-debugObject
 **out
 *.md
 **target
