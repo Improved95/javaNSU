@@ -1,17 +1,18 @@
-package org.lab3.view;
+package org.lab3.view.swing;
 
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
+import org.lab3.view.EditedImage;
+import org.lab3.view.View;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
-import org.lab3.view.swing.JFrameObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
-public class SlashBladeView implements View {
+public class SwingView implements View {
     private Model model;
     private boolean drawing = false;
     private OpenedResources openedResources;
