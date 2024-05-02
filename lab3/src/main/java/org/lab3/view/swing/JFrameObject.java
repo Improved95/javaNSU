@@ -1,4 +1,4 @@
-package org.lab3.view;
+package org.lab3.view.swing;
 
 import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.FrameSize;

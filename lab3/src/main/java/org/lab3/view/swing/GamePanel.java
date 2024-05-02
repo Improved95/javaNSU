@@ -1,4 +1,4 @@
-package org.lab3.view;
+package org.lab3.view.swing;
 
 import org.lab3.slashBlade.FrameSize;
 import org.lab3.view.View;

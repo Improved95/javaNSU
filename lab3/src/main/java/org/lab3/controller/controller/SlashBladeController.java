@@ -2,7 +2,7 @@ package org.lab3.controller.controller;
 
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.Constants;
-import org.lab3.view.JFrameObject;
+import org.lab3.view.swing.JFrameObject;
 import org.lab3.view.View;
 
 import java.util.Timer;
