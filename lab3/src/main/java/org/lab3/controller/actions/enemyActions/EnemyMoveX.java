@@ -3,7 +3,6 @@ package org.lab3.controller.actions.enemyActions;
 import org.lab3.controller.actions.ActionExecuteAbstract;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.slashBlade.FrameSize;
 
 public class EnemyMoveX extends ActionExecuteAbstract {
     public void execute(SamuraiV1 character, LevelObjectsContext levelObjectsContext, double currentFPS) {

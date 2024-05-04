@@ -1,4 +1,4 @@
-package org.lab3.slashBlade;
+package org.lab3.model.objects.characters.slashBlade;
 
 import org.lab3.controller.controller.SlashBladeController;
 import org.lab3.controller.controller.Controller;
@@ -27,7 +27,6 @@ public class SlashBlade {
         slashBladeView = new SwingView();
 
         javaFxWindow = new JavaFxWindow();
-
 
         jFrameSlashBlade = new JFrameSlashBlade(1650);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeController.getSlashBladeKeyListenerController());

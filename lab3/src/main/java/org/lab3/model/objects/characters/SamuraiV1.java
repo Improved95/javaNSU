@@ -1,6 +1,6 @@
 package org.lab3.model.objects.characters;
 
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 import org.lab3.model.objects.slashFX.SlashFX;
 
 public class SamuraiV1 extends SlashBladeCharacterAbstract {

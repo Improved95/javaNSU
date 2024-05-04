@@ -1,6 +1,6 @@
-package org.lab3.resources;
+package org.lab3.view.resources;
 
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,7 @@ public class PauseResources extends ResourcesAbstract {
 
     @Override
     public void openResource(String path) {
-        try (InputStream imageStream = this.getClass().getResourceAsStream("../../../SlashBladeResources/" + path)) {
+        try (InputStream imageStream = this.getClass().getResourceAsStream(mainPath + path)) {
             BufferedImage fullImage = ImageIO.read(imageStream);
             image[0][0] = fullImage.getSubimage(0, 0, Constants.PauseConstants.PAUSE_BG_WIDTH, Constants.PauseConstants.PAUSE_BG_HEIGHT);
 

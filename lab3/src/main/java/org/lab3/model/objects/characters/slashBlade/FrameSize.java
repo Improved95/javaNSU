@@ -1,4 +1,4 @@
-package org.lab3.slashBlade;
+package org.lab3.model.objects.characters.slashBlade;
 
 import java.awt.*;
 

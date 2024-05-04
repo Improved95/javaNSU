@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+    <!--<parent>
         <artifactId>javaNSU</artifactId>
         <groupId>org.nsu.oop</groupId>
         <version>1.0-SNAPSHOT</version>
-    </parent>
+    </parent>-->
 
     <groupId>org.lab3</groupId>
     <artifactId>lab3</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,12 +24,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17</version>
+            <version>22.0.1</version>
         </dependency>
     </dependencies>
 
@@ -40,7 +35,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>org.lab3.view.javaFx.JavaFxWindow</mainClass>
+                    <mainClass>org.lab3.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,6 +1,6 @@
 package org.lab3.view.openedResources;
 
-import org.lab3.resources.ObjectResources;
+import org.lab3.view.resources.ObjectResources;
 
 import java.util.List;
 

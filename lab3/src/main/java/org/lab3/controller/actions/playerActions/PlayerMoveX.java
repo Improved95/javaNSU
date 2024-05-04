@@ -2,7 +2,6 @@ package org.lab3.controller.actions.playerActions;
 
 import org.lab3.controller.actions.ActionExecuteAbstract;
 import org.lab3.model.objects.characters.SamuraiV1;
-import org.lab3.slashBlade.FrameSize;
 
 public class PlayerMoveX extends ActionExecuteAbstract {
     private int aIsPress = 0;

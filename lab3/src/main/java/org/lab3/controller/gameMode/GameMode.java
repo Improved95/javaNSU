@@ -1,7 +1,5 @@
 package org.lab3.controller.gameMode;
 
-import org.lab3.slashBlade.FrameSize;
-
 
 public interface GameMode {
     void initial();

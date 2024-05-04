@@ -1,4 +1,4 @@
-package org.lab3.resources;
+package org.lab3.view.resources;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,7 +12,7 @@ public class SlashFxResources extends ResourcesAbstract {
 
     @Override
     public void openResource(String path) {
-        try (InputStream imageStream = this.getClass().getResourceAsStream("../../../SlashBladeResources/" + path)) {
+        try (InputStream imageStream = this.getClass().getResourceAsStream(mainPath + path)) {
             image[0][0] = ImageIO.read(imageStream);
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -1,7 +1,6 @@
 package org.lab3.view;
 
 import org.lab3.model.objects.DrawObject;
-import org.lab3.slashBlade.FrameSize;
 
 public class EditedImage {
     public static double newPosX;

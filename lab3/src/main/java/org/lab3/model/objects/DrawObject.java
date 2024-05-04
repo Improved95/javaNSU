@@ -1,6 +1,6 @@
 package org.lab3.model.objects;
 
-import org.lab3.resources.ImageIndex;
+import org.lab3.view.resources.ImageIndex;
 
 public interface DrawObject {
     double getScreenPosX();

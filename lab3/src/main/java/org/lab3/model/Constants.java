@@ -1,4 +1,4 @@
-package org.lab3.model.objects;
+package org.lab3.model;
 
 import java.security.PublicKey;
 

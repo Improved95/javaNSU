@@ -10,7 +10,7 @@
   <modules>
     <module>lab1</module>
     <module>lab2</module>
-    <module>lab3</module>
+<!--    <module>lab3</module>-->
   </modules>
 
   <properties>

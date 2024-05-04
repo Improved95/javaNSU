@@ -1,6 +1,6 @@
 package org.lab3.model.objects.slashFX;
 
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 import org.lab3.model.objects.SlashBladeObjectAbstract;
 
 public class SlashFX extends SlashBladeObjectAbstract {

@@ -1,8 +1,8 @@
 package org.lab3.model.objects.pause;
 
 import org.lab3.model.objects.SlashBladeObjectAbstract;
-import org.lab3.slashBlade.FrameSize;
-import org.lab3.model.objects.Constants;
+import org.lab3.model.objects.characters.slashBlade.FrameSize;
+import org.lab3.model.Constants;
 
 public class EndGamePause extends SlashBladeObjectAbstract {
     private PauseButton reset = new PauseButton(Constants.PauseConstants.BUTTONS_INDEX, Constants.PauseConstants.RESET_BUTTON_INDEX);

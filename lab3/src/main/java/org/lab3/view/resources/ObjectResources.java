@@ -1,4 +1,4 @@
-package org.lab3.resources;
+package org.lab3.view.resources;
 
 import java.awt.image.BufferedImage;
 

@@ -4,7 +4,7 @@ import org.lab3.controller.gameMode.GameMode;
 import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.model.Model;
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;

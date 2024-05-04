@@ -1,10 +1,10 @@
 package org.lab3.controller.gameMode.level;
 
 import org.lab3.controller.actions.enemyActions.EnemyAction;
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 import org.lab3.model.objects.characters.SamuraiV1;
 import org.lab3.model.objects.slashFX.SlashFX;
-import org.lab3.slashBlade.FrameSize;
+import org.lab3.model.objects.characters.slashBlade.FrameSize;
 
 import java.util.*;
 

@@ -7,7 +7,7 @@ import org.lab3.controller.actions.playerActions.PlayerAction;
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.model.gameObjectsContext.LevelObjectsContext;
 import org.lab3.model.model.Model;
-import org.lab3.model.objects.Constants;
+import org.lab3.model.Constants;
 import org.lab3.model.objects.SlashBladeObject;
 import org.lab3.model.objects.backgrounds.Background;
 import org.lab3.model.objects.characters.SamuraiV1;
