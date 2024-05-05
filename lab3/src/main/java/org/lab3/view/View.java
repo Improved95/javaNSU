@@ -9,7 +9,5 @@ public interface View {
 
     void setDrawing(boolean drawing);
 
-    void changeViewScreen(FrameObject frameObject);
-
     void switchGameStateResources();
 }

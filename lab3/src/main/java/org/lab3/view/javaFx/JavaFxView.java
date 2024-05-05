@@ -8,7 +8,6 @@ import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.view.EditedImage;
 import org.lab3.view.View;
-import org.lab3.view.FrameObject;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
 
@@ -32,11 +31,6 @@ public class JavaFxView implements View {
     }
 
     @Override
-    public void changeViewScreen(FrameObject frameObject) {
-        frameObject.repaintObjects();
-    }
-
-    @Override
     public void switchGameStateResources() {
         switch (model.getGameState()) {
             case LEVEL1:
@@ -48,6 +42,8 @@ public class JavaFxView implements View {
     }
 
     public void drawObject(Group root) {
+        if (root == null) return;
+
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
             drawObjectsList.sort((o1, o2) -> {
@@ -57,7 +53,7 @@ public class JavaFxView implements View {
                 return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
             });
 
-            root.getChildren().removeAll();
+            root.getChildren().clear();
             for (DrawObject drawObject : drawObjectsList) {
                 BufferedImage bufferedImage = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
                         getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];

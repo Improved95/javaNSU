@@ -28,9 +28,8 @@ public class SwingView implements View {
         this.drawing = drawing;
     }
 
-    @Override
-    public void changeViewScreen(FrameObject frameObject) {
-        frameObject.repaintObjects();
+    public void changeViewScreen(SwingFrame swingFrame) {
+        swingFrame.repaintObjects();
     }
 
     @Override

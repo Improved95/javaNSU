@@ -2,43 +2,42 @@ package org.lab3.view.swing;
 
 import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.FrameSize;
-import org.lab3.view.FrameObject;
-import org.lab3.view.View;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class JFrameSlashBlade extends JFrame implements FrameObject {
+public class SwingFrame extends JFrame {
     private FrameSize frameSize;
     private JFrame jFrame;
     private GamePanel gamePanel;
+    private SwingView view;
+    private KeyListenerController keyListenerController;
 
-    public JFrameSlashBlade() {
-//        this.jFrame = getFrame();
+    public void setView(SwingView view) {
+        this.view = view;
     }
 
-    @Override
     public void setFrameSize(FrameSize frameSize) {
         this.frameSize = frameSize;
     }
 
-    @Override
-    public void addKeyListeners(View view, KeyListenerController keyListenerController) {
-        jFrame.addKeyListener(keyListenerController);
-        jFrame.addMouseListener(keyListenerController);
+    public void addInputListeners(KeyListenerController keyListenerController) {
+        this.keyListenerController = keyListenerController;
     }
 
-    @Override
     public void repaintObjects() {
         gamePanel.repaint();
     }
 
-    @Override
     public void close() {
         jFrame.dispose();
     }
 
-    private JFrame getFrame(View view) {
+    public void createSwingFrame() {
+        this.jFrame = getFrame();
+    }
+
+    private JFrame getFrame() {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -53,8 +52,11 @@ public class JFrameSlashBlade extends JFrame implements FrameObject {
 
         frameSize.setInsets(jFrame.getInsets());
 
-        this.gamePanel = new GamePanel((SwingView) view, frameSize);
+        this.gamePanel = new GamePanel(view, frameSize);
         jFrame.add(gamePanel);
+
+        jFrame.addKeyListener(keyListenerController);
+        jFrame.addMouseListener(keyListenerController);
 
         return jFrame;
     }

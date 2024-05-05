@@ -29,14 +29,17 @@ public class JavaFxWindow extends Application {
         frameSize = frameSize_;
     }
 
-    public static void setKeyAndMouseListeners(JavaFxView view_, KeyListenerController keyListener_) {
+    public static void setView(JavaFxView view_) {
         view = view_;
+    }
+
+    public static void setInputListeners(KeyListenerController keyListener_) {
         keyListener = keyListener_;
     }
 
     public static void repaint() {
-//        view.drawObject(root);
-//        root.requestLayout();
+        System.out.println("here");
+        view.drawObject(root);
     }
 
     public static void main(String[] args) {
@@ -48,8 +51,6 @@ public class JavaFxWindow extends Application {
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
-
-        setTestScene(root, scene);
 
         stage.setResizable(false);
         stage.setScene(scene);

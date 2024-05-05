@@ -8,7 +8,7 @@ import javax.swing.*;
 public interface FrameObject {
     void setFrameSize(FrameSize frameSize);
 
-    void addDrawableComponent(View view, KeyListenerController keyListenerController);
+    void addInputListeners(KeyListenerController keyListenerController);
 
     void repaintObjects();
 
