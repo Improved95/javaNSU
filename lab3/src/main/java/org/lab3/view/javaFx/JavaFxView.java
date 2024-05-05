@@ -1,5 +1,6 @@
 package org.lab3.view.javaFx;
 
+import javafx.scene.image.Image;
 import org.lab3.model.model.Model;
 import org.lab3.view.View;
 import org.lab3.view.FrameObject;
