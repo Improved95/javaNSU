@@ -7,13 +7,13 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-class SlashBladeKeyListener implements KeyListenerController {
+public class SlashBladeKeyListener implements KeyListenerController {
     private FrameSize frameSize;
     private KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
 
     private SlashBladeLogicController slashBladeLogicController;
 
-    SlashBladeKeyListener(SlashBladeLogicController slashBladeLogicController) {
+    public SlashBladeKeyListener(SlashBladeLogicController slashBladeLogicController) {
         this.slashBladeLogicController = slashBladeLogicController;
     }
 

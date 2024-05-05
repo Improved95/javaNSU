@@ -5,10 +5,19 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.lab3.slashBlade.FrameSize;
 
 public class JavaFxWindow extends Application {
+    private static FrameSize frameSize;
+    Scene scene;
+
+    public static void setFrameSize(FrameSize frameSize_) {
+        frameSize = frameSize_;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,7 +36,7 @@ public class JavaFxWindow extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(btn);
 
-        Scene scene = new Scene(root, 300, 250);
+        scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);

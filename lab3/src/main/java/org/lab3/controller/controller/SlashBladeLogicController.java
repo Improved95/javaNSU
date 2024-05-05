@@ -9,13 +9,13 @@ import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;
 
-class SlashBladeLogicController {
+public class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
     private View view;
 
-    SlashBladeLogicController() {
+    public SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
     }
 
@@ -27,7 +27,7 @@ class SlashBladeLogicController {
         this.view = view;
     }
 
-    void initial() {
+    public void initial() {
         try {
             currentGameMode = gameModesFactory.create("LEVEL", model);
         } catch (ClassNotFoundException | IllegalAccessException |
@@ -39,19 +39,19 @@ class SlashBladeLogicController {
         view.switchGameStateResources();
     }
 
-    void keyPressedObserver(int keyCode) {
+    public void keyPressedObserver(int keyCode) {
         currentGameMode.actionOnKeyPressed(keyCode);
     }
 
-    void keyReleasedObserver(int keyCode) {
+    public void keyReleasedObserver(int keyCode) {
         currentGameMode.actionOnKeyReleased(keyCode);
     }
 
-    void mousePressedObserver(int keyCode, int posX, int posY) {
+    public void mousePressedObserver(int keyCode, int posX, int posY) {
         currentGameMode.actionOnMousePressed(keyCode, posX, posY);
     }
 
-    int calculateFrame(double currentFPS) {
+    public int calculateFrame(double currentFPS) {
         int returnValue = currentGameMode.execute(currentFPS);
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             return Constants.GameConstants.EXIT_GAME;

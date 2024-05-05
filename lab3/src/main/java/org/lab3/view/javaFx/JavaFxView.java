@@ -2,7 +2,7 @@ package org.lab3.view.javaFx;
 
 import org.lab3.model.model.Model;
 import org.lab3.view.View;
-import org.lab3.view.swing.JFrameObject;
+import org.lab3.view.FrameObject;
 
 import java.awt.*;
 
@@ -18,7 +18,7 @@ public class JavaFxView implements View {
     }
 
     @Override
-    public void changeViewScreen(JFrameObject jFrameObject) {
+    public void changeViewScreen(FrameObject frameObject) {
 
     }
 

@@ -32,6 +32,8 @@ public class PauseAction implements ActionController {
         isExitPress = false;
 
         Rectangle buttonHitbox = layout.getResume().getHitbox();
+        System.out.println(x + " " + y);
+        System.out.println(buttonHitbox.x + " " + buttonHitbox.y + " " + buttonHitbox.width + " " + buttonHitbox.height);
         if (buttonHitbox.contains(x, y)) {
             isResumePress = true;
         }

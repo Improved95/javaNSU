@@ -2,25 +2,21 @@ package org.lab3.view.swing;
 
 import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.view.FrameObject;
 import org.lab3.view.View;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class JFrameSlashBlade extends JFrame implements JFrameObject {
+public class FrameSlashBlade extends JFrame implements FrameObject {
     private FrameSize frameSize = new FrameSize();
     private JFrame jFrame;
     private GamePanel gamePanel;
 
-    public JFrameSlashBlade(int width) {
+    public FrameSlashBlade(int width) {
         this.frameSize.setWidth(width);
         this.frameSize.setHeight(getHeightByWidth());
         this.jFrame = getFrame();
-    }
-
-    @Override
-    public JFrame getJFrame() {
-        return jFrame;
     }
 
     public FrameSize getFrameSize() {

@@ -1,28 +1,30 @@
-package org.lab3.controller.controller;
+package org.lab3.slashBlade;
 
+import org.lab3.controller.controller.KeyListenerController;
+import org.lab3.controller.controller.SlashBladeKeyListener;
+import org.lab3.controller.controller.SlashBladeLogicController;
 import org.lab3.model.model.Model;
-import org.lab3.slashBlade.Constants;
-import org.lab3.view.swing.JFrameObject;
+import org.lab3.view.FrameObject;
 import org.lab3.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SlashBladeController implements Controller {
+public class TickGenerator {
     private final double maxFPS = 60;
     private final long maxWaitingTime = (long)(1000 / maxFPS);
 
     private SlashBladeLogicController slashBladeLogicController;
     private SlashBladeKeyListener slashBladeKeyListenerController;
 
-    private JFrameObject jFrameObject;
+    private FrameObject frameObject;
     private Model model;
     private View view;
 
     private Timer generationTickTimer;
     private TimerContext timerContext;
 
-    public SlashBladeController() {
+    public TickGenerator() {
         timerContext = new TimerContext();
         slashBladeLogicController = new SlashBladeLogicController();
         slashBladeKeyListenerController  = new SlashBladeKeyListener(slashBladeLogicController);
@@ -32,28 +34,23 @@ public class SlashBladeController implements Controller {
         return slashBladeLogicController;
     }
 
-    @Override
     public KeyListenerController getSlashBladeKeyListenerController() {
         return slashBladeKeyListenerController;
     }
 
-    @Override
-    public void setJFrameObject(JFrameObject jFrameObject) {
-        this.jFrameObject = jFrameObject;
+    public void setJFrameObject(FrameObject frameObject) {
+        this.frameObject = frameObject;
     }
 
-    @Override
     public void setModel(Model model) {
         this.model = model;
         slashBladeKeyListenerController.setFrameSize(model.getFrameSize());
     }
 
-    @Override
     public void setView(View view) {
         this.view = view;
     }
 
-    @Override
     public void initial() {
         slashBladeLogicController.setModel(model);
         slashBladeLogicController.setView(view);
@@ -62,7 +59,6 @@ public class SlashBladeController implements Controller {
         generationTickTimer = new Timer();
     }
 
-    @Override
     public void executeCalculateGame() {
         generationTickTimer.scheduleAtFixedRate(new MyTask(), 0, maxWaitingTime);
     }
@@ -83,11 +79,11 @@ public class SlashBladeController implements Controller {
         /*-----------------*/
 
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
-        view.changeViewScreen(jFrameObject);
+        view.changeViewScreen(frameObject);
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
-            jFrameObject.getJFrame().dispose();
+//            frameObject.getJFrame().dispose();
         }
 
         /*-----------------*/
