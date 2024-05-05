@@ -6,11 +6,11 @@ import org.lab3.slashBlade.FrameSize;
 import javax.swing.*;
 
 public interface FrameObject {
+    void setFrameSize(FrameSize frameSize);
+
     void addDrawableComponent(View view, KeyListenerController keyListenerController);
 
     void repaintObjects();
-
-    FrameSize getFrameSize();
 
     void close();
 }

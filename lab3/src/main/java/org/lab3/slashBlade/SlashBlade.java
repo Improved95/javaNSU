@@ -2,7 +2,6 @@ package org.lab3.slashBlade;
 
 import org.lab3.model.model.Model;
 import org.lab3.model.model.SlashBladeModel;
-import org.lab3.view.ViewDefinition;
 import org.lab3.view.javaFx.JavaFxSlashBlade;
 import org.lab3.view.javaFx.JavaFxView;
 import org.lab3.view.FrameObject;
@@ -17,32 +16,38 @@ public class SlashBlade {
     private static Model slashBladeModel = null;
     private static View swingView = null;
     private static View javaFxView = null;
-    private static FrameObject jFrameSlashBlade;
+    private static FrameObject swingSlashBlade;
     private static FrameObject javaFxSlashBlade;
     private static TickGenerator slashBladeTickGenerator = null;
+    private static FrameSize frameSize = new FrameSize();
 
     public static void initial() {
         slashBladeTickGenerator = new TickGenerator();
         slashBladeModel = new SlashBladeModel();
+
+        frameSize.setWidth(1650);
+        frameSize.setHeight(getHeightByWidth());
 
         if (definitionForSwing())
             swingView = new SwingView();
         if (definitionForJavaFx())
             javaFxView = new JavaFxView();
 
+
         if (definitionForSwing()) {
-            jFrameSlashBlade = new JFrameSlashBlade(1650);
-            jFrameSlashBlade.addDrawableComponent(swingView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
+            swingSlashBlade = new JFrameSlashBlade();
+            swingSlashBlade.addDrawableComponent(swingView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
         if (definitionForJavaFx()) {
-           javaFxSlashBlade = new JavaFxSlashBlade(1650);
+           javaFxSlashBlade = new JavaFxSlashBlade();
            javaFxSlashBlade.addDrawableComponent(javaFxView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
 
+        slashBladeModel.setFrameSize(frameSize);
         if (definitionForSwing())
-            slashBladeModel.setFrameSize(jFrameSlashBlade.getFrameSize());
+            swingSlashBlade.setFrameSize(frameSize);
         if (definitionForJavaFx())
-        slashBladeModel.setFrameSize(javaFxSlashBlade.getFrameSize());
+            javaFxSlashBlade.setFrameSize(frameSize);
 
         if (definitionForSwing())
             swingView.setModel(slashBladeModel);
@@ -57,11 +62,15 @@ public class SlashBlade {
             slashBladeTickGenerator.setJavaFxView(javaFxView);
 
         if (definitionForSwing())
-            slashBladeTickGenerator.setSwingFrame(jFrameSlashBlade);
+            slashBladeTickGenerator.setSwingFrame(swingSlashBlade);
         if (definitionForJavaFx())
             slashBladeTickGenerator.setJavaFxFrame(javaFxSlashBlade);
 
         slashBladeTickGenerator.initial();
         slashBladeTickGenerator.executeCalculateGame();
+    }
+
+    private static int getHeightByWidth() {
+        return (frameSize.getWidth() * frameSize.heightRes) / frameSize.widthRes;
     }
 }

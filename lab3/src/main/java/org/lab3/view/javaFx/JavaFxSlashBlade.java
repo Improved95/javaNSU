@@ -7,13 +7,8 @@ import org.lab3.view.FrameObject;
 
 public class JavaFxSlashBlade implements FrameObject {
     private FrameSize frameSize = new FrameSize();
-//    private JavaFxWindow javaFxWindow;
 
-    public JavaFxSlashBlade(int width) {
-        this.frameSize.setWidth(width);
-        this.frameSize.setHeight(getHeightByWidth());
-
-//        javaFxWindow = new JavaFxWindow();
+    public JavaFxSlashBlade() {
         JavaFxWindow.setFrameSize(frameSize);
         JavaFxWindow.main(null);
     }
@@ -34,11 +29,7 @@ public class JavaFxSlashBlade implements FrameObject {
     }
 
     @Override
-    public FrameSize getFrameSize() {
-        return frameSize;
-    }
-
-    private int getHeightByWidth() {
-        return (frameSize.getWidth() * frameSize.heightRes) / frameSize.widthRes;
+    public void setFrameSize(FrameSize frameSize) {
+        this.frameSize = frameSize;
     }
 }

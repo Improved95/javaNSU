@@ -9,26 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JFrameSlashBlade extends JFrame implements FrameObject {
-    private FrameSize frameSize = new FrameSize();
+    private FrameSize frameSize;
     private JFrame jFrame;
     private GamePanel gamePanel;
 
-    public JFrameSlashBlade(int width) {
-        this.frameSize.setWidth(width);
-        this.frameSize.setHeight(getHeightByWidth());
-        this.jFrame = getFrame();
-    }
-
-    public FrameSize getFrameSize() {
-        return frameSize;
+    public JFrameSlashBlade() {
+//        this.jFrame = getFrame();
     }
 
     @Override
-    public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
+    public void setFrameSize(FrameSize frameSize) {
+        this.frameSize = frameSize;
+    }
+
+    @Override
+    public void addKeyListeners(View view, KeyListenerController keyListenerController) {
         jFrame.addKeyListener(keyListenerController);
         jFrame.addMouseListener(keyListenerController);
-        this.gamePanel = new GamePanel((SwingView) view, frameSize);
-        jFrame.add(gamePanel);
     }
 
     @Override
@@ -41,11 +38,7 @@ public class JFrameSlashBlade extends JFrame implements FrameObject {
         jFrame.dispose();
     }
 
-    private int getHeightByWidth() {
-        return (frameSize.getWidth() * frameSize.heightRes) / frameSize.widthRes;
-    }
-
-    private JFrame getFrame() {
+    private JFrame getFrame(View view) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,6 +52,10 @@ public class JFrameSlashBlade extends JFrame implements FrameObject {
                                 frameSize.getWidth(), frameSize.getHeight());
 
         frameSize.setInsets(jFrame.getInsets());
+
+        this.gamePanel = new GamePanel((SwingView) view, frameSize);
+        jFrame.add(gamePanel);
+
         return jFrame;
     }
 }

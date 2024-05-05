@@ -57,6 +57,7 @@ public class JavaFxView implements View {
                 return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
             });
 
+            root.getChildren().removeAll();
             for (DrawObject drawObject : drawObjectsList) {
                 BufferedImage bufferedImage = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
                         getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
