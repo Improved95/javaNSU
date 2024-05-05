@@ -5,45 +5,73 @@ import org.lab3.model.model.SlashBladeModel;
 import org.lab3.view.javaFx.JavaFxSlashBlade;
 import org.lab3.view.javaFx.JavaFxView;
 import org.lab3.view.FrameObject;
-import org.lab3.view.swing.FrameSlashBlade;
+import org.lab3.view.swing.JFrameSlashBlade;
 import org.lab3.view.swing.SwingView;
 import org.lab3.view.View;
 
 public class SlashBlade {
     private static Model slashBladeModel = null;
-    private static View slashBladeView = null;
-    private static TickGenerator slashBladeCTickGenerator = null;
+    private static View swingView = null;
+    private static View javaFxView = null;
+    private static TickGenerator slashBladeTickGenerator = null;
+
+    public static void initial() {
+        FrameObject jFrameSlashBlade;
+//        JavaFxSlashBlade javaFxSlashBlade;
+
+        slashBladeTickGenerator = new TickGenerator();
+        slashBladeModel = new SlashBladeModel();
+
+        swingView = new SwingView();
+//        javaFxView = new JavaFxView();
+
+        jFrameSlashBlade = new JFrameSlashBlade(1650);
+        jFrameSlashBlade.addDrawableComponent(swingView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
+
+//        javaFxSlashBlade = new JavaFxSlashBlade(1650);
+//        javaFxSlashBlade.addDrawableComponent(javaFxView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
+
+        slashBladeModel.setFrameSize(jFrameSlashBlade.getFrameSize());
+
+        swingView.setModel(slashBladeModel);
+        slashBladeTickGenerator.setModel(slashBladeModel);
+        slashBladeTickGenerator.setView(swingView);
+        slashBladeTickGenerator.setJFrameObject(jFrameSlashBlade);
+
+        slashBladeTickGenerator.initial();
+        slashBladeTickGenerator.executeCalculateGame();
+    }
 
     public static void initialSlashBladeWithSwing() {
         FrameObject jFrameSlashBlade;
 
-        slashBladeCTickGenerator = new TickGenerator();
+        slashBladeTickGenerator = new TickGenerator();
         slashBladeModel = new SlashBladeModel();
         slashBladeView = new SwingView();
 
-        jFrameSlashBlade = new FrameSlashBlade(1650);
-        jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeCTickGenerator.getSlashBladeKeyListenerController());
+        jFrameSlashBlade = new JFrameSlashBlade(1650);
+        jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
 
         slashBladeModel.setFrameSize(jFrameSlashBlade.getFrameSize());
 
         slashBladeView.setModel(slashBladeModel);
-        slashBladeCTickGenerator.setModel(slashBladeModel);
-        slashBladeCTickGenerator.setView(slashBladeView);
-        slashBladeCTickGenerator.setJFrameObject(jFrameSlashBlade);
+        slashBladeTickGenerator.setModel(slashBladeModel);
+        slashBladeTickGenerator.setView(slashBladeView);
+        slashBladeTickGenerator.setJFrameObject(jFrameSlashBlade);
 
-        slashBladeCTickGenerator.initial();
-        slashBladeCTickGenerator.executeCalculateGame();
+        slashBladeTickGenerator.initial();
+        slashBladeTickGenerator.executeCalculateGame();
     }
 
     public static void initialSlashBladeWithJavaFx() {
         JavaFxSlashBlade javaFxSlashBlade;
 
-        slashBladeCTickGenerator = new TickGenerator();
+        slashBladeTickGenerator = new TickGenerator();
         slashBladeModel = new SlashBladeModel();
-        slashBladeView = new JavaFxView();
+        javaFxView = new JavaFxView();
 
         javaFxSlashBlade = new JavaFxSlashBlade(1650);
-//        javaFxSlashBlade.addDrawableComponent(slashBladeView, slashBladeCTickGenerator.getSlashBladeKeyListenerController());
+        javaFxSlashBlade.addDrawableComponent(javaFxView, slashBladeTickGenerator.getSlashBladeKeyListenerController());
 
 //        slashBladeView.setModel(slashBladeModel);
 //        slashBladeCTickGenerator.setModel(slashBladeModel);

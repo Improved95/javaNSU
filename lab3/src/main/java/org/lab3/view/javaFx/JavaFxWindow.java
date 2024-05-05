@@ -11,20 +11,39 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.Constants;
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.view.View;
 
 import javax.imageio.ImageIO;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class JavaFxWindow extends Application {
-    private static FrameSize frameSize;
-    Scene scene;
+    private FrameSize frameSize;
+    private Scene scene;
+    private Group root;
+    private View view;
+    private KeyListener keyListener;
 
-    public static void setFrameSize(FrameSize frameSize_) {
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setFrameSize(FrameSize frameSize_) {
         frameSize = frameSize_;
+    }
+
+    public void setKeyAndMouseListeners(View view, KeyListenerController keyListener) {
+        this.view = view;
+        this.keyListener = keyListener;
+    }
+
+    public void repaint() {
+        root.requestLayout();
     }
 
     public static void main(String[] args) {
@@ -32,7 +51,17 @@ public class JavaFxWindow extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
+        root = new Group();
+        scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
+
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Hello World!");
+        primaryStage.show();
+    }
+
+    private void setTestScene(Group root) throws IOException {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -42,7 +71,6 @@ public class JavaFxWindow extends Application {
             }
         });
 
-        Group root = new Group();
 
         InputStream imageStream = this.getClass().getResourceAsStream("../../../../SlashBladeResources/samurai/fifteen.png");
         BufferedImage fullImage = ImageIO.read(imageStream);
@@ -56,14 +84,9 @@ public class JavaFxWindow extends Application {
         root.getChildren().add(imageView);
         root.getChildren().add(btn);
 
-        scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
+
         scene.setOnKeyPressed(event -> {
             System.out.println(event.getCode().ordinal());
         });
-
-        primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Hello World!");
-        primaryStage.show();
     }
 }

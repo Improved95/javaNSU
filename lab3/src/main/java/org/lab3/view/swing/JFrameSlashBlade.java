@@ -8,12 +8,12 @@ import org.lab3.view.View;
 import javax.swing.*;
 import java.awt.*;
 
-public class FrameSlashBlade extends JFrame implements FrameObject {
+public class JFrameSlashBlade extends JFrame implements FrameObject {
     private FrameSize frameSize = new FrameSize();
     private JFrame jFrame;
     private GamePanel gamePanel;
 
-    public FrameSlashBlade(int width) {
+    public JFrameSlashBlade(int width) {
         this.frameSize.setWidth(width);
         this.frameSize.setHeight(getHeightByWidth());
         this.jFrame = getFrame();
