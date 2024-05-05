@@ -39,7 +39,7 @@ public class JavaFxWindow extends Application {
 
     public static void repaint() {
         System.out.println("here");
-        view.drawObject(root);
+//        view.drawObject(root);
     }
 
     public static void main(String[] args) {
@@ -56,6 +56,7 @@ public class JavaFxWindow extends Application {
         stage.setScene(scene);
         stage.setTitle("SlashBlade");
         stage.show();
+        view.notifyAll();
     }
 
     public void setTestScene(Group root, Scene scene) {

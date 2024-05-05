@@ -12,8 +12,8 @@ import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
 
 public class SlashBlade {
     private static Model slashBladeModel = null;
-//    private static SwingView swingView = null;
-//    private static JavaFxView javaFxView = null;
+    private static SwingView swingView = null;
+    private static JavaFxView javaFxView = null;
     private static SwingFrame swingSlashBlade;
     private static JavaFxFrame javaFxFrame;
     private static TickGenerator slashBladeTickGenerator = null;
@@ -27,48 +27,44 @@ public class SlashBlade {
         frameSize.setHeight(getHeightByWidth());
         slashBladeModel.setFrameSize(frameSize);
 
-        /*if (definitionForSwing())
+        if (definitionForSwing())
             swingView = new SwingView();
         if (definitionForJavaFx())
-            javaFxView = new JavaFxView();*/
+            javaFxView = new JavaFxView();
 
-        /*if (definitionForSwing()) swingView.setModel(slashBladeModel);
-        if (definitionForJavaFx()) javaFxView.setModel(slashBladeModel);*/
+        if (definitionForSwing()) swingView.setModel(slashBladeModel);
+        if (definitionForJavaFx()) javaFxView.setModel(slashBladeModel);
         slashBladeTickGenerator.setModel(slashBladeModel);
 
         if (definitionForSwing()) {
             swingSlashBlade = new SwingFrame();
             swingSlashBlade.setFrameSize(frameSize);
-//            swingSlashBlade.setView(swingView);
+            swingSlashBlade.setView(swingView);
             swingSlashBlade.addInputListeners(slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
         if (definitionForJavaFx()) {
             javaFxFrame = new JavaFxFrame();
             javaFxFrame.setFrameSize(frameSize);
-//            javaFxFrame.setView(javaFxView);
+            javaFxFrame.setView(javaFxView);
             javaFxFrame.addInputListeners(slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
 
         if (definitionForSwing()) {
-//            slashBladeTickGenerator.setSwingView(swingView);
+            slashBladeTickGenerator.setSwingView(swingView);
             slashBladeTickGenerator.setSwingFrame(swingSlashBlade);
         }
         if (definitionForJavaFx()) {
-//            slashBladeTickGenerator.setJavaFxView(javaFxView);
+            slashBladeTickGenerator.setJavaFxView(javaFxView);
             slashBladeTickGenerator.setJavaFxFrame(javaFxFrame);
         }
 
-        if (definitionForSwing()) {
-            new Thread(() -> swingSlashBlade.createSwingFrame()).start();
-        }
-        if (definitionForJavaFx()) {
-            new Thread(() -> javaFxFrame.createJavaFxFrame()).start();
-        }
+        if (definitionForSwing()) swingSlashBlade.createSwingFrame();
+        if (definitionForJavaFx()) javaFxFrame.createJavaFxFrame();
 
-        slashBladeTickGenerator.initial();
-        slashBladeTickGenerator.executeCalculateGame();
-
-
+        new Thread(() -> {
+            slashBladeTickGenerator.initial();
+            slashBladeTickGenerator.executeCalculateGame();
+        }).start();
     }
 
     private static int getHeightByWidth() {

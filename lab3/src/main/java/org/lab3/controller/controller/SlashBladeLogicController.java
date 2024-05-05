@@ -16,8 +16,8 @@ public class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
-//    private View swingView;
-//    private View javaFxView;
+    private View swingView;
+    private View javaFxView;
 
     public SlashBladeLogicController() {
         this.gameModesFactory = new GameModesFactory();
@@ -27,13 +27,13 @@ public class SlashBladeLogicController {
         this.model = model;
     }
 
-    /*public void setSwingView(View view) {
+    public void setSwingView(View view) {
         this.swingView = view;
     }
 
     public void setJavaFxView(View javaFxView) {
         this.javaFxView = javaFxView;
-    }*/
+    }
 
     public void initial() {
         try {
@@ -44,10 +44,10 @@ public class SlashBladeLogicController {
             ex.printStackTrace();
         }
         model.setGameState(GameState.LEVEL1);
-        /*if (definitionForSwing())
+        if (definitionForSwing())
             swingView.switchGameStateResources();
         if (definitionForJavaFx())
-            javaFxView.switchGameStateResources();*/
+            javaFxView.switchGameStateResources();
     }
 
     public void keyPressedObserver(int keyCode) {

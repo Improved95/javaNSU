@@ -74,7 +74,7 @@ public class Constants {
     }
 
     public static class ViewConstants {
-        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.JAVAFX;
+        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.SWING;
 
         public static boolean definitionForSwing() {
             if (Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.SWING ||

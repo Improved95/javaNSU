@@ -10,6 +10,7 @@ import org.lab3.view.EditedImage;
 import org.lab3.view.View;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
+import org.lab3.view.swing.SwingFrame;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class JavaFxView implements View {
     private Model model;
     private boolean drawing = false;
     private OpenedResources openedResources;
+
+    public void changeViewScreen(JavaFxFrame swingFrame) {
+        swingFrame.repaintObjects();
+    }
 
     @Override
     public void setModel(Model model) {
