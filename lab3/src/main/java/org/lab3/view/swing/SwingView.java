@@ -44,7 +44,6 @@ public class SwingView implements View {
         }
     }
 
-    @Override
     public void drawObject(Graphics g) {
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());

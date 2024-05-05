@@ -17,9 +17,13 @@ public class TickGenerator {
     private SlashBladeLogicController slashBladeLogicController;
     private SlashBladeKeyListener slashBladeKeyListenerController;
 
-    private FrameObject frameObject;
+    private FrameObject swingFrame;
+    private FrameObject javaFxFrame;
+
+    private View swingView;
+    private View javaFxView;
+
     private Model model;
-    private View view;
 
     private Timer generationTickTimer;
     private TimerContext timerContext;
@@ -38,8 +42,12 @@ public class TickGenerator {
         return slashBladeKeyListenerController;
     }
 
-    public void setJFrameObject(FrameObject frameObject) {
-        this.frameObject = frameObject;
+    public void setSwingFrame(FrameObject frameObject) {
+        this.swingFrame = frameObject;
+    }
+
+    public void setJavaFxFrame(FrameObject javaFxFrame) {
+        this.javaFxFrame = javaFxFrame;
     }
 
     public void setModel(Model model) {
@@ -47,15 +55,22 @@ public class TickGenerator {
         slashBladeKeyListenerController.setFrameSize(model.getFrameSize());
     }
 
-    public void setView(View view) {
-        this.view = view;
+    public void setSwingView(View view) {
+        this.swingView = view;
+    }
+    public void setJavaFxView(View view) {
+        this.javaFxView = view;
     }
 
     public void initial() {
         slashBladeLogicController.setModel(model);
-        slashBladeLogicController.setView(view);
+//        slashBladeLogicController.setSwingView(swingView);
+        slashBladeLogicController.setJavaFxView(javaFxView);
         slashBladeLogicController.initial();
-        view.setDrawing(true);
+
+//        swingView.setDrawing(true);
+        javaFxView.setDrawing(false);
+
         generationTickTimer = new Timer();
     }
 
@@ -79,11 +94,12 @@ public class TickGenerator {
         /*-----------------*/
 
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
-        view.changeViewScreen(frameObject);
+//        swingView.changeViewScreen(swingFrame);
+        javaFxView.changeViewScreen(javaFxFrame);
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
-//            frameObject.getJFrame().dispose();
+//            swingFrame.getJFrame().dispose();
         }
 
         /*-----------------*/

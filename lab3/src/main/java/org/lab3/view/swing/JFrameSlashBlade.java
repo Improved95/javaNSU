@@ -27,7 +27,7 @@ public class JFrameSlashBlade extends JFrame implements FrameObject {
     public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
         jFrame.addKeyListener(keyListenerController);
         jFrame.addMouseListener(keyListenerController);
-        this.gamePanel = new GamePanel(view, frameSize);
+        this.gamePanel = new GamePanel((SwingView) view, frameSize);
         jFrame.add(gamePanel);
     }
 

@@ -20,7 +20,7 @@ public class JavaFxSlashBlade implements FrameObject {
 
     @Override
     public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
-        javaFxWindow.setKeyAndMouseListeners(view, keyListenerController);
+        javaFxWindow.setKeyAndMouseListeners((JavaFxView) view, keyListenerController);
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.lab3.view.javaFx;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.input.KeyCode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.Constants;
 import org.lab3.slashBlade.FrameSize;
-import org.lab3.view.View;
 
 import javax.imageio.ImageIO;
 import java.awt.event.KeyListener;
@@ -26,23 +24,24 @@ public class JavaFxWindow extends Application {
     private FrameSize frameSize;
     private Scene scene;
     private Group root;
-    private View view;
+    private JavaFxView view;
     private KeyListener keyListener;
 
     public Scene getScene() {
         return scene;
     }
 
-    public void setFrameSize(FrameSize frameSize_) {
-        frameSize = frameSize_;
+    public void setFrameSize(FrameSize frameSize) {
+        this.frameSize = frameSize;
     }
 
-    public void setKeyAndMouseListeners(View view, KeyListenerController keyListener) {
+    public void setKeyAndMouseListeners(JavaFxView view, KeyListenerController keyListener) {
         this.view = view;
         this.keyListener = keyListener;
     }
 
     public void repaint() {
+        view.drawObject(root);
         root.requestLayout();
     }
 
@@ -53,11 +52,11 @@ public class JavaFxWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         root = new Group();
-        scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
+        scene = new Scene(root, 1650, 920);
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("SlashBlade");
         primaryStage.show();
     }
 

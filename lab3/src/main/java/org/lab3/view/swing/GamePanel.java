@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    private View view;
+    private SwingView view;
     private FrameSize frameSize;
 
-    public GamePanel(View view, FrameSize frameSize) {
+    public GamePanel(SwingView view, FrameSize frameSize) {
         this.view = view;
         this.frameSize = frameSize;
         setPanelSize();

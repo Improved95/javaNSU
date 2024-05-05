@@ -13,5 +13,5 @@ public interface View {
 
     void switchGameStateResources();
 
-    void drawObject(Graphics g);
+//    void drawObject(Graphics g);
 }
