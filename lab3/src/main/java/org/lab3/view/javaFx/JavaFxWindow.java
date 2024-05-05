@@ -14,34 +14,31 @@ import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.slashBlade.Constants;
 import org.lab3.slashBlade.FrameSize;
 
-import javax.imageio.ImageIO;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class JavaFxWindow extends Application {
-    private FrameSize frameSize;
-    private Scene scene;
-    private Group root;
-    private JavaFxView view;
-    private KeyListener keyListener;
+    private static Stage stage;
+    private static FrameSize frameSize;
+    private static Scene scene;
+    private static Group root;
+    private static JavaFxView view;
+    private static KeyListener keyListener;
 
-    public Scene getScene() {
+    public static Scene getScene() {
         return scene;
     }
 
-    public void setFrameSize(FrameSize frameSize) {
-        this.frameSize = frameSize;
+    public static void setFrameSize(FrameSize frameSize_) {
+        frameSize = frameSize_;
     }
 
-    public void setKeyAndMouseListeners(JavaFxView view, KeyListenerController keyListener) {
-        this.view = view;
-        this.keyListener = keyListener;
+    public static void setKeyAndMouseListeners(JavaFxView view_, KeyListenerController keyListener_) {
+        view = view_;
+        keyListener = keyListener_;
     }
 
-    public void repaint() {
-        view.drawObject(root);
+    public static void repaint() {
+//        view.drawObject(root);
         root.requestLayout();
     }
 
@@ -51,41 +48,17 @@ public class JavaFxWindow extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        stage = primaryStage;
         root = new Group();
-        scene = new Scene(root, 1650, 920);
+        scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
 
-        primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("SlashBlade");
-        primaryStage.show();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("SlashBlade");
+        stage.show();
     }
 
-    private void setTestScene(Group root) throws IOException {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-
-        InputStream imageStream = this.getClass().getResourceAsStream("../../../../SlashBladeResources/samurai/fifteen.png");
-        BufferedImage fullImage = ImageIO.read(imageStream);
-        Image image = SwingFXUtils.toFXImage(fullImage, null);
-
-        ImageView imageView = new ImageView(image);
-        imageView.setX(50);
-        imageView.setY(50);
-        imageView.setFitWidth(Constants.PlayerConstants.PLAYER_WIDTH);
-        imageView.setFitHeight(Constants.PlayerConstants.PLAYER_HEIGHT);
-        root.getChildren().add(imageView);
-        root.getChildren().add(btn);
-
-
-        scene.setOnKeyPressed(event -> {
-            System.out.println(event.getCode().ordinal());
-        });
+    public static void close() {
+        stage.close();
     }
 }

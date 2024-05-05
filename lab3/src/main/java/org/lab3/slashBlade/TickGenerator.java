@@ -10,6 +10,9 @@ import org.lab3.view.View;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static org.lab3.slashBlade.Constants.ViewConstants.definitionForJavaFx;
+import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
+
 public class TickGenerator {
     private final double maxFPS = 60;
     private final long maxWaitingTime = (long)(1000 / maxFPS);
@@ -64,12 +67,18 @@ public class TickGenerator {
 
     public void initial() {
         slashBladeLogicController.setModel(model);
-//        slashBladeLogicController.setSwingView(swingView);
-        slashBladeLogicController.setJavaFxView(javaFxView);
+
+        if (definitionForSwing())
+            slashBladeLogicController.setSwingView(swingView);
+        if (definitionForJavaFx())
+            slashBladeLogicController.setJavaFxView(javaFxView);
+
         slashBladeLogicController.initial();
 
-//        swingView.setDrawing(true);
-        javaFxView.setDrawing(false);
+        if (definitionForSwing())
+            swingView.setDrawing(true);
+        if (definitionForJavaFx())
+            javaFxView.setDrawing(true);
 
         generationTickTimer = new Timer();
     }
@@ -94,12 +103,18 @@ public class TickGenerator {
         /*-----------------*/
 
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
-//        swingView.changeViewScreen(swingFrame);
-        javaFxView.changeViewScreen(javaFxFrame);
+
+        if (definitionForSwing())
+            swingView.changeViewScreen(swingFrame);
+        if (definitionForJavaFx())
+            javaFxView.changeViewScreen(javaFxFrame);
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
-//            swingFrame.getJFrame().dispose();
+            if (definitionForSwing())
+                swingFrame.close();
+            if (definitionForJavaFx())
+                javaFxFrame.close();
         }
 
         /*-----------------*/

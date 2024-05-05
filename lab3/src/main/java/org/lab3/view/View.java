@@ -12,6 +12,4 @@ public interface View {
     void changeViewScreen(FrameObject frameObject);
 
     void switchGameStateResources();
-
-//    void drawObject(Graphics g);
 }

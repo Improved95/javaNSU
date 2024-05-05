@@ -7,25 +7,30 @@ import org.lab3.view.FrameObject;
 
 public class JavaFxSlashBlade implements FrameObject {
     private FrameSize frameSize = new FrameSize();
-    private JavaFxWindow javaFxWindow;
+//    private JavaFxWindow javaFxWindow;
 
     public JavaFxSlashBlade(int width) {
         this.frameSize.setWidth(width);
         this.frameSize.setHeight(getHeightByWidth());
 
-        javaFxWindow = new JavaFxWindow();
-        javaFxWindow.setFrameSize(frameSize);
-        javaFxWindow.main(null);
+//        javaFxWindow = new JavaFxWindow();
+        JavaFxWindow.setFrameSize(frameSize);
+        JavaFxWindow.main(null);
     }
 
     @Override
     public void addDrawableComponent(View view, KeyListenerController keyListenerController) {
-        javaFxWindow.setKeyAndMouseListeners((JavaFxView) view, keyListenerController);
+        JavaFxWindow.setKeyAndMouseListeners((JavaFxView) view, keyListenerController);
     }
 
     @Override
     public void repaintObjects() {
-        javaFxWindow.repaint();
+        JavaFxWindow.repaint();
+    }
+
+    @Override
+    public void close() {
+        JavaFxWindow.close();
     }
 
     @Override

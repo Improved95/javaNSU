@@ -1,5 +1,7 @@
 package org.lab3.slashBlade;
 
+import org.lab3.view.ViewDefinition;
+
 import java.security.PublicKey;
 
 public class Constants {
@@ -69,5 +71,25 @@ public class Constants {
         public static final int RESUME_BUTTON_INDEX = 0;
         public static final int RESET_BUTTON_INDEX = 1;
         public static final int EXIT_BUTTON_INDEX = 2;
+    }
+
+    public static class ViewConstants {
+        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.SWING;
+
+        public static boolean definitionForSwing() {
+            if (Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.SWING ||
+                    Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.BOTH) {
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean definitionForJavaFx() {
+            if (Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.JAVAFX ||
+                    Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.BOTH) {
+                return true;
+            }
+            return false;
+        }
     }
 }

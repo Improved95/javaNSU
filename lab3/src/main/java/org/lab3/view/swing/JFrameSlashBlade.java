@@ -36,6 +36,11 @@ public class JFrameSlashBlade extends JFrame implements FrameObject {
         gamePanel.repaint();
     }
 
+    @Override
+    public void close() {
+        jFrame.dispose();
+    }
+
     private int getHeightByWidth() {
         return (frameSize.getWidth() * frameSize.heightRes) / frameSize.widthRes;
     }

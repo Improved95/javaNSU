@@ -9,6 +9,9 @@ import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static org.lab3.slashBlade.Constants.ViewConstants.definitionForJavaFx;
+import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
+
 public class SlashBladeLogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
@@ -41,8 +44,10 @@ public class SlashBladeLogicController {
             ex.printStackTrace();
         }
         model.setGameState(GameState.LEVEL1);
-//        swingView.switchGameStateResources();
-        javaFxView.switchGameStateResources();
+        if (definitionForSwing())
+            swingView.switchGameStateResources();
+        if (definitionForJavaFx())
+            javaFxView.switchGameStateResources();
     }
 
     public void keyPressedObserver(int keyCode) {

@@ -65,7 +65,6 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>org.lab3.Main</mainClass>
-<!--                            <mainClass>org.lab3.view.javaFx.JavaFxWindow</mainClass>-->
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

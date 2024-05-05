@@ -11,4 +11,6 @@ public interface FrameObject {
     void repaintObjects();
 
     FrameSize getFrameSize();
+
+    void close();
 }
