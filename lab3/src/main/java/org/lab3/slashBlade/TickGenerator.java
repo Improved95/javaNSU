@@ -96,7 +96,7 @@ public class TickGenerator {
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
             if (definitionForSwing()) swingFrame.close();
-            if (definitionForJavaFx()) JavaFxFrame.close();
+            if (definitionForJavaFx()) javaFxFrame.close();
         }
 
         /*-----------------*/

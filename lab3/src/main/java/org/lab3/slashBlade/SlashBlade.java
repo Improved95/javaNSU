@@ -3,9 +3,7 @@ package org.lab3.slashBlade;
 import org.lab3.model.model.Model;
 import org.lab3.model.model.SlashBladeModel;
 import org.lab3.view.javaFx.JavaFxFrame;
-import org.lab3.view.javaFx.JavaFxView;
 import org.lab3.view.swing.SwingFrame;
-import org.lab3.view.swing.SwingView;
 
 import static org.lab3.slashBlade.Constants.ViewConstants.definitionForJavaFx;
 import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
@@ -44,11 +42,11 @@ public class SlashBlade {
         if (definitionForSwing()) slashBladeTickGenerator.setSwingFrame(swingFrame);
         if (definitionForJavaFx()) slashBladeTickGenerator.setJavaFxFrame(javaFxFrame);
 
-        slashBladeTickGenerator.initial();
-        slashBladeTickGenerator.executeCalculateGame();
-
         if (definitionForSwing()) swingFrame.createSwingFrame();
         if (definitionForJavaFx()) javaFxFrame.main(null);
+
+        slashBladeTickGenerator.initial();
+        slashBladeTickGenerator.executeCalculateGame();
     }
 
     private static int getHeightByWidth() {

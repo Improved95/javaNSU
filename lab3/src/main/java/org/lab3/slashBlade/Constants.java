@@ -2,8 +2,6 @@ package org.lab3.slashBlade;
 
 import org.lab3.view.ViewDefinition;
 
-import java.security.PublicKey;
-
 public class Constants {
     public static class GameConstants {
         public static final int EXIT_GAME = -1;
@@ -74,7 +72,7 @@ public class Constants {
     }
 
     public static class ViewConstants {
-        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.JAVAFX;
+        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.SWING;
 
         public static boolean definitionForSwing() {
             if (Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.SWING ||

@@ -50,7 +50,9 @@ public class JavaFxFrame extends Application {
         launch(args);
     }
 
-    public static void close() {}
+    public static void close() {
+        stage.close();
+    }
 
     @Override
     public void start(Stage primaryStage) {
