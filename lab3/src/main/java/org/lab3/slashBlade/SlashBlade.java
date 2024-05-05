@@ -48,7 +48,7 @@ public class SlashBlade {
         slashBladeTickGenerator.executeCalculateGame();
 
         if (definitionForSwing()) swingFrame.createSwingFrame();
-//        if (definitionForJavaFx()) javaFxFrame;
+        if (definitionForJavaFx()) javaFxFrame.main(null);
     }
 
     private static int getHeightByWidth() {

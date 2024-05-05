@@ -91,8 +91,7 @@ public class TickGenerator {
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
 
         if (definitionForSwing()) swingFrame.repaint();
-        if (definitionForJavaFx()) javaFxFrame.
-//        if (definitionForJavaFx()) javaFxFrame.repaint();
+        if (definitionForJavaFx()) javaFxFrame.repaint();
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
