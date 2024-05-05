@@ -1,4 +1,4 @@
-package org.lab3.model;
+package org.lab3.slashBlade;
 
 import java.security.PublicKey;
 

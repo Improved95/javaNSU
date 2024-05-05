@@ -1,6 +1,6 @@
 package org.lab3.controller.controller;
 
-import org.lab3.model.objects.characters.slashBlade.FrameSize;
+import org.lab3.slashBlade.FrameSize;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;

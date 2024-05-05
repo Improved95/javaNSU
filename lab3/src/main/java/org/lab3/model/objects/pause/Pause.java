@@ -1,8 +1,8 @@
 package org.lab3.model.objects.pause;
 
 import org.lab3.model.objects.SlashBladeObjectAbstract;
-import org.lab3.model.objects.characters.slashBlade.FrameSize;
-import org.lab3.model.Constants;
+import org.lab3.slashBlade.FrameSize;
+import org.lab3.slashBlade.Constants;
 
 public class Pause extends SlashBladeObjectAbstract {
     private PauseButton resume = new PauseButton(Constants.PauseConstants.BUTTONS_INDEX, Constants.PauseConstants.RESUME_BUTTON_INDEX);

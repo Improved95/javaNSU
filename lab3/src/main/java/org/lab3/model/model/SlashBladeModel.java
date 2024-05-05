@@ -2,7 +2,7 @@ package org.lab3.model.model;
 
 import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.gameObjectsContext.ObjectsContext;
-import org.lab3.model.objects.characters.slashBlade.FrameSize;
+import org.lab3.slashBlade.FrameSize;
 
 public class SlashBladeModel implements Model {
     private FrameSize frameSize;

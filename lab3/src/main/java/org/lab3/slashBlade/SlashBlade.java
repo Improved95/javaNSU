@@ -1,4 +1,4 @@
-package org.lab3.model.objects.characters.slashBlade;
+package org.lab3.slashBlade;
 
 import org.lab3.controller.controller.SlashBladeController;
 import org.lab3.controller.controller.Controller;
@@ -11,22 +11,16 @@ import org.lab3.view.swing.SwingView;
 import org.lab3.view.View;
 
 public class SlashBlade {
-    private JFrameObject jFrameSlashBlade;
-    private JavaFxWindow javaFxWindow;
-    private Model slashBladeModel = null;
-    private View slashBladeView = null;
-    private Controller slashBladeController = null;
+    private static Model slashBladeModel = null;
+    private static View slashBladeView = null;
+    private static Controller slashBladeController = null;
 
-    public SlashBlade() {
-        initialSlashBlade();
-    }
+    public static void initialSlashBladeWithSwing() {
+        JFrameObject jFrameSlashBlade;
 
-    private void initialSlashBlade() {
         slashBladeController = new SlashBladeController();
         slashBladeModel = new SlashBladeModel();
         slashBladeView = new SwingView();
-
-        javaFxWindow = new JavaFxWindow();
 
         jFrameSlashBlade = new JFrameSlashBlade(1650);
         jFrameSlashBlade.addDrawableComponent(slashBladeView, slashBladeController.getSlashBladeKeyListenerController());
@@ -40,5 +34,9 @@ public class SlashBlade {
 
         slashBladeController.initial();
         slashBladeController.executeCalculateGame();
+    }
+
+    public static void initialSlashBladeWithJavaFx() {
+        JavaFxWindow.main(null);
     }
 }

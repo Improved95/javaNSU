@@ -1,6 +1,6 @@
 package org.lab3.view.openedResources;
 
-import org.lab3.model.Constants;
+import org.lab3.slashBlade.Constants;
 import org.lab3.view.resources.*;
 
 import java.util.ArrayList;
