@@ -42,8 +42,8 @@ public class JavaFxView implements View {
     }
 
     public void drawObject(Group root) {
-//        System.out.println("here");
-        /*if (root == null) return;
+        System.out.println("here");
+        if (root == null) return;
 
         if (drawing) {
             List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
@@ -67,6 +67,6 @@ public class JavaFxView implements View {
                 imageView.setFitHeight(drawObject.getScreenHeight());
                 root.getChildren().add(imageView);
             }
-        }*/
+        }
     }
 }

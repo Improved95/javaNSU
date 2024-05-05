@@ -12,7 +12,6 @@ import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
 
 public class SlashBlade {
     private static Model slashBladeModel = null;
-//    private static SwingView swingView = null;
     private static SwingFrame swingFrame;
     private static JavaFxFrame javaFxFrame;
     private static TickGenerator slashBladeTickGenerator = null;
@@ -36,20 +35,20 @@ public class SlashBlade {
             swingFrame.addInputListeners(slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
         if (definitionForJavaFx()) {
-            JavaFxFrame.setFrameSize(frameSize);
-            JavaFxFrame.setModel(slashBladeModel);
-            JavaFxFrame.addInputListeners(slashBladeTickGenerator.getSlashBladeKeyListenerController());
+            javaFxFrame = new JavaFxFrame();
+            javaFxFrame.setFrameSize(frameSize);
+            javaFxFrame.setModel(slashBladeModel);
+            javaFxFrame.addInputListeners(slashBladeTickGenerator.getSlashBladeKeyListenerController());
         }
 
         if (definitionForSwing()) slashBladeTickGenerator.setSwingFrame(swingFrame);
+        if (definitionForJavaFx()) slashBladeTickGenerator.setJavaFxFrame(javaFxFrame);
 
-        new Thread(() -> {
-            slashBladeTickGenerator.initial();
-            slashBladeTickGenerator.executeCalculateGame();
-        }).start();
+        slashBladeTickGenerator.initial();
+        slashBladeTickGenerator.executeCalculateGame();
 
         if (definitionForSwing()) swingFrame.createSwingFrame();
-        if (definitionForJavaFx()) JavaFxFrame.main(null);
+//        if (definitionForJavaFx()) javaFxFrame;
     }
 
     private static int getHeightByWidth() {

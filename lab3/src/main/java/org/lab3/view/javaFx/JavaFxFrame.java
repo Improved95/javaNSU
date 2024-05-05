@@ -11,13 +11,15 @@ import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 
-public class JavaFxFrame extends Application {
+public class JavaFxFrame extends Application implements Runnable {
     private static Stage stage;
     private static FrameSize frameSize;
     private static Scene scene;
     private static Group root;
     private static JavaFxView view = new JavaFxView();
     private static KeyListenerController keyListener;
+
+    private static boolean isDraw = false;
 
     public static void setFrameSize(FrameSize frameSize_) {
         frameSize = frameSize_;
@@ -41,6 +43,31 @@ public class JavaFxFrame extends Application {
 
     public static void repaint() {
         view.drawObject(root);
+    }
+
+    public synchronized void waitNextDrawTick() throws InterruptedException {
+        while (!isDraw) {
+            wait();
+        }
+        isDraw = false;
+    }
+
+    public void setNewDrawTick() {
+        isDraw = true;
+        notifyAll();
+    }
+
+    @Override
+    public void run() {
+        main(null);
+
+        while (true) {
+            try {
+                waitNextDrawTick();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public static void main(String[] args) {
