@@ -1,6 +1,7 @@
 package org.lab3.view.swing;
 
 import org.lab3.controller.controller.KeyListenerController;
+import org.lab3.model.model.Model;
 import org.lab3.slashBlade.FrameSize;
 
 import javax.swing.*;
@@ -9,23 +10,35 @@ import java.awt.*;
 public class SwingFrame extends JFrame {
     private FrameSize frameSize;
     private JFrame jFrame;
-    private GamePanel gamePanel;
+    private gamePanel gamePanel;
     private SwingView view;
     private KeyListenerController keyListenerController;
 
-    public void setView(SwingView view) {
-        this.view = view;
+    public SwingFrame() {
+        view = new SwingView();
+    }
+
+    public SwingView getView() {
+        return view;
     }
 
     public void setFrameSize(FrameSize frameSize) {
         this.frameSize = frameSize;
     }
 
+    public void setModel(Model model) {
+        view.setModel(model);
+    }
+
     public void addInputListeners(KeyListenerController keyListenerController) {
         this.keyListenerController = keyListenerController;
     }
 
-    public void repaintObjects() {
+    public void setDrawing(boolean isDraw) {
+        view.setDrawing(isDraw);
+    }
+
+    public void repaint() {
         gamePanel.repaint();
     }
 
@@ -52,12 +65,35 @@ public class SwingFrame extends JFrame {
 
         frameSize.setInsets(jFrame.getInsets());
 
-        this.gamePanel = new GamePanel(view, frameSize);
+        this.gamePanel = new gamePanel(view, frameSize);
         jFrame.add(gamePanel);
 
         jFrame.addKeyListener(keyListenerController);
         jFrame.addMouseListener(keyListenerController);
 
         return jFrame;
+    }
+}
+
+class gamePanel extends JPanel {
+    private SwingView view;
+    private FrameSize frameSize;
+
+    public gamePanel(SwingView view, FrameSize frameSize) {
+        this.view = view;
+        this.frameSize = frameSize;
+        setPanelSize();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        view.drawObject(g);
+        g.dispose();
+    }
+
+    private void setPanelSize() {
+        Dimension dimension = new Dimension(frameSize.getWidth(), frameSize.getHeight());
+        setPreferredSize(dimension);
     }
 }

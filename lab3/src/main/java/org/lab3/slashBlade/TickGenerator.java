@@ -4,12 +4,8 @@ import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.controller.controller.SlashBladeKeyListener;
 import org.lab3.controller.controller.SlashBladeLogicController;
 import org.lab3.model.model.Model;
-import org.lab3.view.FrameObject;
-import org.lab3.view.View;
 import org.lab3.view.javaFx.JavaFxFrame;
-import org.lab3.view.javaFx.JavaFxView;
 import org.lab3.view.swing.SwingFrame;
-import org.lab3.view.swing.SwingView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,10 +21,6 @@ public class TickGenerator {
     private SlashBladeKeyListener slashBladeKeyListenerController;
 
     private SwingFrame swingFrame;
-    private JavaFxFrame javaFxFrame;
-
-    private SwingView swingView;
-    private JavaFxView javaFxView;
 
     private Model model;
 
@@ -53,32 +45,21 @@ public class TickGenerator {
         this.swingFrame = swingFrame;
     }
 
-    public void setJavaFxFrame(JavaFxFrame javaFxFrame) {
-        this.javaFxFrame = javaFxFrame;
-    }
-
     public void setModel(Model model) {
         this.model = model;
         slashBladeKeyListenerController.setFrameSize(model.getFrameSize());
     }
 
-    public void setSwingView(SwingView view) {
-        this.swingView = view;
-    }
-    public void setJavaFxView(JavaFxView view) {
-        this.javaFxView = view;
-    }
-
     public void initial() {
         slashBladeLogicController.setModel(model);
 
-        if (definitionForSwing()) slashBladeLogicController.setSwingView(swingView);
-        if (definitionForJavaFx()) slashBladeLogicController.setJavaFxView(javaFxView);
+        if (definitionForSwing()) slashBladeLogicController.setSwingView(swingFrame.getView());
+        if (definitionForJavaFx()) slashBladeLogicController.setJavaFxView(JavaFxFrame.getView());
 
         slashBladeLogicController.initial();
 
-        if (definitionForSwing()) swingView.setDrawing(true);
-        if (definitionForJavaFx()) javaFxView.setDrawing(true);
+        if (definitionForSwing()) swingFrame.setDrawing(true);
+        if (definitionForJavaFx()) JavaFxFrame.setDrawing(true);
 
         generationTickTimer = new Timer();
     }
@@ -104,13 +85,13 @@ public class TickGenerator {
 
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
 
-        if (definitionForSwing()) swingView.changeViewScreen(swingFrame);
-        if (definitionForJavaFx()) javaFxView.changeViewScreen(javaFxFrame);
+        if (definitionForSwing()) swingFrame.repaint();
+        if (definitionForJavaFx()) JavaFxFrame.repaint();
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
             if (definitionForSwing()) swingFrame.close();
-            if (definitionForJavaFx()) javaFxFrame.close();
+            if (definitionForJavaFx()) JavaFxFrame.close();
         }
 
         /*-----------------*/

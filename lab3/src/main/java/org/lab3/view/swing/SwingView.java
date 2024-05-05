@@ -3,7 +3,6 @@ package org.lab3.view.swing;
 import org.lab3.model.model.Model;
 import org.lab3.model.objects.DrawObject;
 import org.lab3.view.EditedImage;
-import org.lab3.view.FrameObject;
 import org.lab3.view.View;
 import org.lab3.view.openedResources.Level1Resources;
 import org.lab3.view.openedResources.OpenedResources;
@@ -26,10 +25,6 @@ public class SwingView implements View {
     @Override
     public void setDrawing(boolean drawing) {
         this.drawing = drawing;
-    }
-
-    public void changeViewScreen(SwingFrame swingFrame) {
-        swingFrame.repaintObjects();
     }
 
     @Override

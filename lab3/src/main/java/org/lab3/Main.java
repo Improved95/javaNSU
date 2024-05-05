@@ -5,6 +5,6 @@ import org.lab3.slashBlade.SlashBlade;
 public class Main {
     public static void main(String args[])  {
         SlashBlade.initial();
-//        System.exit(0);
+        System.exit(0);
     }
 }
