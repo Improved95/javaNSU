@@ -1,10 +1,9 @@
-package org.lab3.controller.controller;
+package org.lab3.slashBlade;
 
 import org.lab3.controller.gameMode.GameMode;
 import org.lab3.controller.factories.GameModesFactory;
 import org.lab3.controller.gameMode.GameState;
 import org.lab3.model.model.Model;
-import org.lab3.slashBlade.Constants;
 import org.lab3.view.View;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,14 +11,14 @@ import java.lang.reflect.InvocationTargetException;
 import static org.lab3.slashBlade.Constants.ViewConstants.definitionForJavaFx;
 import static org.lab3.slashBlade.Constants.ViewConstants.definitionForSwing;
 
-public class SlashBladeLogicController {
+public class LogicController {
     private GameModesFactory gameModesFactory;
     private GameMode currentGameMode;
     private Model model;
     private View swingView;
     private View javaFxView;
 
-    public SlashBladeLogicController() {
+    public LogicController() {
         this.gameModesFactory = new GameModesFactory();
     }
 

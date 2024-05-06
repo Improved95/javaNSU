@@ -1,6 +1,7 @@
 package org.lab3.controller.controller;
 
 import org.lab3.slashBlade.FrameSize;
+import org.lab3.slashBlade.LogicController;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -11,10 +12,10 @@ public class SlashBladeKeyListener implements KeyListenerController {
     private FrameSize frameSize;
     private KeysIsPressedContext keysIsPressedContext = new KeysIsPressedContext();
 
-    private SlashBladeLogicController slashBladeLogicController;
+    private LogicController logicController;
 
-    public SlashBladeKeyListener(SlashBladeLogicController slashBladeLogicController) {
-        this.slashBladeLogicController = slashBladeLogicController;
+    public SlashBladeKeyListener(LogicController logicController) {
+        this.logicController = logicController;
     }
 
     public void setFrameSize(FrameSize frameSize) {
@@ -30,7 +31,7 @@ public class SlashBladeKeyListener implements KeyListenerController {
     public void keyPressed(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 0) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 1);
-            slashBladeLogicController.keyPressedObserver(e.getKeyCode());
+            logicController.keyPressedObserver(e.getKeyCode());
         }
     }
 
@@ -38,7 +39,7 @@ public class SlashBladeKeyListener implements KeyListenerController {
     public void keyReleased(KeyEvent e) {
         if (keysIsPressedContext.getKeyStatus(e.getKeyCode()) == 1) {
             keysIsPressedContext.setKeyStatus(e.getKeyCode(), 0);
-            slashBladeLogicController.keyReleasedObserver(e.getKeyCode());
+            logicController.keyReleasedObserver(e.getKeyCode());
         }
     }
 
@@ -50,7 +51,7 @@ public class SlashBladeKeyListener implements KeyListenerController {
     @Override
     public void mousePressed(MouseEvent e) {
         int newPosY = e.getY() - frameSize.getInsets().top;
-        slashBladeLogicController.mousePressedObserver(e.getButton(), e.getX(), newPosY);
+        logicController.mousePressedObserver(e.getButton(), e.getX(), newPosY);
     }
 
     @Override
