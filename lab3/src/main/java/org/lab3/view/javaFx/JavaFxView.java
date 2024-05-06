@@ -18,6 +18,8 @@ import java.util.List;
 public class JavaFxView implements View {
     private Model model;
     private OpenedResources openedResources;
+    private boolean runnableDraw = true;
+    private boolean newTickIsExist = false;
 
     @Override
     public void setModel(Model model) {
@@ -60,5 +62,32 @@ public class JavaFxView implements View {
             imageView.setFitHeight(drawObject.getScreenHeight());
             root.getChildren().add(imageView);
         }*/
+    }
+
+    private synchronized void waitNewTick() throws InterruptedException {
+        while (!newTickIsExist) {
+            wait();
+        }
+        newTickIsExist = false;
+    }
+
+    public synchronized void setNewTick() {
+        newTickIsExist = true;
+        notifyAll();
+    }
+
+    public void loopDraw(Group root) {
+        while(runnableDraw) {
+            try {
+                waitNewTick();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+        drawObject(root);
+    }
+
+    public void breakDraw() {
+        runnableDraw = false;
     }
 }
