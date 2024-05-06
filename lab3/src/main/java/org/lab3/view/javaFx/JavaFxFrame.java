@@ -40,7 +40,7 @@ public class JavaFxFrame extends Application {
     }
 
     public static void repaint() {
-        view.setNewTick();
+//        view.setNewTick();
     }
 
     public static void main(String[] args) {
@@ -60,7 +60,6 @@ public class JavaFxFrame extends Application {
 
         stage.setOnCloseRequest(event -> {
             System.out.println(Thread.currentThread().getName());
-            view.breakDraw();
             stage.close();
             Thread.currentThread().interrupt();
             System.exit(0);
@@ -69,7 +68,7 @@ public class JavaFxFrame extends Application {
         stage.setScene(scene);
         stage.setTitle("SlashBlade");
         stage.show();
-        view.loopDraw(root);
+//        view.loopDraw(root);
     }
 
     public void setTestScene(Group root, Scene scene) {
