@@ -63,8 +63,8 @@ public class TickGenerator {
 
         slashBladeLogicController.initial();
 
-        if (definitionForSwing()) swingFrame.setDrawing(true);
-        if (definitionForJavaFx()) javaFxFrame.setDrawing(true);
+        if (definitionForSwing()) swingFrame.setDrawing();
+        if (definitionForJavaFx()) javaFxFrame.setDrawing();
 
         generationTickTimer = new Timer();
     }

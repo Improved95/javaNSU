@@ -34,8 +34,8 @@ public class SwingFrame extends JFrame {
         this.keyListenerController = keyListenerController;
     }
 
-    public void setDrawing(boolean isDraw) {
-        view.setDrawing(isDraw);
+    public void setDrawing() {
+        jFrame.setVisible(true);
     }
 
     public void repaint() {
@@ -55,7 +55,6 @@ public class SwingFrame extends JFrame {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         jFrame.setResizable(false);
-        jFrame.setVisible(true);
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();

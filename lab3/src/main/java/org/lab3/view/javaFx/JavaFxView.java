@@ -17,17 +17,11 @@ import java.util.List;
 
 public class JavaFxView implements View {
     private Model model;
-    private boolean drawing = false;
     private OpenedResources openedResources;
 
     @Override
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    @Override
-    public void setDrawing(boolean drawing) {
-        this.drawing = drawing;
     }
 
     @Override
@@ -43,30 +37,27 @@ public class JavaFxView implements View {
 
     public void drawObject(Group root) {
         System.out.println("here");
-        if (root == null) return;
 
-        if (drawing) {
-            List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
-            drawObjectsList.sort((o1, o2) -> {
-                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
-                    return -1;
-                }
-                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
-            });
-
-            root.getChildren().clear();
-            for (DrawObject drawObject : drawObjectsList) {
-                BufferedImage bufferedImage = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
-                        getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
-
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                ImageView imageView = new ImageView(image);
-                imageView.setX(EditedImage.newPosX);
-                imageView.setY(drawObject.getScreenPosY());
-                imageView.setFitWidth(EditedImage.newWidth);
-                imageView.setFitHeight(drawObject.getScreenHeight());
-                root.getChildren().add(imageView);
+        List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
+        drawObjectsList.sort((o1, o2) -> {
+            if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
+                return -1;
             }
-        }
+            return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
+        });
+
+        /*root.getChildren().clear();
+        for (DrawObject drawObject : drawObjectsList) {
+            BufferedImage bufferedImage = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
+                    getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
+
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            ImageView imageView = new ImageView(image);
+            imageView.setX(EditedImage.newPosX);
+            imageView.setY(drawObject.getScreenPosY());
+            imageView.setFitWidth(EditedImage.newWidth);
+            imageView.setFitHeight(drawObject.getScreenHeight());
+            root.getChildren().add(imageView);
+        }*/
     }
 }

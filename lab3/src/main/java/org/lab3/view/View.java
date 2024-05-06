@@ -7,7 +7,5 @@ import java.awt.*;
 public interface View {
     void setModel(Model model);
 
-    void setDrawing(boolean drawing);
-
     void switchGameStateResources();
 }

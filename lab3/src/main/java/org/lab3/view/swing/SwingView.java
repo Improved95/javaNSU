@@ -14,17 +14,11 @@ import java.util.List;
 
 public class SwingView implements View {
     private Model model;
-    private boolean drawing = false;
     private OpenedResources openedResources;
 
     @Override
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    @Override
-    public void setDrawing(boolean drawing) {
-        this.drawing = drawing;
     }
 
     @Override
@@ -39,23 +33,21 @@ public class SwingView implements View {
     }
 
     public void drawObject(Graphics g) {
-        if (drawing) {
-            List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
-            drawObjectsList.sort((o1, o2) -> {
-                if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
-                    return -1;
-                }
-                return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
-            });
-
-            for (DrawObject drawObject : drawObjectsList) {
-                EditedImage.editImage(drawObject);
-                 BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
-                        getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
-
-                g.drawImage(image, (int)EditedImage.newPosX, (int)drawObject.getScreenPosY(),
-                        EditedImage.newWidth, drawObject.getScreenHeight(), null);
+        List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
+        drawObjectsList.sort((o1, o2) -> {
+            if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
+                return -1;
             }
+            return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
+        });
+
+        for (DrawObject drawObject : drawObjectsList) {
+            EditedImage.editImage(drawObject);
+            BufferedImage image = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
+                    getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
+
+            g.drawImage(image, (int)EditedImage.newPosX, (int)drawObject.getScreenPosY(),
+                    EditedImage.newWidth, drawObject.getScreenHeight(), null);
         }
     }
 }

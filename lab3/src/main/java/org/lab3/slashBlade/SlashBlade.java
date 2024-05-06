@@ -42,8 +42,13 @@ public class SlashBlade {
         if (definitionForSwing()) slashBladeTickGenerator.setSwingFrame(swingFrame);
         if (definitionForJavaFx()) slashBladeTickGenerator.setJavaFxFrame(javaFxFrame);
 
-        if (definitionForSwing()) swingFrame.createSwingFrame();
-        if (definitionForJavaFx()) javaFxFrame.main(null);
+        if (definitionForSwing()) {
+            new Thread(() -> swingFrame.createSwingFrame()).start();
+        }
+
+        if (definitionForJavaFx()) {
+            new Thread(() -> javaFxFrame.main(null)).start();
+        }
 
         slashBladeTickGenerator.initial();
         slashBladeTickGenerator.executeCalculateGame();

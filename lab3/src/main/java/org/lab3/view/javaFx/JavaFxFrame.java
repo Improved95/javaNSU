@@ -19,9 +19,6 @@ public class JavaFxFrame extends Application {
     private static JavaFxView view = new JavaFxView();
     private static KeyListenerController keyListener;
 
-    private static boolean isRunnable = true;
-    private static boolean isDraw = false;
-
     public static void setFrameSize(FrameSize frameSize_) {
         frameSize = frameSize_;
     }
@@ -38,8 +35,8 @@ public class JavaFxFrame extends Application {
         keyListener = keyListener_;
     }
 
-    public static void setDrawing(boolean isDraw) {
-        view.setDrawing(isDraw);
+    public static void setDrawing() {
+//        stage.show();
     }
 
     public static void repaint() {
@@ -51,6 +48,7 @@ public class JavaFxFrame extends Application {
     }
 
     public static void close() {
+        Thread.currentThread().interrupt();
         stage.close();
     }
 
@@ -60,6 +58,10 @@ public class JavaFxFrame extends Application {
         root = new Group();
         scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
 
+        stage.setOnCloseRequest(event -> {
+            Thread.currentThread().interrupt();
+            stage.close();
+        });
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("SlashBlade");
