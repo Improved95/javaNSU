@@ -36,7 +36,8 @@ public class JavaFxView implements View {
     }
 
     public void drawObject(Group root) {
-        System.out.println("here");
+        System.out.println("here" + Thread.currentThread().getName());
+//        System.out.println("here");
 
         List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
         drawObjectsList.sort((o1, o2) -> {

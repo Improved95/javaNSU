@@ -46,12 +46,12 @@ public class SlashBlade {
             new Thread(() -> swingFrame.createSwingFrame()).start();
         }
 
-        if (definitionForJavaFx()) {
-            new Thread(() -> javaFxFrame.main(null)).start();
-        }
-
         slashBladeTickGenerator.initial();
         slashBladeTickGenerator.executeCalculateGame();
+
+        if (definitionForJavaFx()) {
+            javaFxFrame.main(null);
+        }
     }
 
     private static int getHeightByWidth() {

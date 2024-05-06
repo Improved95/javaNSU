@@ -59,6 +59,7 @@ public class JavaFxFrame extends Application {
         scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
 
         stage.setOnCloseRequest(event -> {
+            System.out.println(Thread.currentThread().getName());
             Thread.currentThread().interrupt();
             stage.close();
         });
