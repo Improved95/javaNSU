@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.lab3.controller.controller.KeyListenerController;
@@ -18,6 +19,7 @@ public class JavaFxFrame extends Application {
     private static Group root;
     private static JavaFxView view = new JavaFxView();
     private static KeyListenerController keyListener;
+    private static Canvas canvas;
 
     public static void setFrameSize(FrameSize frameSize_) {
         frameSize = frameSize_;
@@ -36,11 +38,11 @@ public class JavaFxFrame extends Application {
     }
 
     public static void setDrawing() {
-//        stage.show();
+        stage.show();
     }
 
     public static void repaint() {
-        view.drawObject(root);
+        view.drawObject(canvas);
     }
 
     public static void main(String[] args) {
@@ -57,6 +59,8 @@ public class JavaFxFrame extends Application {
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, frameSize.getWidth(), frameSize.getHeight());
+        canvas = new Canvas(frameSize.getWidth(), frameSize.getHeight());
+        root.getChildren().add(canvas);
 
         stage.setOnCloseRequest(event -> {
             System.out.println(Thread.currentThread().getName());
@@ -66,7 +70,7 @@ public class JavaFxFrame extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("SlashBlade");
-        stage.show();
+//        stage.show();
     }
 
     public void setTestScene(Group root, Scene scene) {

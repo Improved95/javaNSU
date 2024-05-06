@@ -2,6 +2,7 @@ package org.lab3.view.javaFx;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.lab3.model.model.Model;
@@ -35,10 +36,7 @@ public class JavaFxView implements View {
         }
     }
 
-    public void drawObject(Group root) {
-        System.out.println("here" + Thread.currentThread().getName());
-//        System.out.println("here");
-
+    public void drawObject(Canvas canvas) {
         List<DrawObject> drawObjectsList = new ArrayList<>(model.getGameModeObjectsContext().getDrawObjectsList());
         drawObjectsList.sort((o1, o2) -> {
             if (o1.getScreenLayerLevel() - o2.getScreenLayerLevel() == 0) {
@@ -46,19 +44,15 @@ public class JavaFxView implements View {
             }
             return o1.getScreenLayerLevel() - o2.getScreenLayerLevel();
         });
-
-        /*root.getChildren().clear();
+//        canvas.getGraphicsContext2D().clearRect(0,0, canvas.getWidth(), canvas.getHeight());
         for (DrawObject drawObject : drawObjectsList) {
             BufferedImage bufferedImage = openedResources.getResourcesList().get(drawObject.getResourcesIndexInResourcesList()).
                     getImage()[drawObject.getCurrentImageIndex().getI1()][drawObject.getCurrentImageIndex().getI2()];
 
+            EditedImage.editImage(drawObject);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            ImageView imageView = new ImageView(image);
-            imageView.setX(EditedImage.newPosX);
-            imageView.setY(drawObject.getScreenPosY());
-            imageView.setFitWidth(EditedImage.newWidth);
-            imageView.setFitHeight(drawObject.getScreenHeight());
-            root.getChildren().add(imageView);
-        }*/
+            canvas.getGraphicsContext2D().drawImage(image, EditedImage.newPosX, drawObject.getScreenPosY(),
+                    EditedImage.newWidth, drawObject.getScreenHeight());
+        }
     }
 }

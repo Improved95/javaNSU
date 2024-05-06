@@ -72,7 +72,7 @@ public class Constants {
     }
 
     public static class ViewConstants {
-        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.SWING;
+        public static final ViewDefinition VIEW_DEFINITION = ViewDefinition.BOTH;
 
         public static boolean definitionForSwing() {
             if (Constants.ViewConstants.VIEW_DEFINITION == ViewDefinition.SWING ||

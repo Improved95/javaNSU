@@ -1,5 +1,6 @@
 package org.lab3.slashBlade;
 
+import javafx.application.Platform;
 import org.lab3.controller.controller.KeyListenerController;
 import org.lab3.controller.controller.SlashBladeKeyListener;
 import org.lab3.controller.controller.SlashBladeLogicController;
@@ -64,7 +65,7 @@ public class TickGenerator {
         slashBladeLogicController.initial();
 
         if (definitionForSwing()) swingFrame.setDrawing();
-        if (definitionForJavaFx()) javaFxFrame.setDrawing();
+        if (definitionForJavaFx()) Platform.runLater(() -> javaFxFrame.setDrawing());
 
         generationTickTimer = new Timer();
     }
@@ -91,12 +92,13 @@ public class TickGenerator {
         int returnValue = slashBladeLogicController.calculateFrame(timerContext.currentFPS);
 
         if (definitionForSwing()) swingFrame.repaint();
-        if (definitionForJavaFx()) javaFxFrame.repaint();
+        if (definitionForJavaFx()) Platform.runLater(() -> javaFxFrame.repaint());
 
         if (returnValue == Constants.GameConstants.EXIT_GAME) {
             generationTickTimer.cancel();
             if (definitionForSwing()) swingFrame.close();
-            if (definitionForJavaFx()) javaFxFrame.close();
+
+            if (definitionForJavaFx()) Platform.runLater(() -> javaFxFrame.close());
         }
 
         /*-----------------*/
