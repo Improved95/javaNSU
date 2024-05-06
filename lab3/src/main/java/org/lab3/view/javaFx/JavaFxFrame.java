@@ -40,7 +40,7 @@ public class JavaFxFrame extends Application {
     }
 
     public static void repaint() {
-//        view.setNewTick();
+        view.drawObject(root);
     }
 
     public static void main(String[] args) {
@@ -48,8 +48,8 @@ public class JavaFxFrame extends Application {
     }
 
     public static void close() {
-        stage.close();
         Thread.currentThread().interrupt();
+        stage.close();
     }
 
     @Override
@@ -60,15 +60,13 @@ public class JavaFxFrame extends Application {
 
         stage.setOnCloseRequest(event -> {
             System.out.println(Thread.currentThread().getName());
-            stage.close();
             Thread.currentThread().interrupt();
-            System.exit(0);
+            stage.close();
         });
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("SlashBlade");
         stage.show();
-//        view.loopDraw(root);
     }
 
     public void setTestScene(Group root, Scene scene) {
