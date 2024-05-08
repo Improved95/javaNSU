@@ -34,7 +34,7 @@
 
         <Root level="info">
             <AppenderRef ref="CalculatorLogTRACE" level="trace"/>
-            <AppenderRef ref="CalculatorLogDEBUG" level="debug"/>
+            <AppenderRef ref="CalculatorLogDEBUG" level="debugObject"/>
             <AppenderRef ref="CalculatorLogINFO" level="info"/>
             <AppenderRef ref="CalculatorLogWARN" level="warn"/>
             <AppenderRef ref="CalculatorLogERROR" level="error"/>
