@@ -1,0 +1,8 @@
+carBodyWarehouseSize=15
+engineWarehouseSize=15
+accessoryWarehouseSize=15
+readyCarWarehouseSize=15
+accessoryProvidersNumber=1
+workersNumber=5
+dealersNumber=5
+isLogging=false

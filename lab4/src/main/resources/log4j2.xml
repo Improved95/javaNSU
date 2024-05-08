@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+
+        <File name="factoryLogTRACE" fileName="lab4/src/logs/factoryLogTRACE.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="factoryLogDEBUG" fileName="lab4/src/logs/factoryLogDEDUG.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="factoryLogINFO" fileName="lab4/src/logs/factoryLogINFO.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="factoryLogWARN" fileName="lab4/src/logs/factoryLogWARN.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="factoryLogERROR" fileName="lab4/src/logs/factoryLogERROR.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="info">
+            <AppenderRef ref="factoryLogTRACE" level="trace"/>
+            <AppenderRef ref="factoryLogDEBUG" level="debug"/>
+            <AppenderRef ref="factoryLogINFO" level="info"/>
+            <AppenderRef ref="factoryLogWARN" level="warn"/>
+            <AppenderRef ref="factoryLogERROR" level="error"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
