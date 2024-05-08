@@ -33,7 +33,14 @@
             <artifactId>controlsfx</artifactId>
             <scope>system</scope>
             <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.base.jar</systemPath>
-            <version>11.1.1</version>
+            <version>11.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <scope>system</scope>
+            <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.fxml.jar</systemPath>
+            <version>17.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
