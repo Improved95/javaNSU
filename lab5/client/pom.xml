@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <junit.version>5.10.0</junit.version>  </properties>
 
-  <dependencies>
+  <!--<dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -48,38 +48,30 @@
       <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.graphics.jar</systemPath>
       <version>11</version>
     </dependency>
-  </dependencies>
+  </dependencies>-->
 
-  <!--<dependencies>
+  <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.controls.jar</systemPath>
       <version>17.0.6</version>
     </dependency>
 
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.fxml.jar</systemPath>
       <version>17.0.6</version>
     </dependency>
 
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.media.jar</systemPath>
       <version>17.0.6</version>
     </dependency>
 
     <dependency>
       <groupId>org.controlsfx</groupId>
       <artifactId>controlsfx</artifactId>
-&lt;!&ndash;      <scope>system</scope>&ndash;&gt;
-&lt;!&ndash;      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.base.jar</systemPath>&ndash;&gt;
       <version>11.1.2</version>
     </dependency>
 
@@ -118,7 +110,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-  </dependencies>-->
+  </dependencies>
 
   <build>
     <plugins>
@@ -131,6 +123,7 @@
           <target>17</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -140,7 +133,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.lab5.client.Main</mainClass>
+              <mainClass>org.lab5.client.view.JavaFxFrame</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
@@ -151,6 +144,33 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>default-resources</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>javafx-res-copy</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes/org/lab5/client/view/res</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/resources/clientResources/javaFxResources</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>

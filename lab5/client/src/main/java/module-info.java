@@ -7,6 +7,6 @@ module org.lab5.client {
 //    requires net.synedra.validatorfx;
 //    requires com.almasb.fxgl.all;
 
-    opens org.lab5.client to javafx.fxml;
-    exports org.lab5.client;
+    opens org.lab5.client.view to javafx.fxml;
+    exports org.lab5.client.view;
 }
