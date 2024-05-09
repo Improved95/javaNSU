@@ -1,5 +1,7 @@
 module lab3 {
     requires java.desktop;
     requires javafx.controls;
-    requires javafx.fxml;
+    requires javafx.media;
+    requires javafx.swingEmpty;
+//    requires javafx.fxml;
 }

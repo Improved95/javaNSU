@@ -2,24 +2,45 @@ package org.lab5.client.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.lab5.client.client.Constants;
 
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class JavaFxFrame extends Application {
+    private static Stage mainStage;
+
+    private static Scene mainScene;
+    private static Scene inputDataScene;
+
+    private static Parent mainChatSpace;
+    private static Parent inputDataForm;
+
+    public static void switchToMainScene() {
+        mainStage.setScene(mainScene);
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(JavaFxFrame.class.getResource("res/hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Chat");
-        stage.setScene(scene);
-        stage.show();
+        mainStage = stage;
+
+        inputDataForm = new FXMLLoader(JavaFxFrame.class.getResource("inputDataForm.fxml")).load();
+        StackPane inputDataFormLayout = new StackPane();
+        inputDataFormLayout.getChildren().add(inputDataForm);
+        inputDataScene = new Scene(inputDataFormLayout, 450, 200);
+
+        mainStage.setTitle("Chat");
+        mainStage.setScene(inputDataScene);
+        mainStage.show();
+
+        mainChatSpace = new FXMLLoader(JavaFxFrame.class.getResource("mainSpace.fxml")).load();
+        StackPane mainSceneLayout = new StackPane();
+        mainSceneLayout.getChildren().add(mainChatSpace);
+        mainScene = new Scene(mainSceneLayout, 600, 400);
     }
+
     public static void main(String[] args) {
         launch();
     }

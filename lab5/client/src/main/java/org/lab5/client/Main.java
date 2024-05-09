@@ -4,6 +4,7 @@ import org.lab5.client.client.Client;
 
 public class Main {
     public static void main(String[] argv) {
-        Client.initial();
+        Client client = new Client();
+        client.initial();
     }
 }

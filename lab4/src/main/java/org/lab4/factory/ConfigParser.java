@@ -1,4 +1,4 @@
-package org.lab4.controller.factory;
+package org.lab4.factory;
 
 import java.io.IOException;
 import java.io.InputStream;
