@@ -7,6 +7,7 @@ public class ClientView {
 
     public ClientView() {
         InputDataFormController.setClientView(this);
+        JavaFxFrame.setClientView(this);
     }
 
     public void setClientController(ClientController clientController) {
@@ -15,5 +16,9 @@ public class ClientView {
 
     public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
         clientController.connectToServer(formDataContext);
+    }
+
+    public void closeApp() {
+        clientController.stopConnection();
     }
 }

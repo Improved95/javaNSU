@@ -18,6 +18,12 @@ public class JavaFxFrame extends Application {
     private static Parent mainChatSpace;
     private static Parent inputDataForm;
 
+    private static ClientView clientView;
+
+    public static void setClientView(ClientView clientView) {
+        JavaFxFrame.clientView = clientView;
+    }
+
     public static void switchToMainScene() {
         mainStage.setScene(mainScene);
     }
@@ -39,6 +45,10 @@ public class JavaFxFrame extends Application {
         StackPane mainSceneLayout = new StackPane();
         mainSceneLayout.getChildren().add(mainChatSpace);
         mainScene = new Scene(mainSceneLayout, 600, 400);
+
+        stage.setOnCloseRequest((windowEvent) -> {
+            clientView.closeApp();
+        });
     }
 
     public static void main(String[] args) {
