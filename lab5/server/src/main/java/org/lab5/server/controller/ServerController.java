@@ -4,7 +4,6 @@ import org.lab5.server.model.ServerModel;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class ServerController {
     private ServerModel serverModel;
@@ -16,7 +15,15 @@ public class ServerController {
     public void initialServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(serverModel.getSocket());
         serverModel.setServerSocket(serverSocket);
+    }
 
-        Socket clientSocket = serverSocket.accept();
+    public void stopServer() throws IOException {
+        serverModel.getServerSocket().close();
+    }
+
+    public void clientRegistration() throws IOException {
+        while (true) {
+            new Thread(new ClientHandler(serverModel.getServerSocket().accept())).start();
+        }
     }
 }

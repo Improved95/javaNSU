@@ -48,6 +48,7 @@ public class JavaFxFrame extends Application {
 
         stage.setOnCloseRequest((windowEvent) -> {
             clientView.closeApp();
+            mainStage.close();
         });
     }
 

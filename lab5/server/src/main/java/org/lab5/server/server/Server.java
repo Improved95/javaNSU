@@ -19,6 +19,8 @@ public class Server {
 
         try {
             serverController.initialServer();
+            serverController.clientRegistration();
+            serverController.stopServer();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

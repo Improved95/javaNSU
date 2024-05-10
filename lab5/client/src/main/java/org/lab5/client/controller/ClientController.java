@@ -13,7 +13,7 @@ public class ClientController {
         this.model = model;
     }
 
-    public void connectToServer(FormDataContext formDataContext) {
+    public int connectToServer(FormDataContext formDataContext) {
         model.setServerIP(formDataContext.getIP());
         model.setServerSocket(Integer.parseInt(formDataContext.getSocket()));
         model.setNickname(formDataContext.getNickname());
@@ -21,14 +21,19 @@ public class ClientController {
         try {
             Socket clientSocket = new Socket(model.getServerIP(), model.getServerSocket());
             model.setClientSocket(clientSocket);
+            System.out.println("connect");
         } catch (IOException ex) {
             ex.printStackTrace();
+            return -1;
         }
+        return 0;
     }
 
     public void stopConnection() {
         try {
-            model.getClientSocket().close();
+            if (model.getClientSocket() != null) {
+                model.getClientSocket().close();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
