@@ -19,10 +19,8 @@ public class InputDataFormController {
 
     @FXML
     public void clickOnContinueButton() {
-        FormDataContext formDataContext = new FormDataContext();
-        formDataContext.IP = ipTextField.getText();
-        formDataContext.socket = socketTextField.getText();
-        formDataContext.nickname = nicknameTextField.getText();
+        FormDataContext formDataContext = new FormDataContext(ipTextField.getText(),
+                socketTextField.getText(), nicknameTextField.getText());
         clientView.clickOnContinueFromStartDataForm(formDataContext);
 
         JavaFxFrame.switchToMainScene();

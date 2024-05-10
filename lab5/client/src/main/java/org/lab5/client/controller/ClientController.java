@@ -1,5 +1,6 @@
 package org.lab5.client.controller;
 
+import org.lab5.client.client.Client;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.FormDataContext;
 
@@ -8,25 +9,33 @@ import java.net.*;
 
 public class ClientController {
     private ClientModel model;
+    private Client client;
 
     public void setModel(ClientModel model) {
         this.model = model;
     }
 
-    public int connectToServer(FormDataContext formDataContext) {
-        model.setServerIP(formDataContext.getIP());
-        model.setServerSocket(Integer.parseInt(formDataContext.getSocket()));
-        model.setNickname(formDataContext.getNickname());
+    public void setMainWorkflow(Client client) {
+        this.client = client;
+    }
+
+    public boolean connectToServer(FormDataContext formDataContext) {
+        model.setServerIP(formDataContext.IP);
+        model.setServerSocket(Integer.parseInt(formDataContext.socket));
+        model.setNickname(formDataContext.nickname);
 
         try {
             Socket clientSocket = new Socket(model.getServerIP(), model.getServerSocket());
             model.setClientSocket(clientSocket);
-            System.out.println("connect");
         } catch (IOException ex) {
             ex.printStackTrace();
-            return -1;
+            model.setConnectToServer(false);
+            return false;
         }
-        return 0;
+
+        client.wakeUp();
+        model.setConnectToServer(true);
+        return true;
     }
 
     public void stopConnection() {
