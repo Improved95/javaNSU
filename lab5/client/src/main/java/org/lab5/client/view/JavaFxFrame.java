@@ -39,10 +39,10 @@ public class JavaFxFrame extends Application {
     private static void switchScene(Scene connectFormScene) {
         mainStage.setScene(connectFormScene);
 
-        double mainStageWidth = connectFormScene.getWidth();
-        double mainStageHeight = connectFormScene.getHeight();
-        mainStage.setX(screenWidth / 2 - mainStageWidth / 2);
-        mainStage.setY(screenHeight / 2 - mainStageHeight / 2);
+        double sceneWidth = connectFormScene.getWidth();
+        double sceneHeight = connectFormScene.getHeight();
+        mainStage.setX(screenWidth / 2 - sceneWidth / 2);
+        mainStage.setY(screenHeight / 2 - sceneHeight / 2);
 
         mainStage.show();
     }

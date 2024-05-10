@@ -31,11 +31,6 @@ public class ClientView {
         clientController.connectToServer(formDataContext);
     }
 
-    public void closeApp() {
-        tickGenerator.cancel();
-        clientController.stopConnection();
-    }
-
     public void initialTickGenerator() {
         Task myTask = new Task();
         tickGenerator = new Timer();
@@ -56,5 +51,10 @@ public class ClientView {
                 }
             });
         }
+    }
+
+    public void closeApp() {
+        tickGenerator.cancel();
+        clientController.stopConnection();
     }
 }

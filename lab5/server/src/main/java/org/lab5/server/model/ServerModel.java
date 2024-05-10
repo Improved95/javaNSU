@@ -2,13 +2,13 @@ package org.lab5.server.model;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServerModel {
     private int socket;
     private ServerSocket serverSocket;
-    private Set<Socket> clientSocketSet = new HashSet<>();
+    private Map<Socket, ClientData> clientSocketSet = new HashMap();
 
     public int getSocket() {
         return socket;
@@ -26,11 +26,7 @@ public class ServerModel {
         this.serverSocket = serverSocket;
     }
 
-    public Set<Socket> getClientSocketSet() {
+    public Map<Socket, ClientData> getClientSocketSet() {
         return clientSocketSet;
-    }
-
-    public void setClientSocketSet(Set<Socket> clientSocketList) {
-        this.clientSocketSet = clientSocketList;
     }
 }

@@ -20,7 +20,7 @@ public class ClientController {
         this.client = client;
     }
 
-    public boolean connectToServer(FormDataContext formDataContext) {
+    public void connectToServer(FormDataContext formDataContext) {
         model.setServerIP(formDataContext.IP);
         model.setServerSocket(Integer.parseInt(formDataContext.socket));
         model.setNickname(formDataContext.nickname);
@@ -28,19 +28,18 @@ public class ClientController {
         try {
             Socket clientSocket = new Socket(model.getServerIP(), model.getServerSocket());
             model.setClientSocket(clientSocket);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            model.setConnectToServer(false);
-            return false;
-        }
 
-        client.wakeUp();
-        model.setViewStage(ViewStage.CHAT);
-        model.setConnectToServer(true);
-        return true;
+            model.setConnectToServer(true);
+            model.setViewStage(ViewStage.CHAT);
+//            client.wakeUp();
+        } catch (IOException ex) {
+            model.setConnectToServer(false);
+            ex.printStackTrace();
+        }
     }
 
     public void stopConnection() {
+//        client.wakeUp();
         try {
             if (model.getClientSocket() != null) {
                 model.getClientSocket().close();

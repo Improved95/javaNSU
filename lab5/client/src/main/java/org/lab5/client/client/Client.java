@@ -25,14 +25,6 @@ public class Client {
         clientController.setMainWorkflow(this);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
-
-        try {
-            while (!clientModel.isConnectToServer()) {
-                wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public synchronized void wakeUp() {
