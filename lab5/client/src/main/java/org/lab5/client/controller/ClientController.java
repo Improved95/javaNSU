@@ -3,6 +3,7 @@ package org.lab5.client.controller;
 import org.lab5.client.client.Client;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.FormDataContext;
+import org.lab5.client.view.ViewStage;
 
 import java.io.IOException;
 import java.net.*;
@@ -34,6 +35,7 @@ public class ClientController {
         }
 
         client.wakeUp();
+        model.setViewStage(ViewStage.CHAT);
         model.setConnectToServer(true);
         return true;
     }

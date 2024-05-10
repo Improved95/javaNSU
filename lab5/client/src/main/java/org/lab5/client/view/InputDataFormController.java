@@ -23,6 +23,6 @@ public class InputDataFormController {
                 socketTextField.getText(), nicknameTextField.getText());
         clientView.clickOnContinueFromStartDataForm(formDataContext);
 
-        JavaFxFrame.switchToMainScene();
+//        JavaFxFrame.switchToMainScene();
     }
 }

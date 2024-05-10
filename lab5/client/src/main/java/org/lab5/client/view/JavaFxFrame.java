@@ -7,16 +7,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class JavaFxFrame extends Application {
+    private static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+    private static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+
     private static Stage mainStage;
 
-    private static Scene mainScene;
-    private static Scene inputDataScene;
+    private static Scene chatScene;
+    private static Scene connectFormScene;
 
-    private static Parent mainChatSpace;
-    private static Parent inputDataForm;
+    private static Parent mainChat;
+    private static Parent connectForm;
 
     private static ClientView clientView;
 
@@ -24,32 +28,47 @@ public class JavaFxFrame extends Application {
         JavaFxFrame.clientView = clientView;
     }
 
+    public static void switchToConnectFormScene() {
+        switchScene(connectFormScene);
+    }
+
     public static void switchToMainScene() {
-        mainStage.setScene(mainScene);
+        switchScene(chatScene);
+    }
+
+    private static void switchScene(Scene connectFormScene) {
+        mainStage.setScene(connectFormScene);
+
+        double mainStageWidth = connectFormScene.getWidth();
+        double mainStageHeight = connectFormScene.getHeight();
+        mainStage.setX(screenWidth / 2 - mainStageWidth / 2);
+        mainStage.setY(screenHeight / 2 - mainStageHeight / 2);
+
+        mainStage.show();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
 
-        inputDataForm = new FXMLLoader(JavaFxFrame.class.getResource("inputDataForm.fxml")).load();
-        StackPane inputDataFormLayout = new StackPane();
-        inputDataFormLayout.getChildren().add(inputDataForm);
-        inputDataScene = new Scene(inputDataFormLayout, 450, 200);
-
         mainStage.setTitle("Chat");
-        mainStage.setScene(inputDataScene);
-        mainStage.show();
 
-        mainChatSpace = new FXMLLoader(JavaFxFrame.class.getResource("mainSpace.fxml")).load();
+        connectForm = new FXMLLoader(JavaFxFrame.class.getResource("inputDataForm.fxml")).load();
+        StackPane inputDataFormLayout = new StackPane();
+        inputDataFormLayout.getChildren().add(connectForm);
+        connectFormScene = new Scene(inputDataFormLayout, 450, 200);
+
+        mainChat = new FXMLLoader(JavaFxFrame.class.getResource("mainChat.fxml")).load();
         StackPane mainSceneLayout = new StackPane();
-        mainSceneLayout.getChildren().add(mainChatSpace);
-        mainScene = new Scene(mainSceneLayout, 600, 400);
+        mainSceneLayout.getChildren().add(mainChat);
+        chatScene = new Scene(mainSceneLayout, 600, 400);
 
         stage.setOnCloseRequest((windowEvent) -> {
             clientView.closeApp();
             mainStage.close();
         });
+
+        clientView.initialTickGenerator();
     }
 
     public static void main(String[] args) {

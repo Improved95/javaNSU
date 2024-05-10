@@ -1,5 +1,7 @@
 package org.lab5.client.model;
 
+import org.lab5.client.view.ViewStage;
+
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,8 @@ public class ClientModel {
 
     private Socket clientSocket;
     private boolean connectToServer = false;
+
+    private ViewStage viewStage;
 
     private List<MessageType> messagesList = new ArrayList<>();
 
@@ -56,5 +60,13 @@ public class ClientModel {
 
     public List<MessageType> getMessagesList() {
         return messagesList;
+    }
+
+    public ViewStage getViewStage() {
+        return viewStage;
+    }
+
+    public void setViewStage(ViewStage viewStage) {
+        this.viewStage = viewStage;
     }
 }
