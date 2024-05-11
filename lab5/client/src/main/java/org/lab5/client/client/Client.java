@@ -25,6 +25,8 @@ public class Client {
         clientController.setMainWorkflow(this);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
+
+
     }
 
     public synchronized void wakeUp() {

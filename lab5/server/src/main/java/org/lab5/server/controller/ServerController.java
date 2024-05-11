@@ -4,10 +4,7 @@ import org.lab5.server.model.ServerModel;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -42,11 +39,10 @@ public class ServerController {
                 }
 
                 if (selectionKey.isReadable()) {
-
+                    readSocket(selectionKey);
                 }
 
                 selectionKeysIterator.remove();
-                System.out.println("here");
             }
         }
     }
@@ -55,5 +51,9 @@ public class ServerController {
         SocketChannel clientSocket = serverSocket.accept();
         clientSocket.configureBlocking(false);
         clientSocket.register(selector, SelectionKey.OP_READ);
+    }
+
+    private void readSocket(SelectionKey key) throws IOException {
+        SocketChannel client = (SocketChannel) key.channel();
     }
 }
