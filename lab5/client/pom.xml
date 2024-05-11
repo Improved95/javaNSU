@@ -10,45 +10,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.10.0</junit.version>  </properties>
-
-  <!--<dependencies>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.controls.jar</systemPath>
-      <version>22.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.controlsfx</groupId>
-      <artifactId>controlsfx</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.base.jar</systemPath>
-      <version>11.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.fxml.jar</systemPath>
-      <version>17.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-swing</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.swing.jar</systemPath>
-      <version>23-ea+3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-graphics</artifactId>
-      <scope>system</scope>
-      <systemPath>/Users/improvedmac/Documents/improved/coding/java/packages/javafx_package/lib/javafx.graphics.jar</systemPath>
-      <version>11</version>
-    </dependency>
-  </dependencies>-->
+    <junit.version>5.10.0</junit.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -56,25 +19,21 @@
       <artifactId>javafx-controls</artifactId>
       <version>17.0.6</version>
     </dependency>
-
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>17.0.6</version>
     </dependency>
-
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
       <version>17.0.6</version>
     </dependency>
-
     <dependency>
       <groupId>org.controlsfx</groupId>
       <artifactId>controlsfx</artifactId>
       <version>11.1.2</version>
     </dependency>
-
     <dependency>
       <groupId>com.dlsc.formsfx</groupId>
       <artifactId>formsfx-core</artifactId>
@@ -86,7 +45,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>net.synedra</groupId>
       <artifactId>validatorfx</artifactId>
@@ -98,7 +56,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>com.github.almasb</groupId>
       <artifactId>fxgl</artifactId>
@@ -123,7 +80,6 @@
           <target>17</target>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -144,29 +100,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <!--<plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>javafx-res-copy</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${basedir}/target/classes/org/lab5/client/view/res</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/resources/clientResources/javaFxResources</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>-->
-
     </plugins>
   </build>
 </project>
