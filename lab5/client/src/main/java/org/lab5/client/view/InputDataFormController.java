@@ -22,7 +22,5 @@ public class InputDataFormController {
         FormDataContext formDataContext = new FormDataContext(ipTextField.getText(),
                 socketTextField.getText(), nicknameTextField.getText());
         clientView.clickOnContinueFromStartDataForm(formDataContext);
-
-//        JavaFxFrame.switchToMainScene();
     }
 }
