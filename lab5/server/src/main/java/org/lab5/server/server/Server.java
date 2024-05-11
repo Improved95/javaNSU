@@ -4,6 +4,7 @@ import org.lab5.server.controller.ServerController;
 import org.lab5.server.model.ServerModel;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Server {
     private ServerModel serverModel;
@@ -13,14 +14,17 @@ public class Server {
         serverModel = new ServerModel();
         serverController = new ServerController();
 
-        serverModel.setSocket(65525);
+        try (InputStream inputStream = getClass().getResourceAsStream("config")) {
+            serverModel.setServerProperty(ConfigParser.parse(inputStream));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         serverController.setServerModel(serverModel);
 
         try {
             serverController.initialServer();
-            serverController.clientRegistration();
-            serverController.stopServer();
+            serverController.channelsHandler();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

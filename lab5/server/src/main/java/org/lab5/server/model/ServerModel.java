@@ -1,32 +1,19 @@
 package org.lab5.server.model;
 
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Properties;
 
 public class ServerModel {
-    private int socket;
-    private ServerSocket serverSocket;
-    private Map<Socket, ClientData> clientSocketSet = new HashMap();
+    private Properties serverProperty;
 
-    public int getSocket() {
-        return socket;
+    public int getServerPort() {
+        return Integer.parseInt(serverProperty.getProperty("port"));
     }
 
-    public void setSocket(int socket) {
-        this.socket = socket;
+    public Properties getServerProperty() {
+        return serverProperty;
     }
 
-    public ServerSocket getServerSocket() {
-        return serverSocket;
-    }
-
-    public void setServerSocket(ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
-    }
-
-    public Map<Socket, ClientData> getClientSocketSet() {
-        return clientSocketSet;
+    public void setServerProperty(Properties serverProperty) {
+        this.serverProperty = serverProperty;
     }
 }
