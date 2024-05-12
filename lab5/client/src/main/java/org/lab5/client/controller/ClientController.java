@@ -23,7 +23,6 @@ public class ClientController {
 
         try {
             SocketChannel clientSocketChannel = SocketChannel.open();
-            System.out.println(model.getServerIP() + " " + model.getServerSocket());
             clientSocketChannel.bind(new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
             clientSocketChannel.configureBlocking(false);
             model.setClientSocketChannel(clientSocketChannel);

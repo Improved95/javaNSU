@@ -42,7 +42,6 @@ public class Client {
             }
         }
 
-        System.out.println("here");
         clientController.connectToServer(null);
     }
 
