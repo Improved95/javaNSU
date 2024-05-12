@@ -4,9 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <artifactId>javaNSU</artifactId>
+    <groupId>org.nsu.oop</groupId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
   <groupId>org.lab5</groupId>
   <artifactId>lab5-test</artifactId>
-  <version>0</version>
+  <version>1.0.0</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,11 +24,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
-      <version>2.17.2</version>
-    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -49,19 +51,24 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>RELEASE</version>
+      <version>7.10.2</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.lab5</groupId>
-      <artifactId>lab5-server</artifactId>
-      <version>0</version>
+      <artifactId>lab5-client</artifactId>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.lab5</groupId>
-      <artifactId>lab5-client</artifactId>
-      <version>0</version>
+      <artifactId>lab5-server</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lab5</groupId>
+      <artifactId>lab5-connection</artifactId>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

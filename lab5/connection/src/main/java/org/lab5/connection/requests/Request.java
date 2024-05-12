@@ -1,4 +1,4 @@
-package org.lab5.client.requests;
+package org.lab5.connection.requests;
 
 import java.io.Serializable;
 

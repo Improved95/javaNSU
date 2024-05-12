@@ -1,6 +1,6 @@
 package org.lab5.client.controller;
 
-import org.lab5.client.requests.Request;
+import org.lab5.connection.requests.Request;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,7 +1,6 @@
-package org.lab5.client.requests;
+package org.lab5.connection.requests;
 
 public class Login extends Request {
-    public final String requestType = "login";
     public final String nickname;
     public final String messageType;
 

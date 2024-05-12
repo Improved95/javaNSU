@@ -3,7 +3,6 @@ package org.lab5.client.client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ClientView;
-import org.lab5.client.view.JavaFxFrame;
 import org.lab5.client.view.ViewStage;
 
 public class Client {
@@ -11,7 +10,11 @@ public class Client {
     private ClientView clientView;
     private ClientController clientController;
 
-    public ClientController getClientController() {
+    public final ClientModel getClientModel() {
+        return clientModel;
+    }
+
+    public final ClientController getClientController() {
         return clientController;
     }
 

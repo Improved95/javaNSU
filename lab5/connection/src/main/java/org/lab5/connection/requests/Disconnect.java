@@ -1,4 +1,4 @@
-package org.lab5.client.requests;
+package org.lab5.connection.requests;
 
 public class Disconnect extends Request {
     public Disconnect() {

@@ -9,8 +9,11 @@ import org.lab5.server.server.Server;
 public class ChatTest {
     @Test
     public void test1() {
-        Server server = new Server();
-        server.initial();
+        Thread serverThread = new Thread(() -> {
+            Server server = new Server();
+            server.initial();
+        });
+        serverThread.start();
 
         Client client = new Client();
         client.initial();
