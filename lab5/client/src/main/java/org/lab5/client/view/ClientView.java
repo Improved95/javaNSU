@@ -34,7 +34,6 @@ public class ClientView {
     }
 
     public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
-//        clientController.connectToServer(formDataContext);
         clientModel.setServerIP(formDataContext.IP);
         clientModel.setServerSocket(Integer.parseInt(formDataContext.socket));
         clientModel.setNickname(formDataContext.nickname);

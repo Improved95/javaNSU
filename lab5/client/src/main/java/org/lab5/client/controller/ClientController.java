@@ -1,7 +1,7 @@
 package org.lab5.client.controller;
 
-import org.lab5.client.client.Client;
 import org.lab5.client.model.ClientModel;
+import org.lab5.client.requests.Login;
 import org.lab5.client.view.FormDataContext;
 import org.lab5.client.view.ViewStage;
 
@@ -17,19 +17,15 @@ public class ClientController {
     }
 
     public void connectToServer(FormDataContext formDataContext) {
-//        model.setServerIP(formDataContext.IP);
-//        model.setServerSocket(Integer.parseInt(formDataContext.socket));
-//        model.setNickname(formDataContext.nickname);
-
         try {
-            SocketChannel clientSocketChannel = SocketChannel.open();
-            clientSocketChannel.bind(new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
+            SocketChannel clientSocketChannel = SocketChannel.open(new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
             clientSocketChannel.configureBlocking(false);
+
             model.setClientSocketChannel(clientSocketChannel);
-            model.setConnectToServer(true);
             model.setViewStage(ViewStage.CHAT);
 
-//            SendReceiveRequest.sendRequest(model.getClientSocket(), new Login("improve", "xml"));
+            System.out.println(model.getClientSocketChannel().isConnected());
+            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve", "xml"));
         } catch (IOException ex) {
             model.setConnectToServer(false);
             ex.printStackTrace();

@@ -1,6 +1,8 @@
 package org.lab5.server.controller;
 
-import org.lab5.connection.requests.Request;
+
+
+import org.lab5.server.requests.Request;
 
 import java.io.*;
 import java.nio.ByteBuffer;
