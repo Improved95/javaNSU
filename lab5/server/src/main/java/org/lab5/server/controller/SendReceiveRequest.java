@@ -1,7 +1,5 @@
 package org.lab5.server.controller;
 
-
-
 import org.lab5.server.requests.Request;
 
 import java.io.*;
@@ -32,8 +30,12 @@ public class SendReceiveRequest {
         buffer.flip();
         buffer.get(receiveBytes);
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
-            Request request = (Request) in.readObject();
-            System.out.println(request.requestType);
+            Object obj = in.readObject();
+            if (obj instanceof Request) {
+                Request request = (Request) obj;
+                System.out.println(request.requestType);
+            } else {
+            }
         }
     }
 }

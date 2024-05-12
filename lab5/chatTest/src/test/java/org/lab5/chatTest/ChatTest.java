@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.controller.SendReceiveRequest;
-import org.lab5.client.view.FormDataContext;
+import org.lab5.client.model.ClientModel;
 import org.lab5.client.requests.Login;
 import org.lab5.client.requests.Request;
 import org.lab5.server.server.Server;
@@ -22,8 +22,10 @@ public class ChatTest {
         client.initial();
 
         ClientController clientController = client.getClientController();
-        FormDataContext formDataContext = new FormDataContext("localhost", "65525", "improve");
-        clientController.connectToServer(formDataContext);
+        ClientModel clientModel = client.getClientModel();
+        clientModel.setServerIP("localhost");
+        clientModel.setServerSocket(65525);
+        clientController.connectToServer();
 
         Request request = new Login("improve", "xml");
         SendReceiveRequest.sendRequest(client.getClientModel().getClientSocketChannel(), request);

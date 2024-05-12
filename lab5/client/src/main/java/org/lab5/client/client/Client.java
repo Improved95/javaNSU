@@ -42,7 +42,7 @@ public class Client {
             }
         }
 
-        clientController.connectToServer(null);
+        clientController.connectToServer();
     }
 
     public synchronized void wakeUp() {

@@ -16,15 +16,15 @@ public class ClientController {
         this.model = model;
     }
 
-    public void connectToServer(FormDataContext formDataContext) {
+    public void connectToServer() {
         try {
-            SocketChannel clientSocketChannel = SocketChannel.open(new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
+            SocketChannel clientSocketChannel = SocketChannel.open(
+                    new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
             clientSocketChannel.configureBlocking(false);
 
             model.setClientSocketChannel(clientSocketChannel);
             model.setViewStage(ViewStage.CHAT);
 
-            System.out.println(model.getClientSocketChannel().isConnected());
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve", "xml"));
         } catch (IOException ex) {
             model.setConnectToServer(false);
