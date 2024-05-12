@@ -3,6 +3,7 @@ package org.lab5.client.client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ClientView;
+import org.lab5.client.view.JavaFxFrame;
 import org.lab5.client.view.ViewStage;
 
 public class Client {
@@ -30,7 +31,6 @@ public class Client {
 
         clientController.setModel(clientModel);
 
-//        new Thread(() -> JavaFxFrame.main(null)).start();
-
+        new Thread(() -> JavaFxFrame.main(null)).start();
     }
 }

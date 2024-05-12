@@ -3,6 +3,8 @@ package org.lab5.client.controller;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.FormDataContext;
 import org.lab5.client.view.ViewStage;
+import org.lab5.connection.requests.Login;
+
 import java.io.IOException;
 import java.net.*;
 

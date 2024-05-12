@@ -1,2 +1,3 @@
-module org.lab5.connection {
+module connection {
+    exports org.lab5.connection.requests;
 }
