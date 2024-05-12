@@ -25,8 +25,8 @@ public class Server {
         try {
             serverController.initialServer();
             serverController.channelsHandler();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException | ClassNotFoundException ex) {
+            new RuntimeException(ex);
         }
     }
 }

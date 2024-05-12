@@ -1,6 +1,7 @@
 package org.lab5.client.view;
 
 import javafx.application.Platform;
+import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
 
@@ -10,6 +11,7 @@ import java.util.TimerTask;
 public class ClientView {
     private ClientModel clientModel;
     private ClientController clientController;
+    private Client clientWorkflow;
 
     private Timer tickGenerator;
     private ViewStage viewStage = null;
@@ -27,8 +29,19 @@ public class ClientView {
         this.clientController = clientController;
     }
 
+    public void setClientWorkflow(Client clientWorkflow) {
+        this.clientWorkflow = clientWorkflow;
+    }
+
     public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
-        clientController.connectToServer(formDataContext);
+//        clientController.connectToServer(formDataContext);
+        System.out.println("clickOnContinueFromStartDataForm");
+        clientModel.setServerIP(formDataContext.IP);
+        clientModel.setServerSocket(Integer.parseInt(formDataContext.socket));
+        clientModel.setNickname(formDataContext.nickname);
+
+        clientModel.setConnectToServer(true);
+        clientWorkflow.wakeUp();
     }
 
     public void initialTickGenerator() {

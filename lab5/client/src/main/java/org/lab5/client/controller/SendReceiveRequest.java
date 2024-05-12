@@ -1,27 +1,37 @@
 package org.lab5.client.controller;
 
-import org.lab5.connection.requests.Request;
+import org.lab5.client.requests.Request;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
 public class SendReceiveRequest {
-    public static void sendRequest(Socket socket, Request request) {
-        System.out.println(request.requestType);
-        try (ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())) {
+    private static int bufferSize = 1024;
+    private static ByteBuffer buffer= ByteBuffer.allocate(bufferSize);
+
+    public static void sendRequest(SocketChannel socketChannel, Request request) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(bos);) {
             oos.writeObject(request);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            byte[] req = bos.toByteArray();
+            buffer = ByteBuffer.wrap(req);
+            while (buffer.hasRemaining()) {
+                socketChannel.write(buffer);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static void receiveRequest(Socket socket) {
-        try (ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
-           Request request = (Request) ois.readObject();
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+    public static void receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
+        int bytesRead = socketChannel.read(buffer);
+        byte[] receiveBytes = new byte[bytesRead];
+        buffer.flip();
+        buffer.get(receiveBytes);
+        try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
+            Request request = (Request) in.readObject();
+            System.out.println(request.requestType);
         }
     }
 }

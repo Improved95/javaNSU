@@ -1,4 +1,4 @@
-package org.lab5.connection.requests;
+package org.lab5.server.requests;
 
 public class Login extends Request {
     public final String nickname;

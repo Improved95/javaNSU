@@ -1,12 +1,13 @@
 package org.lab5.client.controller;
 
+import org.lab5.client.client.Client;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.FormDataContext;
 import org.lab5.client.view.ViewStage;
-import org.lab5.connection.requests.Login;
 
 import java.io.IOException;
 import java.net.*;
+import java.nio.channels.SocketChannel;
 
 public class ClientController {
     private ClientModel model;
@@ -16,18 +17,20 @@ public class ClientController {
     }
 
     public void connectToServer(FormDataContext formDataContext) {
-        model.setServerIP(formDataContext.IP);
-        model.setServerSocket(Integer.parseInt(formDataContext.socket));
-        model.setNickname(formDataContext.nickname);
+//        model.setServerIP(formDataContext.IP);
+//        model.setServerSocket(Integer.parseInt(formDataContext.socket));
+//        model.setNickname(formDataContext.nickname);
 
         try {
-            Socket clientSocket = new Socket(model.getServerIP(), model.getServerSocket());
-            model.setClientSocket(clientSocket);
+            SocketChannel clientSocketChannel = SocketChannel.open();
+            System.out.println(model.getServerIP() + " " + model.getServerSocket());
+            clientSocketChannel.bind(new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
+            clientSocketChannel.configureBlocking(false);
+            model.setClientSocketChannel(clientSocketChannel);
             model.setConnectToServer(true);
             model.setViewStage(ViewStage.CHAT);
 
-
-//            SendReceiveRequest.sendRequest(model.getClientSocket(), new Login("improve", "serialization"));
+//            SendReceiveRequest.sendRequest(model.getClientSocket(), new Login("improve", "xml"));
         } catch (IOException ex) {
             model.setConnectToServer(false);
             ex.printStackTrace();
@@ -36,8 +39,8 @@ public class ClientController {
 
     public void stopConnection() {
         try {
-            if (model.getClientSocket() != null) {
-                model.getClientSocket().close();
+            if (model.getClientSocketChannel() != null) {
+                model.getClientSocketChannel().close();
             }
         } catch (IOException ex) {
             ex.printStackTrace();

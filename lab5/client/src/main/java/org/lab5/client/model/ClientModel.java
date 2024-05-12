@@ -3,6 +3,7 @@ package org.lab5.client.model;
 import org.lab5.client.view.ViewStage;
 
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ClientModel {
     private int serverSocket;
     private String nickname;
 
-    private Socket clientSocket;
+    private SocketChannel clientSocket;
     private boolean connectToServer = false;
 
     private ViewStage viewStage;
@@ -42,11 +43,11 @@ public class ClientModel {
         this.serverSocket = serverSocket;
     }
 
-    public Socket getClientSocket() {
+    public SocketChannel getClientSocketChannel() {
         return clientSocket;
     }
 
-    public void setClientSocket(Socket clientSocket) {
+    public void setClientSocketChannel(SocketChannel clientSocket) {
         this.clientSocket = clientSocket;
     }
 

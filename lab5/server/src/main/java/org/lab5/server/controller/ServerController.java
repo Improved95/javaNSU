@@ -26,14 +26,14 @@ public class ServerController {
         serverSocket.register(selector, SelectionKey.OP_ACCEPT);
     }
 
-    public void channelsHandler() throws IOException {
+    public void channelsHandler() throws IOException, ClassNotFoundException {
         while (true) {
             selector.select();
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             Iterator<SelectionKey> selectionKeysIterator = selectionKeys.iterator();
 
             while (selectionKeysIterator.hasNext()) {
-                SelectionKey selectionKey = (SelectionKey) selectionKeysIterator.next();
+                SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isAcceptable()) {
                     System.out.println("isAcceptable");
@@ -42,7 +42,7 @@ public class ServerController {
 
                 if (selectionKey.isReadable()) {
                     System.out.println("isReadable");
-                    SendReceiveRequest.receiveRequest(selectionKey);
+                    SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
                 }
 
                 selectionKeysIterator.remove();

@@ -19,7 +19,7 @@ public class Client {
         return clientController;
     }
 
-    public void initial() {
+    public synchronized void initial() {
         clientModel = new ClientModel();
         clientView = new ClientView();
         clientController = new ClientController();
@@ -28,9 +28,25 @@ public class Client {
 
         clientView.setClientModel(clientModel);
         clientView.setClientController(clientController);
+        clientView.setClientWorkflow(this);
 
         clientController.setModel(clientModel);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
+
+        while (!clientModel.isConnectToServer()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        System.out.println("here");
+        clientController.connectToServer(null);
+    }
+
+    public synchronized void wakeUp() {
+        notifyAll();
     }
 }
