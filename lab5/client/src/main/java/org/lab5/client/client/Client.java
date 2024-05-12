@@ -11,7 +11,11 @@ public class Client {
     private ClientView clientView;
     private ClientController clientController;
 
-    public synchronized void initial() {
+    public ClientController getClientController() {
+        return clientController;
+    }
+
+    public void initial() {
         clientModel = new ClientModel();
         clientView = new ClientView();
         clientController = new ClientController();
@@ -22,14 +26,8 @@ public class Client {
         clientView.setClientController(clientController);
 
         clientController.setModel(clientModel);
-        clientController.setMainWorkflow(this);
 
-        new Thread(() -> JavaFxFrame.main(null)).start();
+//        new Thread(() -> JavaFxFrame.main(null)).start();
 
-
-    }
-
-    public synchronized void wakeUp() {
-        notifyAll();
     }
 }

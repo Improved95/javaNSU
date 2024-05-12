@@ -1,9 +1,11 @@
 package org.lab5.server.controller;
 
 import org.lab5.server.model.ServerModel;
+import org.lab5.server.requests.Request;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
@@ -30,16 +32,19 @@ public class ServerController {
         while (true) {
             selector.select();
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
-            Iterator selectionKeysIterator = selectionKeys.iterator();
+            Iterator<SelectionKey> selectionKeysIterator = selectionKeys.iterator();
 
             while (selectionKeysIterator.hasNext()) {
                 SelectionKey selectionKey = (SelectionKey) selectionKeysIterator.next();
+
                 if (selectionKey.isAcceptable()) {
+                    System.out.println("isAcceptable");
                     registeringNewClient(selector, serverSocket);
                 }
 
                 if (selectionKey.isReadable()) {
-                    readSocket(selectionKey);
+                    System.out.println("isReadable");
+                    SendReceiveRequest.receiveRequest(selectionKey);
                 }
 
                 selectionKeysIterator.remove();
@@ -51,9 +56,5 @@ public class ServerController {
         SocketChannel clientSocket = serverSocket.accept();
         clientSocket.configureBlocking(false);
         clientSocket.register(selector, SelectionKey.OP_READ);
-    }
-
-    private void readSocket(SelectionKey key) throws IOException {
-        SocketChannel client = (SocketChannel) key.channel();
     }
 }
