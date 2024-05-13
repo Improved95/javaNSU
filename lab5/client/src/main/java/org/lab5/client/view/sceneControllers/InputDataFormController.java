@@ -1,8 +1,10 @@
-package org.lab5.client.view;
+package org.lab5.client.view.sceneControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import org.lab5.client.view.ClientView;
+import org.lab5.client.view.FormDataContext;
 import org.lab5.communication.TransferProtocol;
 
 public class InputDataFormController {

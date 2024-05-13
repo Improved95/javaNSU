@@ -48,7 +48,7 @@ public class Client {
                     throw new RuntimeException(e);
                 }
             }
-        } while (clientController.connectToServer() == 0 ? false : true && !stopTryConnect);
+        } while ((clientController.connectToServer() == 0 ? false : true) && !stopTryConnect);
     }
 
     public synchronized void wakeUp() {

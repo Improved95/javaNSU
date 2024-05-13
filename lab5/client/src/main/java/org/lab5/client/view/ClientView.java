@@ -4,6 +4,9 @@ import javafx.application.Platform;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
+import org.lab5.client.view.sceneControllers.InputDataFormController;
+import org.lab5.client.view.sceneControllers.ListOfClientsController;
+import org.lab5.client.view.sceneControllers.MainChatController;
 import org.lab5.communication.TransferProtocol;
 
 import java.util.Timer;
@@ -20,6 +23,7 @@ public class ClientView {
     public ClientView() {
         InputDataFormController.setClientView(this);
         MainChatController.setClientView(this);
+        ListOfClientsController.setClientView(this);
         JavaFxFrame.setClientView(this);
     }
 
@@ -46,6 +50,14 @@ public class ClientView {
 
     public void clickOnSendButton(String message) {
         controller.sendMessage(message);
+    }
+
+    public void switchOnClientsListFromChat() {
+        JavaFxFrame.switchToClientsList();
+    }
+
+    public void switchOnChatFromClientsList() {
+        JavaFxFrame.returnOnChatFromClientsList();
     }
 
     public void setTransferProtocol(TransferProtocol transferProtocol) {

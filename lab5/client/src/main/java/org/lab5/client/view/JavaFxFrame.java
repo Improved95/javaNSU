@@ -48,7 +48,15 @@ public class JavaFxFrame extends Application {
         mainStage.show();
     }
 
+    public static void switchToClientsList() {
+        StackPane stackPane = (StackPane) mainStage.getScene().getRoot();
+        stackPane.getChildren().add(listOfClients);
+    }
 
+    public static void returnOnChatFromClientsList() {
+        StackPane stackPane = (StackPane) mainStage.getScene().getRoot();
+        stackPane.getChildren().remove(1);
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
