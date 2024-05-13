@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class SendReceiveRequest {
-    private static int bufferSize = 1024;
+    private static int bufferSize = 1024 * 2;
     private static ByteBuffer buffer= ByteBuffer.allocate(bufferSize);
 
     public static void sendRequest(SocketChannel socketChannel, Request request) {

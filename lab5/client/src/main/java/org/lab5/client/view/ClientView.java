@@ -1,13 +1,16 @@
 package org.lab5.client.view;
 
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.sceneControllers.InputDataFormController;
 import org.lab5.client.view.sceneControllers.ListOfClientsController;
 import org.lab5.client.view.sceneControllers.MainChatController;
+import org.lab5.communication.ClientData;
 import org.lab5.communication.TransferProtocol;
 
 import java.util.Timer;
@@ -54,9 +57,21 @@ public class ClientView {
     }
 
     public void switchOnClientsListFromChat() {
-
-
+        controller.getListOfClients();
         VBox vBoxListOfClients = ListOfClientsController.getVBoxListOfClients();
+
+        int i = 0;
+        for (ClientData clientData : model.getClientDataList()) {
+            Label label = new Label();
+            label.setPrefHeight(17.0);
+            label.setPrefWidth(595);
+            label.setFont(Font.font("Arial Bold", 15));
+            label.setText(i++ + ": Nickname: " + clientData.getNickname());
+            System.out.println(clientData.getNickname());
+//            vBoxListOfClients.getChildren().add(label);
+        }
+
+
         JavaFxFrame.switchToClientsList();
     }
 

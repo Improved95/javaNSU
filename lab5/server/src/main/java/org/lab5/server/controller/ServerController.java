@@ -2,6 +2,7 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
+import org.lab5.communication.requests.ClientsList;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.ClientData;
 import org.lab5.server.model.ServerModel;
@@ -10,8 +11,7 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class ServerController {
     private ServerModel model;

@@ -1,6 +1,8 @@
 package org.lab5.communication;
 
-public class ClientData {
+import java.io.Serializable;
+
+public class ClientData implements Serializable {
     private String nickname;
     public final TransferProtocol transferProtocol;
 

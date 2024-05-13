@@ -1,6 +1,7 @@
 package org.lab5.client.model;
 
 import org.lab5.client.view.ViewStage;
+import org.lab5.communication.ClientData;
 import org.lab5.communication.MessageData;
 import org.lab5.communication.TransferProtocol;
 
@@ -16,6 +17,7 @@ public class ClientModel {
     private SocketChannel clientSocket;
     private boolean tryToConnectToServer = false;
 
+    private List<ClientData> clientDataList = new ArrayList<>();
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
@@ -60,6 +62,14 @@ public class ClientModel {
 
     public void setTryToConnectToServer(boolean connectToServer) {
         this.tryToConnectToServer = connectToServer;
+    }
+
+    public List<ClientData> getClientDataList() {
+        return clientDataList;
+    }
+
+    public void setClientDataList(List<ClientData> clientDataList) {
+        this.clientDataList = clientDataList;
     }
 
     public TransferProtocol getTransferProtocol() {
