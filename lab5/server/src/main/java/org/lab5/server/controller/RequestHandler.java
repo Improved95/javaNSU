@@ -1,4 +1,4 @@
-package org.lab5.server.server;
+package org.lab5.server.controller;
 
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
