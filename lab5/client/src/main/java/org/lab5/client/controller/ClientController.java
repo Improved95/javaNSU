@@ -6,6 +6,7 @@ import org.lab5.client.view.ViewStage;
 import org.lab5.communication.MessageType;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.Login;
+import org.lab5.communication.requests.Message;
 
 import java.io.IOException;
 import java.net.*;
@@ -16,6 +17,11 @@ public class ClientController {
 
     public void setModel(ClientModel model) {
         this.model = model;
+    }
+
+    public void sendMessage(String message) {
+        Message messageRequest = new Message(message);
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageRequest);
     }
 
     public void connectToServer() {

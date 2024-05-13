@@ -43,6 +43,10 @@ public class ClientView {
         clientWorkflow.wakeUp();
     }
 
+    public void clickOnSendButton(String message) {
+        clientController.sendMessage(message);
+    }
+
     public void initialTickGenerator() {
         Task myTask = new Task();
         tickGenerator = new Timer();

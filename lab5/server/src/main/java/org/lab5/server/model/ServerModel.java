@@ -1,12 +1,11 @@
 package org.lab5.server.model;
 
 import java.nio.channels.SocketChannel;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class ServerModel {
     private Properties serverProperty;
+    private List<MessageData> messageList = new ArrayList<>();
     private Map<SocketChannel, ClientData> clientTable = new HashMap<>();
 
     public int getServerPort() {
@@ -19,6 +18,10 @@ public class ServerModel {
 
     public void setServerProperty(Properties serverProperty) {
         this.serverProperty = serverProperty;
+    }
+
+    public List<MessageData> getMessageList() {
+        return messageList;
     }
 
     public Map<SocketChannel, ClientData> getClientTable() {

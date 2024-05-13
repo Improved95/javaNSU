@@ -17,6 +17,6 @@ public class MainChatController {
     }
 
     public void clickOnSendButton() {
-
+        clientView.clickOnSendButton(messageTextField.getText());
     }
 }
