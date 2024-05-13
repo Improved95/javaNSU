@@ -3,12 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="450.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.InputDataFormController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="450.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.InputDataFormController">
    <children>
       <Label layoutX="12.0" layoutY="14.0" prefHeight="22.0" prefWidth="426.0" text="Введите IP адрес сервера, сокет и никнейм " textOverrun="WORD_ELLIPSIS">
          <font>
@@ -47,6 +48,8 @@
          <font>
             <Font name="Arial Italic" size="12.0" />
          </font></TextField>
+      <CheckBox layoutX="339.0" layoutY="61.0" mnemonicParsing="false" selected="true" text="Serialization" />
+      <CheckBox layoutX="339.0" layoutY="106.0" mnemonicParsing="false" text="XML" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

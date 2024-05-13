@@ -1,4 +1,4 @@
-package org.lab5.server.model;
+package org.lab5.communication;
 
 public class MessageData {
     public final String nickname;

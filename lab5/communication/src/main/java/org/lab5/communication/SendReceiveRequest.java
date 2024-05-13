@@ -25,6 +25,7 @@ public class SendReceiveRequest {
     }
 
     public static Request receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
+        buffer.clear();
         int bytesRead = socketChannel.read(buffer);
         System.out.println("bytesRead: " + bytesRead);
         byte[] receiveBytes = new byte[bytesRead];

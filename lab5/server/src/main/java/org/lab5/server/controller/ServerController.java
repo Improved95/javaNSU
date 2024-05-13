@@ -44,6 +44,8 @@ public class ServerController {
                 }
 
                 if (selectionKey.isReadable()) {
+                    /* сделать проверку на то что открытый клиентский канал */
+
                     System.out.println("isReadable");
                     Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
                     RequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);

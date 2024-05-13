@@ -33,6 +33,8 @@ public class ClientController {
             model.setClientSocketChannel(clientSocketChannel);
             model.setViewStage(ViewStage.CHAT);
 
+
+
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(),
                     new Login("improve", MessageType.SERIALIZABLE));
         } catch (IOException ex) {
