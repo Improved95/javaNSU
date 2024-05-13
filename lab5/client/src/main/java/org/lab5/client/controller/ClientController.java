@@ -3,6 +3,7 @@ package org.lab5.client.controller;
 import org.lab5.client.model.ClientModel;
 
 import org.lab5.client.view.ViewStage;
+import org.lab5.communication.MessageType;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.Login;
 
@@ -20,13 +21,14 @@ public class ClientController {
     public void connectToServer() {
         try {
             SocketChannel clientSocketChannel = SocketChannel.open(
-                    new InetSocketAddress(model.getServerIP(), model.getServerSocket()));
+                    new InetSocketAddress(model.getServerIP(), model.getServerPort()));
             clientSocketChannel.configureBlocking(false);
 
             model.setClientSocketChannel(clientSocketChannel);
             model.setViewStage(ViewStage.CHAT);
 
-            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve", "xml"));
+            SendReceiveRequest.sendRequest(model.getClientSocketChannel(),
+                    new Login("improve", MessageType.SERIALIZABLE));
         } catch (IOException ex) {
             model.setConnectToServer(false);
             ex.printStackTrace();

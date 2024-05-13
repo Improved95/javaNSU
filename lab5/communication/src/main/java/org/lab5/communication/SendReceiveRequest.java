@@ -24,18 +24,14 @@ public class SendReceiveRequest {
         }
     }
 
-    public static void receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
+    public static Request receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
         int bytesRead = socketChannel.read(buffer);
+        System.out.println("bytesRead: " + bytesRead);
         byte[] receiveBytes = new byte[bytesRead];
         buffer.flip();
         buffer.get(receiveBytes);
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
-            Object obj = in.readObject();
-            if (obj instanceof Request) {
-                Request request = (Request) obj;
-                System.out.println(request.requestType);
-            } else {
-            }
+            return (Request) in.readObject();
         }
     }
 }

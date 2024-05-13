@@ -18,6 +18,7 @@ public class ClientView {
 
     public ClientView() {
         InputDataFormController.setClientView(this);
+        MainChatController.setClientView(this);
         JavaFxFrame.setClientView(this);
     }
 
@@ -35,7 +36,7 @@ public class ClientView {
 
     public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
         clientModel.setServerIP(formDataContext.IP);
-        clientModel.setServerSocket(Integer.parseInt(formDataContext.socket));
+        clientModel.setServerPort(Integer.parseInt(formDataContext.socket));
         clientModel.setNickname(formDataContext.nickname);
 
         clientModel.setConnectToServer(true);

@@ -1,17 +1,13 @@
 package org.lab5.server.model;
 
+import org.lab5.communication.MessageType;
+
 public class ClientData {
-    private String nickname;
+    public final String nickname;
+    public final MessageType messageType;
 
-    public ClientData(String nickname) {
+    public ClientData(String nickname, MessageType messageType) {
         this.nickname = nickname;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.messageType = messageType;
     }
 }

@@ -1,7 +1,9 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.requests.Request;
 import org.lab5.server.model.ServerModel;
+import org.lab5.server.server.RequestHandler;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -43,7 +45,8 @@ public class ServerController {
 
                 if (selectionKey.isReadable()) {
                     System.out.println("isReadable");
-                    SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    RequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
                 }
 
                 selectionKeysIterator.remove();

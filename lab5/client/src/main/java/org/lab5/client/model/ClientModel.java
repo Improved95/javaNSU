@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClientModel {
     private String serverIP;
-    private int serverSocket;
+    private int serverPort;
     private String nickname;
 
     private SocketChannel clientSocket;
@@ -35,12 +35,12 @@ public class ClientModel {
         this.serverIP = serverIP;
     }
 
-    public int getServerSocket() {
-        return serverSocket;
+    public int getServerPort() {
+        return serverPort;
     }
 
-    public void setServerSocket(int serverSocket) {
-        this.serverSocket = serverSocket;
+    public void setServerPort(int serverSocket) {
+        this.serverPort = serverSocket;
     }
 
     public SocketChannel getClientSocketChannel() {
