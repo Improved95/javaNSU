@@ -21,6 +21,7 @@ public class JavaFxFrame extends Application {
 
     private static Parent mainChat;
     private static Parent connectForm;
+    private static Parent listOfClients;
 
     private static ClientView clientView;
 
@@ -47,6 +48,8 @@ public class JavaFxFrame extends Application {
         mainStage.show();
     }
 
+
+
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
@@ -62,6 +65,8 @@ public class JavaFxFrame extends Application {
         StackPane mainSceneLayout = new StackPane();
         mainSceneLayout.getChildren().add(mainChat);
         chatScene = new Scene(mainSceneLayout, 600, 400);
+
+        listOfClients = new FXMLLoader(JavaFxFrame.class.getResource("listOfClients.fxml")).load();
 
         stage.setOnCloseRequest((windowEvent) -> {
             clientView.closeApp();

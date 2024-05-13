@@ -1,5 +1,6 @@
 package org.lab5.server.model;
 
+import org.lab5.communication.ClientData;
 import org.lab5.communication.MessageData;
 
 import java.nio.channels.SocketChannel;

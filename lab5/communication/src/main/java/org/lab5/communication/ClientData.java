@@ -1,6 +1,4 @@
-package org.lab5.server.model;
-
-import org.lab5.communication.TransferProtocol;
+package org.lab5.communication;
 
 public class ClientData {
     private String nickname;
