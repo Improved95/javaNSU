@@ -4,13 +4,14 @@ import javafx.application.Platform;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
+import org.lab5.communication.TransferProtocol;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ClientView {
-    private ClientModel clientModel;
-    private ClientController clientController;
+    private ClientModel model;
+    private ClientController controller;
     private Client clientWorkflow;
 
     private Timer tickGenerator;
@@ -22,12 +23,12 @@ public class ClientView {
         JavaFxFrame.setClientView(this);
     }
 
-    public void setClientModel(ClientModel clientModel) {
-        this.clientModel = clientModel;
+    public void setModel(ClientModel model) {
+        this.model = model;
     }
 
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
+    public void setController(ClientController controller) {
+        this.controller = controller;
     }
 
     public void setClientWorkflow(Client clientWorkflow) {
@@ -35,16 +36,20 @@ public class ClientView {
     }
 
     public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
-        clientModel.setServerIP(formDataContext.IP);
-        clientModel.setServerPort(Integer.parseInt(formDataContext.socket));
-        clientModel.setNickname(formDataContext.nickname);
+        model.setServerIP(formDataContext.IP);
+        model.setServerPort(Integer.parseInt(formDataContext.socket));
+        model.setNickname(formDataContext.nickname);
 
-        clientModel.setConnectToServer(true);
+        model.setConnectToServer(true);
         clientWorkflow.wakeUp();
     }
 
     public void clickOnSendButton(String message) {
-        clientController.sendMessage(message);
+        controller.sendMessage(message);
+    }
+
+    public void setTransferProtocol(TransferProtocol transferProtocol) {
+        model.setTransferProtocol(transferProtocol);
     }
 
     public void initialTickGenerator() {
@@ -57,7 +62,7 @@ public class ClientView {
         @Override
         public void run() {
             Platform.runLater(() -> {
-                ViewStage viewStageInModel = clientModel.getViewStage();
+                ViewStage viewStageInModel = model.getViewStage();
                 if (viewStage != viewStageInModel) {
                     switch (viewStageInModel) {
                         case CONNECT_FORM -> JavaFxFrame.switchToConnectFormScene();
@@ -71,6 +76,6 @@ public class ClientView {
 
     public void closeApp() {
         tickGenerator.cancel();
-        clientController.stopConnection();
+        controller.stopConnection();
     }
 }

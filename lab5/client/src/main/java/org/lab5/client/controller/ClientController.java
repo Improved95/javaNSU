@@ -3,7 +3,6 @@ package org.lab5.client.controller;
 import org.lab5.client.model.ClientModel;
 
 import org.lab5.client.view.ViewStage;
-import org.lab5.communication.MessageType;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
@@ -35,8 +34,7 @@ public class ClientController {
 
 
 
-            SendReceiveRequest.sendRequest(model.getClientSocketChannel(),
-                    new Login("improve", MessageType.SERIALIZABLE));
+            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve"));
         } catch (IOException ex) {
             model.setConnectToServer(false);
             ex.printStackTrace();

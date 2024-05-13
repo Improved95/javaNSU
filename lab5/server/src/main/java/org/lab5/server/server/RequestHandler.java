@@ -19,12 +19,11 @@ public class RequestHandler {
 
     private static void handleLogin(Request request, SocketChannel socketChannel, ServerModel model) {
         Login loginRequest = (Login) request;
-        ClientData clientData = new ClientData(loginRequest.nickname, loginRequest.messageType);
-        model.getClientTable().put(socketChannel, clientData);
+        model.getClientTable().get(socketChannel).setNickname(loginRequest.nickname);
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel serverModel) {
-        String clientNickname = serverModel.getClientTable().get(socketChannel).nickname;
+        String clientNickname = serverModel.getClientTable().get(socketChannel).getNickname();
         Message messageRequest = (Message) request;
         MessageData messageData = new MessageData(clientNickname, messageRequest.message);
         serverModel.getMessageList().add(messageData);

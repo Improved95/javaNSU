@@ -26,8 +26,8 @@ public class Client {
 
         clientModel.setViewStage(ViewStage.CONNECT_FORM);
 
-        clientView.setClientModel(clientModel);
-        clientView.setClientController(clientController);
+        clientView.setModel(clientModel);
+        clientView.setController(clientController);
         clientView.setClientWorkflow(this);
 
         clientController.setModel(clientModel);

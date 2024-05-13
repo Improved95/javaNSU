@@ -1,4 +1,4 @@
-package org.lab5.chatTest;
+package test;
 
 import org.junit.jupiter.api.Test;
 import org.lab5.client.client.Client;

@@ -1,8 +1,9 @@
 package org.lab5.client.model;
 
 import org.lab5.client.view.ViewStage;
+import org.lab5.communication.MessageData;
+import org.lab5.communication.TransferProtocol;
 
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,11 @@ public class ClientModel {
     private SocketChannel clientSocket;
     private boolean connectToServer = false;
 
+    private TransferProtocol transferProtocol;
+
     private ViewStage viewStage;
 
-    private List<MessageType> messagesList = new ArrayList<>();
+    private List<MessageData> messagesList = new ArrayList<>();
 
     public String getNickname() {
         return nickname;
@@ -59,7 +62,15 @@ public class ClientModel {
         this.connectToServer = connectToServer;
     }
 
-    public List<MessageType> getMessagesList() {
+    public TransferProtocol getTransferProtocol() {
+        return transferProtocol;
+    }
+
+    public void setTransferProtocol(TransferProtocol transferProtocol) {
+        this.transferProtocol = transferProtocol;
+    }
+
+    public List<MessageData> getMessagesList() {
         return messagesList;
     }
 

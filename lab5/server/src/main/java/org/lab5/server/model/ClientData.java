@@ -1,13 +1,20 @@
 package org.lab5.server.model;
 
-import org.lab5.communication.MessageType;
+import org.lab5.communication.TransferProtocol;
 
 public class ClientData {
-    public final String nickname;
-    public final MessageType messageType;
+    private String nickname;
+    public final TransferProtocol transferProtocol;
 
-    public ClientData(String nickname, MessageType messageType) {
+    public ClientData(TransferProtocol transferProtocol) {
+        this.transferProtocol = transferProtocol;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
         this.nickname = nickname;
-        this.messageType = messageType;
     }
 }
