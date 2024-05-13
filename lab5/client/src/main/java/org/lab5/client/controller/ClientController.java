@@ -5,6 +5,7 @@ import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ViewStage;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
+import org.lab5.communication.requests.ClientsListRequest;
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
 
@@ -23,6 +24,11 @@ public class ClientController {
     public void sendMessage(String message) {
         Message messageRequest = new Message(message);
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageRequest);
+    }
+
+    public void getListOfClients() {
+        ClientsListRequest clientsListRequest = new ClientsListRequest();
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
     }
 
     public int connectToServer() {

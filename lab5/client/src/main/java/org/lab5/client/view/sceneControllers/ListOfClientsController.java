@@ -8,14 +8,14 @@ public class ListOfClientsController {
     private static ClientView clientView;
 
     @FXML
-    private VBox vBoxListOfClients;
+    private static VBox vBoxListOfClients;
 
     public static void setClientView(ClientView clientView) {
         ListOfClientsController.clientView = clientView;
     }
 
-    public VBox getVbox() {
-        return this.vBoxListOfClients;
+    public static VBox getVBoxListOfClients() {
+        return vBoxListOfClients;
     }
 
     @FXML

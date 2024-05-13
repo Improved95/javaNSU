@@ -2,7 +2,7 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
 import org.lab5.communication.SendReceiveRequest;
-import org.lab5.communication.requests.ListOfClients;
+import org.lab5.communication.requests.ClientsList;
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
 import org.lab5.communication.requests.Request;
@@ -37,7 +37,7 @@ public class RequestHandler {
     private static void handleListParticipantsRequest(SocketChannel socketChannel, ServerModel model) {
         Map<SocketChannel, ClientData> clientTable = model.getClientTable();
         List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
-        ListOfClients listOfClientsRequest = new ListOfClients(clientDataList);
-        SendReceiveRequest.sendRequest(socketChannel, listOfClientsRequest);
+        ClientsList clientsListRequest = new ClientsList(clientDataList);
+        SendReceiveRequest.sendRequest(socketChannel, clientsListRequest);
     }
 }

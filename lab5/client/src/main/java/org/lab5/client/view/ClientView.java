@@ -1,6 +1,7 @@
 package org.lab5.client.view;
 
 import javafx.application.Platform;
+import javafx.scene.layout.VBox;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
@@ -53,6 +54,9 @@ public class ClientView {
     }
 
     public void switchOnClientsListFromChat() {
+
+
+        VBox vBoxListOfClients = ListOfClientsController.getVBoxListOfClients();
         JavaFxFrame.switchToClientsList();
     }
 
