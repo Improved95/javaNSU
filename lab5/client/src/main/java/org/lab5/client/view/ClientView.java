@@ -40,7 +40,7 @@ public class ClientView {
         model.setServerPort(Integer.parseInt(formDataContext.socket));
         model.setNickname(formDataContext.nickname);
 
-        model.setConnectToServer(true);
+        model.setTryToConnectToServer(true);
         clientWorkflow.wakeUp();
     }
 
@@ -75,6 +75,8 @@ public class ClientView {
     }
 
     public void closeApp() {
+        clientWorkflow.setStopTryConnect(true);
+        clientWorkflow.wakeUp();
         tickGenerator.cancel();
         controller.stopConnection();
     }

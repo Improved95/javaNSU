@@ -11,12 +11,18 @@ public class Client {
     private ClientView clientView;
     private ClientController clientController;
 
+    private boolean stopTryConnect = false;
+
     public final ClientModel getClientModel() {
         return clientModel;
     }
 
     public final ClientController getClientController() {
         return clientController;
+    }
+
+    public void setStopTryConnect(boolean stopTryConnect) {
+        this.stopTryConnect = stopTryConnect;
     }
 
     public synchronized void initial() {
@@ -34,15 +40,15 @@ public class Client {
 
         new Thread(() -> JavaFxFrame.main(null)).start();
 
-        while (!clientModel.isConnectToServer()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        do {
+            while (!clientModel.isTryToConnectToServer() && !stopTryConnect) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        }
-
-        clientController.connectToServer();
+        } while (clientController.connectToServer() == 0 ? false : true && !stopTryConnect);
     }
 
     public synchronized void wakeUp() {

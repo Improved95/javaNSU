@@ -23,7 +23,7 @@ public class ClientController {
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageRequest);
     }
 
-    public void connectToServer() {
+    public int connectToServer() {
         try {
             SocketChannel clientSocketChannel = SocketChannel.open(
                     new InetSocketAddress(model.getServerIP(), model.getServerPort()));
@@ -32,12 +32,13 @@ public class ClientController {
             model.setClientSocketChannel(clientSocketChannel);
             model.setViewStage(ViewStage.CHAT);
 
-
-
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve"));
+
+            return 0;
         } catch (IOException ex) {
-            model.setConnectToServer(false);
+            model.setTryToConnectToServer(false);
             ex.printStackTrace();
+            return 1;
         }
     }
 

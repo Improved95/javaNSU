@@ -14,7 +14,7 @@ public class ClientModel {
     private String nickname;
 
     private SocketChannel clientSocket;
-    private boolean connectToServer = false;
+    private boolean tryToConnectToServer = false;
 
     private TransferProtocol transferProtocol;
 
@@ -54,12 +54,12 @@ public class ClientModel {
         this.clientSocket = clientSocket;
     }
 
-    public boolean isConnectToServer() {
-        return connectToServer;
+    public boolean isTryToConnectToServer() {
+        return tryToConnectToServer;
     }
 
-    public void setConnectToServer(boolean connectToServer) {
-        this.connectToServer = connectToServer;
+    public void setTryToConnectToServer(boolean connectToServer) {
+        this.tryToConnectToServer = connectToServer;
     }
 
     public TransferProtocol getTransferProtocol() {
