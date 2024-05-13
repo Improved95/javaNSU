@@ -41,16 +41,16 @@ public class ServerController {
                 SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isAcceptable()) {
-                    System.out.println("isAcceptable");
                     registeringNewClient(selector, serverSocket);
                 }
 
                 if (selectionKey.isReadable()) {
-                    /* сделать проверку на то что открытый клиентский канал */
-
-                    System.out.println("isReadable");
                     Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
-                    RequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
+                    if (request == null) {
+                        deleteClient((SocketChannel) selectionKey.channel());
+                    } else {
+                        RequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
+                    }
                 }
 
                 selectionKeysIterator.remove();
@@ -73,5 +73,11 @@ public class ServerController {
             clientData = new ClientData(TransferProtocol.XML);
         }
         model.getClientTable().put(clientSocketChannel, clientData);
+    }
+
+    private void deleteClient(SocketChannel socketChannel) throws IOException {
+        System.out.println("deleteClient");
+        model.getClientTable().remove(socketChannel);
+        socketChannel.close();
     }
 }

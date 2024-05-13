@@ -3,7 +3,6 @@ package org.lab5.server.controller;
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
 import org.lab5.communication.requests.Request;
-import org.lab5.server.model.ClientData;
 import org.lab5.communication.MessageData;
 import org.lab5.server.model.ServerModel;
 
