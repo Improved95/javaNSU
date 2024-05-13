@@ -3,10 +3,10 @@ package org.lab5.chatTest;
 import org.junit.jupiter.api.Test;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
-import org.lab5.client.controller.SendReceiveRequest;
 import org.lab5.client.model.ClientModel;
-import org.lab5.client.requests.Login;
-import org.lab5.client.requests.Request;
+import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.requests.Login;
+import org.lab5.communication.requests.Request;
 import org.lab5.server.server.Server;
 
 public class ChatTest {

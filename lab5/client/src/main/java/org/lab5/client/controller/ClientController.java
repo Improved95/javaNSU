@@ -1,9 +1,10 @@
 package org.lab5.client.controller;
 
 import org.lab5.client.model.ClientModel;
-import org.lab5.client.requests.Login;
-import org.lab5.client.view.FormDataContext;
+
 import org.lab5.client.view.ViewStage;
+import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.requests.Login;
 
 import java.io.IOException;
 import java.net.*;

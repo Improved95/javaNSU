@@ -76,11 +76,11 @@
       </exclusions>
     </dependency>
 
-    <!--<dependency>
+    <dependency>
       <groupId>org.lab5</groupId>
-      <artifactId>lab5-connection</artifactId>
+      <artifactId>lab5-communication</artifactId>
       <version>1.0.0</version>
-    </dependency>-->
+    </dependency>
   </dependencies>
 
   <build>

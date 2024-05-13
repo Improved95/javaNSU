@@ -1,4 +1,4 @@
-package org.lab5.client.requests;
+package org.lab5.communication.requests;
 
 public class ListOfParticipants extends Request {
     public ListOfParticipants() {

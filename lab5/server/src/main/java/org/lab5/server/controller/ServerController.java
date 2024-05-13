@@ -1,5 +1,6 @@
 package org.lab5.server.controller;
 
+import org.lab5.communication.SendReceiveRequest;
 import org.lab5.server.model.ServerModel;
 
 import java.io.*;
