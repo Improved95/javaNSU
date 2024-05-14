@@ -60,7 +60,7 @@ public class ClientController {
             }
             model.getClientSocketChannel().write(byteBuffer);
 
-            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login("improve"));
+            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login(model.getNickname()));
             return 0;
         } catch (IOException ex) {
             model.setTryToConnectToServer(false);
