@@ -1,6 +1,7 @@
 package org.lab5.client.view;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -59,17 +60,18 @@ public class ClientView {
     public void switchOnClientsListFromChat() {
         controller.getListOfClients();
 
-        VBox vBoxListOfClients = ClientsListController.getVBoxListOfClients();
+        VBox vBoxListOfClients = JavaFxFrame.getClientsListController().getVBoxListOfClients();
+        vBoxListOfClients.getChildren().clear();
 
-        int i = 0;
+        int i = 1;
         for (ClientData clientData : model.getClientDataList()) {
             Label label = new Label();
             label.setPrefHeight(17.0);
             label.setPrefWidth(595);
+            label.setPadding(new Insets(0, 0, 10, 0));
             label.setFont(Font.font("Arial Bold", 15));
-            label.setText(i++ + ": Nickname: " + clientData.getNickname());
-            System.out.println(vBoxListOfClients);
-//            vBoxListOfClients.getChildren().add(label);
+            label.setText(i++ + ": " + clientData.getNickname() + ";");
+            vBoxListOfClients.getChildren().add(label);
         }
 
         JavaFxFrame.switchToClientsList();

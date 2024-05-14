@@ -33,7 +33,7 @@ public class ClientController {
         ClientsListRequest clientsListRequest = new ClientsListRequest();
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
         try {
-            sleep(2000);
+            sleep(1000);
             ClientsList clientsList = (ClientsList) SendReceiveRequest.receiveRequest(model.getClientSocketChannel());
             model.setClientDataList(clientsList.listOfClients);
         } catch (IOException | ClassNotFoundException ex) {

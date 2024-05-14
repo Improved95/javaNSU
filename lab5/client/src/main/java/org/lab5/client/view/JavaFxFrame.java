@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.MainChatController;
+import org.lab5.client.view.sceneControllers.SceneController;
 
 import java.awt.*;
 import java.io.IOException;
@@ -34,6 +35,18 @@ public class JavaFxFrame extends Application {
 
     public static void setClientView(ClientView clientView) {
         JavaFxFrame.clientView = clientView;
+    }
+
+    public static ConnectFormController getConnectFormController() {
+        return connectFormController;
+    }
+
+    public static MainChatController getMainChatController() {
+        return mainChatController;
+    }
+
+    public static ClientsListController getClientsListController() {
+        return clientsListController;
     }
 
     public static void switchToConnectFormScene() {
@@ -71,14 +84,9 @@ public class JavaFxFrame extends Application {
 
         mainStage.setTitle("Chat");
 
-        load();
-
-        mainChat = new FXMLLoader(JavaFxFrame.class.getResource("mainChat.fxml")).load();
-        StackPane mainSceneLayout = new StackPane();
-        mainSceneLayout.getChildren().add(mainChat);
-        chatScene = new Scene(mainSceneLayout, 600, 400);
-
-        listOfClients = new FXMLLoader(JavaFxFrame.class.getResource("listOfClients.fxml")).load();
+        initialConnectFormScene();
+        initialMainChatScene();
+        initialClientsListScene();
 
         stage.setOnCloseRequest((windowEvent) -> {
             clientView.closeApp();
@@ -88,14 +96,28 @@ public class JavaFxFrame extends Application {
         clientView.initialTickGenerator();
     }
 
-    private void initialConnectForm() throws IOException {
+    private void initialConnectFormScene() throws IOException {
         FXMLLoader connectFormLoader = new FXMLLoader(JavaFxFrame.class.getResource("connectForm.fxml"));
         connectForm = connectFormLoader.load();
         connectFormController = connectFormLoader.getController();
-
         StackPane inputDataFormLayout = new StackPane();
         inputDataFormLayout.getChildren().add(connectForm);
         connectFormScene = new Scene(inputDataFormLayout, 450, 200);
+    }
+
+    private void initialMainChatScene() throws IOException {
+        FXMLLoader connectFormLoader = new FXMLLoader(JavaFxFrame.class.getResource("mainChat.fxml"));
+        mainChat = connectFormLoader.load();
+        mainChatController = connectFormLoader.getController();
+        StackPane mainSceneLayout = new StackPane();
+        mainSceneLayout.getChildren().add(mainChat);
+        chatScene = new Scene(mainSceneLayout, 600, 400);
+    }
+
+    private void initialClientsListScene() throws IOException {
+        FXMLLoader connectFormLoader = new FXMLLoader(JavaFxFrame.class.getResource("listOfClients.fxml"));
+        listOfClients = connectFormLoader.load();
+        clientsListController = connectFormLoader.getController();
     }
 
     public static void main(String[] args) {

@@ -14,15 +14,13 @@ public class ClientsListController implements SceneController {
 
     @FXML
     private VBox vBoxListOfClients;
-    @FXML
-    private Button closeButton;
 
     public static void setClientView(ClientView clientView) {
         ClientsListController.clientView = clientView;
     }
 
-    public static VBox getVBoxListOfClients() {
-        return null;
+    public VBox getVBoxListOfClients() {
+        return vBoxListOfClients;
     }
 
     @FXML
