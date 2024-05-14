@@ -2,7 +2,6 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
-import org.lab5.communication.requests.ClientsList;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.ClientData;
 import org.lab5.server.model.ServerModel;
@@ -49,7 +48,7 @@ public class ServerController {
                     if (request == null) {
                         deleteClient((SocketChannel) selectionKey.channel());
                     } else {
-                        RequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
+                        ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
                     }
                 }
 

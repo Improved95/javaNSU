@@ -5,10 +5,7 @@ import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ViewStage;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
-import org.lab5.communication.requests.ClientsList;
-import org.lab5.communication.requests.ClientsListRequest;
-import org.lab5.communication.requests.Login;
-import org.lab5.communication.requests.Message;
+import org.lab5.communication.requests.*;
 
 import java.io.IOException;
 import java.net.*;
@@ -40,8 +37,8 @@ public class ClientController {
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
         try {
             sleep(1000);
-            ClientsList clientsList = (ClientsList) SendReceiveRequest.receiveRequest(model.getClientSocketChannel());
-            model.setClientDataList(clientsList.listOfClients);
+            ClientsListReceive clientsListReceive = (ClientsListReceive) SendReceiveRequest.receiveRequest(model.getClientSocketChannel());
+            model.setClientDataList(clientsListReceive.listOfClients);
         } catch (IOException | ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         } catch (InterruptedException e) {
@@ -49,14 +46,21 @@ public class ClientController {
         }
     }
 
-    public void channelsHandler() throws IOException {
+    public void channelsHandler() throws IOException, ClassNotFoundException {
         while (true) {
             selector.select();
             Set<SelectionKey> selectionKeySet = selector.keys();
 
             Iterator<SelectionKey> selectionKeyIterator = selectionKeySet.iterator();
             while (selectionKeyIterator.hasNext()) {
+                SelectionKey selectionKey = selectionKeyIterator.next();
 
+                if (selectionKey.isReadable()) {
+                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    ClientRequestHandler.handle(request, model);
+                }
+
+                selectionKeyIterator.remove();
             }
         }
     }

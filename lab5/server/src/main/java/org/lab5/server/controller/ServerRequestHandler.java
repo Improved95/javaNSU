@@ -2,7 +2,7 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
 import org.lab5.communication.SendReceiveRequest;
-import org.lab5.communication.requests.ClientsList;
+import org.lab5.communication.requests.ClientsListReceive;
 import org.lab5.communication.requests.Login;
 import org.lab5.communication.requests.Message;
 import org.lab5.communication.requests.Request;
@@ -13,12 +13,12 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-public class RequestHandler {
+public class ServerRequestHandler {
     public static void handle(Request request, SocketChannel socketChannel, ServerModel model) {
         switch (request.requestType) {
             case LOGIN -> handleLogin(request, socketChannel, model);
             case MESSAGE -> handleMessage(request, socketChannel, model);
-            case LIST_OF_CLIENTS_REQUEST -> handleListParticipantsRequest(socketChannel, model);
+            case CLIENTS_LIST_REQUEST -> handleListParticipantsRequest(socketChannel, model);
         }
     }
 
@@ -37,7 +37,7 @@ public class RequestHandler {
     private static void handleListParticipantsRequest(SocketChannel socketChannel, ServerModel model) {
         Map<SocketChannel, ClientData> clientTable = model.getClientTable();
         List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
-        ClientsList clientsListRequest = new ClientsList(clientDataList);
-        SendReceiveRequest.sendRequest(socketChannel, clientsListRequest);
+        ClientsListReceive clientsListReceiveRequest = new ClientsListReceive(clientDataList);
+        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveRequest);
     }
 }
