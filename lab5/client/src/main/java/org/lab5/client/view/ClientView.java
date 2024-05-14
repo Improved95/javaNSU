@@ -107,7 +107,8 @@ public class ClientView {
                     }
                     viewStage = viewStageInModel;
 
-                    if (model.getClientListStatus() == ClientListStatus.EXIST) {
+                    System.out.println(model.getClientListStatus());
+                    if (model.getClientListStatus().equals(ClientListStatus.EXIST)) {
                         showClientsList();
                     }
                 }
