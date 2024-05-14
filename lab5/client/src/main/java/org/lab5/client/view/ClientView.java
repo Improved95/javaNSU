@@ -9,6 +9,7 @@ import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
+import org.lab5.client.model.MessagesListStatus;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.MainChatController;
@@ -80,10 +81,10 @@ public class ClientView {
         }
 
         JavaFxFrame.switchToClientsList();
-        model.setClientListStatus(ClientListStatus.NO_REQUEST);
+        model.setClientListStatus(ClientListStatus.NOTHING);
     }
 
-    public void showMessageList() {
+    public void showMessagesList() {
         VBox vBoxMessagesList = JavaFxFrame.getMainChatController().getVBoxMessagesList();
         vBoxMessagesList.getChildren().clear();
 
@@ -100,6 +101,8 @@ public class ClientView {
 
             vBoxMessagesList.getChildren().add(label);
         }
+
+        model.setMessagesListStatus(MessagesListStatus.NOTHING);
     }
 
     public void addMessage() {
@@ -118,6 +121,8 @@ public class ClientView {
         label.setText(message);
 
         vBoxMessagesList.getChildren().add(label);
+        
+        model.setMessagesListStatus(MessagesListStatus.NOTHING);
     }
 
     public void switchOnChatFromClientsList() {
@@ -146,8 +151,13 @@ public class ClientView {
                     }
                     viewStage = viewStageInModel;
                 }
-                if (model.getClientListStatus().equals(ClientListStatus.EXIST)) {
+                if (model.getClientListStatus() == ClientListStatus.EXIST) {
                     showClientsList();
+                }
+                if (model.getMessagesListStatus() == MessagesListStatus.UPDATE_FULL_LIST) {
+                    showMessagesList();
+                } else if (model.getMessagesListStatus() == MessagesListStatus.ADD_MESSAGE) {
+                    addMessage();
                 }
             });
         }

@@ -1,7 +1,7 @@
 package org.lab5.communication.requests;
 
-public class Disconnect extends Request {
-    public Disconnect() {
+public class DisconnectReq extends Request {
+    public DisconnectReq() {
         super(RequestType.DISCONNECT);
     }
 }

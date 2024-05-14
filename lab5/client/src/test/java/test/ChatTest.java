@@ -5,7 +5,7 @@ import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
 import org.lab5.communication.SendReceiveRequest;
-import org.lab5.communication.requests.Login;
+import org.lab5.communication.requests.LoginReq;
 import org.lab5.communication.requests.Request;
 import org.lab5.server.server.Server;
 
@@ -27,7 +27,7 @@ public class ChatTest {
         clientModel.setServerSocket(65525);
         clientController.connectToServer();
 
-        Request request = new Login("improve", "xml");
+        Request request = new LoginReq("improve", "xml");
         SendReceiveRequest.sendRequest(client.getClientModel().getClientSocketChannel(), request);
     }
 }

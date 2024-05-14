@@ -1,9 +1,9 @@
 package org.lab5.communication.requests;
 
-public class Message extends Request {
+public class MessageReq extends Request {
     public String message;
 
-    public Message(String message) {
+    public MessageReq(String message) {
         super(RequestType.MESSAGE);
         this.message = message;
     }

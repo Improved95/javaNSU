@@ -13,9 +13,9 @@
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="15.0" layoutY="14.0" prefHeight="337.0" prefWidth="376.0" vvalue="1.0">
          <content>
-            <VBox fx:id="vBoxMessagesList" prefHeight="23.0" prefWidth="374.0">
+            <VBox fx:id="vBoxMessagesList" maxWidth="1.7976931348623157E308" prefWidth="374.0">
                <children>
-                  <Label maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="305.0" text="Label">
+                  <Label disable="true" maxWidth="1.7976931348623157E308" prefWidth="364.0" text="аывфафвыаааааааааааааааааааааааааааааааааааааааааааааааа" textOverrun="CLIP" visible="false" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

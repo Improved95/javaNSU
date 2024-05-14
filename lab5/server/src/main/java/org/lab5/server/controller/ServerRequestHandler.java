@@ -2,9 +2,9 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
 import org.lab5.communication.SendReceiveRequest;
-import org.lab5.communication.requests.ClientsListReceive;
-import org.lab5.communication.requests.Login;
-import org.lab5.communication.requests.Message;
+import org.lab5.communication.requests.ClientsListReceiveReq;
+import org.lab5.communication.requests.LoginReq;
+import org.lab5.communication.requests.MessageReq;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.MessageData;
 import org.lab5.server.model.ServerModel;
@@ -23,21 +23,21 @@ public class ServerRequestHandler {
     }
 
     private static void handleLogin(Request request, SocketChannel socketChannel, ServerModel model) {
-        Login loginRequest = (Login) request;
-        model.getClientTable().get(socketChannel).setNickname(loginRequest.nickname);
+        LoginReq loginReqRequest = (LoginReq) request;
+        model.getClientTable().get(socketChannel).setNickname(loginReqRequest.nickname);
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel serverModel) {
         String clientNickname = serverModel.getClientTable().get(socketChannel).getNickname();
-        Message messageRequest = (Message) request;
-        MessageData messageData = new MessageData(clientNickname, messageRequest.message);
+        MessageReq messageReqRequest = (MessageReq) request;
+        MessageData messageData = new MessageData(clientNickname, messageReqRequest.message);
         serverModel.getMessageList().add(messageData);
     }
 
     private static void handleListParticipantsRequest(SocketChannel socketChannel, ServerModel model) {
         Map<SocketChannel, ClientData> clientTable = model.getClientTable();
         List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
-        ClientsListReceive clientsListReceiveRequest = new ClientsListReceive(clientDataList);
-        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveRequest);
+        ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataList);
+        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveReqRequest);
     }
 }

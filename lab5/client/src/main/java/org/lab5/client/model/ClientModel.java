@@ -23,7 +23,8 @@ public class ClientModel {
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
-    private ClientListStatus clientListStatus = ClientListStatus.NO_REQUEST;
+    private ClientListStatus clientListStatus = ClientListStatus.NOTHING;
+    private MessagesListStatus messagesListStatus = MessagesListStatus.NOTHING;
 
     public String getNickname() {
         return nickname;
@@ -107,5 +108,13 @@ public class ClientModel {
 
     public void setClientListStatus(ClientListStatus clientListStatus) {
         this.clientListStatus = clientListStatus;
+    }
+
+    public MessagesListStatus getMessagesListStatus() {
+        return messagesListStatus;
+    }
+
+    public void setMessagesListStatus(MessagesListStatus messagesListStatus) {
+        this.messagesListStatus = messagesListStatus;
     }
 }

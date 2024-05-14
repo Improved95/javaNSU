@@ -1,6 +1,8 @@
 package org.lab5.communication;
 
-public class MessageData {
+import java.io.Serializable;
+
+public class MessageData implements Serializable {
     public final String nickname;
     public final String message;
 

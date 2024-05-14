@@ -1,7 +1,7 @@
 package org.lab5.communication.requests;
 
-public class ClientsListRequest extends Request {
-    public ClientsListRequest() {
+public class ClientsListRequestReq extends Request {
+    public ClientsListRequestReq() {
         super(RequestType.CLIENTS_LIST_REQUEST);
     }
 }

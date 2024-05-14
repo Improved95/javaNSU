@@ -28,14 +28,14 @@ public class ClientController {
     }
 
     public void sendMessage(String message) {
-        Message messageRequest = new Message(message);
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageRequest);
+        MessageReq messageReqRequest = new MessageReq(message);
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageReqRequest);
     }
 
     public void getListOfClients() {
         model.setClientListStatus(ClientListStatus.REQUEST);
-        ClientsListRequest clientsListRequest = new ClientsListRequest();
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
+        ClientsListRequestReq clientsListRequestReq = new ClientsListRequestReq();
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequestReq);
     }
 
     public void channelsHandler() throws IOException, ClassNotFoundException {
@@ -77,7 +77,7 @@ public class ClientController {
             }
             model.getClientSocketChannel().write(byteBuffer);
 
-            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login(model.getNickname()));
+            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
             model.setConnectToServer(true);
         } catch (IOException ex) {
             model.setTryToConnectToServer(false);

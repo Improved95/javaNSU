@@ -3,7 +3,7 @@ package org.lab5.server.controller;
 import org.lab5.communication.MessageData;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
-import org.lab5.communication.requests.MessagesList;
+import org.lab5.communication.requests.MessagesListReq;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.ClientData;
 import org.lab5.server.model.ServerModel;
@@ -76,8 +76,8 @@ public class ServerController {
         model.getClientTable().put(clientSocketChannel, clientData);
 
         List<MessageData> messagesList = model.getMessageList();
-//        messagesList = new MessagesList(model.getMessageList().subList());
-//        SendReceiveRequest.sendRequest(clientSocketChannel, messagesList);
+        MessagesListReq messagesListReq = new MessagesListReq(messagesList);
+        SendReceiveRequest.sendRequest(clientSocketChannel, messagesListReq);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {

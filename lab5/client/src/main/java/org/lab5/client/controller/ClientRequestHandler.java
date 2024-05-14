@@ -2,8 +2,9 @@ package org.lab5.client.controller;
 
 import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
-import org.lab5.communication.requests.ClientsListReceive;
-import org.lab5.communication.requests.MessagesList;
+import org.lab5.client.model.MessagesListStatus;
+import org.lab5.communication.requests.ClientsListReceiveReq;
+import org.lab5.communication.requests.MessagesListReq;
 import org.lab5.communication.requests.Request;
 
 public class ClientRequestHandler {
@@ -15,13 +16,14 @@ public class ClientRequestHandler {
     }
 
     private static void handleClientsListReceive(Request request, ClientModel model) {
-        ClientsListReceive clientsListReceive = (ClientsListReceive) request;
-        model.setClientDataList(clientsListReceive.listOfClients);
+        ClientsListReceiveReq clientsListReceiveReq = (ClientsListReceiveReq) request;
+        model.setClientDataList(clientsListReceiveReq.listOfClients);
         model.setClientListStatus(ClientListStatus.EXIST);
     }
 
     private static void handleMessageList(Request request, ClientModel model) {
-        MessagesList messagesList = (MessagesList) request;
-        model.getMessagesList().addAll(messagesList.messagesList);
+        MessagesListReq messagesListReq = (MessagesListReq) request;
+        model.getMessagesList().addAll(messagesListReq.messagesList);
+        model.setMessagesListStatus(MessagesListStatus.UPDATE_FULL_LIST);
     }
 }
