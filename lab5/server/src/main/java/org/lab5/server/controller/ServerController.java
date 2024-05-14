@@ -75,8 +75,8 @@ public class ServerController {
         model.getClientTable().put(clientSocketChannel, clientData);
     }
 
-    private void deleteClient(SocketChannel socketChannel) throws IOException {
+    private void deleteClient(SocketChannel socketChannel) /*throws IOException*/ {
         model.getClientTable().remove(socketChannel);
-        socketChannel.close();
+//        socketChannel.close();
     }
 }

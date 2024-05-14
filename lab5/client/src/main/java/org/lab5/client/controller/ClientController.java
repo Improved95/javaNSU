@@ -15,6 +15,8 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
+import static java.lang.Thread.sleep;
+
 public class ClientController {
     private ClientModel model;
 
@@ -31,10 +33,13 @@ public class ClientController {
         ClientsListRequest clientsListRequest = new ClientsListRequest();
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
         try {
+            sleep(2000);
             ClientsList clientsList = (ClientsList) SendReceiveRequest.receiveRequest(model.getClientSocketChannel());
             model.setClientDataList(clientsList.listOfClients);
         } catch (IOException | ClassNotFoundException ex) {
             throw new RuntimeException(ex);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

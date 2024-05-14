@@ -7,7 +7,7 @@ import org.lab5.client.view.ClientView;
 import org.lab5.client.view.FormDataContext;
 import org.lab5.communication.TransferProtocol;
 
-public class InputDataFormController {
+public class ConnectFormController implements SceneController {
     public static ClientView clientView;
 
     @FXML
@@ -24,7 +24,7 @@ public class InputDataFormController {
     private CheckBox XMLCheckBox;
 
     public static void setClientView(ClientView clientView) {
-        InputDataFormController.clientView = clientView;
+        ConnectFormController.clientView = clientView;
     }
 
     @FXML

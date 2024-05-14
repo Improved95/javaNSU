@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.lab5.client.view.sceneControllers.ClientsListController;
+import org.lab5.client.view.sceneControllers.ConnectFormController;
+import org.lab5.client.view.sceneControllers.MainChatController;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,6 +25,10 @@ public class JavaFxFrame extends Application {
     private static Parent mainChat;
     private static Parent connectForm;
     private static Parent listOfClients;
+
+    private static ConnectFormController connectFormController;
+    private static MainChatController mainChatController;
+    private static ClientsListController clientsListController;
 
     private static ClientView clientView;
 
@@ -55,7 +62,7 @@ public class JavaFxFrame extends Application {
 
     public static void returnOnChatFromClientsList() {
         StackPane stackPane = (StackPane) mainStage.getScene().getRoot();
-        stackPane.getChildren().remove(1);
+        stackPane.getChildren().remove(listOfClients);
     }
 
     @Override
@@ -64,10 +71,7 @@ public class JavaFxFrame extends Application {
 
         mainStage.setTitle("Chat");
 
-        connectForm = new FXMLLoader(JavaFxFrame.class.getResource("inputDataForm.fxml")).load();
-        StackPane inputDataFormLayout = new StackPane();
-        inputDataFormLayout.getChildren().add(connectForm);
-        connectFormScene = new Scene(inputDataFormLayout, 450, 200);
+        load();
 
         mainChat = new FXMLLoader(JavaFxFrame.class.getResource("mainChat.fxml")).load();
         StackPane mainSceneLayout = new StackPane();
@@ -82,6 +86,16 @@ public class JavaFxFrame extends Application {
         });
 
         clientView.initialTickGenerator();
+    }
+
+    private void initialConnectForm() throws IOException {
+        FXMLLoader connectFormLoader = new FXMLLoader(JavaFxFrame.class.getResource("connectForm.fxml"));
+        connectForm = connectFormLoader.load();
+        connectFormController = connectFormLoader.getController();
+
+        StackPane inputDataFormLayout = new StackPane();
+        inputDataFormLayout.getChildren().add(connectForm);
+        connectFormScene = new Scene(inputDataFormLayout, 450, 200);
     }
 
     public static void main(String[] args) {

@@ -7,8 +7,8 @@ import javafx.scene.text.Font;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientModel;
-import org.lab5.client.view.sceneControllers.InputDataFormController;
-import org.lab5.client.view.sceneControllers.ListOfClientsController;
+import org.lab5.client.view.sceneControllers.ConnectFormController;
+import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.MainChatController;
 import org.lab5.communication.ClientData;
 import org.lab5.communication.TransferProtocol;
@@ -25,9 +25,9 @@ public class ClientView {
     private ViewStage viewStage = null;
 
     public ClientView() {
-        InputDataFormController.setClientView(this);
+        ConnectFormController.setClientView(this);
         MainChatController.setClientView(this);
-        ListOfClientsController.setClientView(this);
+        ClientsListController.setClientView(this);
         JavaFxFrame.setClientView(this);
     }
 
@@ -58,7 +58,8 @@ public class ClientView {
 
     public void switchOnClientsListFromChat() {
         controller.getListOfClients();
-        VBox vBoxListOfClients = ListOfClientsController.getVBoxListOfClients();
+
+        VBox vBoxListOfClients = ClientsListController.getVBoxListOfClients();
 
         int i = 0;
         for (ClientData clientData : model.getClientDataList()) {
@@ -67,10 +68,9 @@ public class ClientView {
             label.setPrefWidth(595);
             label.setFont(Font.font("Arial Bold", 15));
             label.setText(i++ + ": Nickname: " + clientData.getNickname());
-            System.out.println(clientData.getNickname());
+            System.out.println(vBoxListOfClients);
 //            vBoxListOfClients.getChildren().add(label);
         }
-
 
         JavaFxFrame.switchToClientsList();
     }

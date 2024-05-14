@@ -8,7 +8,6 @@ import java.nio.channels.SocketChannel;
 
 public class SendReceiveRequest {
     private static int bufferSize = 1024 * 2;
-    private static ByteBuffer buffer= ByteBuffer.allocate(bufferSize);
 
     public static void sendRequest(SocketChannel socketChannel, Request request) {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -25,18 +24,16 @@ public class SendReceiveRequest {
     }
 
     public static Request receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
-        buffer.clear();
-        int bytesRead = socketChannel.read(buffer);
-
-        if (bytesRead == - 1) {
-            return null;
-        }
+        ByteBuffer receiveBuffer= ByteBuffer.allocate(bufferSize);
+        int bytesRead = socketChannel.read(receiveBuffer);
+        if (bytesRead == - 1) { return null; }
 
         byte[] receiveBytes = new byte[bytesRead];
-        buffer.flip();
-        buffer.get(receiveBytes);
-        try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
-            return (Request) in.readObject();
+        receiveBuffer.flip();
+        receiveBuffer.get(receiveBytes);
+        System.out.println("bytes read " + bytesRead);
+        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
+            return (Request) ois.readObject();
         }
     }
 }

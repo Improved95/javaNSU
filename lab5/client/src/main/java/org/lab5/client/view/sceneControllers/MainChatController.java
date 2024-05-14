@@ -5,7 +5,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.lab5.client.view.ClientView;
 
-public class MainChatController {
+public class MainChatController implements SceneController {
     private static ClientView clientView;
 
     @FXML
