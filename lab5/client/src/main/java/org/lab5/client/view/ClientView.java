@@ -51,6 +51,7 @@ public class ClientView {
         model.setNickname(formDataContext.nickname);
 
         model.setTryToConnectToServer(true);
+        model.setConnectToServer(true);
         clientWorkflow.wakeUp();
     }
 
@@ -106,20 +107,20 @@ public class ClientView {
                         case CHAT -> JavaFxFrame.switchToMainScene();
                     }
                     viewStage = viewStageInModel;
-
-                    System.out.println(model.getClientListStatus());
-                    if (model.getClientListStatus().equals(ClientListStatus.EXIST)) {
-                        showClientsList();
-                    }
+                }
+                if (model.getClientListStatus().equals(ClientListStatus.EXIST)) {
+                    showClientsList();
                 }
             });
         }
     }
 
     public void closeApp() {
-        clientWorkflow.setStopTryConnect(true);
-        clientWorkflow.wakeUp();
-        tickGenerator.cancel();
+        model.setTryToConnectToServer(false);
         controller.stopConnection();
+        if (!model.isConnectToServer()) {
+            clientWorkflow.wakeUp();
+        }
+        tickGenerator.cancel();
     }
 }

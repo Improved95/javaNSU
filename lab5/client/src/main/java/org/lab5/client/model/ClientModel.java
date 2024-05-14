@@ -16,6 +16,7 @@ public class ClientModel {
 
     private SocketChannel clientSocket;
     private boolean tryToConnectToServer = false;
+    private boolean connectToServer = false;
 
     private List<ClientData> clientDataList = new ArrayList<>();
     private TransferProtocol transferProtocol;
@@ -63,6 +64,14 @@ public class ClientModel {
 
     public void setTryToConnectToServer(boolean connectToServer) {
         this.tryToConnectToServer = connectToServer;
+    }
+
+    public boolean isConnectToServer() {
+        return connectToServer;
+    }
+
+    public void setConnectToServer(boolean connectToServer) {
+        this.connectToServer = connectToServer;
     }
 
     public List<ClientData> getClientDataList() {

@@ -21,6 +21,7 @@ public class ClientController {
     private ClientModel model;
 
     private Selector selector;
+    private boolean continueChannelsHandler = true;
 
     public void setModel(ClientModel model) {
         this.model = model;
@@ -38,7 +39,7 @@ public class ClientController {
     }
 
     public void channelsHandler() throws IOException, ClassNotFoundException {
-        while (true) {
+        while (continueChannelsHandler) {
             selector.select();
             Set<SelectionKey> selectionKeySet = selector.selectedKeys();
             Iterator<SelectionKey> selectionKeysIterator = selectionKeySet.iterator();
@@ -56,7 +57,7 @@ public class ClientController {
         }
     }
 
-    public int connectToServer() {
+    public void connectToServer() {
         try {
             SocketChannel clientSocketChannel = SocketChannel.open(
                     new InetSocketAddress(model.getServerIP(), model.getServerPort()));
@@ -77,19 +78,21 @@ public class ClientController {
             model.getClientSocketChannel().write(byteBuffer);
 
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new Login(model.getNickname()));
-            return 0;
+            model.setConnectToServer(true);
         } catch (IOException ex) {
             model.setTryToConnectToServer(false);
+            model.setConnectToServer(false);
             ex.printStackTrace();
-            return 1;
         }
     }
 
     public void stopConnection() {
         try {
             if (model.getClientSocketChannel() != null) {
+                continueChannelsHandler = false;
                 model.getClientSocketChannel().close();
             }
+            continueChannelsHandler = false;
         } catch (IOException ex) {
             ex.printStackTrace();
         }

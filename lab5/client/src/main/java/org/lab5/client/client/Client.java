@@ -13,18 +13,12 @@ public class Client {
     private ClientView clientView;
     private ClientController clientController;
 
-    private boolean stopTryConnect = false;
-
     public final ClientModel getClientModel() {
         return clientModel;
     }
 
     public final ClientController getClientController() {
         return clientController;
-    }
-
-    public void setStopTryConnect(boolean stopTryConnect) {
-        this.stopTryConnect = stopTryConnect;
     }
 
     public synchronized void initial() {
@@ -43,19 +37,22 @@ public class Client {
         new Thread(() -> JavaFxFrame.main(null)).start();
 
         do {
-            while (!clientModel.isTryToConnectToServer() && !stopTryConnect) {
+            while (!clientModel.isTryToConnectToServer()) {
                 try {
                     wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
                 }
             }
-        } while ((clientController.connectToServer() == 0 ? false : true) && !stopTryConnect);
+            clientController.connectToServer();
+        } while (!clientModel.isConnectToServer() && !clientModel.isTryToConnectToServer());
 
-        try {
-            clientController.channelsHandler();
-        } catch (IOException | RuntimeException | ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
+        if (clientModel.isConnectToServer()) {
+            try {
+                clientController.channelsHandler();
+            } catch (IOException | RuntimeException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
