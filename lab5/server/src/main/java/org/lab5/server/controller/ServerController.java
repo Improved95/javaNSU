@@ -17,7 +17,7 @@ public class ServerController {
     private ServerModel model;
 
     private Selector selector;
-    private ServerSocketChannel serverSocket;
+    private ServerSocketChannel serverSocketChannel;
 
     public void setServerModel(ServerModel serverModel) {
         this.model = serverModel;
@@ -25,10 +25,10 @@ public class ServerController {
 
     public void initialServer() throws IOException {
         selector = Selector.open();
-        serverSocket = ServerSocketChannel.open();
-        serverSocket.bind(new InetSocketAddress("localhost", model.getServerPort()));
-        serverSocket.configureBlocking(false);
-        serverSocket.register(selector, SelectionKey.OP_ACCEPT);
+        serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.bind(new InetSocketAddress("localhost", model.getServerPort()));
+        serverSocketChannel.configureBlocking(false);
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
     }
 
     public void channelsHandler() throws IOException, ClassNotFoundException {
@@ -41,7 +41,7 @@ public class ServerController {
                 SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isAcceptable()) {
-                    registeringNewClient(selector, serverSocket);
+                    registeringNewClient(selector, serverSocketChannel);
                 }
 
                 if (selectionKey.isReadable()) {

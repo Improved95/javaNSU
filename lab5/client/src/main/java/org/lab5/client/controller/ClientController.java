@@ -13,12 +13,18 @@ import org.lab5.communication.requests.Message;
 import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
 public class ClientController {
     private ClientModel model;
+
+    private Selector selector;
 
     public void setModel(ClientModel model) {
         this.model = model;
@@ -43,11 +49,26 @@ public class ClientController {
         }
     }
 
+    public void channelsHandler() throws IOException {
+        while (true) {
+            selector.select();
+            Set<SelectionKey> selectionKeySet = selector.keys();
+
+            Iterator<SelectionKey> selectionKeyIterator = selectionKeySet.iterator();
+            while (selectionKeyIterator.hasNext()) {
+
+            }
+        }
+    }
+
     public int connectToServer() {
         try {
             SocketChannel clientSocketChannel = SocketChannel.open(
                     new InetSocketAddress(model.getServerIP(), model.getServerPort()));
             clientSocketChannel.configureBlocking(false);
+
+            selector = Selector.open();
+            clientSocketChannel.register(selector, SelectionKey.OP_READ);
 
             model.setClientSocketChannel(clientSocketChannel);
             model.setViewStage(ViewStage.CHAT);
