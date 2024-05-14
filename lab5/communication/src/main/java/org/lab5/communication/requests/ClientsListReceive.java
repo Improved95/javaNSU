@@ -8,7 +8,7 @@ public class ClientsListReceive extends Request {
     public final List<ClientData> listOfClients;
 
     public ClientsListReceive(List<ClientData> listOfClients) {
-        super(RequestType.LIST_OF_CLIENTS);
+        super(RequestType.CLIENTS_LIST_RECEIVE);
         this.listOfClients = listOfClients;
     }
 }

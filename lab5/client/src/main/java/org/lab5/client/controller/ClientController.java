@@ -1,5 +1,6 @@
 package org.lab5.client.controller;
 
+import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
 
 import org.lab5.client.view.ViewStage;
@@ -16,8 +17,6 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-import static java.lang.Thread.sleep;
-
 public class ClientController {
     private ClientModel model;
 
@@ -33,34 +32,26 @@ public class ClientController {
     }
 
     public void getListOfClients() {
+        model.setClientListStatus(ClientListStatus.REQUEST);
         ClientsListRequest clientsListRequest = new ClientsListRequest();
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequest);
-        try {
-            sleep(1000);
-            ClientsListReceive clientsListReceive = (ClientsListReceive) SendReceiveRequest.receiveRequest(model.getClientSocketChannel());
-            model.setClientDataList(clientsListReceive.listOfClients);
-        } catch (IOException | ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void channelsHandler() throws IOException, ClassNotFoundException {
         while (true) {
             selector.select();
-            Set<SelectionKey> selectionKeySet = selector.keys();
+            Set<SelectionKey> selectionKeySet = selector.selectedKeys();
+            Iterator<SelectionKey> selectionKeysIterator = selectionKeySet.iterator();
 
-            Iterator<SelectionKey> selectionKeyIterator = selectionKeySet.iterator();
-            while (selectionKeyIterator.hasNext()) {
-                SelectionKey selectionKey = selectionKeyIterator.next();
+            while (selectionKeysIterator.hasNext()) {
+                SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isReadable()) {
                     Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
                     ClientRequestHandler.handle(request, model);
                 }
 
-                selectionKeyIterator.remove();
+                selectionKeysIterator.remove();
             }
         }
     }

@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
+import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.ClientsListController;
@@ -59,7 +60,9 @@ public class ClientView {
 
     public void switchOnClientsListFromChat() {
         controller.getListOfClients();
+    }
 
+    public void showClientsList() {
         VBox vBoxListOfClients = JavaFxFrame.getClientsListController().getVBoxListOfClients();
         vBoxListOfClients.getChildren().clear();
 
@@ -75,6 +78,7 @@ public class ClientView {
         }
 
         JavaFxFrame.switchToClientsList();
+        model.setClientListStatus(ClientListStatus.NO_REQUEST);
     }
 
     public void switchOnChatFromClientsList() {
@@ -102,6 +106,10 @@ public class ClientView {
                         case CHAT -> JavaFxFrame.switchToMainScene();
                     }
                     viewStage = viewStageInModel;
+
+                    if (model.getClientListStatus() == ClientListStatus.EXIST) {
+                        showClientsList();
+                    }
                 }
             });
         }

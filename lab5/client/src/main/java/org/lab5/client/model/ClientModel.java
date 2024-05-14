@@ -21,6 +21,7 @@ public class ClientModel {
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
+    private ClientListStatus clientListStatus = ClientListStatus.NO_REQUEST;
 
     private List<MessageData> messagesList = new ArrayList<>();
 
@@ -90,5 +91,13 @@ public class ClientModel {
 
     public void setViewStage(ViewStage viewStage) {
         this.viewStage = viewStage;
+    }
+
+    public ClientListStatus getClientListStatus() {
+        return clientListStatus;
+    }
+
+    public void setClientListStatus(ClientListStatus clientListStatus) {
+        this.clientListStatus = clientListStatus;
     }
 }

@@ -6,6 +6,8 @@ import org.lab5.client.view.ClientView;
 import org.lab5.client.view.JavaFxFrame;
 import org.lab5.client.view.ViewStage;
 
+import java.io.IOException;
+
 public class Client {
     private ClientModel clientModel;
     private ClientView clientView;
@@ -49,6 +51,12 @@ public class Client {
                 }
             }
         } while ((clientController.connectToServer() == 0 ? false : true) && !stopTryConnect);
+
+        try {
+            clientController.channelsHandler();
+        } catch (IOException | RuntimeException | ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public synchronized void wakeUp() {
