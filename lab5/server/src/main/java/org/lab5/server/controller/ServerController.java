@@ -6,6 +6,8 @@ import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.MessagesListReq;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.ClientData;
+import org.lab5.communication.requests.notification.NotificationReq;
+import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
 
 import java.io.*;
@@ -78,6 +80,10 @@ public class ServerController {
         List<MessageData> messagesList = model.getMessageList();
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
         SendReceiveRequest.sendRequest(clientSocketChannel, messagesListReq);
+
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        NotificationReq notificationReq = new NotificationReq(NotificationType.CONNECT, clientData.getNickname());
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {

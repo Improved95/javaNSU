@@ -26,13 +26,13 @@ public class ServerRequestHandler {
         model.getClientTable().get(socketChannel).setNickname(loginReqRequest.nickname);
     }
 
-    private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel serverModel) {
-        String clientNickname = serverModel.getClientTable().get(socketChannel).getNickname();
+    private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel model) {
+        String clientNickname = model.getClientTable().get(socketChannel).getNickname();
         MessageFromClientReq messageFromClientReqRequest = (MessageFromClientReq) request;
         MessageData messageData = new MessageData(clientNickname, messageFromClientReqRequest.message);
-        serverModel.getMessageList().add(messageData);
+        model.getMessageList().add(messageData);
 
-        Set<SocketChannel> socketChannelSet = serverModel.getClientTable().keySet();
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
         SendReceiveRequest.broadCast(socketChannelSet, messageFromServerReq);
     }

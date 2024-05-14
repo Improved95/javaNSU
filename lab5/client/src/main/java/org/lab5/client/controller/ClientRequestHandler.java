@@ -7,6 +7,7 @@ import org.lab5.communication.requests.ClientsListReceiveReq;
 import org.lab5.communication.requests.MessageFromServerReq;
 import org.lab5.communication.requests.MessagesListReq;
 import org.lab5.communication.requests.Request;
+import org.lab5.communication.requests.notification.NotificationReq;
 
 public class ClientRequestHandler {
     public static void handle(Request request, ClientModel model) {
@@ -14,6 +15,7 @@ public class ClientRequestHandler {
             case CLIENTS_LIST_RECEIVE -> handleClientsListReceive(request, model);
             case MESSAGE_FROM_SERVER -> handleMessageFromServer(request, model);
             case MESSAGE_LIST -> handleMessageList(request, model);
+            case NOTIFICATION ->
         }
     }
 
@@ -33,5 +35,10 @@ public class ClientRequestHandler {
         MessageFromServerReq messageFromServerReq = (MessageFromServerReq) request;
         model.getMessagesList().add(messageFromServerReq.messageData);
         model.setMessagesListStatus(MessagesListStatus.ADD_MESSAGE);
+    }
+
+    private static void handleNotification(Request request, ClientModel model) {
+        NotificationReq notificationReq = (NotificationReq) request;
+
     }
 }
