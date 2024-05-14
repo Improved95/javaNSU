@@ -13,6 +13,7 @@ import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.MainChatController;
 import org.lab5.communication.ClientData;
+import org.lab5.communication.MessageData;
 import org.lab5.communication.TransferProtocol;
 
 import java.util.Timer;
@@ -82,6 +83,43 @@ public class ClientView {
         model.setClientListStatus(ClientListStatus.NO_REQUEST);
     }
 
+    public void showMessageList() {
+        VBox vBoxMessagesList = JavaFxFrame.getMainChatController().getVBoxMessagesList();
+        vBoxMessagesList.getChildren().clear();
+
+        for (MessageData messageData : model.getMessagesList()) {
+            Label label = new Label();
+            label.setMaxWidth(1.7976931348623157E308);
+            label.setPrefHeight(17.0);
+            label.setPrefWidth(305.0);
+            label.setPadding(new Insets(3, 3, 3, 3));
+            label.setFont(Font.font("Arial", 12));
+
+            String message = messageData.nickname + ": " + messageData.message;
+            label.setText(message);
+
+            vBoxMessagesList.getChildren().add(label);
+        }
+    }
+
+    public void addMessage() {
+        VBox vBoxMessagesList = JavaFxFrame.getMainChatController().getVBoxMessagesList();
+        vBoxMessagesList.getChildren().clear();
+
+        Label label = new Label();
+        label.setMaxWidth(1.7976931348623157E308);
+        label.setPrefHeight(17.0);
+        label.setPrefWidth(305.0);
+        label.setPadding(new Insets(3, 3, 3, 3));
+        label.setFont(Font.font("Arial", 12));
+
+        MessageData messageData = model.getMessagesList().getLast();
+        String message = messageData.nickname + ": " + messageData.message;
+        label.setText(message);
+
+        vBoxMessagesList.getChildren().add(label);
+    }
+
     public void switchOnChatFromClientsList() {
         JavaFxFrame.returnOnChatFromClientsList();
     }
@@ -116,11 +154,15 @@ public class ClientView {
     }
 
     public void closeApp() {
-        model.setTryToConnectToServer(false);
         controller.stopConnection();
+        model.setTryToConnectToServer(false);
+
+        /*в случае если подключения не произошло и основной поток все еще
+        * ждет попыток подключения*/
         if (!model.isConnectToServer()) {
             clientWorkflow.wakeUp();
         }
+
         tickGenerator.cancel();
     }
 }

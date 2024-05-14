@@ -18,8 +18,8 @@ public class SendReceiveRequest {
             while (buffer.hasRemaining()) {
                 socketChannel.write(buffer);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

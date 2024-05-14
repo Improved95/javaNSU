@@ -3,33 +3,38 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.ClientsListController">
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.ClientsListController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000066" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#9a9a9a" height="341.0" stroke="BLACK" strokeMiterLimit="50.0" strokeWidth="2.0" visible="false" width="541.0" />
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox fx:id="vBoxListOfClients" layoutX="66.0" layoutY="50.0" prefHeight="300.0" prefWidth="373.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-insets: 0; -fx-border-width: 3;">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="595.0" text="User 1">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
+            <ScrollPane hbarPolicy="NEVER" layoutX="54.0" layoutY="50.0" prefHeight="302.0" prefWidth="376.0" vvalue="1.0">
+               <content>
+                  <VBox fx:id="vBoxListOfClients" prefHeight="300.0" prefWidth="373.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="595.0" style="-fx-border-color: black; -fx-border-width: 0 0 2 0;" text="User 1" textOverrun="CLIP">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
                      <padding>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
                      </padding>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
+                  </VBox>
+               </content>
+            </ScrollPane>
             <Button fx:id="closeButton" layoutX="464.0" layoutY="50.0" mnemonicParsing="false" onAction="#clickOnCloseButton" prefHeight="10.0" prefWidth="70.0" text="Close" />
          </children>
       </Pane>

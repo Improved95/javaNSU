@@ -19,12 +19,11 @@ public class ClientModel {
     private boolean connectToServer = false;
 
     private List<ClientData> clientDataList = new ArrayList<>();
+    private List<MessageData> messagesList = new ArrayList<>();
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
     private ClientListStatus clientListStatus = ClientListStatus.NO_REQUEST;
-
-    private List<MessageData> messagesList = new ArrayList<>();
 
     public String getNickname() {
         return nickname;
