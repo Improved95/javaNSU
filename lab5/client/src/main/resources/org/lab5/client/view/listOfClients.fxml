@@ -9,14 +9,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.ClientsListController">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.ClientsListController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000066" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#9a9a9a" height="341.0" stroke="BLACK" strokeMiterLimit="50.0" strokeWidth="2.0" visible="false" width="541.0" />
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox fx:id="vBoxListOfClients" layoutX="66.0" layoutY="50.0" prefHeight="300.0" prefWidth="373.0" style="-fx-background-color: white;">
+            <VBox fx:id="vBoxListOfClients" layoutX="66.0" layoutY="50.0" prefHeight="300.0" prefWidth="373.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-insets: 0; -fx-border-width: 3;">
                <children>
                   <Label prefHeight="17.0" prefWidth="595.0" text="User 1">
                      <font>
