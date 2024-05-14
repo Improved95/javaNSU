@@ -89,12 +89,7 @@ public class ClientView {
         vBoxMessagesList.getChildren().clear();
 
         for (MessageData messageData : model.getMessagesList()) {
-            Label label = new Label();
-            label.setMaxWidth(1.7976931348623157E308);
-            label.setPrefHeight(17.0);
-            label.setPrefWidth(305.0);
-            label.setPadding(new Insets(3, 3, 3, 3));
-            label.setFont(Font.font("Arial", 12));
+            Label label = createLabelForMessage();
 
             String message = messageData.nickname + ": " + messageData.message;
             label.setText(message);
@@ -107,22 +102,26 @@ public class ClientView {
 
     public void addMessage() {
         VBox vBoxMessagesList = JavaFxFrame.getMainChatController().getVBoxMessagesList();
-        vBoxMessagesList.getChildren().clear();
 
-        Label label = new Label();
-        label.setMaxWidth(1.7976931348623157E308);
-        label.setPrefHeight(17.0);
-        label.setPrefWidth(305.0);
-        label.setPadding(new Insets(3, 3, 3, 3));
-        label.setFont(Font.font("Arial", 12));
+        Label label = createLabelForMessage();
 
         MessageData messageData = model.getMessagesList().getLast();
         String message = messageData.nickname + ": " + messageData.message;
         label.setText(message);
 
         vBoxMessagesList.getChildren().add(label);
-        
+
         model.setMessagesListStatus(MessagesListStatus.NOTHING);
+    }
+
+    private Label createLabelForMessage() {
+        Label label = new Label();
+        label.setMaxWidth(1.7976931348623157E308);
+        label.setPrefHeight(17.0);
+        label.setPrefWidth(305.0);
+        label.setPadding(new Insets(3, 3, 3, 3));
+        label.setFont(Font.font("Arial", 12));
+        return label;
     }
 
     public void switchOnChatFromClientsList() {

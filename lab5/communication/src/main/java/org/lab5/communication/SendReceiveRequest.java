@@ -5,9 +5,16 @@ import org.lab5.communication.requests.Request;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Set;
 
 public class SendReceiveRequest {
     private static int bufferSize = 1024 * 2;
+
+    public static void broadCast(Set<SocketChannel> socketChannelSet, Request request) {
+        for (SocketChannel socketChannel : socketChannelSet) {
+            sendRequest(socketChannel, request);
+        }
+    }
 
     public static void sendRequest(SocketChannel socketChannel, Request request) {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -28,8 +28,8 @@ public class ClientController {
     }
 
     public void sendMessage(String message) {
-        MessageReq messageReqRequest = new MessageReq(message);
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageReqRequest);
+        MessageFromClientReq messageFromClientReqRequest = new MessageFromClientReq(message);
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageFromClientReqRequest);
     }
 
     public void getListOfClients() {
