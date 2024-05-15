@@ -28,12 +28,12 @@ public class ServerRequestHandler {
         LoginReq loginReqRequest = (LoginReq) request;
         model.getClientTable().get(socketChannel).setNickname(loginReqRequest.nickname);
 
-        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        /*Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         socketChannelSet.remove(socketChannel);
         String nickNameClientConnected = model.getClientTable().get(socketChannel).getNickname();
         NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickNameClientConnected);
         NotificationReq notificationReq = new NotificationReq(notificationData);
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);*/
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel model) {

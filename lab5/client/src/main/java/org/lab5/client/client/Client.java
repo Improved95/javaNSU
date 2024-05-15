@@ -9,12 +9,12 @@ import org.lab5.client.view.ViewStage;
 import java.io.IOException;
 
 public class Client {
-    private ClientModel clientModel;
-    private ClientView clientView;
+    private ClientModel model;
+    private ClientView view;
     private ClientController clientController;
 
-    public final ClientModel getClientModel() {
-        return clientModel;
+    public final ClientModel getModel() {
+        return model;
     }
 
     public final ClientController getClientController() {
@@ -22,22 +22,22 @@ public class Client {
     }
 
     public synchronized void initial() {
-        clientModel = new ClientModel();
-        clientView = new ClientView();
+        model = new ClientModel();
+        view = new ClientView();
         clientController = new ClientController();
 
-        clientModel.setViewStage(ViewStage.CONNECT_FORM);
+        model.setViewStage(ViewStage.CONNECT_FORM);
 
-        clientView.setModel(clientModel);
-        clientView.setController(clientController);
-        clientView.setClientWorkflow(this);
+        view.setModel(model);
+        view.setController(clientController);
+        view.setClientWorkflow(this);
 
-        clientController.setModel(clientModel);
+        clientController.setModel(model);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
 
-        do {
-            while (!clientModel.isTryToConnectToServer()) {
+        /*do {
+            while (!model.isTryToConnectToServer()) {
                 try {
                     wait();
                 } catch (InterruptedException ex) {
@@ -45,15 +45,15 @@ public class Client {
                 }
             }
             clientController.connectToServer();
-        } while (!clientModel.isConnectToServer() && !clientModel.isTryToConnectToServer());
+        } while (!model.isConnectToServer() && !model.isTryToConnectToServer());*/
 
-        if (clientModel.isConnectToServer()) {
+        /*if (model.isConnectToServer()) {
             try {
                 clientController.channelsHandler();
             } catch (IOException | RuntimeException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-        }
+        }*/
     }
 
     public synchronized void wakeUp() {

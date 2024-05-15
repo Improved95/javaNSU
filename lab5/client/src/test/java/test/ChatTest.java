@@ -22,12 +22,12 @@ public class ChatTest {
         client.initial();
 
         ClientController clientController = client.getClientController();
-        ClientModel clientModel = client.getClientModel();
+        ClientModel clientModel = client.getModel();
         clientModel.setServerIP("localhost");
         clientModel.setServerSocket(65525);
         clientController.connectToServer();
 
         Request request = new LoginReq("improve", "xml");
-        SendReceiveRequest.sendRequest(client.getClientModel().getClientSocketChannel(), request);
+        SendReceiveRequest.sendRequest(client.getModel().getClientSocketChannel(), request);
     }
 }

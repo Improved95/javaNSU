@@ -52,14 +52,14 @@ public class ClientView {
         this.clientWorkflow = clientWorkflow;
     }
 
-    public void clickOnContinueFromStartDataForm(FormDataContext formDataContext) {
+    public void clickOnConnectButtonFromConnectForm(FormDataContext formDataContext) {
         model.setServerIP(formDataContext.IP);
         model.setServerPort(Integer.parseInt(formDataContext.socket));
         model.setNickname(formDataContext.nickname);
-
-        model.setTryToConnectToServer(true);
-        model.setConnectToServer(true);
-        clientWorkflow.wakeUp();
+        controller.connectToServer();
+//        model.setTryToConnectToServer(true);
+//        model.setConnectToServer(true);
+//        clientWorkflow.wakeUp();
     }
 
     public void clickOnSendButton(String message) {
@@ -201,13 +201,13 @@ public class ClientView {
 
     public void closeApp() {
         controller.stopConnection();
-        model.setTryToConnectToServer(false);
+//        model.setTryToConnectToServer(false);
 
         /*в случае если подключения не произошло и основной поток все еще
         * ждет попыток подключения*/
-        if (!model.isConnectToServer()) {
-            clientWorkflow.wakeUp();
-        }
+//        if (!model.isConnectToServer()) {
+//            clientWorkflow.wakeUp();
+//        }
 
         tickGenerator.cancel();
     }

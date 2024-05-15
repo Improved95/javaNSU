@@ -16,8 +16,8 @@ public class ClientModel {
     private String nickname;
 
     private SocketChannel clientSocket;
-    private boolean tryToConnectToServer = false;
-    private boolean connectToServer = false;
+//    private boolean tryToConnectToServer = false;
+//    private boolean connectToServer = false;
 
     private List<ClientData> clientDataList = new ArrayList<>();
     private List<MessageData> messagesList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ClientModel {
         this.clientSocket = clientSocket;
     }
 
-    public boolean isTryToConnectToServer() {
+    /*public boolean isTryToConnectToServer() {
         return tryToConnectToServer;
     }
 
@@ -74,7 +74,7 @@ public class ClientModel {
 
     public void setConnectToServer(boolean connectToServer) {
         this.connectToServer = connectToServer;
-    }
+    }*/
 
     public List<ClientData> getClientDataList() {
         return clientDataList;

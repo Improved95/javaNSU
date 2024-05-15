@@ -31,7 +31,7 @@ public class ConnectFormController implements SceneController {
     public void clickOnContinueButton() {
         FormDataContext formDataContext = new FormDataContext(ipTextField.getText(),
                 socketTextField.getText(), nicknameTextField.getText());
-        clientView.clickOnContinueFromStartDataForm(formDataContext);
+        clientView.clickOnConnectButtonFromConnectForm(formDataContext);
 
         clientView.setTransferProtocol(TransferProtocol.SERIALIZABLE);
         if (XMLCheckBox.isSelected()) {
