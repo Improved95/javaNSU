@@ -77,11 +77,6 @@ public class ServerController {
         List<MessageData> messagesList = model.getMessageList();
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
         SendReceiveRequest.sendRequest(clientSocketChannel, messagesListReq);
-
-        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
-        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, clientData.getNickname());
-        NotificationReq notificationReq = new NotificationReq(notificationData);
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {

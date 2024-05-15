@@ -1,9 +1,12 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
+import org.lab5.communication.NotificationData;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.MessageData;
+import org.lab5.communication.requests.notification.NotificationReq;
+import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
 
 import java.nio.channels.SocketChannel;
@@ -24,6 +27,13 @@ public class ServerRequestHandler {
     private static void handleLogin(Request request, SocketChannel socketChannel, ServerModel model) {
         LoginReq loginReqRequest = (LoginReq) request;
         model.getClientTable().get(socketChannel).setNickname(loginReqRequest.nickname);
+
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        socketChannelSet.remove(socketChannel);
+        String nickNameClientConnected = model.getClientTable().get(socketChannel).getNickname();
+        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickNameClientConnected);
+        NotificationReq notificationReq = new NotificationReq(notificationData);
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel model) {

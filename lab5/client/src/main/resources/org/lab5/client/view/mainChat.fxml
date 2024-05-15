@@ -15,7 +15,7 @@
          <content>
             <VBox fx:id="vBoxMessagesList" maxWidth="1.7976931348623157E308" prefWidth="374.0">
                <children>
-                  <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefWidth="364.0" text="notification dsaaaaaaaaaaaaaaaaaaaaaaaddddd ddddddddddf dddddddd" textOverrun="CLIP" wrapText="true">
+                  <Label alignment="TOP_LEFT" disable="true" maxWidth="1.7976931348623157E308" prefWidth="364.0" text="notification dsaaaaaaaaaaaaaaaaaaaaaaaddddd ddddddddddf dddddddd" textOverrun="CLIP" visible="false" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

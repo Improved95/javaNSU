@@ -136,9 +136,9 @@ public class ClientView {
         NotificationData notificationData = model.getNotificationDataList().getLast();
         String notificationText = "User " + notificationData.text;
         if (notificationData.notificationType == NotificationType.CONNECT) {
-            notificationText += "connected.";
+            notificationText += " connected.";
         } else if (notificationData.notificationType == NotificationType.DISCONNECT) {
-            notificationText += "disconnected.";
+            notificationText += " disconnected.";
         }
         label.setText(notificationText);
 
@@ -193,7 +193,7 @@ public class ClientView {
                 } else if (model.getChatAreaStatus() == ChatAreaStatus.ADD_MESSAGE) {
                     addMessage();
                 } else if (model.getChatAreaStatus() == ChatAreaStatus.ADD_NOTIFICATION) {
-
+                    addNotification();
                 }
             });
         }

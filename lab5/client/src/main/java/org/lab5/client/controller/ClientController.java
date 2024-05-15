@@ -77,6 +77,16 @@ public class ClientController {
             }
             model.getClientSocketChannel().write(byteBuffer);
 
+            selector.select();
+            Iterator iter = selector.selectedKeys().iterator();
+            while (iter.hasNext()) {
+                SelectionKey selectionKey =  (SelectionKey) iter.next();
+                if (selectionKey.isReadable()) {
+//                    ha
+                }
+                iter.remove();
+            }
+
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
             model.setConnectToServer(true);
         } catch (IOException ex) {
