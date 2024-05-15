@@ -9,11 +9,8 @@ import org.lab5.server.model.ServerModel;
 
 import java.io.*;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
-
-import static java.lang.Thread.sleep;
 
 public class ServerController {
     private ServerModel model;
@@ -62,29 +59,21 @@ public class ServerController {
 
     private void registeringNewClient(Selector selector, ServerSocketChannel serverSocket) throws IOException {
         SocketChannel clientSocketChannel = serverSocket.accept();
-//        clientSocketChannel.configureBlocking(false);
-//        clientSocketChannel.register(selector, SelectionKey.OP_READ);
+        clientSocketChannel.configureBlocking(false);
+        clientSocketChannel.register(selector, SelectionKey.OP_READ);
+    }
 
-        byte byteBuffer[] = new byte[1];
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        ClientData clientData;
-        if (byteBuffer[0] == (byte)10) {
-            clientData = new ClientData(TransferProtocol.SERIALIZABLE);
-            System.out.println("SERIALIZABLE");
-        } else {
-            clientData = new ClientData(TransferProtocol.XML);
-            System.out.println("XML");
-        }
-        model.getClientTable().put(clientSocketChannel, clientData);
+    public void loginNewClient(SocketChannel socketChannel, String nickname) {
+        model.getClientTable().get(socketChannel).setNickname(nickname);
 
         List<MessageData> messagesList = model.getMessageList();
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
-        SendReceiveRequest.sendRequest(clientSocketChannel, messagesListReq);
+        SendReceiveRequest.sendRequest(socketChannel, messagesListReq);
+
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickname);
+        NotificationReq notificationReq = new NotificationReq(notificationData);
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {

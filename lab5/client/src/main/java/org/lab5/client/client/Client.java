@@ -1,6 +1,7 @@
 package org.lab5.client.client;
 
 import org.lab5.client.controller.ClientController;
+import org.lab5.client.controller.ClientRequestHandler;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ClientView;
 import org.lab5.client.view.JavaFxFrame;
@@ -32,6 +33,7 @@ public class Client {
         view.setController(clientController);
 
         clientController.setModel(model);
+        ClientRequestHandler.setController(clientController);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
     }

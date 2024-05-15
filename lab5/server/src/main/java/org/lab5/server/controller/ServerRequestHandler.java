@@ -2,9 +2,10 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
 import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.MessageData;
-import org.lab5.communication.requests.SetTransportProtocolReq;
+import org.lab5.communication.requests.TransportProtocolReq;
 import org.lab5.server.model.ServerModel;
 
 import java.nio.channels.SocketChannel;
@@ -14,28 +15,40 @@ import java.util.Map;
 import java.util.Set;
 
 public class ServerRequestHandler {
+    private static ServerController controller;
+
+    public static void setController(ServerController controller) {
+        ServerRequestHandler.controller = controller;
+    }
+
     public static void handle(Request request, SocketChannel socketChannel, ServerModel model) {
         switch (request.requestType) {
-            case LOGIN -> handleLogin(request, socketChannel, model);
+            case TRANSPORT_PROTOCOL -> handleTransportProtocol(request, socketChannel, model);
+            case LOGIN -> handleLogin(request, socketChannel);
             case MESSAGE_FROM_CLIENT -> handleMessage(request, socketChannel, model);
             case CLIENTS_LIST_REQUEST -> handleListParticipantsRequest(socketChannel, model);
         }
     }
 
-    private static void handleLogin(Request request, SocketChannel socketChannel, ServerModel model) {
-        LoginReq loginReqRequest = (LoginReq) request;
-        model.getClientTable().get(socketChannel).setNickname(loginReqRequest.nickname);
+    private static void handleTransportProtocol(Request request, SocketChannel socketChannel, ServerModel model) {
+        TransportProtocolReq transportProtocolReq = (TransportProtocolReq) request;
 
-        /*Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
-        socketChannelSet.remove(socketChannel);
-        String nickNameClientConnected = model.getClientTable().get(socketChannel).getNickname();
-        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickNameClientConnected);
-        NotificationReq notificationReq = new NotificationReq(notificationData);
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);*/
+        ClientData clientData;
+        if (transportProtocolReq.transportProtocolByte == (byte)10) {
+            clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+            System.out.println("SERIALIZABLE");
+        } else {
+            clientData = new ClientData(TransferProtocol.XML);
+            System.out.println("XML");
+        }
+        model.getClientTable().put(socketChannel, clientData);
+
+        SendReceiveRequest.sendRequest(socketChannel, new TransportProtocolReq((byte) 0));
     }
 
-    private static void handleTransportProtocol(SocketChannel socketChannel) {
-        SendReceiveRequest.sendRequest(socketChannel, new SetTransportProtocolReq());
+    private static void handleLogin(Request request, SocketChannel socketChannel) {
+        LoginReq loginReqRequest = (LoginReq) request;
+        controller.loginNewClient(socketChannel, loginReqRequest.nickname);
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel model) {

@@ -10,13 +10,24 @@ import org.lab5.communication.requests.Request;
 import org.lab5.communication.requests.notification.NotificationReq;
 
 public class ClientRequestHandler {
+    private static ClientController controller;
+
+    public static void setController(ClientController controller) {
+        ClientRequestHandler.controller = controller;
+    }
+
     public static void handle(Request request, ClientModel model) {
         switch (request.requestType) {
+            case TRANSPORT_PROTOCOL -> handleTransportProtocol();
             case CLIENTS_LIST_RECEIVE -> handleClientsListReceive(request, model);
             case MESSAGE_FROM_SERVER -> handleMessageFromServer(request, model);
             case MESSAGE_LIST -> handleMessageList(request, model);
             case NOTIFICATION -> handleNotification(request, model);
         }
+    }
+
+    private static void handleTransportProtocol() {
+        controller.loginToServer();
     }
 
     private static void handleClientsListReceive(Request request, ClientModel model) {

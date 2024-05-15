@@ -15,8 +15,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
-import static java.lang.Thread.sleep;
-
 public class ClientController {
     private ClientModel model;
 
@@ -50,33 +48,35 @@ public class ClientController {
 
             model.setClientSocketChannel(clientSocketChannel);
 
-//            channelsHandler = new ChannelsHandler(model, this, selector);
-//            channelsHandlerThread = new Thread(channelsHandler);
-//            channelsHandlerThread.start();
-
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1);
+            byte byteBuffer[] = new byte[1];
             if (model.getTransferProtocol().equals(TransferProtocol.SERIALIZABLE)) {
-                byteBuffer.put((byte) 10);
+                byteBuffer[0] = 10;
                 System.out.println("SERIALIZABLE");
             } else if (model.getTransferProtocol().equals(TransferProtocol.XML)) {
-                byteBuffer.put((byte) 20);
+                byteBuffer[0] = 20;
                 System.out.println("XML");
             }
-            model.getClientSocketChannel().write(byteBuffer);
+            model.getClientSocketChannel().write(ByteBuffer.wrap(byteBuffer));
 
-//            SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
-//            model.setViewStage(ViewStage.CHAT);
+            channelsHandler = new ChannelsHandler(model, this, selector);
+            channelsHandlerThread = new Thread(channelsHandler);
+            channelsHandlerThread.start();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void loginToServer() {
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
+        model.setViewStage(ViewStage.CHAT);
     }
 
     public void stopConnection() {
         try {
             if (model.getClientSocketChannel() != null) {
                 model.getClientSocketChannel().close();
-//                channelsHandler.stopChannelsHandle();
-//                channelsHandlerThread.interrupt();
+                channelsHandler.stopChannelsHandle();
+                channelsHandlerThread.interrupt();
             }
         } catch (IOException ex) {
             ex.printStackTrace();

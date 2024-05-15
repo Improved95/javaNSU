@@ -1,7 +1,7 @@
 package org.lab5.communication;
 
 import org.lab5.communication.requests.Request;
-import org.lab5.communication.requests.SetTransportProtocolReq;
+import org.lab5.communication.requests.TransportProtocolReq;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -36,14 +36,15 @@ public class SendReceiveRequest {
         int bytesRead = socketChannel.read(receiveBuffer);
         if (bytesRead == - 1) { return null; }
 
-        if (bytesRead == 1) {
-            return new SetTransportProtocolReq();
-        }
-
         byte[] receiveBytes = new byte[bytesRead];
         receiveBuffer.flip();
         receiveBuffer.get(receiveBytes);
         System.out.println("bytes read " + bytesRead);
+
+        if (bytesRead == 1) {
+            return new TransportProtocolReq(receiveBytes[0]);
+        }
+
         try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
             return (Request) ois.readObject();
         }

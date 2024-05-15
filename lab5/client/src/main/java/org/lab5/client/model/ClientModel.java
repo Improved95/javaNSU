@@ -26,6 +26,8 @@ public class ClientModel {
     private ClientListStatus clientListStatus = ClientListStatus.NOTHING;
     private ChatAreaStatus chatAreaStatus = ChatAreaStatus.NOTHING;
 
+//    private LoginStatus loginStatus;
+
     public String getNickname() {
         return nickname;
     }

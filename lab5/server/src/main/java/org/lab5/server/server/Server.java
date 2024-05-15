@@ -1,6 +1,7 @@
 package org.lab5.server.server;
 
 import org.lab5.server.controller.ServerController;
+import org.lab5.server.controller.ServerRequestHandler;
 import org.lab5.server.model.ServerModel;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class Server {
         }
 
         serverController.setServerModel(serverModel);
+        ServerRequestHandler.setController(serverController);
 
         try {
             serverController.initialServer();

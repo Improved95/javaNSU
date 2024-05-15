@@ -23,6 +23,7 @@ public class MainChatController implements SceneController {
     }
 
     public void clickOnSendButton() {
+        messageTextField.setText("");
         clientView.clickOnSendButton(messageTextField.getText());
     }
 

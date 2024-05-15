@@ -18,7 +18,6 @@ import org.lab5.client.view.sceneControllers.MainChatController;
 import org.lab5.communication.ClientData;
 import org.lab5.communication.MessageData;
 import org.lab5.communication.NotificationData;
-import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.notification.NotificationType;
 
 import java.util.Timer;
