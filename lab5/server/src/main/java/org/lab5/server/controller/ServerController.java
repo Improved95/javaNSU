@@ -1,8 +1,7 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.*;
-import org.lab5.communication.requests.MessagesListReq;
-import org.lab5.communication.requests.Request;
+import org.lab5.communication.requests.*;
 import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
@@ -48,7 +47,7 @@ public class ServerController {
                     if (request == null) {
                         deleteClient((SocketChannel) selectionKey.channel());
                     } else {
-                        ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel(), model);
+                        ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel());
                     }
                 }
 
@@ -70,10 +69,40 @@ public class ServerController {
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
         SendReceiveRequest.sendRequest(socketChannel, messagesListReq);
 
-        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
+        socketChannelSet.remove(socketChannel);
         NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickname);
         NotificationReq notificationReq = new NotificationReq(notificationData);
         SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
+    }
+
+    public void setClientTransportProtocol(TransportProtocolReq transportProtocolReq, SocketChannel socketChannel) {
+        ClientData clientData;
+        if (transportProtocolReq.transportProtocolByte == (byte)10) {
+            clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+        } else {
+            clientData = new ClientData(TransferProtocol.XML);
+        }
+        model.getClientTable().put(socketChannel, clientData);
+
+        SendReceiveRequest.sendRequest(socketChannel, new TransportProtocolReq((byte) 0));
+    }
+
+    public void receiveMessageAndBroadcastToAnywhere(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
+        String clientNickname = model.getClientTable().get(socketChannel).getNickname();
+        MessageData messageData = new MessageData(clientNickname, messageFromClientReq.message);
+        model.getMessageList().add(messageData);
+
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
+        SendReceiveRequest.broadCast(socketChannelSet, messageFromServerReq);
+    }
+
+    public void sendClientList(SocketChannel socketChannel) {
+        Map<SocketChannel, ClientData> clientTable = model.getClientTable();
+        List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
+        ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataList);
+        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveReqRequest);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {

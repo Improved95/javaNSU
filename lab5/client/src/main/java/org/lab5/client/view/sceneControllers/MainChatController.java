@@ -1,7 +1,7 @@
 package org.lab5.client.view.sceneControllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.lab5.client.view.ClientView;
@@ -11,6 +11,8 @@ public class MainChatController implements SceneController {
 
     @FXML
     private VBox vBoxMessagesList;
+    @FXML
+    private ScrollPane scrollPane;
     @FXML
     private TextField messageTextField;
 
@@ -22,9 +24,14 @@ public class MainChatController implements SceneController {
         return vBoxMessagesList;
     }
 
+    public ScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
     public void clickOnSendButton() {
-        messageTextField.setText("");
         clientView.clickOnSendButton(messageTextField.getText());
+        messageTextField.setText("");
+        messageTextField.requestFocus();
     }
 
     @FXML

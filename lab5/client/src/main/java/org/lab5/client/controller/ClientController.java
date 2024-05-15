@@ -51,10 +51,8 @@ public class ClientController {
             byte byteBuffer[] = new byte[1];
             if (model.getTransferProtocol().equals(TransferProtocol.SERIALIZABLE)) {
                 byteBuffer[0] = 10;
-                System.out.println("SERIALIZABLE");
             } else if (model.getTransferProtocol().equals(TransferProtocol.XML)) {
                 byteBuffer[0] = 20;
-                System.out.println("XML");
             }
             model.getClientSocketChannel().write(ByteBuffer.wrap(byteBuffer));
 

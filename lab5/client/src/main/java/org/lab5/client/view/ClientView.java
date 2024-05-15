@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -188,14 +189,6 @@ public class ClientView {
 
     public void closeApp() {
         controller.stopConnection();
-//        model.setTryToConnectToServer(false);
-
-        /*в случае если подключения не произошло и основной поток все еще
-        * ждет попыток подключения*/
-//        if (!model.isConnectToServer()) {
-//            clientWorkflow.wakeUp();
-//        }
-
         tickGenerator.cancel();
     }
 }
