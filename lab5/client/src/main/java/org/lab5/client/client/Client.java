@@ -30,33 +30,9 @@ public class Client {
 
         view.setModel(model);
         view.setController(clientController);
-        view.setClientWorkflow(this);
 
         clientController.setModel(model);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
-
-        /*do {
-            while (!model.isTryToConnectToServer()) {
-                try {
-                    wait();
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            clientController.connectToServer();
-        } while (!model.isConnectToServer() && !model.isTryToConnectToServer());*/
-
-        /*if (model.isConnectToServer()) {
-            try {
-                clientController.channelsHandler();
-            } catch (IOException | RuntimeException | ClassNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        }*/
-    }
-
-    public synchronized void wakeUp() {
-        notifyAll();
     }
 }

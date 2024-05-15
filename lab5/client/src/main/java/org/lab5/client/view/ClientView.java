@@ -28,7 +28,6 @@ import java.util.TimerTask;
 public class ClientView {
     private ClientModel model;
     private ClientController controller;
-    private Client clientWorkflow;
 
     private Timer tickGenerator;
     private ViewStage viewStage = null;
@@ -48,18 +47,11 @@ public class ClientView {
         this.controller = controller;
     }
 
-    public void setClientWorkflow(Client clientWorkflow) {
-        this.clientWorkflow = clientWorkflow;
-    }
-
     public void clickOnConnectButtonFromConnectForm(FormDataContext formDataContext) {
         model.setServerIP(formDataContext.IP);
         model.setServerPort(Integer.parseInt(formDataContext.socket));
         model.setNickname(formDataContext.nickname);
         controller.connectToServer();
-//        model.setTryToConnectToServer(true);
-//        model.setConnectToServer(true);
-//        clientWorkflow.wakeUp();
     }
 
     public void clickOnSendButton(String message) {

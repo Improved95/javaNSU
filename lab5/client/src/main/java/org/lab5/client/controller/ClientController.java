@@ -14,14 +14,13 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.Iterator;
-import java.util.Set;
 
 public class ClientController {
     private ClientModel model;
 
     private Selector selector;
-    private boolean continueChannelsHandler = true;
+    private ChannelsHandler channelsHandler;
+    private Thread channelsHandlerThread;
 
     public void setModel(ClientModel model) {
         this.model = model;
@@ -38,25 +37,6 @@ public class ClientController {
         SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequestReq);
     }
 
-    public void channelsHandler() throws IOException, ClassNotFoundException {
-        while (continueChannelsHandler) {
-            selector.select();
-            Set<SelectionKey> selectionKeySet = selector.selectedKeys();
-            Iterator<SelectionKey> selectionKeysIterator = selectionKeySet.iterator();
-
-            while (selectionKeysIterator.hasNext()) {
-                SelectionKey selectionKey = selectionKeysIterator.next();
-
-                if (selectionKey.isReadable()) {
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
-                    ClientRequestHandler.handle(request, model);
-                }
-
-                selectionKeysIterator.remove();
-            }
-        }
-    }
-
     public void connectToServer() {
         try {
             SocketChannel clientSocketChannel = SocketChannel.open(
@@ -67,7 +47,6 @@ public class ClientController {
             clientSocketChannel.register(selector, SelectionKey.OP_READ);
 
             model.setClientSocketChannel(clientSocketChannel);
-            model.setViewStage(ViewStage.CHAT);
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(1);
             if (model.getTransferProtocol() == TransferProtocol.SERIALIZABLE) {
@@ -76,12 +55,13 @@ public class ClientController {
                 byteBuffer.put((byte) 1);
             }
             model.getClientSocketChannel().write(byteBuffer);
-
             SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
-//            model.setConnectToServer(true);
+            model.setViewStage(ViewStage.CHAT);
+
+            channelsHandler = new ChannelsHandler(model, selector);
+            channelsHandlerThread = new Thread(channelsHandler);
+            channelsHandlerThread.start();
         } catch (IOException ex) {
-//            model.setTryToConnectToServer(false);
-//            model.setConnectToServer(false);
             ex.printStackTrace();
         }
     }
@@ -89,10 +69,10 @@ public class ClientController {
     public void stopConnection() {
         try {
             if (model.getClientSocketChannel() != null) {
-                continueChannelsHandler = false;
                 model.getClientSocketChannel().close();
+                channelsHandler.stopChannelsHandle();
+                channelsHandlerThread.interrupt();
             }
-            continueChannelsHandler = false;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
