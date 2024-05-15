@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.MainChatController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab5.client.view.sceneControllers.MainChatController">
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="15.0" layoutY="14.0" prefHeight="337.0" prefWidth="376.0" vvalue="1.0">
          <content>
             <VBox fx:id="vBoxMessagesList" maxWidth="1.7976931348623157E308" prefWidth="374.0">
                <children>
-                  <Label disable="true" maxWidth="1.7976931348623157E308" prefWidth="364.0" text="аывфафвыаааааааааааааааааааааааааааааааааааааааааааааааа" textOverrun="CLIP" visible="false" wrapText="true">
+                  <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefWidth="364.0" text="notification dsaaaaaaaaaaaaaaaaaaaaaaaddddd ddddddddddf dddddddd" textOverrun="CLIP" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

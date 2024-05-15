@@ -1,15 +1,15 @@
 package org.lab5.communication.requests.notification;
 
+import org.lab5.communication.NotificationData;
 import org.lab5.communication.requests.Request;
 import org.lab5.communication.requests.RequestType;
 
 public class NotificationReq extends Request {
-    public final NotificationType notificationType;
-    public final String clientNickname;
+    public final NotificationData notificationData;
 
-    public NotificationReq(NotificationType notificationType, String clientNickname) {
+    public NotificationReq(NotificationData notificationData) {
         super(RequestType.NOTIFICATION);
-        this.notificationType = notificationType;
-        this.clientNickname = clientNickname;
+        this.notificationData = notificationData;
+
     }
 }

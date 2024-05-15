@@ -2,20 +2,25 @@ package org.lab5.client.view;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
-import org.lab5.client.model.MessagesListStatus;
+import org.lab5.client.model.ChatAreaStatus;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.MainChatController;
 import org.lab5.communication.ClientData;
 import org.lab5.communication.MessageData;
+import org.lab5.communication.NotificationData;
 import org.lab5.communication.TransferProtocol;
+import org.lab5.communication.requests.notification.NotificationType;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,7 +102,7 @@ public class ClientView {
             vBoxMessagesList.getChildren().add(label);
         }
 
-        model.setMessagesListStatus(MessagesListStatus.NOTHING);
+        model.setChatAreaStatus(ChatAreaStatus.NOTHING);
     }
 
     public void addMessage() {
@@ -111,7 +116,35 @@ public class ClientView {
 
         vBoxMessagesList.getChildren().add(label);
 
-        model.setMessagesListStatus(MessagesListStatus.NOTHING);
+        model.setChatAreaStatus(ChatAreaStatus.NOTHING);
+    }
+
+    public void addNotification() {
+        VBox vBoxMessagesList = JavaFxFrame.getMainChatController().getVBoxMessagesList();
+
+        Label label = new Label();
+        label.setMaxWidth(1.7976931348623157E308);
+        label.setPrefHeight(17.0);
+        label.setPrefWidth(305.0);
+        label.setPadding(new Insets(5, 5, 5, 5));
+        label.setAlignment(Pos.CENTER);
+        label.setTextAlignment(TextAlignment.CENTER);
+        label.setTextOverrun(OverrunStyle.CLIP);
+        label.setWrapText(true);
+        label.setFont(Font.font("Arial Bold", 13));
+
+        NotificationData notificationData = model.getNotificationDataList().getLast();
+        String notificationText = "User " + notificationData.text;
+        if (notificationData.notificationType == NotificationType.CONNECT) {
+            notificationText += "connected.";
+        } else if (notificationData.notificationType == NotificationType.DISCONNECT) {
+            notificationText += "disconnected.";
+        }
+        label.setText(notificationText);
+
+        vBoxMessagesList.getChildren().add(label);
+
+        model.setChatAreaStatus(ChatAreaStatus.NOTHING);
     }
 
     private Label createLabelForMessage() {
@@ -119,7 +152,9 @@ public class ClientView {
         label.setMaxWidth(1.7976931348623157E308);
         label.setPrefHeight(17.0);
         label.setPrefWidth(305.0);
-        label.setPadding(new Insets(3, 3, 3, 3));
+        label.setPadding(new Insets(3,3,3,3));
+        label.setTextOverrun(OverrunStyle.CLIP);
+        label.setWrapText(true);
         label.setFont(Font.font("Arial", 12));
         return label;
     }
@@ -153,10 +188,12 @@ public class ClientView {
                 if (model.getClientListStatus() == ClientListStatus.EXIST) {
                     showClientsList();
                 }
-                if (model.getMessagesListStatus() == MessagesListStatus.UPDATE_FULL_LIST) {
+                if (model.getChatAreaStatus() == ChatAreaStatus.UPDATE_FULL_LIST) {
                     showMessagesList();
-                } else if (model.getMessagesListStatus() == MessagesListStatus.ADD_MESSAGE) {
+                } else if (model.getChatAreaStatus() == ChatAreaStatus.ADD_MESSAGE) {
                     addMessage();
+                } else if (model.getChatAreaStatus() == ChatAreaStatus.ADD_NOTIFICATION) {
+
                 }
             });
         }

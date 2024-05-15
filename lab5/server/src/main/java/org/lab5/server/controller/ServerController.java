@@ -1,11 +1,8 @@
 package org.lab5.server.controller;
 
-import org.lab5.communication.MessageData;
-import org.lab5.communication.SendReceiveRequest;
-import org.lab5.communication.TransferProtocol;
+import org.lab5.communication.*;
 import org.lab5.communication.requests.MessagesListReq;
 import org.lab5.communication.requests.Request;
-import org.lab5.communication.ClientData;
 import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
@@ -82,12 +79,19 @@ public class ServerController {
         SendReceiveRequest.sendRequest(clientSocketChannel, messagesListReq);
 
         Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
-        NotificationReq notificationReq = new NotificationReq(NotificationType.CONNECT, clientData.getNickname());
+        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, clientData.getNickname());
+        NotificationReq notificationReq = new NotificationReq(notificationData);
         SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {
+        String nickNameRemovedClient = model.getClientTable().get(socketChannel).getNickname();
         model.getClientTable().remove(socketChannel);
         socketChannel.close();
+
+        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
+        NotificationData notificationData = new NotificationData(NotificationType.DISCONNECT, nickNameRemovedClient);
+        NotificationReq notificationReq = new NotificationReq(notificationData);
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 }

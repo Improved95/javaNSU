@@ -3,6 +3,7 @@ package org.lab5.client.model;
 import org.lab5.client.view.ViewStage;
 import org.lab5.communication.ClientData;
 import org.lab5.communication.MessageData;
+import org.lab5.communication.NotificationData;
 import org.lab5.communication.TransferProtocol;
 
 import java.nio.channels.SocketChannel;
@@ -20,11 +21,12 @@ public class ClientModel {
 
     private List<ClientData> clientDataList = new ArrayList<>();
     private List<MessageData> messagesList = new ArrayList<>();
+    private List<NotificationData> notificationDataList = new ArrayList<>();
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
     private ClientListStatus clientListStatus = ClientListStatus.NOTHING;
-    private MessagesListStatus messagesListStatus = MessagesListStatus.NOTHING;
+    private ChatAreaStatus chatAreaStatus = ChatAreaStatus.NOTHING;
 
     public String getNickname() {
         return nickname;
@@ -94,6 +96,10 @@ public class ClientModel {
         return messagesList;
     }
 
+    public List<NotificationData> getNotificationDataList() {
+        return notificationDataList;
+    }
+
     public ViewStage getViewStage() {
         return viewStage;
     }
@@ -110,11 +116,11 @@ public class ClientModel {
         this.clientListStatus = clientListStatus;
     }
 
-    public MessagesListStatus getMessagesListStatus() {
-        return messagesListStatus;
+    public ChatAreaStatus getChatAreaStatus() {
+        return chatAreaStatus;
     }
 
-    public void setMessagesListStatus(MessagesListStatus messagesListStatus) {
-        this.messagesListStatus = messagesListStatus;
+    public void setChatAreaStatus(ChatAreaStatus chatAreaStatus) {
+        this.chatAreaStatus = chatAreaStatus;
     }
 }
