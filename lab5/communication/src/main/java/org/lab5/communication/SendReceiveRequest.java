@@ -1,6 +1,7 @@
 package org.lab5.communication;
 
 import org.lab5.communication.requests.Request;
+import org.lab5.communication.requests.SetTransportProtocolReq;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -31,9 +32,13 @@ public class SendReceiveRequest {
     }
 
     public static Request receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
-        ByteBuffer receiveBuffer= ByteBuffer.allocate(bufferSize);
+        ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
         int bytesRead = socketChannel.read(receiveBuffer);
         if (bytesRead == - 1) { return null; }
+
+        if (bytesRead == 1) {
+            return new SetTransportProtocolReq();
+        }
 
         byte[] receiveBytes = new byte[bytesRead];
         receiveBuffer.flip();

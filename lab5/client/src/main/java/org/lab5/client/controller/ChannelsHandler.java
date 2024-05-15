@@ -12,12 +12,15 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class ChannelsHandler implements Runnable {
-    public final ClientModel model;
-    public final Selector selector;
+    public ClientModel model;
+    public ClientController controller;
+
+    public Selector selector;
     private boolean continueChannelsHandler = true;
 
-    public ChannelsHandler(ClientModel model, Selector selector) {
+    public ChannelsHandler(ClientModel model, ClientController controller, Selector selector) {
         this.model = model;
+        this.controller = controller;
         this.selector = selector;
     }
 

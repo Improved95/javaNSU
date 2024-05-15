@@ -8,7 +8,6 @@ import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import org.lab5.client.client.Client;
 import org.lab5.client.controller.ClientController;
 import org.lab5.client.model.ClientListStatus;
 import org.lab5.client.model.ClientModel;
@@ -47,10 +46,11 @@ public class ClientView {
         this.controller = controller;
     }
 
-    public void clickOnConnectButtonFromConnectForm(FormDataContext formDataContext) {
-        model.setServerIP(formDataContext.IP);
-        model.setServerPort(Integer.parseInt(formDataContext.socket));
-        model.setNickname(formDataContext.nickname);
+    public void clickOnConnectButtonFromConnectForm(ConnectFormDataContext connectFormDataContext) {
+        model.setServerIP(connectFormDataContext.IP);
+        model.setServerPort(Integer.parseInt(connectFormDataContext.socket));
+        model.setNickname(connectFormDataContext.nickname);
+        model.setTransferProtocol(connectFormDataContext.transferProtocol);
         controller.connectToServer();
     }
 
@@ -153,10 +153,6 @@ public class ClientView {
 
     public void switchOnChatFromClientsList() {
         JavaFxFrame.returnOnChatFromClientsList();
-    }
-
-    public void setTransferProtocol(TransferProtocol transferProtocol) {
-        model.setTransferProtocol(transferProtocol);
     }
 
     public void initialTickGenerator() {

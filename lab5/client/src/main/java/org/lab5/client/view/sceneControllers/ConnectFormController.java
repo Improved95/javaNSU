@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import org.lab5.client.view.ClientView;
-import org.lab5.client.view.FormDataContext;
+import org.lab5.client.view.ConnectFormDataContext;
 import org.lab5.communication.TransferProtocol;
 
 public class ConnectFormController implements SceneController {
@@ -29,14 +29,14 @@ public class ConnectFormController implements SceneController {
 
     @FXML
     public void clickOnContinueButton() {
-        FormDataContext formDataContext = new FormDataContext(ipTextField.getText(),
-                socketTextField.getText(), nicknameTextField.getText());
-        clientView.clickOnConnectButtonFromConnectForm(formDataContext);
-
-        clientView.setTransferProtocol(TransferProtocol.SERIALIZABLE);
+        TransferProtocol currentTransferProtocol = TransferProtocol.SERIALIZABLE;
         if (XMLCheckBox.isSelected()) {
-            clientView.setTransferProtocol(TransferProtocol.XML);
+            currentTransferProtocol = TransferProtocol.XML;
         }
+
+        ConnectFormDataContext connectFormDataContext = new ConnectFormDataContext(ipTextField.getText(),
+                socketTextField.getText(), nicknameTextField.getText(), currentTransferProtocol);
+        clientView.clickOnConnectButtonFromConnectForm(connectFormDataContext);
     }
 
     @FXML

@@ -1,12 +1,10 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.ClientData;
-import org.lab5.communication.NotificationData;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.MessageData;
-import org.lab5.communication.requests.notification.NotificationReq;
-import org.lab5.communication.requests.notification.NotificationType;
+import org.lab5.communication.requests.SetTransportProtocolReq;
 import org.lab5.server.model.ServerModel;
 
 import java.nio.channels.SocketChannel;
@@ -34,6 +32,10 @@ public class ServerRequestHandler {
         NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickNameClientConnected);
         NotificationReq notificationReq = new NotificationReq(notificationData);
         SendReceiveRequest.broadCast(socketChannelSet, notificationReq);*/
+    }
+
+    private static void handleTransportProtocol(SocketChannel socketChannel) {
+        SendReceiveRequest.sendRequest(socketChannel, new SetTransportProtocolReq());
     }
 
     private static void handleMessage(Request request, SocketChannel socketChannel, ServerModel model) {

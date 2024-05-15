@@ -13,6 +13,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
 
+import static java.lang.Thread.sleep;
+
 public class ServerController {
     private ServerModel model;
 
@@ -60,17 +62,23 @@ public class ServerController {
 
     private void registeringNewClient(Selector selector, ServerSocketChannel serverSocket) throws IOException {
         SocketChannel clientSocketChannel = serverSocket.accept();
-        clientSocketChannel.configureBlocking(false);
-        clientSocketChannel.register(selector, SelectionKey.OP_READ);
+//        clientSocketChannel.configureBlocking(false);
+//        clientSocketChannel.register(selector, SelectionKey.OP_READ);
 
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1);
-        clientSocketChannel.read(byteBuffer);
+        byte byteBuffer[] = new byte[1];
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         ClientData clientData;
-        if (byteBuffer.get() == 0) {
+        if (byteBuffer[0] == (byte)10) {
             clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+            System.out.println("SERIALIZABLE");
         } else {
             clientData = new ClientData(TransferProtocol.XML);
+            System.out.println("XML");
         }
         model.getClientTable().put(clientSocketChannel, clientData);
 
