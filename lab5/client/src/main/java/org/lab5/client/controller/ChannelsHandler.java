@@ -35,7 +35,7 @@ public class ChannelsHandler implements Runnable {
                 SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isReadable()) {
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), model.getTransferProtocol());
                     if (request == null) {
                         controller.stopConnection();
                         model.setViewStage(ViewStage.CONNECT_FORM);

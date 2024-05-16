@@ -43,7 +43,8 @@ public class ServerController {
                 }
 
                 if (selectionKey.isReadable()) {
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    TransferProtocol transferProtocol = model.getClientTable().get(selectionKey.channel()).transferProtocol;
+                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), transferProtocol);
                     if (request == null) {
                         deleteClient((SocketChannel) selectionKey.channel());
                     } else {
@@ -67,7 +68,9 @@ public class ServerController {
 
         List<MessageData> messagesList = model.getMessageList();
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
-        SendReceiveRequest.sendRequest(socketChannel, messagesListReq);
+
+        TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
+        SendReceiveRequest.sendRequest(socketChannel, messagesListReq, transferProtocol);
 
         Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
         socketChannelSet.remove(socketChannel);
@@ -85,7 +88,8 @@ public class ServerController {
         }
         model.getClientTable().put(socketChannel, clientData);
 
-        SendReceiveRequest.sendRequest(socketChannel, new TransportProtocolReq((byte) 0));
+        TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
+        SendReceiveRequest.sendRequest(socketChannel, new TransportProtocolReq((byte) 0), transferProtocol);
     }
 
     public void receiveMessageAndBroadcastToAnywhere(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
@@ -95,6 +99,7 @@ public class ServerController {
 
         Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
+
         SendReceiveRequest.broadCast(socketChannelSet, messageFromServerReq);
     }
 
@@ -102,7 +107,9 @@ public class ServerController {
         Map<SocketChannel, ClientData> clientTable = model.getClientTable();
         List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
         ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataList);
-        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveReqRequest);
+
+        TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
+        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveReqRequest, transferProtocol);
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {
@@ -113,6 +120,7 @@ public class ServerController {
         Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         NotificationData notificationData = new NotificationData(NotificationType.DISCONNECT, nickNameRemovedClient);
         NotificationReq notificationReq = new NotificationReq(notificationData);
+
         SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
     }
 }

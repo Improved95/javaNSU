@@ -28,13 +28,13 @@ public class ClientController {
 
     public void sendMessage(String message) {
         MessageFromClientReq messageFromClientReqRequest = new MessageFromClientReq(message);
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageFromClientReqRequest);
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageFromClientReqRequest, model.getTransferProtocol());
     }
 
     public void getListOfClients() {
         model.setClientListStatus(ClientListStatus.REQUEST);
         ClientsListRequestReq clientsListRequestReq = new ClientsListRequestReq();
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequestReq);
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequestReq, model.getTransferProtocol());
     }
 
     public void connectToServer() {
@@ -65,7 +65,7 @@ public class ClientController {
     }
 
     public void loginToServer() {
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()));
+        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()), model.getTransferProtocol());
         model.setViewStage(ViewStage.CHAT);
     }
 

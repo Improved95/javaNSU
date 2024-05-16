@@ -6,7 +6,6 @@ import org.lab5.communication.requests.TransportProtocolReq;
 import java.io.*;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
-import java.nio.channels.AsynchronousCloseException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.NotYetConnectedException;
 import java.nio.channels.SocketChannel;
@@ -17,11 +16,11 @@ public class SendReceiveRequest {
 
     public static void broadCast(Set<SocketChannel> socketChannelSet, Request request) {
         for (SocketChannel socketChannel : socketChannelSet) {
-            sendRequest(socketChannel, request);
+            sendRequest(socketChannel, request, transferProtocol);
         }
     }
 
-    public static void sendRequest(SocketChannel socketChannel, Request request) {
+    public static void sendRequest(SocketChannel socketChannel, Request request, TransferProtocol transferProtocol) {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
             oos.writeObject(request);
@@ -35,7 +34,7 @@ public class SendReceiveRequest {
         }
     }
 
-    public static Request receiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
+    public static Request receiveRequest(SocketChannel socketChannel, TransferProtocol transferProtocol) throws IOException, ClassNotFoundException {
         ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
 
         int bytesRead;
