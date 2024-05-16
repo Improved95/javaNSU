@@ -50,7 +50,7 @@ public class ClientRequestHandler {
 
     private static void handleNotification(Request request, ClientModel model) {
         NotificationReq notificationReq = (NotificationReq) request;
-        model.getNotificationDataList().add(notificationReq.notificationData);
+        model.getNotificationList().add(notificationReq.notificationData);
         model.setChatAreaStatus(ChatAreaStatus.ADD_NOTIFICATION);
     }
 }

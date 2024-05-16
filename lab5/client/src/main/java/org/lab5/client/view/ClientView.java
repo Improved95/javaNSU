@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -125,7 +124,7 @@ public class ClientView {
         label.setWrapText(true);
         label.setFont(Font.font("Arial Bold", 13));
 
-        NotificationData notificationData = model.getNotificationDataList().getLast();
+        NotificationData notificationData = model.getNotificationList().getLast();
         String notificationText = "User " + notificationData.text;
         if (notificationData.notificationType == NotificationType.CONNECT) {
             notificationText += " connected.";
@@ -149,6 +148,11 @@ public class ClientView {
         label.setWrapText(true);
         label.setFont(Font.font("Arial", 12));
         return label;
+    }
+
+    public void clickOnDisconnectButton() {
+        controller.stopConnection();
+        model.setViewStage(ViewStage.CONNECT_FORM);
     }
 
     public void switchOnChatFromClientsList() {
@@ -188,7 +192,7 @@ public class ClientView {
     }
 
     public void closeApp() {
-        controller.stopConnection();
         tickGenerator.cancel();
+        controller.stopConnection();
     }
 }

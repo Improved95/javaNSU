@@ -88,7 +88,7 @@ public class JavaFxFrame extends Application {
         initialMainChatScene();
         initialClientsListScene();
 
-        stage.setOnCloseRequest((windowEvent) -> {
+        mainStage.setOnCloseRequest((windowEvent) -> {
             clientView.closeApp();
             mainStage.close();
         });

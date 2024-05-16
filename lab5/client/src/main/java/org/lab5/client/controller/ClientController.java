@@ -74,6 +74,10 @@ public class ClientController {
             if (model.getClientSocketChannel() != null) {
                 model.getClientSocketChannel().close();
                 channelsHandler.stopChannelsHandle();
+
+                model.getMessagesList().clear();
+                model.getNotificationList().clear();
+
                 channelsHandlerThread.interrupt();
             }
         } catch (IOException ex) {

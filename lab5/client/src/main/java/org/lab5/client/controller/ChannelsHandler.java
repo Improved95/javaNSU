@@ -1,6 +1,7 @@
 package org.lab5.client.controller;
 
 import org.lab5.client.model.ClientModel;
+import org.lab5.client.view.ViewStage;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
 
@@ -35,6 +36,10 @@ public class ChannelsHandler implements Runnable {
 
                 if (selectionKey.isReadable()) {
                     Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel());
+                    if (request == null) {
+                        controller.stopConnection();
+                        model.setViewStage(ViewStage.CONNECT_FORM);
+                    }
                     ClientRequestHandler.handle(request, model);
                 }
 

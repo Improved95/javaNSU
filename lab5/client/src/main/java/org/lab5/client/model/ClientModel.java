@@ -19,7 +19,7 @@ public class ClientModel {
 
     private List<ClientData> clientDataList = new ArrayList<>();
     private List<MessageData> messagesList = new ArrayList<>();
-    private List<NotificationData> notificationDataList = new ArrayList<>();
+    private List<NotificationData> notificationList = new ArrayList<>();
     private TransferProtocol transferProtocol;
 
     private ViewStage viewStage;
@@ -80,8 +80,8 @@ public class ClientModel {
         return messagesList;
     }
 
-    public List<NotificationData> getNotificationDataList() {
-        return notificationDataList;
+    public List<NotificationData> getNotificationList() {
+        return notificationList;
     }
 
     public ViewStage getViewStage() {

@@ -41,6 +41,6 @@ public class MainChatController implements SceneController {
 
     @FXML
     public void clickOnDisconnectButton() {
-
+        clientView.clickOnDisconnectButton();
     }
 }
