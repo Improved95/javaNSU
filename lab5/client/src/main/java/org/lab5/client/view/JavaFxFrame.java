@@ -67,8 +67,8 @@ public class JavaFxFrame extends Application {
             mainStage.setX(screenWidth / 2 - newSceneWidth / 2);
             mainStage.setY(screenHeight / 2 - newSceneHeight / 2);
         } else {
-            double middlePosX = currentScene.getX() / 2;
-            double middlePosY = currentScene.getY() / 2;
+            double middlePosX = mainStage.getX() + currentScene.getWidth() / 2;
+            double middlePosY = mainStage.getY() + currentScene.getHeight() / 2;
 
             mainStage.setX(middlePosX - newSceneWidth / 2);
             mainStage.setY(middlePosY - newSceneHeight / 2);
