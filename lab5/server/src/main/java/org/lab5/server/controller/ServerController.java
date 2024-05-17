@@ -70,26 +70,36 @@ public class ServerController {
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
-        SendReceiveRequest.sendRequest(socketChannel, messagesListReq, transferProtocol);
 
-        Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
+
+        try {
+            SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        /*Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
         socketChannelSet.remove(socketChannel);
-        NotificationData notificationData = new NotificationData(NotificationType.CONNECT, nickname);
-        NotificationReq notificationReq = new NotificationReq(notificationData);
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
+        NotificationReq notificationReq = new NotificationReq(
+                new NotificationData(NotificationType.CONNECT, nickname));
+        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);*/
     }
 
     public void setClientTransportProtocol(TransportProtocolReq transportProtocolReq, SocketChannel socketChannel) {
         ClientData clientData;
         if (transportProtocolReq.transportProtocolByte == (byte)10) {
-            clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+            clientData = new ClientData(socketChannel, TransferProtocol.SERIALIZABLE);
         } else {
-            clientData = new ClientData(TransferProtocol.XML);
+            clientData = new ClientData(socketChannel, TransferProtocol.XML);
         }
         model.getClientTable().put(socketChannel, clientData);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
-        SendReceiveRequest.sendRequest(socketChannel, new TransportProtocolReq((byte) 0), transferProtocol);
+        try {
+            SendReceiveRequest.sendRequest(new TransportProtocolReq((byte) 0), socketChannel, transferProtocol);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void receiveMessageAndBroadcastToAnywhere(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
@@ -100,7 +110,11 @@ public class ServerController {
         Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
 
-        SendReceiveRequest.broadCast(socketChannelSet, messageFromServerReq);
+        try {
+            SendReceiveRequest.broadCast(messageFromServerReq, socketChannelSet);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void sendClientList(SocketChannel socketChannel) {
@@ -109,7 +123,11 @@ public class ServerController {
         ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataList);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
-        SendReceiveRequest.sendRequest(socketChannel, clientsListReceiveReqRequest, transferProtocol);
+        try {
+            SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void deleteClient(SocketChannel socketChannel) throws IOException {
@@ -121,6 +139,6 @@ public class ServerController {
         NotificationData notificationData = new NotificationData(NotificationType.DISCONNECT, nickNameRemovedClient);
         NotificationReq notificationReq = new NotificationReq(notificationData);
 
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);
+        SendReceiveRequest.broadCast(notificationReq, socketChannelSet);
     }
 }

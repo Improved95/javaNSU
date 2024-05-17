@@ -28,13 +28,21 @@ public class ClientController {
 
     public void sendMessage(String message) {
         MessageFromClientReq messageFromClientReqRequest = new MessageFromClientReq(message);
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), messageFromClientReqRequest, model.getTransferProtocol());
+        try {
+            SendReceiveRequest.sendRequest(messageFromClientReqRequest, model.getClientSocketChannel(), model.getTransferProtocol());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void getListOfClients() {
         model.setClientListStatus(ClientListStatus.REQUEST);
         ClientsListRequestReq clientsListRequestReq = new ClientsListRequestReq();
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), clientsListRequestReq, model.getTransferProtocol());
+        try {
+            SendReceiveRequest.sendRequest(clientsListRequestReq, model.getClientSocketChannel(), model.getTransferProtocol());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void connectToServer() {
@@ -65,7 +73,11 @@ public class ClientController {
     }
 
     public void loginToServer() {
-        SendReceiveRequest.sendRequest(model.getClientSocketChannel(), new LoginReq(model.getNickname()), model.getTransferProtocol());
+        try {
+            SendReceiveRequest.sendRequest(new LoginReq(model.getNickname()), model.getClientSocketChannel(), model.getTransferProtocol());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         model.setViewStage(ViewStage.CHAT);
     }
 
