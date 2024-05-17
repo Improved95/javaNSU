@@ -33,7 +33,6 @@ public class Client {
         view.setController(clientController);
 
         clientController.setModel(model);
-        ClientRequestHandler.setController(clientController);
 
         new Thread(() -> JavaFxFrame.main(null)).start();
     }

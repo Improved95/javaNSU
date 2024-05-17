@@ -19,7 +19,7 @@ public class ClientController {
     private ClientModel model;
 
     private Selector selector;
-    private ChannelsHandler channelsHandler;
+    private ClientChannelsHandler clientChannelsHandler;
     private Thread channelsHandlerThread;
 
     public void setModel(ClientModel model) {
@@ -66,20 +66,16 @@ public class ClientController {
 
             loginToServer();
 
-            channelsHandler = new ChannelsHandler(model, this, selector);
-            channelsHandlerThread = new Thread(channelsHandler);
+            clientChannelsHandler = new ClientChannelsHandler(model, this, selector);
+            channelsHandlerThread = new Thread(clientChannelsHandler);
             channelsHandlerThread.start();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void loginToServer() {
-        try {
-            SendReceiveRequest.sendRequest(new LoginReq(model.getNickname()), model.getClientSocketChannel(), model.getTransferProtocol());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public void loginToServer() throws IOException {
+        SendReceiveRequest.sendRequest(new LoginReq(model.getNickname()), model.getClientSocketChannel(), model.getTransferProtocol());
         model.setViewStage(ViewStage.CHAT);
     }
 
@@ -87,7 +83,7 @@ public class ClientController {
         try {
             if (model.getClientSocketChannel() != null) {
                 model.getClientSocketChannel().close();
-                channelsHandler.stopChannelsHandle();
+                clientChannelsHandler.stopChannelsHandle();
 
                 model.getMessagesList().clear();
                 model.getNotificationList().clear();

@@ -10,12 +10,6 @@ import org.lab5.communication.requests.Request;
 import org.lab5.communication.requests.notification.NotificationReq;
 
 public class ClientRequestHandler {
-    private static ClientController controller;
-
-    public static void setController(ClientController controller) {
-        ClientRequestHandler.controller = controller;
-    }
-
     public static void handle(Request request, ClientModel model) {
         switch (request.requestType) {
             case CLIENTS_LIST_RECEIVE -> handleClientsListReceive(request, model);

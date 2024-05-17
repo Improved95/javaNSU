@@ -16,49 +16,14 @@ public class ServerController {
     private ServerModel model;
 
     private Selector selector;
-    private ServerSocketChannel serverSocketChannel;
+    private ServerChannelsHandler channelsHandler;
+    private Thread channelsHandlerThread;
 
     public void setServerModel(ServerModel serverModel) {
         this.model = serverModel;
     }
 
-    public void initialServer() throws IOException {
-        selector = Selector.open();
-        serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.bind(new InetSocketAddress("localhost", model.getServerPort()));
-        serverSocketChannel.configureBlocking(false);
-        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-    }
-
-    public void channelsHandler() throws IOException, ClassNotFoundException {
-        while (true) {
-            selector.select();
-            Set<SelectionKey> selectionKeys = selector.selectedKeys();
-            Iterator<SelectionKey> selectionKeysIterator = selectionKeys.iterator();
-
-            while (selectionKeysIterator.hasNext()) {
-                SelectionKey selectionKey = selectionKeysIterator.next();
-
-                if (selectionKey.isAcceptable()) {
-                    registeringNewClient(selector, serverSocketChannel);
-                }
-
-                if (selectionKey.isReadable()) {
-                    TransferProtocol transferProtocol = model.getClientTable().get(selectionKey.channel()).transferProtocol;
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), transferProtocol);
-                    if (request == null) {
-                        deleteClient((SocketChannel) selectionKey.channel());
-                    } else {
-                        ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel());
-                    }
-                }
-
-                selectionKeysIterator.remove();
-            }
-        }
-    }
-
-    private void registeringNewClient(Selector selector, ServerSocketChannel serverSocket) throws IOException {
+    public void registeringNewClient(Selector selector, ServerSocketChannel serverSocket) throws IOException {
         SocketChannel clientSocketChannel = serverSocket.accept();
 
         byte[] buffer = new byte[1];
@@ -130,7 +95,7 @@ public class ServerController {
         }
     }
 
-    private void deleteClient(SocketChannel socketChannel) throws IOException {
+    public void deleteClient(SocketChannel socketChannel) throws IOException {
         String nickNameRemovedClient = model.getClientTable().get(socketChannel).getNickname();
         model.getClientTable().remove(socketChannel);
         socketChannel.close();
@@ -140,5 +105,41 @@ public class ServerController {
         NotificationReq notificationReq = new NotificationReq(notificationData);
 
         SendReceiveRequest.broadCast(notificationReq, socketChannelSet);
+    }
+
+    public void initialServer() {
+        try {
+            selector = Selector.open();
+            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+            serverSocketChannel.bind(new InetSocketAddress("localhost", model.getServerPort()));
+            serverSocketChannel.configureBlocking(false);
+            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+            model.setServerSocketChannel(serverSocketChannel);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void initialChannelHandler() {
+        channelsHandler = new ServerChannelsHandler(model, this, selector);
+        channelsHandlerThread = new Thread(channelsHandler);
+        channelsHandlerThread.start();
+    }
+
+    public void stopServer() {
+        Set<SelectionKey> selectionKeys = selector.selectedKeys();
+        try {
+            for (SelectionKey selectionKey : selectionKeys) {
+                selectionKey.channel().close();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        if (channelsHandler != null) {
+            channelsHandler.stopChannelsHandle();
+            channelsHandlerThread.interrupt();
+        }
     }
 }

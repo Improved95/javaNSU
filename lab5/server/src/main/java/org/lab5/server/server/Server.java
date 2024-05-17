@@ -6,6 +6,7 @@ import org.lab5.server.model.ServerModel;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 
 public class Server {
     private ServerModel serverModel;
@@ -24,11 +25,14 @@ public class Server {
         serverController.setServerModel(serverModel);
         ServerRequestHandler.setController(serverController);
 
-        try {
-            serverController.initialServer();
-            serverController.channelsHandler();
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        serverController.initialServer();
+        serverController.initialChannelHandler();
+
+        Scanner scanner = new Scanner(System.in);
+        String line;
+        do {
+            line = scanner.next();
+        } while (!line.equals("break"));
+        serverController.stopServer();
     }
 }
