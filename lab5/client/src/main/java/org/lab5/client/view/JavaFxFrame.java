@@ -57,14 +57,24 @@ public class JavaFxFrame extends Application {
         switchScene(chatScene);
     }
 
-    private static void switchScene(Scene connectFormScene) {
-        mainStage.setScene(connectFormScene);
+    private static void switchScene(Scene newScene) {
+        Scene currentScene = mainStage.getScene();
 
-        double sceneWidth = connectFormScene.getWidth();
-        double sceneHeight = connectFormScene.getHeight();
-        mainStage.setX(screenWidth / 2 - sceneWidth / 2);
-        mainStage.setY(screenHeight / 2 - sceneHeight / 2);
+        double newSceneWidth = newScene.getWidth();
+        double newSceneHeight = newScene.getHeight();
 
+        if (currentScene == null) {
+            mainStage.setX(screenWidth / 2 - newSceneWidth / 2);
+            mainStage.setY(screenHeight / 2 - newSceneHeight / 2);
+        } else {
+            double middlePosX = currentScene.getX() / 2;
+            double middlePosY = currentScene.getY() / 2;
+
+            mainStage.setX(middlePosX - newSceneWidth / 2);
+            mainStage.setY(middlePosY - newSceneHeight / 2);
+        }
+
+        mainStage.setScene(newScene);
         mainStage.show();
     }
 
