@@ -9,8 +9,8 @@ import java.util.Set;
 
 public class SendReceiveRequest {
     public static void broadCast(Request request, Set<SocketChannel> socketChannelSet) throws IOException {
-        ByteBuffer buffer = ObjectSerialize.createSendByteBuffer(request);
         for (SocketChannel socketChannel : socketChannelSet) {
+            ByteBuffer buffer = ObjectSerialize.createSendByteBuffer(request);
             socketChannel.write(buffer);
         }
     }
