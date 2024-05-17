@@ -64,6 +64,8 @@ public class ClientController {
             }
             model.getClientSocketChannel().write(ByteBuffer.wrap(byteBuffer));
 
+            loginToServer();
+
             channelsHandler = new ChannelsHandler(model, this, selector);
             channelsHandlerThread = new Thread(channelsHandler);
             channelsHandlerThread.start();

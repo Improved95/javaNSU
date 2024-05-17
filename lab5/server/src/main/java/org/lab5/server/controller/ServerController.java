@@ -8,6 +8,7 @@ import org.lab5.server.model.ServerModel;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
 
@@ -59,6 +60,19 @@ public class ServerController {
 
     private void registeringNewClient(Selector selector, ServerSocketChannel serverSocket) throws IOException {
         SocketChannel clientSocketChannel = serverSocket.accept();
+
+        byte[] buffer = new byte[1];
+        clientSocketChannel.read(ByteBuffer.wrap(buffer));
+
+        System.out.println(buffer[0]);
+
+        ClientData clientData = null;
+        switch (buffer[0]) {
+            case 10 -> clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+            case 20 -> clientData = new ClientData(TransferProtocol.XML);
+        }
+        model.getClientTable().put(clientSocketChannel, clientData);
+
         clientSocketChannel.configureBlocking(false);
         clientSocketChannel.register(selector, SelectionKey.OP_READ);
     }
@@ -70,39 +84,25 @@ public class ServerController {
         MessagesListReq messagesListReq = new MessagesListReq(messagesList);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
-
-
         try {
             SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        /*Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
+        Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
         socketChannelSet.remove(socketChannel);
         NotificationReq notificationReq = new NotificationReq(
                 new NotificationData(NotificationType.CONNECT, nickname));
-        SendReceiveRequest.broadCast(socketChannelSet, notificationReq);*/
-    }
 
-    public void setClientTransportProtocol(TransportProtocolReq transportProtocolReq, SocketChannel socketChannel) {
-        ClientData clientData;
-        if (transportProtocolReq.transportProtocolByte == (byte)10) {
-            clientData = new ClientData(socketChannel, TransferProtocol.SERIALIZABLE);
-        } else {
-            clientData = new ClientData(socketChannel, TransferProtocol.XML);
-        }
-        model.getClientTable().put(socketChannel, clientData);
-
-        TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
-            SendReceiveRequest.sendRequest(new TransportProtocolReq((byte) 0), socketChannel, transferProtocol);
+            SendReceiveRequest.broadCast(notificationReq, socketChannelSet);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void receiveMessageAndBroadcastToAnywhere(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
+    public void receiveMessageAndBroadcastToEveryone(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
         String clientNickname = model.getClientTable().get(socketChannel).getNickname();
         MessageData messageData = new MessageData(clientNickname, messageFromClientReq.message);
         model.getMessageList().add(messageData);

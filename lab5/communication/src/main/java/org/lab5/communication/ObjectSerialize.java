@@ -1,7 +1,6 @@
 package org.lab5.communication;
 
 import org.lab5.communication.requests.Request;
-import org.lab5.communication.requests.TransportProtocolReq;
 
 import java.io.*;
 import java.net.SocketException;
@@ -39,10 +38,6 @@ public class ObjectSerialize {
         byte[] receiveBytes = new byte[bytesRead];
         receiveBuffer.flip();
         receiveBuffer.get(receiveBytes);
-
-        if (bytesRead == 1) {
-            return new TransportProtocolReq(receiveBytes[0]);
-        }
 
         try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
             return (Request) ois.readObject();

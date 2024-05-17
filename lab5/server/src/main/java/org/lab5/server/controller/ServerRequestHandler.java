@@ -1,7 +1,6 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.requests.*;
-import org.lab5.communication.requests.TransportProtocolReq;
 
 import java.nio.channels.SocketChannel;
 
@@ -14,16 +13,10 @@ public class ServerRequestHandler {
 
     public static void handle(Request request, SocketChannel socketChannel) {
         switch (request.requestType) {
-            case TRANSPORT_PROTOCOL -> handleTransportProtocol(request, socketChannel);
             case LOGIN -> handleLogin(request, socketChannel);
             case MESSAGE_FROM_CLIENT -> handleMessage(request, socketChannel);
             case CLIENTS_LIST_REQUEST -> handleClientListRequest(socketChannel);
         }
-    }
-
-    private static void handleTransportProtocol(Request request, SocketChannel socketChannel) {
-        TransportProtocolReq transportProtocolReq = (TransportProtocolReq) request;
-        controller.setClientTransportProtocol(transportProtocolReq, socketChannel);
     }
 
     private static void handleLogin(Request request, SocketChannel socketChannel) {
