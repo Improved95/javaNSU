@@ -26,7 +26,7 @@ public class ServerRequestHandler {
 
     private static void handleMessage(Request request, SocketChannel socketChannel) {
         MessageFromClientReq messageFromClientReqRequest = (MessageFromClientReq) request;
-        controller.receiveMessageAndBroadcastToAnywhere(messageFromClientReqRequest, socketChannel);
+        controller.receiveMessageAndBroadcastToEveryone(messageFromClientReqRequest, socketChannel);
     }
 
     private static void handleClientListRequest(SocketChannel socketChannel) {
