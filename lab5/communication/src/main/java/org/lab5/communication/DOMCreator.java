@@ -1,9 +1,13 @@
 package org.lab5.communication;
 
+import org.lab5.communication.requests.ClientsListReceiveReq;
+import org.lab5.communication.requests.ClientsListRequestReq;
 import org.lab5.communication.requests.LoginReq;
 import org.lab5.communication.requests.Request;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,6 +27,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.NotYetConnectedException;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DOMCreator {
     private static int bufferSize = 1024;
@@ -47,12 +53,12 @@ public class DOMCreator {
         }
     }
 
-
     public static ByteBuffer createSendByteBuffer(Request request) throws TransformerException {
         Document document = null;
         switch (request.requestType) {
             case LOGIN -> document = createLoginXML(request);
             case CLIENTS_LIST_REQUEST -> document = createClientsListRequestXML();
+            case CLIENTS_LIST_RECEIVE -> document = createClientListReceiveXML(request);
         }
 
         StringWriter stringWriter = new StringWriter();
@@ -84,8 +90,26 @@ public class DOMCreator {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
-        commandElement.setAttribute("name", "list");
+        commandElement.setAttribute("name", "request-clients-list");
         document.appendChild(commandElement);
+
+        return document;
+    }
+
+    private static Document createClientListReceiveXML(Request request) {
+        Document document = documentBuilder.newDocument();
+
+        Element commandElement = document.createElement("command");
+        commandElement.setAttribute("name", "receive-clients-list");
+        document.appendChild(commandElement);
+
+        ClientsListReceiveReq clientsListReceiveReq = (ClientsListReceiveReq) request;
+        for (ClientData clientData : clientsListReceiveReq.listOfClients) {
+            Element clientDataElement = document.createElement("nickname");
+            clientDataElement.setTextContent(clientData.getNickname());
+
+            commandElement.appendChild(clientDataElement);
+        }
 
         return document;
     }
@@ -130,6 +154,8 @@ public class DOMCreator {
         Request request = null;
         switch (requestType) {
             case ("login") -> request = createLoginRequestFromXML(commandElement);
+            case ("request-clients-list") -> request = createClientListRequestFromXML();
+            case ("receive-clients-list") -> request = createClientListReceiveFromXML(commandElement);
         }
         return request;
     }
@@ -137,5 +163,24 @@ public class DOMCreator {
     private static Request createLoginRequestFromXML(Element commandElement) {
         String name = commandElement.getElementsByTagName("name").item(0).getTextContent();
         return new LoginReq(name);
+    }
+
+    private static Request createClientListRequestFromXML() {
+        return new ClientsListRequestReq();
+    }
+
+    private static Request createClientListReceiveFromXML(Element commandElement) {
+        List<ClientData> clientDataList = new ArrayList<>();
+
+        NodeList nodeList = commandElement.getChildNodes();
+        int len = nodeList.getLength();
+        for (int i = 0; i < len; ++i) {
+            String clientNickname = nodeList.item(i).getTextContent();
+            ClientData clientData = new ClientData(null);
+            clientData.setNickname(clientNickname);
+            clientDataList.add(clientData);
+        }
+
+        return new ClientsListReceiveReq(clientDataList);
     }
 }
