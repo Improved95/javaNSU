@@ -6,6 +6,9 @@ import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -51,7 +54,7 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol);
-        } catch (IOException ex) {
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
 
@@ -90,7 +93,7 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol);
-        } catch (IOException ex) {
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
     }

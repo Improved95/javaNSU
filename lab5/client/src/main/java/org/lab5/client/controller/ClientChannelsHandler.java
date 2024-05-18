@@ -4,7 +4,9 @@ import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ViewStage;
 import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -25,7 +27,7 @@ public class ClientChannelsHandler implements Runnable {
         this.selector = selector;
     }
 
-    public void channelsHandler() throws IOException, ClassNotFoundException {
+    public void channelsHandler() throws IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
         while (continueChannelsHandler) {
             selector.select();
             Set<SelectionKey> selectionKeySet = selector.selectedKeys();
@@ -56,7 +58,7 @@ public class ClientChannelsHandler implements Runnable {
     public void run() {
         try {
             channelsHandler();
-        } catch (IOException | RuntimeException | ClassNotFoundException ex) {
+        } catch (IOException | RuntimeException | ClassNotFoundException | SAXException | ParserConfigurationException ex) {
             ex.printStackTrace();
         }
     }

@@ -8,6 +8,7 @@ import org.lab5.communication.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.*;
 
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
@@ -30,7 +31,7 @@ public class ClientController {
         MessageFromClientReq messageFromClientReqRequest = new MessageFromClientReq(message);
         try {
             SendReceiveRequest.sendRequest(messageFromClientReqRequest, model.getClientSocketChannel(), model.getTransferProtocol());
-        } catch (IOException ex) {
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
     }
@@ -40,13 +41,14 @@ public class ClientController {
         ClientsListRequestReq clientsListRequestReq = new ClientsListRequestReq();
         try {
             SendReceiveRequest.sendRequest(clientsListRequestReq, model.getClientSocketChannel(), model.getTransferProtocol());
-        } catch (IOException ex) {
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
     }
 
     public void connectToServer() {
         try {
+            //connect to server
             SocketChannel clientSocketChannel = SocketChannel.open(
                     new InetSocketAddress(model.getServerIP(), model.getServerPort()));
             clientSocketChannel.configureBlocking(false);
@@ -56,6 +58,7 @@ public class ClientController {
 
             model.setClientSocketChannel(clientSocketChannel);
 
+            //send transport protocol
             byte byteBuffer[] = new byte[1];
             if (model.getTransferProtocol().equals(TransferProtocol.SERIALIZABLE)) {
                 byteBuffer[0] = 10;
@@ -64,19 +67,17 @@ public class ClientController {
             }
             model.getClientSocketChannel().write(ByteBuffer.wrap(byteBuffer));
 
-            loginToServer();
+            //send login request
+            SendReceiveRequest.sendRequest(new LoginReq(model.getNickname()), model.getClientSocketChannel(), model.getTransferProtocol());
+            model.setViewStage(ViewStage.CHAT);
 
+            //create channels handler thread
             clientChannelsHandler = new ClientChannelsHandler(model, this, selector);
             channelsHandlerThread = new Thread(clientChannelsHandler);
             channelsHandlerThread.start();
-        } catch (IOException ex) {
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public void loginToServer() throws IOException {
-        SendReceiveRequest.sendRequest(new LoginReq(model.getNickname()), model.getClientSocketChannel(), model.getTransferProtocol());
-        model.setViewStage(ViewStage.CHAT);
     }
 
     public void stopConnection() {

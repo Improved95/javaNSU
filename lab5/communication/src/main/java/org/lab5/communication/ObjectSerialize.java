@@ -22,7 +22,7 @@ public class ObjectSerialize {
         }
     }
 
-    public static Request createRequestFromByteBuffer(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
+    public static Request createReceiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
         ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
 
         int bytesRead;

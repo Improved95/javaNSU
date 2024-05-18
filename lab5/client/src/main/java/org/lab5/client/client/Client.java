@@ -1,13 +1,10 @@
 package org.lab5.client.client;
 
 import org.lab5.client.controller.ClientController;
-import org.lab5.client.controller.ClientRequestHandler;
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ClientView;
 import org.lab5.client.view.JavaFxFrame;
 import org.lab5.client.view.ViewStage;
-
-import java.io.IOException;
 
 public class Client {
     private ClientModel model;
