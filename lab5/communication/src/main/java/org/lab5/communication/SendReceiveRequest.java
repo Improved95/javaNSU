@@ -35,7 +35,7 @@ public class SendReceiveRequest {
         Request request = null;
         switch (transferProtocol) {
             case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(socketChannel);
-            case XML -> request = DOMCreator.createReceiveRequest(socketChannel);
+            case XML -> request = DOMParser.createReceiveRequest(socketChannel);
         }
         return request;
     }

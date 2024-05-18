@@ -1,14 +1,8 @@
 package org.lab5.communication;
 
-import org.lab5.communication.requests.ClientsListReceiveReq;
-import org.lab5.communication.requests.ClientsListRequestReq;
-import org.lab5.communication.requests.LoginReq;
-import org.lab5.communication.requests.Request;
+import org.lab5.communication.requests.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,16 +13,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.StringWriter;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ClosedChannelException;
-import java.nio.channels.NotYetConnectedException;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DOMCreator {
     private static int bufferSize = 1024;
@@ -59,6 +45,7 @@ public class DOMCreator {
             case LOGIN -> document = createLoginXML(request);
             case CLIENTS_LIST_REQUEST -> document = createClientsListRequestXML();
             case CLIENTS_LIST_RECEIVE -> document = createClientListReceiveXML(request);
+            case MESSAGE_FROM_CLIENT -> document = createMessageFromClientXML(request);
         }
 
         StringWriter stringWriter = new StringWriter();
@@ -114,73 +101,17 @@ public class DOMCreator {
         return document;
     }
 
-    public static Request createReceiveRequest(SocketChannel socketChannel)
-            throws IOException, SAXException, ParserConfigurationException {
+    private static Document createMessageFromClientXML(Request request) {
+        Document document = documentBuilder.newDocument();
 
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
+        Element commandElement = document.createElement("command");
+        commandElement.setAttribute("name", "message-from-client");
+        document.appendChild(commandElement);
 
-        int bytesRead;
-        try {
-            bytesRead = socketChannel.read(receiveBuffer);
-            System.out.println("bytes read " + bytesRead);
-        } catch (SocketException | NotYetConnectedException | ClosedChannelException ex) {
-            return null;
-        }
+        MessageFromClientReq messageFromClientReq = (MessageFromClientReq) request;
+        Element messageElement = document.createElement("message");
+        commandElement.setTextContent(messageFromClientReq.message);
 
-        if (bytesRead == - 1) { return null; }
-
-        byte[] receiveBytes = new byte[bytesRead];
-        receiveBuffer.flip();
-        receiveBuffer.get(receiveBytes);
-
-        Document document = documentBuilder.parse(new ByteArrayInputStream(receiveBytes));
-
-        /*Transformer transformer = null;
-        try {
-            transformer = transformerFactory.newTransformer();
-            StringWriter stringWriter = new StringWriter();
-            transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
-
-            System.out.println(stringWriter.getBuffer().toString());
-        } catch (TransformerException ex) {
-            ex.printStackTrace();
-        }*/
-
-        document.getDocumentElement().normalize();
-        Element commandElement = (Element) document.getElementsByTagName("command").item(0);
-
-        String requestType = document.getDocumentElement().getAttribute("name");
-        Request request = null;
-        switch (requestType) {
-            case ("login") -> request = createLoginRequestFromXML(commandElement);
-            case ("request-clients-list") -> request = createClientListRequestFromXML();
-            case ("receive-clients-list") -> request = createClientListReceiveFromXML(commandElement);
-        }
-        return request;
-    }
-
-    private static Request createLoginRequestFromXML(Element commandElement) {
-        String name = commandElement.getElementsByTagName("name").item(0).getTextContent();
-        return new LoginReq(name);
-    }
-
-    private static Request createClientListRequestFromXML() {
-        return new ClientsListRequestReq();
-    }
-
-    private static Request createClientListReceiveFromXML(Element commandElement) {
-        List<ClientData> clientDataList = new ArrayList<>();
-
-        NodeList nodeList = commandElement.getChildNodes();
-        int len = nodeList.getLength();
-        for (int i = 0; i < len; ++i) {
-            String clientNickname = nodeList.item(i).getTextContent();
-            ClientData clientData = new ClientData(null);
-            clientData.setNickname(clientNickname);
-            clientDataList.add(clientData);
-        }
-
-        return new ClientsListReceiveReq(clientDataList);
+        return document;
     }
 }
