@@ -6,14 +6,14 @@ import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ServerModel;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ServerController {
     private ServerModel model;
@@ -58,14 +58,11 @@ public class ServerController {
             ex.printStackTrace();
         }
 
-        Set<SocketChannel> socketChannelSet = new HashSet<>(model.getClientTable().keySet());
-        socketChannelSet.remove(socketChannel);
         NotificationReq notificationReq = new NotificationReq(
                 new NotificationData(NotificationType.CONNECT, nickname));
-
         try {
-            SendReceiveRequest.broadCast(notificationReq, socketChannelSet);
-        } catch (IOException ex) {
+            SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(socketChannel));
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
     }
@@ -75,12 +72,10 @@ public class ServerController {
         MessageData messageData = new MessageData(clientNickname, messageFromClientReq.message);
         model.getMessageList().add(messageData);
 
-        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
-
         try {
-            SendReceiveRequest.broadCast(messageFromServerReq, socketChannelSet);
-        } catch (IOException ex) {
+            SendReceiveRequest.broadCast(messageFromServerReq, getClientsListForBroadCast(null));
+        } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
     }
@@ -98,16 +93,28 @@ public class ServerController {
         }
     }
 
-    public void deleteClient(SocketChannel socketChannel) throws IOException {
+    public void deleteClient(SocketChannel socketChannel) throws IOException, TransformerException {
         String nickNameRemovedClient = model.getClientTable().get(socketChannel).getNickname();
         model.getClientTable().remove(socketChannel);
         socketChannel.close();
 
-        Set<SocketChannel> socketChannelSet = model.getClientTable().keySet();
         NotificationData notificationData = new NotificationData(NotificationType.DISCONNECT, nickNameRemovedClient);
         NotificationReq notificationReq = new NotificationReq(notificationData);
 
-        SendReceiveRequest.broadCast(notificationReq, socketChannelSet);
+        SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(null));
+    }
+
+    private List<Map.Entry<SocketChannel, TransferProtocol>> getClientsListForBroadCast(SocketChannel exceptionSocketChannel) {
+        return model.getClientTable().entrySet()
+                .stream()
+                .filter(entry -> {
+                    if (exceptionSocketChannel != null) {
+                        return !entry.getKey().equals(exceptionSocketChannel);
+                    }
+                    return true;
+                })
+                .map(entry -> new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().transferProtocol))
+                .collect(Collectors.toList());
     }
 
     public void initialServer() {

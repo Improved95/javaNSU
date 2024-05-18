@@ -115,7 +115,7 @@ public class DOMCreator {
         MessageFromClientReq messageFromClientReq = (MessageFromClientReq) request;
         Element messageElement = document.createElement("message");
         commandElement.setTextContent(messageFromClientReq.message);
-        document.appendChild(messageElement);
+        commandElement.appendChild(messageElement);
 
         return document;
     }
@@ -129,11 +129,12 @@ public class DOMCreator {
 
         MessageFromServerReq messageFromServerReq = (MessageFromServerReq) request;
         Element nicknameElement = document.createElement("nickname");
-        commandElement.setTextContent(messageFromServerReq.messageData.message);
+        nicknameElement.setTextContent(messageFromServerReq.messageData.nickname);
         commandElement.appendChild(nicknameElement);
 
         Element messageElement = document.createElement("message");
-        commandElement.setTextContent(messageFromServerReq.messageData.message);
+        System.out.println(messageFromServerReq.messageData.message);
+        messageElement.setTextContent(messageFromServerReq.messageData.message);
         commandElement.appendChild(messageElement);
 
         return document;
@@ -155,7 +156,6 @@ public class DOMCreator {
             messageDataElement.appendChild(nicknameElement);
 
             Element messageElement = document.createElement("message");
-            commandElement.setTextContent(messageData.message);
             messageDataElement.appendChild(messageElement);
 
             commandElement.appendChild(messageDataElement);
