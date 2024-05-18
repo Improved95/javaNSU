@@ -1,8 +1,11 @@
 package org.lab5.communication;
 
 import org.lab5.communication.requests.*;
+import org.lab5.communication.requests.notification.NotificationReq;
+import org.lab5.communication.requests.notification.NotificationType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -86,8 +89,12 @@ public class DOMParser {
         switch (requestType) {
             case ("login") -> request = createLoginRequestFromXML(commandElement);
             case ("request-clients-list") -> request = createClientListRequestFromXML();
-            case ("receive-clients-list") -> request = createClientListReceiveFromXML(commandElement);
-            case ("message-from-client") -> request = createMessageFromClientFromXML(commandElement);
+            case ("receive-clients-list") -> request = createClientListReceiveRequestFromXML(commandElement);
+            case ("message-from-client") -> request = createMessageFromClientRequestFromXML(commandElement);
+            case ("message-from-server") -> request = createMessageFromServerRequestFromXML(commandElement);
+            case ("message-list") -> request = createMessageListRequestFromXML(commandElement);
+            case ("notification") -> request = createNotificationRequestFromXML(commandElement);
+
         }
         return request;
     }
@@ -101,7 +108,7 @@ public class DOMParser {
         return new ClientsListRequestReq();
     }
 
-    private static Request createClientListReceiveFromXML(Element commandElement) {
+    private static Request createClientListReceiveRequestFromXML(Element commandElement) {
         List<ClientData> clientDataList = new ArrayList<>();
 
         NodeList nodeList = commandElement.getElementsByTagName("nickname");
@@ -116,8 +123,38 @@ public class DOMParser {
         return new ClientsListReceiveReq(clientDataList);
     }
 
-    private static Request createMessageFromClientFromXML(Element commandElement) {
+    private static Request createMessageFromClientRequestFromXML(Element commandElement) {
         String message = commandElement.getElementsByTagName("message").item(0).getTextContent();
         return new MessageFromClientReq(message);
+    }
+
+    private static Request createMessageFromServerRequestFromXML(Element commandElement) {
+        String nickname = commandElement.getElementsByTagName("nickname").item(0).getTextContent();
+        String message = commandElement.getElementsByTagName("message").item(0).getTextContent();
+
+        return new MessageFromServerReq(new MessageData(nickname, message));
+    }
+
+    private static Request createMessageListRequestFromXML(Element commandElement) {
+        List<MessageData> messageDataList = new ArrayList<>();
+
+        NodeList messageDataListXML = commandElement.getElementsByTagName("messageData");
+        int length = messageDataListXML.getLength();
+        for (int i = 0; i < length; ++i) {
+            Element messageDataXML = (Element) messageDataListXML.item(i);
+            String nickname = messageDataXML.getElementsByTagName("nickname").item(0).getTextContent();
+            String message = messageDataXML.getElementsByTagName("message").item(0).getTextContent();
+            messageDataList.add(new MessageData(nickname, message));
+        }
+
+        return new MessagesListReq(messageDataList);
+    }
+
+    private static Request createNotificationRequestFromXML(Element commandElement) {
+        String notificationType = commandElement.getElementsByTagName("notificationType").item(0).getTextContent();
+        String text = commandElement.getElementsByTagName("text").item(0).getTextContent();
+
+        NotificationData notificationData = new NotificationData(NotificationType.valueOf(notificationType), text);
+        return new NotificationReq(notificationData);
     }
 }

@@ -10,6 +10,5 @@ public class NotificationReq extends Request {
     public NotificationReq(NotificationData notificationData) {
         super(RequestType.NOTIFICATION);
         this.notificationData = notificationData;
-
     }
 }

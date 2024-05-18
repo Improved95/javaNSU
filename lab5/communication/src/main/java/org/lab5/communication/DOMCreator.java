@@ -1,6 +1,7 @@
 package org.lab5.communication;
 
 import org.lab5.communication.requests.*;
+import org.lab5.communication.requests.notification.NotificationReq;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -46,6 +47,9 @@ public class DOMCreator {
             case CLIENTS_LIST_REQUEST -> document = createClientsListRequestXML();
             case CLIENTS_LIST_RECEIVE -> document = createClientListReceiveXML(request);
             case MESSAGE_FROM_CLIENT -> document = createMessageFromClientXML(request);
+            case MESSAGE_FROM_SERVER -> document = createMessageFromServerXML(request);
+            case MESSAGE_LIST -> document = createMessageListXML(request);
+            case NOTIFICATION -> document = createNotificationXML(request);
         }
 
         StringWriter stringWriter = new StringWriter();
@@ -111,6 +115,70 @@ public class DOMCreator {
         MessageFromClientReq messageFromClientReq = (MessageFromClientReq) request;
         Element messageElement = document.createElement("message");
         commandElement.setTextContent(messageFromClientReq.message);
+        document.appendChild(messageElement);
+
+        return document;
+    }
+
+    private static Document createMessageFromServerXML(Request request) {
+        Document document = documentBuilder.newDocument();
+
+        Element commandElement = document.createElement("command");
+        commandElement.setAttribute("name", "message-from-server");
+        document.appendChild(commandElement);
+
+        MessageFromServerReq messageFromServerReq = (MessageFromServerReq) request;
+        Element nicknameElement = document.createElement("nickname");
+        commandElement.setTextContent(messageFromServerReq.messageData.message);
+        commandElement.appendChild(nicknameElement);
+
+        Element messageElement = document.createElement("message");
+        commandElement.setTextContent(messageFromServerReq.messageData.message);
+        commandElement.appendChild(messageElement);
+
+        return document;
+    }
+
+    private static Document createMessageListXML(Request request) {
+        Document document = documentBuilder.newDocument();
+
+        Element commandElement = document.createElement("command");
+        commandElement.setAttribute("name", "message-list");
+        document.appendChild(commandElement);
+
+        MessagesListReq messagesListReq = (MessagesListReq) request;
+        for (MessageData messageData : messagesListReq.messagesList) {
+            Element messageDataElement = document.createElement("messageData");
+
+            Element nicknameElement = document.createElement("nickname");
+            commandElement.setTextContent(messageData.message);
+            messageDataElement.appendChild(nicknameElement);
+
+            Element messageElement = document.createElement("message");
+            commandElement.setTextContent(messageData.message);
+            messageDataElement.appendChild(messageElement);
+
+            commandElement.appendChild(messageDataElement);
+        }
+
+        return document;
+    }
+
+    private static Document createNotificationXML(Request request) {
+        Document document = documentBuilder.newDocument();
+
+        Element commandElement = document.createElement("command");
+        commandElement.setAttribute("name", "notification");
+        document.appendChild(commandElement);
+
+        NotificationReq notificationReq = (NotificationReq) request;
+        Element notificationTypeElement = document.createElement("notificationType");
+        notificationTypeElement.setTextContent(notificationReq.notificationData.notificationType.toString());
+        commandElement.appendChild(notificationTypeElement);
+
+        Element textElement = document.createElement("text");
+        textElement.setTextContent(notificationReq.notificationData.notificationType.name());
+        commandElement.appendChild(textElement);
 
         return document;
     }
