@@ -13,13 +13,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
@@ -72,16 +68,6 @@ public class DOMParser {
         receiveBuffer.get(receiveBytes);
 
         Document document = documentBuilder.parse(new ByteArrayInputStream(receiveBytes));
-
-        try {
-            Transformer transformer = transformerFactory.newTransformer();
-            StringWriter stringWriter = new StringWriter();
-            transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
-
-            System.out.println(stringWriter.getBuffer().toString());
-        } catch (TransformerException ex) {
-            ex.printStackTrace();
-        }
 
         document.getDocumentElement().normalize();
         Element commandElement = (Element) document.getElementsByTagName("command").item(0);

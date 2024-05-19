@@ -18,7 +18,7 @@ import java.io.StringWriter;
 import java.nio.ByteBuffer;
 
 public class DOMCreator {
-    private static int bufferSize = 1024;
+    private static int bufferSize = 1024 * 3;
     private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
     private static DocumentBuilder documentBuilder;
     static {
