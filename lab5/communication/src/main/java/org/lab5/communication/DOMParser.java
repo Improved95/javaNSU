@@ -89,18 +89,18 @@ public class DOMParser {
         String requestType = document.getDocumentElement().getAttribute("name");
         Request request = null;
         switch (requestType) {
-            case ("login") -> request = createLoginRequestFromXML(commandElement);
+            case ("login") -> request = createLoginFromXML(commandElement);
             case ("request-clients-list") -> request = createClientListRequestFromXML();
-            case ("receive-clients-list") -> request = createClientListReceiveRequestFromXML(commandElement);
-            case ("message-from-client") -> request = createMessageFromClientRequestFromXML(commandElement);
-            case ("message-from-server") -> request = createMessageFromServerRequestFromXML(commandElement);
-            case ("message-list") -> request = createMessageListRequestFromXML(commandElement);
-            case ("notification") -> request = createNotificationRequestFromXML(commandElement);
+            case ("receive-clients-list") -> request = createClientListReceiveFromXML(commandElement);
+            case ("message-from-client") -> request = createMessageFromClientFromXML(commandElement);
+            case ("message-from-server") -> request = createMessageFromServerFromXML(commandElement);
+            case ("message-list") -> request = createMessageListFromXML(commandElement);
+            case ("notification") -> request = createNotificationFromXML(commandElement);
         }
         return request;
     }
 
-    private static Request createLoginRequestFromXML(Element commandElement) {
+    private static Request createLoginFromXML(Element commandElement) {
         String name = commandElement.getElementsByTagName("name").item(0).getTextContent();
         return new LoginReq(name);
     }
@@ -109,7 +109,7 @@ public class DOMParser {
         return new ClientsListRequestReq();
     }
 
-    private static Request createClientListReceiveRequestFromXML(Element commandElement) {
+    private static Request createClientListReceiveFromXML(Element commandElement) {
         List<ClientData> clientDataList = new ArrayList<>();
 
         NodeList nodeList = commandElement.getElementsByTagName("nickname");
@@ -124,19 +124,19 @@ public class DOMParser {
         return new ClientsListReceiveReq(clientDataList);
     }
 
-    private static Request createMessageFromClientRequestFromXML(Element commandElement) {
+    private static Request createMessageFromClientFromXML(Element commandElement) {
         String message = commandElement.getElementsByTagName("message").item(0).getTextContent();
         return new MessageFromClientReq(message);
     }
 
-    private static Request createMessageFromServerRequestFromXML(Element commandElement) {
+    private static Request createMessageFromServerFromXML(Element commandElement) {
         String nickname = commandElement.getElementsByTagName("nickname").item(0).getTextContent();
         String message = commandElement.getElementsByTagName("message").item(0).getTextContent();
 
         return new MessageFromServerReq(new MessageData(nickname, message));
     }
 
-    private static Request createMessageListRequestFromXML(Element commandElement) {
+    private static Request createMessageListFromXML(Element commandElement) {
         List<MessageData> messageDataList = new ArrayList<>();
 
         NodeList messageDataListXML = commandElement.getElementsByTagName("messageData");
@@ -151,7 +151,7 @@ public class DOMParser {
         return new MessagesListReq(messageDataList);
     }
 
-    private static Request createNotificationRequestFromXML(Element commandElement) {
+    private static Request createNotificationFromXML(Element commandElement) {
         String notificationType = commandElement.getElementsByTagName("notificationType").item(0).getTextContent();
         String text = commandElement.getElementsByTagName("text").item(0).getTextContent();
 

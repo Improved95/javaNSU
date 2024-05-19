@@ -43,13 +43,13 @@ public class DOMCreator {
     public static ByteBuffer createSendByteBuffer(Request request) throws TransformerException {
         Document document = null;
         switch (request.requestType) {
-            case LOGIN -> document = createLoginXML(request);
-            case CLIENTS_LIST_REQUEST -> document = createClientsListRequestXML();
-            case CLIENTS_LIST_RECEIVE -> document = createClientListReceiveXML(request);
-            case MESSAGE_FROM_CLIENT -> document = createMessageFromClientXML(request);
-            case MESSAGE_FROM_SERVER -> document = createMessageFromServerXML(request);
-            case MESSAGE_LIST -> document = createMessageListXML(request);
-            case NOTIFICATION -> document = createNotificationXML(request);
+            case LOGIN -> document = createLoginXMLRequest(request);
+            case CLIENTS_LIST_REQUEST -> document = createClientsListRequestXMLRequest();
+            case CLIENTS_LIST_RECEIVE -> document = createClientListReceiveXMLRequest(request);
+            case MESSAGE_FROM_CLIENT -> document = createMessageFromClientXMLRequest(request);
+            case MESSAGE_FROM_SERVER -> document = createMessageFromServerXMLRequest(request);
+            case MESSAGE_LIST -> document = createMessageListXMLRequest(request);
+            case NOTIFICATION -> document = createNotificationXMLRequest(request);
         }
 
         StringWriter stringWriter = new StringWriter();
@@ -58,7 +58,7 @@ public class DOMCreator {
         return ByteBuffer.wrap(stringWriter.getBuffer().toString().getBytes());
     }
 
-    private static Document createLoginXML(Request request) {
+    private static Document createLoginXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
         LoginReq loginReq = (LoginReq) request;
 
@@ -77,7 +77,7 @@ public class DOMCreator {
         return document;
     }
 
-    private static Document createClientsListRequestXML() {
+    private static Document createClientsListRequestXMLRequest() {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -87,7 +87,7 @@ public class DOMCreator {
         return document;
     }
 
-    private static Document createClientListReceiveXML(Request request) {
+    private static Document createClientListReceiveXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -105,7 +105,7 @@ public class DOMCreator {
         return document;
     }
 
-    private static Document createMessageFromClientXML(Request request) {
+    private static Document createMessageFromClientXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -114,13 +114,13 @@ public class DOMCreator {
 
         MessageFromClientReq messageFromClientReq = (MessageFromClientReq) request;
         Element messageElement = document.createElement("message");
-        commandElement.setTextContent(messageFromClientReq.message);
+        messageElement.setTextContent(messageFromClientReq.message);
         commandElement.appendChild(messageElement);
 
         return document;
     }
 
-    private static Document createMessageFromServerXML(Request request) {
+    private static Document createMessageFromServerXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -133,14 +133,13 @@ public class DOMCreator {
         commandElement.appendChild(nicknameElement);
 
         Element messageElement = document.createElement("message");
-        System.out.println(messageFromServerReq.messageData.message);
         messageElement.setTextContent(messageFromServerReq.messageData.message);
         commandElement.appendChild(messageElement);
 
         return document;
     }
 
-    private static Document createMessageListXML(Request request) {
+    private static Document createMessageListXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -152,10 +151,11 @@ public class DOMCreator {
             Element messageDataElement = document.createElement("messageData");
 
             Element nicknameElement = document.createElement("nickname");
-            commandElement.setTextContent(messageData.message);
+            nicknameElement.setTextContent(messageData.nickname);
             messageDataElement.appendChild(nicknameElement);
 
             Element messageElement = document.createElement("message");
+            messageElement.setTextContent(messageData.message);
             messageDataElement.appendChild(messageElement);
 
             commandElement.appendChild(messageDataElement);
@@ -164,7 +164,7 @@ public class DOMCreator {
         return document;
     }
 
-    private static Document createNotificationXML(Request request) {
+    private static Document createNotificationXMLRequest(Request request) {
         Document document = documentBuilder.newDocument();
 
         Element commandElement = document.createElement("command");
@@ -177,7 +177,7 @@ public class DOMCreator {
         commandElement.appendChild(notificationTypeElement);
 
         Element textElement = document.createElement("text");
-        textElement.setTextContent(notificationReq.notificationData.notificationType.name());
+        textElement.setTextContent(notificationReq.notificationData.text);
         commandElement.appendChild(textElement);
 
         return document;
