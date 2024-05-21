@@ -37,35 +37,8 @@ public class DOMParser {
         }
     }
 
-    private static TransformerFactory transformerFactory = TransformerFactory.newInstance();
-    private static Transformer transformer;
-    static {
-        try {
-            transformer = transformerFactory.newTransformer();
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static Request createReceiveRequest(SocketChannel socketChannel)
-            throws IOException, SAXException, ParserConfigurationException {
-
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
-
-        int bytesRead;
-        try {
-            bytesRead = socketChannel.read(receiveBuffer);
-            System.out.println("bytes read " + bytesRead);
-        } catch (SocketException | NotYetConnectedException | ClosedChannelException ex) {
-            return null;
-        }
-
-        if (bytesRead == - 1) { return null; }
-
-        byte[] receiveBytes = new byte[bytesRead];
-        receiveBuffer.flip();
-        receiveBuffer.get(receiveBytes);
+    public static Request createReceiveRequest(byte[] receiveBytes)
+            throws IOException, SAXException {
 
         Document document = documentBuilder.parse(new ByteArrayInputStream(receiveBytes));
 

@@ -10,8 +10,6 @@ import java.nio.channels.NotYetConnectedException;
 import java.nio.channels.SocketChannel;
 
 public class ObjectSerialize {
-    private final static int bufferSize = 1024 * 2;
-
     public static ByteBuffer createSendByteBuffer(Request request) throws IOException {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
@@ -22,23 +20,7 @@ public class ObjectSerialize {
         }
     }
 
-    public static Request createReceiveRequest(SocketChannel socketChannel) throws IOException, ClassNotFoundException {
-        ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
-
-        int bytesRead;
-        try {
-            bytesRead = socketChannel.read(receiveBuffer);
-            System.out.println("bytes read " + bytesRead);
-        } catch (SocketException | NotYetConnectedException | ClosedChannelException ex) {
-            return null;
-        }
-
-        if (bytesRead == - 1) { return null; }
-
-        byte[] receiveBytes = new byte[bytesRead];
-        receiveBuffer.flip();
-        receiveBuffer.get(receiveBytes);
-
+    public static Request createReceiveRequest(byte[] receiveBytes) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
             return (Request) ois.readObject();
         }
