@@ -12,7 +12,7 @@ public class ServerModel {
     private ServerSocketChannel serverSocketChannel;
 
     private List<MessageData> messageList = new ArrayList<>();
-    private Map<SocketChannel, ClientDataForReq> clientTable = new HashMap<>();
+    private Map<SocketChannel, ClientData> clientTable = new HashMap<>();
 
     public int getServerPort() {
         return Integer.parseInt(serverProperty.getProperty("port"));
@@ -38,7 +38,7 @@ public class ServerModel {
         return messageList;
     }
 
-    public Map<SocketChannel, ClientDataForReq> getClientTable() {
+    public Map<SocketChannel, ClientData> getClientTable() {
         return clientTable;
     }
 }

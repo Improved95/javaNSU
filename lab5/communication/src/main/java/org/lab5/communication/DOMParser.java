@@ -102,8 +102,7 @@ public class DOMParser {
         int len = nodeList.getLength();
         for (int i = 0; i < len; ++i) {
             String clientNickname = nodeList.item(i).getTextContent();
-            ClientDataForReq clientDataForReq = new ClientDataForReq(null);
-            clientDataForReq.setNickname(clientNickname);
+            ClientDataForReq clientDataForReq = new ClientDataForReq(clientNickname);
             clientDataForReqList.add(clientDataForReq);
         }
 

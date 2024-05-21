@@ -4,6 +4,7 @@ import org.lab5.communication.*;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
+import org.lab5.server.model.ClientData;
 import org.lab5.server.model.ServerModel;
 
 import javax.xml.transform.TransformerException;
@@ -33,12 +34,12 @@ public class ServerController {
 
         System.out.println(buffer[0]);
 
-        ClientDataForReq clientDataForReq = null;
+        ClientData clientData = null;
         switch (buffer[0]) {
-            case 10 -> clientDataForReq = new ClientDataForReq(TransferProtocol.SERIALIZABLE);
-            case 20 -> clientDataForReq = new ClientDataForReq(TransferProtocol.XML);
+            case 10 -> clientData = new ClientData(TransferProtocol.SERIALIZABLE);
+            case 20 -> clientData = new ClientData(TransferProtocol.XML);
         }
-        model.getClientTable().put(clientSocketChannel, clientDataForReq);
+        model.getClientTable().put(clientSocketChannel, clientData);
 
         clientSocketChannel.configureBlocking(false);
         clientSocketChannel.register(selector, SelectionKey.OP_READ);
@@ -80,8 +81,11 @@ public class ServerController {
     }
 
     public void sendClientList(SocketChannel socketChannel) {
-        Map<SocketChannel, ClientDataForReq> clientTable = model.getClientTable();
-        List<ClientDataForReq> clientDataForReqList = new ArrayList<>(clientTable.values());
+        List<ClientDataForReq> clientDataForReqList = model.getClientTable().entrySet()
+                .stream()
+                .map(entry -> new ClientDataForReq(entry.getValue().getNickname()))
+                .collect(Collectors.toList());
+
         ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataForReqList);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;

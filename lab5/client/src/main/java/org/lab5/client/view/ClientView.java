@@ -72,7 +72,7 @@ public class ClientView {
             label.setPrefWidth(595);
             label.setPadding(new Insets(0, 0, 10, 0));
             label.setFont(Font.font("Arial Bold", 15));
-            label.setText(i++ + ": " + clientDataForReq.getNickname() + ";");
+            label.setText(i++ + ": " + clientDataForReq.nickname + ";");
             vBoxListOfClients.getChildren().add(label);
         }
 

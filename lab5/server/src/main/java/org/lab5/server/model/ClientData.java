@@ -5,13 +5,20 @@ import org.lab5.communication.TransferProtocol;
 import java.nio.ByteBuffer;
 
 public class ClientData {
-    public final String nickname;
+    private String nickname;
     public final TransferProtocol transferProtocol;
     private ByteBuffer sendBuffer = ByteBuffer.allocate(1024);
     private ByteBuffer receiveBuffer = ByteBuffer.allocate(1024);
 
-    public ClientData(String nickname, TransferProtocol transferProtocol) {
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public ClientData(TransferProtocol transferProtocol) {
         this.transferProtocol = transferProtocol;
     }
 
