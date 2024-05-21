@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SendReceiveRequest {
-    private final static int bufferSize = 1024 * 3;
+    private final static int bufferSize = 1024;
 
     public static void broadCast(Request request, List<Map.Entry<SocketChannel, TransferProtocol>> clientsList)
             throws IOException, TransformerException {
