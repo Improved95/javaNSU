@@ -1,5 +1,9 @@
-package org.lab5.communication;
+package org.lab5.communication.communicate;
 
+import org.lab5.communication.DOMCreator;
+import org.lab5.communication.DOMParser;
+import org.lab5.communication.ObjectSerialize;
+import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.Request;
 import org.xml.sax.SAXException;
 

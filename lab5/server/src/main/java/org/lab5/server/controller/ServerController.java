@@ -1,6 +1,7 @@
 package org.lab5.server.controller;
 
 import org.lab5.communication.*;
+import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;

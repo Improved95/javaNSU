@@ -2,7 +2,7 @@ package org.lab5.client.controller;
 
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ViewStage;
-import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
 import org.xml.sax.SAXException;
 

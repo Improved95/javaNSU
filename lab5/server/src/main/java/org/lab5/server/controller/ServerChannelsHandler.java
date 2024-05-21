@@ -1,6 +1,6 @@
 package org.lab5.server.controller;
 
-import org.lab5.communication.SendReceiveRequest;
+import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.Request;
 import org.lab5.server.model.ServerModel;
