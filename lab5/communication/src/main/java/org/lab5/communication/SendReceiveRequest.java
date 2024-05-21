@@ -24,7 +24,13 @@ public class SendReceiveRequest {
                 case SERIALIZABLE -> buffer = ObjectSerialize.createSendByteBuffer(request);
                 case XML -> buffer = DOMCreator.createSendByteBuffer(request);
             }
-            client.getKey().write(buffer);
+
+            ByteBuffer dataByteBufferWithDataSize = ByteBuffer.allocate(4 + buffer.capacity());
+            dataByteBufferWithDataSize.putInt(buffer.capacity());
+            dataByteBufferWithDataSize.put(4, buffer.array());
+            dataByteBufferWithDataSize.rewind();
+
+            client.getKey().write(dataByteBufferWithDataSize);
         }
     }
 
@@ -36,7 +42,13 @@ public class SendReceiveRequest {
             case SERIALIZABLE -> buffer = ObjectSerialize.createSendByteBuffer(request);
             case XML -> buffer = DOMCreator.createSendByteBuffer(request);
         }
-        socketChannel.write(buffer);
+
+        ByteBuffer dataByteBufferWithDataSize = ByteBuffer.allocate(4 + buffer.capacity());
+        dataByteBufferWithDataSize.putInt(buffer.capacity());
+        dataByteBufferWithDataSize.put(4, buffer.array());
+        dataByteBufferWithDataSize.rewind();
+
+        socketChannel.write(dataByteBufferWithDataSize);
     }
 
     public static Request receiveRequest(SocketChannel socketChannel, TransferProtocol transferProtocol)
@@ -57,10 +69,18 @@ public class SendReceiveRequest {
         receiveBuffer.flip();
         receiveBuffer.get(receiveBytes);
 
+        ByteBuffer dataSizeBuffer = ByteBuffer.allocate(4);
+        receiveBuffer.get(0, dataSizeBuffer.array(), 0, 4);
+        dataSizeBuffer.rewind();
+
+        int dataSize = dataSizeBuffer.getInt();
+        byte[] dataBuffer = new byte[dataSize];
+        receiveBuffer.get(4, dataBuffer, 0, dataSize);
+
         Request request = null;
         switch (transferProtocol) {
-            case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(receiveBytes);
-            case XML -> request = DOMParser.createReceiveRequest(receiveBytes);
+            case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(dataBuffer);
+            case XML -> request = DOMParser.createReceiveRequest(dataBuffer);
         }
         return request;
     }
