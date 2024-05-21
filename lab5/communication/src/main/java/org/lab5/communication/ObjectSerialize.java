@@ -3,11 +3,7 @@ package org.lab5.communication;
 import org.lab5.communication.requests.Request;
 
 import java.io.*;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ClosedChannelException;
-import java.nio.channels.NotYetConnectedException;
-import java.nio.channels.SocketChannel;
 
 public class ObjectSerialize {
     public static ByteBuffer createSendByteBuffer(Request request) throws IOException {
