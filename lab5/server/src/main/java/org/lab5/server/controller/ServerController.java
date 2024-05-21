@@ -33,12 +33,12 @@ public class ServerController {
 
         System.out.println(buffer[0]);
 
-        ClientData clientData = null;
+        ClientDataForReq clientDataForReq = null;
         switch (buffer[0]) {
-            case 10 -> clientData = new ClientData(TransferProtocol.SERIALIZABLE);
-            case 20 -> clientData = new ClientData(TransferProtocol.XML);
+            case 10 -> clientDataForReq = new ClientDataForReq(TransferProtocol.SERIALIZABLE);
+            case 20 -> clientDataForReq = new ClientDataForReq(TransferProtocol.XML);
         }
-        model.getClientTable().put(clientSocketChannel, clientData);
+        model.getClientTable().put(clientSocketChannel, clientDataForReq);
 
         clientSocketChannel.configureBlocking(false);
         clientSocketChannel.register(selector, SelectionKey.OP_READ);
@@ -80,9 +80,9 @@ public class ServerController {
     }
 
     public void sendClientList(SocketChannel socketChannel) {
-        Map<SocketChannel, ClientData> clientTable = model.getClientTable();
-        List<ClientData> clientDataList = new ArrayList<>(clientTable.values());
-        ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataList);
+        Map<SocketChannel, ClientDataForReq> clientTable = model.getClientTable();
+        List<ClientDataForReq> clientDataForReqList = new ArrayList<>(clientTable.values());
+        ClientsListReceiveReq clientsListReceiveReqRequest = new ClientsListReceiveReq(clientDataForReqList);
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {

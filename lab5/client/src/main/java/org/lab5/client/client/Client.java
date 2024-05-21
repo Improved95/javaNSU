@@ -19,7 +19,7 @@ public class Client {
         return clientController;
     }
 
-    public synchronized void initial() {
+    public void initial() {
         model = new ClientModel();
         view = new ClientView();
         clientController = new ClientController();

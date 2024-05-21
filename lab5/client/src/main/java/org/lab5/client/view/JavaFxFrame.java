@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.MainChatController;
-import org.lab5.client.view.sceneControllers.SceneController;
 
 import java.awt.*;
 import java.io.IOException;

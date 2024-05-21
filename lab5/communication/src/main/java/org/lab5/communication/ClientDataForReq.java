@@ -2,11 +2,11 @@ package org.lab5.communication;
 
 import java.io.Serializable;
 
-public class ClientData implements Serializable {
+public class ClientDataForReq implements Serializable {
     private String nickname;
     public final TransferProtocol transferProtocol;
 
-    public ClientData(TransferProtocol transferProtocol) {
+    public ClientDataForReq(TransferProtocol transferProtocol) {
         this.transferProtocol = transferProtocol;
     }
 

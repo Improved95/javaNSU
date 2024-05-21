@@ -95,9 +95,9 @@ public class DOMCreator {
         document.appendChild(commandElement);
 
         ClientsListReceiveReq clientsListReceiveReq = (ClientsListReceiveReq) request;
-        for (ClientData clientData : clientsListReceiveReq.listOfClients) {
+        for (ClientDataForReq clientDataForReq : clientsListReceiveReq.listOfClients) {
             Element clientDataElement = document.createElement("nickname");
-            clientDataElement.setTextContent(clientData.getNickname());
+            clientDataElement.setTextContent(clientDataForReq.getNickname());
 
             commandElement.appendChild(clientDataElement);
         }

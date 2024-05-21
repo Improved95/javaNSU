@@ -1,6 +1,6 @@
 package org.lab5.server.model;
 
-import org.lab5.communication.ClientData;
+import org.lab5.communication.ClientDataForReq;
 import org.lab5.communication.MessageData;
 
 import java.nio.channels.ServerSocketChannel;
@@ -12,7 +12,7 @@ public class ServerModel {
     private ServerSocketChannel serverSocketChannel;
 
     private List<MessageData> messageList = new ArrayList<>();
-    private Map<SocketChannel, ClientData> clientTable = new HashMap<>();
+    private Map<SocketChannel, ClientDataForReq> clientTable = new HashMap<>();
 
     public int getServerPort() {
         return Integer.parseInt(serverProperty.getProperty("port"));
@@ -38,7 +38,7 @@ public class ServerModel {
         return messageList;
     }
 
-    public Map<SocketChannel, ClientData> getClientTable() {
+    public Map<SocketChannel, ClientDataForReq> getClientTable() {
         return clientTable;
     }
 }

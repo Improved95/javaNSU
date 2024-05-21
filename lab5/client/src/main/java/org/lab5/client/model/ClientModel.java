@@ -1,7 +1,7 @@
 package org.lab5.client.model;
 
 import org.lab5.client.view.ViewStage;
-import org.lab5.communication.ClientData;
+import org.lab5.communication.ClientDataForReq;
 import org.lab5.communication.MessageData;
 import org.lab5.communication.NotificationData;
 import org.lab5.communication.TransferProtocol;
@@ -17,7 +17,7 @@ public class ClientModel {
 
     private SocketChannel clientSocket;
 
-    private List<ClientData> clientDataList = new ArrayList<>();
+    private List<ClientDataForReq> clientDataForReqList = new ArrayList<>();
     private List<MessageData> messagesList = new ArrayList<>();
     private List<NotificationData> notificationList = new ArrayList<>();
     private TransferProtocol transferProtocol;
@@ -60,12 +60,12 @@ public class ClientModel {
         this.clientSocket = clientSocket;
     }
 
-    public List<ClientData> getClientDataList() {
-        return clientDataList;
+    public List<ClientDataForReq> getClientDataList() {
+        return clientDataForReqList;
     }
 
-    public void setClientDataList(List<ClientData> clientDataList) {
-        this.clientDataList = clientDataList;
+    public void setClientDataList(List<ClientDataForReq> clientDataForReqList) {
+        this.clientDataForReqList = clientDataForReqList;
     }
 
     public TransferProtocol getTransferProtocol() {

@@ -96,18 +96,18 @@ public class DOMParser {
     }
 
     private static Request createClientListReceiveFromXML(Element commandElement) {
-        List<ClientData> clientDataList = new ArrayList<>();
+        List<ClientDataForReq> clientDataForReqList = new ArrayList<>();
 
         NodeList nodeList = commandElement.getElementsByTagName("nickname");
         int len = nodeList.getLength();
         for (int i = 0; i < len; ++i) {
             String clientNickname = nodeList.item(i).getTextContent();
-            ClientData clientData = new ClientData(null);
-            clientData.setNickname(clientNickname);
-            clientDataList.add(clientData);
+            ClientDataForReq clientDataForReq = new ClientDataForReq(null);
+            clientDataForReq.setNickname(clientNickname);
+            clientDataForReqList.add(clientDataForReq);
         }
 
-        return new ClientsListReceiveReq(clientDataList);
+        return new ClientsListReceiveReq(clientDataForReqList);
     }
 
     private static Request createMessageFromClientFromXML(Element commandElement) {

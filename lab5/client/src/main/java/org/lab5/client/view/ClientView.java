@@ -15,7 +15,7 @@ import org.lab5.client.model.ChatAreaStatus;
 import org.lab5.client.view.sceneControllers.ConnectFormController;
 import org.lab5.client.view.sceneControllers.ClientsListController;
 import org.lab5.client.view.sceneControllers.MainChatController;
-import org.lab5.communication.ClientData;
+import org.lab5.communication.ClientDataForReq;
 import org.lab5.communication.MessageData;
 import org.lab5.communication.NotificationData;
 import org.lab5.communication.requests.notification.NotificationType;
@@ -66,13 +66,13 @@ public class ClientView {
         vBoxListOfClients.getChildren().clear();
 
         int i = 1;
-        for (ClientData clientData : model.getClientDataList()) {
+        for (ClientDataForReq clientDataForReq : model.getClientDataList()) {
             Label label = new Label();
             label.setPrefHeight(17.0);
             label.setPrefWidth(595);
             label.setPadding(new Insets(0, 0, 10, 0));
             label.setFont(Font.font("Arial Bold", 15));
-            label.setText(i++ + ": " + clientData.getNickname() + ";");
+            label.setText(i++ + ": " + clientDataForReq.getNickname() + ";");
             vBoxListOfClients.getChildren().add(label);
         }
 
