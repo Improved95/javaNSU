@@ -69,9 +69,9 @@ public class SendReceiveRequest {
 
         if (bytesRead == - 1) { return null; }
 
-        byte[] receiveBytes = new byte[bytesRead];
+        ByteBuffer receiveBytes = ByteBuffer.allocate(bytesRead);
         receiveBuffer.flip();
-        receiveBuffer.get(receiveBytes);
+        receiveBuffer.get(receiveBytes.array());
 
         ByteBuffer dataSizeBuffer = ByteBuffer.allocate(4);
         receiveBuffer.get(0, dataSizeBuffer.array(), 0, 4);
