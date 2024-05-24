@@ -2,6 +2,7 @@ package org.lab5.client.controller;
 
 import org.lab5.client.model.ClientModel;
 import org.lab5.client.view.ViewStage;
+import org.lab5.communication.communicate.Receiver;
 import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
 import org.xml.sax.SAXException;
@@ -12,6 +13,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class ClientChannelsHandler implements Runnable {
@@ -20,6 +22,8 @@ public class ClientChannelsHandler implements Runnable {
 
     public final Selector selector;
     private boolean continueChannelsHandler = true;
+
+    private Receiver receiver = new Receiver();
 
     public ClientChannelsHandler(ClientModel model, ClientController controller, Selector selector) {
         this.model = model;
@@ -37,12 +41,14 @@ public class ClientChannelsHandler implements Runnable {
                 SelectionKey selectionKey = selectionKeysIterator.next();
 
                 if (selectionKey.isReadable()) {
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), model.getTransferProtocol());
-                    if (request == null) {
+                    List<Request> requestList = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), model.getTransferProtocol(), receiver);
+                    if (requestList == null) {
                         controller.stopConnection();
                         model.setViewStage(ViewStage.CONNECT_FORM);
                     }
-                    ClientRequestHandler.handle(request, model);
+                    for (Request request : requestList) {
+                        ClientRequestHandler.handle(request, model);
+                    }
                 }
 
                 selectionKeysIterator.remove();

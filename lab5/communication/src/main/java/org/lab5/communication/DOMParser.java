@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +29,10 @@ public class DOMParser {
         }
     }
 
-    public static Request createReceiveRequest(byte[] receiveBytes)
+    public static Request createReceiveRequest(ByteBuffer receiveBytes)
             throws IOException, SAXException {
 
-        Document document = documentBuilder.parse(new ByteArrayInputStream(receiveBytes));
+        Document document = documentBuilder.parse(new ByteArrayInputStream(receiveBytes.array()));
 
         document.getDocumentElement().normalize();
         Element commandElement = (Element) document.getElementsByTagName("command").item(0);

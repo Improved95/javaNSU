@@ -1,5 +1,6 @@
 package org.lab5.server.controller;
 
+import org.lab5.communication.communicate.Receiver;
 import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.Request;
@@ -13,6 +14,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class ServerChannelsHandler implements Runnable {
@@ -21,6 +23,8 @@ public class ServerChannelsHandler implements Runnable {
 
     public final Selector selector;
     private boolean continueChannelsHandler = true;
+
+    private Receiver receiver = new Receiver();
 
     public ServerChannelsHandler(ServerModel model, ServerController controller, Selector selector) {
         this.model = model;
@@ -43,11 +47,13 @@ public class ServerChannelsHandler implements Runnable {
 
                 if (selectionKey.isReadable()) {
                     TransferProtocol transferProtocol = model.getClientTable().get(selectionKey.channel()).transferProtocol;
-                    Request request = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), transferProtocol);
-                    if (request == null) {
+                    List<Request> requestList = SendReceiveRequest.receiveRequest((SocketChannel) selectionKey.channel(), transferProtocol, receiver);
+                    if (requestList == null) {
                         controller.deleteClient((SocketChannel) selectionKey.channel());
                     } else {
-                        ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel());
+                        for (Request request : requestList) {
+                            ServerRequestHandler.handle(request, (SocketChannel) selectionKey.channel());
+                        }
                     }
                 }
 

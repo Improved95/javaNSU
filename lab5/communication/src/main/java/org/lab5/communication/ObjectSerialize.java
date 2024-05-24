@@ -16,8 +16,8 @@ public class ObjectSerialize {
         }
     }
 
-    public static Request createReceiveRequest(byte[] receiveBytes) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes))) {
+    public static Request createReceiveRequest(ByteBuffer receiveBytes) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(receiveBytes.array()))) {
             return (Request) ois.readObject();
         }
     }

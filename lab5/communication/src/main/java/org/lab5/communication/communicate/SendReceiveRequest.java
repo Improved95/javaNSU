@@ -14,6 +14,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.NotYetConnectedException;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +57,7 @@ public class SendReceiveRequest {
         socketChannel.write(dataByteBufferWithDataSize);
     }
 
-    public static Request receiveRequest(SocketChannel socketChannel, TransferProtocol transferProtocol)
+    public static List<Request> receiveRequest(SocketChannel socketChannel, TransferProtocol transferProtocol, Receiver receiver)
             throws IOException, ClassNotFoundException, SAXException {
         ByteBuffer receiveBuffer = ByteBuffer.allocate(bufferSize);
 
@@ -69,23 +71,31 @@ public class SendReceiveRequest {
 
         if (bytesRead == - 1) { return null; }
 
-        ByteBuffer receiveBytes = ByteBuffer.allocate(bytesRead);
+        /*ByteBuffer receiveBytes = ByteBuffer.allocate(bytesRead);
         receiveBuffer.flip();
-        receiveBuffer.get(receiveBytes.array());
+        receiveBuffer.get(receiveBytes.array());*/
 
-        ByteBuffer dataSizeBuffer = ByteBuffer.allocate(4);
+        /*ByteBuffer dataSizeBuffer = ByteBuffer.allocate(4);
         receiveBuffer.get(0, dataSizeBuffer.array(), 0, 4);
         dataSizeBuffer.rewind();
 
         int dataSize = dataSizeBuffer.getInt();
         byte[] dataBuffer = new byte[dataSize];
-        receiveBuffer.get(4, dataBuffer, 0, dataSize);
+        receiveBuffer.get(4, dataBuffer, 0, dataSize);*/
 
-        Request request = null;
-        switch (transferProtocol) {
-            case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(dataBuffer);
-            case XML -> request = DOMParser.createReceiveRequest(dataBuffer);
+        List<ByteBuffer> receiveDataList = receiver.readReceiveBytes(receiveBuffer, bytesRead);
+
+        List<Request> requestList = new ArrayList<>();
+        for (ByteBuffer receiveData : receiveDataList) {
+            switch (transferProtocol) {
+                case SERIALIZABLE -> requestList.add(ObjectSerialize.createReceiveRequest(receiveData));
+                case XML -> requestList.add(DOMParser.createReceiveRequest(receiveData));
+
+//                case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(receiveData);
+//                case XML -> request = DOMParser.createReceiveRequest(receiveData);
+            }
         }
-        return request;
+
+        return requestList;
     }
 }
