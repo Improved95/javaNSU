@@ -6,8 +6,6 @@ import java.nio.channels.SocketChannel;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import static java.lang.Thread.sleep;
-
 public class Sender implements Runnable {
     private boolean isSending = true;
 
@@ -48,7 +46,7 @@ public class Sender implements Runnable {
 
     public synchronized void waitNewBuffers() throws InterruptedException {
         while (buffersListIsEmpty()) {
-            System.out.println("waitNewBuffers");
+//            System.out.println("waitNewBuffers");
             wait();
             if (!isSending) {
                 break;
