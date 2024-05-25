@@ -1,38 +1,76 @@
 package org.lab5.communication.communicate;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import static java.lang.Thread.sleep;
 
 public class Sender implements Runnable {
     private boolean isSending = true;
 
-    private List<SocketAndBufferPair> buffersList = new LinkedList<>();
+    private ConcurrentLinkedQueue<SocketAndDequeBufferPair> socketAndDequeBufferPairs = new ConcurrentLinkedQueue<>();
+
+    private boolean socketChannelIsExist(SocketChannel socketChannel) {
+        for (SocketAndDequeBufferPair socketAndDequeBufferPair : socketAndDequeBufferPairs) {
+            if (socketAndDequeBufferPair.socketChannel.equals(socketChannel)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public synchronized void addSendDataBuffer(SocketChannel socketChannel, ByteBuffer buffer) {
-        buffersList.add(new SocketAndBufferPair(socketChannel, buffer));
+        if (socketChannelIsExist(socketChannel)) {
+            for (SocketAndDequeBufferPair socketAndDequeBufferPair : socketAndDequeBufferPairs) {
+                if (socketAndDequeBufferPair.socketChannel.equals(socketChannel)) {
+                    socketAndDequeBufferPair.addBuffer(buffer);
+                }
+            }
+        } else {
+            SocketAndDequeBufferPair socketAndDequeBufferPair = new SocketAndDequeBufferPair(socketChannel);
+            socketAndDequeBufferPair.addBuffer(buffer);
+            socketAndDequeBufferPairs.add(socketAndDequeBufferPair);
+        }
         notifyAll();
     }
 
+    private boolean buffersListIsEmpty() {
+        for (SocketAndDequeBufferPair socketAndDequeBufferPair : socketAndDequeBufferPairs) {
+            if (!socketAndDequeBufferPair.bufferDeque.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public synchronized void waitNewBuffers() throws InterruptedException {
-        while (buffersList.isEmpty()) {
+        while (buffersListIsEmpty()) {
+            System.out.println("waitNewBuffers");
             wait();
+            if (!isSending) {
+                break;
+            }
         }
     }
 
-    public synchronized void sendingBuffer() throws InterruptedException {
+    private synchronized void sendingBuffer() throws InterruptedException, IOException {
         while (isSending) {
             waitNewBuffers();
 
-            Iterator<SocketAndBufferPair> bufferIterator = buffersList.iterator();
-            while (bufferIterator.hasNext()) {
-//                ByteBuffer sendBuffer = bufferIterator.next();
+            for (SocketAndDequeBufferPair socketAndDequeBufferPair : socketAndDequeBufferPairs) {
+                if (socketAndDequeBufferPair.bufferDeque.isEmpty()) {
+                    continue;
+                }
+                SocketChannel socketChannel = socketAndDequeBufferPair.socketChannel;
+                ByteBuffer buffer = socketAndDequeBufferPair.bufferDeque.getFirst();
 
-//                if (!sendBuffer.hasRemaining()) {
-//                    bufferIterator.remove();
-//                }
+                socketChannel.write(buffer);
+                if (!buffer.hasRemaining()) {
+                    socketAndDequeBufferPair.bufferDeque.removeFirst();
+                }
             }
         }
     }
@@ -41,18 +79,26 @@ public class Sender implements Runnable {
     public void run() {
         try {
             sendingBuffer();
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private class SocketAndBufferPair {
-        public final SocketChannel socketChannel;
-        public final ByteBuffer buffer;
+    public synchronized void stopSendData() {
+        isSending = false;
+        notifyAll();
+    }
 
-        public SocketAndBufferPair(SocketChannel socketChannel, ByteBuffer buffer) {
+    private class SocketAndDequeBufferPair {
+        public final SocketChannel socketChannel;
+        public final Deque<ByteBuffer> bufferDeque = new ArrayDeque<>();
+
+        public void addBuffer(ByteBuffer buffer) {
+            bufferDeque.addFirst(buffer);
+        }
+
+        public SocketAndDequeBufferPair(SocketChannel socketChannel) {
             this.socketChannel = socketChannel;
-            this.buffer = buffer;
         }
     }
 }

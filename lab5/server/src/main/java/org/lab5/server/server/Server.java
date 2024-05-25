@@ -27,6 +27,7 @@ public class Server {
 
         serverController.initialServer();
         serverController.initialChannelHandler();
+        serverController.initialDataSender();
 
         Scanner scanner = new Scanner(System.in);
         String line;

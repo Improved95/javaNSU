@@ -21,7 +21,7 @@ import java.util.Map;
 public class SendReceiveRequest {
     private final static int bufferSize = 1024;
 
-    public static void broadCast(Request request, List<Map.Entry<SocketChannel, TransferProtocol>> clientsList)
+    public static void broadCast(Request request, List<Map.Entry<SocketChannel, TransferProtocol>> clientsList, Sender sender)
             throws IOException, TransformerException {
         ByteBuffer buffer = null;
         for (Map.Entry<SocketChannel, TransferProtocol> client : clientsList) {
@@ -35,11 +35,11 @@ public class SendReceiveRequest {
             dataByteBufferWithDataSize.put(4, buffer.array());
             dataByteBufferWithDataSize.rewind();
 
-            client.getKey().write(dataByteBufferWithDataSize);
+            sender.addSendDataBuffer(client.getKey(), dataByteBufferWithDataSize);
         }
     }
 
-    public static void sendRequest(Request request, SocketChannel socketChannel, TransferProtocol transferProtocol)
+    public static void sendRequest(Request request, SocketChannel socketChannel, TransferProtocol transferProtocol, Sender sender)
             throws IOException, TransformerException {
 
         ByteBuffer buffer = null;
@@ -53,7 +53,7 @@ public class SendReceiveRequest {
         dataByteBufferWithDataSize.put(4, buffer.array());
         dataByteBufferWithDataSize.rewind();
 
-        socketChannel.write(dataByteBufferWithDataSize);
+        sender.addSendDataBuffer(socketChannel, dataByteBufferWithDataSize);
     }
 
     public static List<Request> receiveRequest(SocketChannel socketChannel, TransferProtocol transferProtocol, Receiver receiver)

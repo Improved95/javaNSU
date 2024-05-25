@@ -2,6 +2,7 @@ package org.lab5.server.controller;
 
 import org.lab5.communication.*;
 import org.lab5.communication.communicate.SendReceiveRequest;
+import org.lab5.communication.communicate.Sender;
 import org.lab5.communication.requests.*;
 import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
@@ -22,6 +23,9 @@ public class ServerController {
     private Selector selector;
     private ServerChannelsHandler channelsHandler;
     private Thread channelsHandlerThread;
+
+    private Sender sender;
+    private Thread senderThread;
 
     public void setServerModel(ServerModel serverModel) {
         this.model = serverModel;
@@ -54,7 +58,7 @@ public class ServerController {
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
-            SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol);
+            SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol, sender);
         } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
@@ -62,7 +66,7 @@ public class ServerController {
         NotificationReq notificationReq = new NotificationReq(
                 new NotificationData(NotificationType.CONNECT, nickname));
         try {
-            SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(socketChannel));
+            SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(socketChannel), sender);
         } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
@@ -75,7 +79,7 @@ public class ServerController {
 
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
         try {
-            SendReceiveRequest.broadCast(messageFromServerReq, getClientsListForBroadCast(null));
+            SendReceiveRequest.broadCast(messageFromServerReq, getClientsListForBroadCast(null), sender);
         } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
@@ -91,7 +95,7 @@ public class ServerController {
 
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
-            SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol);
+            SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol, sender);
         } catch (IOException | TransformerException ex) {
             ex.printStackTrace();
         }
@@ -105,7 +109,7 @@ public class ServerController {
         NotificationData notificationData = new NotificationData(NotificationType.DISCONNECT, nickNameRemovedClient);
         NotificationReq notificationReq = new NotificationReq(notificationData);
 
-        SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(null));
+        SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(null), sender);
     }
 
     private List<Map.Entry<SocketChannel, TransferProtocol>> getClientsListForBroadCast(SocketChannel exceptionSocketChannel) {
@@ -141,6 +145,12 @@ public class ServerController {
         channelsHandlerThread.start();
     }
 
+    public void initialDataSender() {
+        sender = new Sender();
+        senderThread = new Thread(sender);
+        senderThread.start();
+    }
+
     public void stopServer() {
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         try {
@@ -154,6 +164,10 @@ public class ServerController {
         if (channelsHandler != null) {
             channelsHandler.stopChannelsHandle();
             channelsHandlerThread.interrupt();
+        }
+        if (sender != null) {
+            sender.stopSendData();
+            senderThread.interrupt();
         }
     }
 }
