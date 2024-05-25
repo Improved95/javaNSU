@@ -20,8 +20,6 @@ public class Receiver {
 
     private void fillDataSizeBuffer(ByteBuffer receiveByteBuffer, int byteBufferSize) {
         if (receiveStatus == ReceiveStatus.READ_DATA_SIZE) {
-            System.out.println("READ_DATA_SIZE");
-
             if (byteBufferSize - readBytesInCurrentIteration >= INT_SIZE - readBytesForData) {
                 dataSizeBuffer.put(readBytesForData, receiveByteBuffer, readBytesInCurrentIteration, INT_SIZE - readBytesForData);
                 readBytesInCurrentIteration += INT_SIZE - readBytesForData;
@@ -43,8 +41,6 @@ public class Receiver {
 
     private void fillDataBuffer(ByteBuffer receiveByteBuffer, int byteBufferSize) {
         if (receiveStatus == ReceiveStatus.READ_DATA) {
-            System.out.println("READ_DATA");
-
             if (byteBufferSize - readBytesInCurrentIteration >= dataSize) {
                 dataBuffer.put((readBytesForData - INT_SIZE), receiveByteBuffer, readBytesInCurrentIteration, dataSize - (readBytesForData - INT_SIZE));
                 readBytesInCurrentIteration += dataSize - (readBytesForData - INT_SIZE);
