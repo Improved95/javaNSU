@@ -21,7 +21,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 public class ClientController {
-    private final Logger logger = LoggerFactory.getLogger(ClientController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     private ClientModel model;
 
@@ -40,9 +40,9 @@ public class ClientController {
         MessageFromClientReq messageFromClientReqRequest = new MessageFromClientReq(message);
         try {
             SendReceiveRequest.sendRequest(messageFromClientReqRequest, model.getClientSocketChannel(), model.getTransferProtocol(), sender);
-            logger.info("send request {} receiver {} by {}", messageFromClientReqRequest, model.getClientSocketChannel(), model.getTransferProtocol());
+//            logger.info("send request {} receiver {} by {}", messageFromClientReqRequest, model.getClientSocketChannel(), model.getTransferProtocol());
         } catch (IOException | TransformerException ex) {
-            logger.error("cannot send message ", ex);
+//            logger.error("cannot send message ", ex);
         }
     }
 
@@ -51,9 +51,9 @@ public class ClientController {
         ClientsListRequestReq clientsListRequestReq = new ClientsListRequestReq();
         try {
             SendReceiveRequest.sendRequest(clientsListRequestReq, model.getClientSocketChannel(), model.getTransferProtocol(), sender);
-            logger.info("send request {} receiver {} by {}", clientsListRequestReq, model.getClientSocketChannel(), model.getTransferProtocol());
+//            logger.info("send request {} receiver {} by {}", clientsListRequestReq, model.getClientSocketChannel(), model.getTransferProtocol());
         } catch (IOException | TransformerException ex) {
-            logger.error("cannot send request for ClientsList ", ex);
+//            logger.error("cannot send request for ClientsList ", ex);
         }
     }
 
@@ -92,9 +92,9 @@ public class ClientController {
             channelsHandlerThread = new Thread(clientChannelsHandler);
             channelsHandlerThread.start();
 
-            logger.info("connected to server");
+//            logger.info("connected to server");
         } catch (IOException | TransformerException ex) {
-            logger.error("cannot connect to server ", ex);
+//            logger.error("cannot connect to server ", ex);
             stopConnection();
         }
     }
@@ -112,9 +112,9 @@ public class ClientController {
                 channelsHandlerThread.interrupt();
                 senderThread.interrupt();
             }
-            logger.info("client stopped connection");
+//            logger.info("client stopped connection");
         } catch (IOException ex) {
-            logger.error("exception on close connection ", ex);
+//            logger.error("exception on close connection ", ex);
         }
     }
 }
