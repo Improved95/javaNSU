@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+
+        <File name="LogTRACE" fileName="lab5/logs/communication/LogTRACE.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="LogDEBUG" fileName="lab5/logs/communication/LogDEDUG.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="LogINFO" fileName="lab5/logs/communication/LogINFO.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="LogWARN" fileName="lab5/logs/communication/LogWARN.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="LogERROR" fileName="lab5/logs/communication/LogERROR.log" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="info">
+            <AppenderRef ref="LogTRACE" level="trace"/>
+            <AppenderRef ref="LogDEBUG" level="debug"/>
+            <AppenderRef ref="LogINFO" level="info"/>
+            <AppenderRef ref="LogWARN" level="warn"/>
+            <AppenderRef ref="LogERROR" level="error"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

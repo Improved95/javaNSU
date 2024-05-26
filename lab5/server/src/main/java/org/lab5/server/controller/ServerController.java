@@ -8,6 +8,8 @@ import org.lab5.communication.requests.notification.NotificationReq;
 import org.lab5.communication.requests.notification.NotificationType;
 import org.lab5.server.model.ClientData;
 import org.lab5.server.model.ServerModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.transform.TransformerException;
 import java.io.*;
@@ -18,6 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServerController {
+    private final Logger logger = LoggerFactory.getLogger(ServerController.class);
+
     private ServerModel model;
 
     private Selector selector;
@@ -48,6 +52,8 @@ public class ServerController {
 
         clientSocketChannel.configureBlocking(false);
         clientSocketChannel.register(selector, SelectionKey.OP_READ);
+
+        logger.info("registered new client {}", clientSocketChannel);
     }
 
     public void loginNewClient(SocketChannel socketChannel, String nickname) {
@@ -59,8 +65,9 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol, sender);
+            logger.info("send all messages in chat for {} by", socketChannel, transferProtocol);
         } catch (IOException | TransformerException ex) {
-            ex.printStackTrace();
+            logger.error("exception on send all messages in chat for new client: ", ex);
         }
 
         NotificationReq notificationReq = new NotificationReq(
@@ -68,8 +75,10 @@ public class ServerController {
         try {
             SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(socketChannel), sender);
         } catch (IOException | TransformerException ex) {
-            ex.printStackTrace();
+            logger.error("exception on notify all clients about new client: ", ex);
         }
+
+        logger.info("logging new client");
     }
 
     public void receiveMessageAndBroadcastToEveryone(MessageFromClientReq messageFromClientReq, SocketChannel socketChannel) {
@@ -80,8 +89,9 @@ public class ServerController {
         MessageFromServerReq messageFromServerReq = new MessageFromServerReq(messageData);
         try {
             SendReceiveRequest.broadCast(messageFromServerReq, getClientsListForBroadCast(null), sender);
+            logger.info("send new message to all clients");
         } catch (IOException | TransformerException ex) {
-            ex.printStackTrace();
+            logger.error("exception on send new message {} to all clients ", messageFromServerReq, ex);
         }
     }
 
@@ -96,8 +106,9 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol, sender);
+            logger.info("send clientsList to {}", socketChannel);
         } catch (IOException | TransformerException ex) {
-            ex.printStackTrace();
+            logger.error("exception on send clientsList {} to {} by {}", clientsListReceiveReqRequest, socketChannel, transferProtocol, ex);
         }
     }
 
@@ -110,6 +121,7 @@ public class ServerController {
         NotificationReq notificationReq = new NotificationReq(notificationData);
 
         SendReceiveRequest.broadCast(notificationReq, getClientsListForBroadCast(null), sender);
+        logger.info("client {} disconnected", socketChannel);
     }
 
     private List<Map.Entry<SocketChannel, TransferProtocol>> getClientsListForBroadCast(SocketChannel exceptionSocketChannel) {
@@ -134,8 +146,10 @@ public class ServerController {
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
             model.setServerSocketChannel(serverSocketChannel);
+            logger.info("server initialized");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.error("server cannot initialize ", ex);
+            throw new RuntimeException();
         }
     }
 
@@ -158,7 +172,7 @@ public class ServerController {
                 selectionKey.channel().close();
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.error("exception on stopped server ", ex);
         }
 
         if (channelsHandler != null) {
@@ -169,5 +183,6 @@ public class ServerController {
             sender.stopSendData();
             senderThread.interrupt();
         }
+        logger.info("server stopped");
     }
 }

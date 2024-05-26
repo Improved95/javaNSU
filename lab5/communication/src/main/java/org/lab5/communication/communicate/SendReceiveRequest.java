@@ -5,6 +5,8 @@ import org.lab5.communication.DOMParser;
 import org.lab5.communication.ObjectSerialize;
 import org.lab5.communication.TransferProtocol;
 import org.lab5.communication.requests.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.transform.TransformerException;
@@ -19,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SendReceiveRequest {
+    private static final Logger logger = LoggerFactory.getLogger(SendReceiveRequest.class);
+
     private final static int bufferSize = 1024;
 
     public static void broadCast(Request request, List<Map.Entry<SocketChannel, TransferProtocol>> clientsList, Sender sender)
@@ -33,6 +37,7 @@ public class SendReceiveRequest {
             ByteBuffer dataByteBufferWithDataSize = ByteBuffer.allocate(4 + buffer.capacity());
             dataByteBufferWithDataSize.putInt(buffer.capacity());
             dataByteBufferWithDataSize.put(4, buffer.array());
+            logger.info("create new byte request with size {} and total message size {}", buffer.capacity(), dataByteBufferWithDataSize.capacity());
             dataByteBufferWithDataSize.rewind();
 
             sender.addSendDataBuffer(client.getKey(), dataByteBufferWithDataSize);
@@ -63,7 +68,7 @@ public class SendReceiveRequest {
         int bytesRead;
         try {
             bytesRead = socketChannel.read(receiveBuffer);
-            System.out.println("bytes read " + bytesRead);
+            logger.info("receive data with size {}", bytesRead);
         } catch (SocketException | NotYetConnectedException | ClosedChannelException ex) {
             return null;
         }
@@ -74,10 +79,15 @@ public class SendReceiveRequest {
 
         List<Request> requestList = new ArrayList<>();
         for (ByteBuffer receiveData : receiveDataList) {
+            logger.info("receive message with {} size", receiveData.capacity());
+
+            Request request = null;
             switch (transferProtocol) {
-                case SERIALIZABLE -> requestList.add(ObjectSerialize.createReceiveRequest(receiveData));
-                case XML -> requestList.add(DOMParser.createReceiveRequest(receiveData));
+                case SERIALIZABLE -> request = ObjectSerialize.createReceiveRequest(receiveData);
+                case XML -> request = DOMParser.createReceiveRequest(receiveData);
             }
+            logger.info("create new request {} from receive bytes", request);
+            requestList.add(request);
         }
 
         return requestList;

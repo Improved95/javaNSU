@@ -5,9 +5,10 @@ import org.lab5.client.view.ViewStage;
 import org.lab5.communication.communicate.Receiver;
 import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -17,10 +18,12 @@ import java.util.List;
 import java.util.Set;
 
 public class ClientChannelsHandler implements Runnable {
-    public final ClientModel model;
-    public final ClientController controller;
+    private final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
-    public final Selector selector;
+    private final ClientModel model;
+    private final ClientController controller;
+
+    private final Selector selector;
     private boolean continueChannelsHandler = true;
 
     private Receiver receiver = new Receiver();
@@ -31,7 +34,7 @@ public class ClientChannelsHandler implements Runnable {
         this.selector = selector;
     }
 
-    public void channelsHandler() throws IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
+    public void channelsHandler() throws IOException, ClassNotFoundException, SAXException {
         while (continueChannelsHandler) {
             selector.select();
             Set<SelectionKey> selectionKeySet = selector.selectedKeys();
@@ -64,8 +67,11 @@ public class ClientChannelsHandler implements Runnable {
     public void run() {
         try {
             channelsHandler();
-        } catch (IOException | RuntimeException | ClassNotFoundException | SAXException | ParserConfigurationException ex) {
-            ex.printStackTrace();
+        } catch (RuntimeException  ex) {
+            logger.error("fatal error in channels handler ", ex);
+            throw new RuntimeException();
+        } catch (IOException | ClassNotFoundException | SAXException ex) {
+            logger.error("exception in channelsHandler ", ex);
         }
     }
 }
