@@ -1,7 +1,7 @@
 package org.lab5.communication.communicate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Sender implements Runnable {
-    private final Logger logger = LoggerFactory.getLogger(Sender.class);
+//    private final Logger logger = LoggerFactory.getLogger(Sender.class);
 
     private boolean isSending = true;
 
@@ -71,7 +71,7 @@ public class Sender implements Runnable {
                 ByteBuffer buffer = socketAndDequeBufferPair.bufferDeque.getFirst();
 
                 socketChannel.write(buffer);
-                logger.info("write in socket {}, buffer {} with size {}", socketChannel, buffer, buffer.capacity());
+//                logger.info("write in socket {}, buffer {} with size {}", socketChannel, buffer, buffer.capacity());
                 if (!buffer.hasRemaining()) {
                     socketAndDequeBufferPair.bufferDeque.removeFirst();
                 }
@@ -84,7 +84,7 @@ public class Sender implements Runnable {
         try {
             sendingBuffer();
         } catch (InterruptedException | IOException ex) {
-            logger.error("exception in buffer sender ", ex);
+//            logger.error("exception in buffer sender ", ex);
         }
     }
 

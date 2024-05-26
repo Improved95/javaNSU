@@ -5,8 +5,8 @@ import org.lab5.client.view.ViewStage;
 import org.lab5.communication.communicate.Receiver;
 import org.lab5.communication.communicate.SendReceiveRequest;
 import org.lab5.communication.requests.Request;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ClientChannelsHandler implements Runnable {
-    private final Logger logger = LoggerFactory.getLogger(ClientController.class);
+//    private final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     private final ClientModel model;
     private final ClientController controller;
@@ -68,10 +68,10 @@ public class ClientChannelsHandler implements Runnable {
         try {
             channelsHandler();
         } catch (RuntimeException  ex) {
-            logger.error("fatal error in channels handler ", ex);
+//            logger.error("fatal error in channels handler ", ex);
             throw new RuntimeException();
         } catch (IOException | ClassNotFoundException | SAXException ex) {
-            logger.error("exception in channelsHandler ", ex);
+//            logger.error("exception in channelsHandler ", ex);
         }
     }
 }

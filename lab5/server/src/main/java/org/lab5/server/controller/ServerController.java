@@ -65,7 +65,7 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(messagesListReq, socketChannel, transferProtocol, sender);
-            logger.info("send all messages in chat for {} by", socketChannel, transferProtocol);
+            logger.info("send all messages in chat for {} by {}", socketChannel, transferProtocol);
         } catch (IOException | TransformerException ex) {
             logger.error("exception on send all messages in chat for new client: ", ex);
         }
@@ -106,7 +106,7 @@ public class ServerController {
         TransferProtocol transferProtocol = model.getClientTable().get(socketChannel).transferProtocol;
         try {
             SendReceiveRequest.sendRequest(clientsListReceiveReqRequest, socketChannel, transferProtocol, sender);
-            logger.info("send clientsList to {}", socketChannel);
+            logger.info("send clientsList to {} by {}", socketChannel, transferProtocol);
         } catch (IOException | TransformerException ex) {
             logger.error("exception on send clientsList {} to {} by {}", clientsListReceiveReqRequest, socketChannel, transferProtocol, ex);
         }
