@@ -1,6 +1,6 @@
 package org.lab4.jframe;
 
-import org.lab4.controller.factory.FactoryWorkflow;
+import org.lab4.factory.FactoryWorkflow;
 
 import javax.swing.*;
 import java.awt.*;

@@ -11,6 +11,10 @@
     <module>lab1</module>
     <module>lab2</module>
     <module>lab3</module>
+    <module>lab4</module>
+    <module>lab5/client</module>
+    <module>lab5/server</module>
+    <module>lab5/communication</module>
   </modules>
 
   <properties>

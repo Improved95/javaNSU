@@ -1,4 +1,4 @@
-package org.lab4.controller.factory;
+package org.lab4.factory;
 
 import org.lab4.controller.Dealer;
 import org.lab4.controller.Worker;
