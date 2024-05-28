@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ClientChannelsHandler implements Runnable {
-//    private final Logger logger = LoggerFactory.getLogger(ClientController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     private final ClientModel model;
     private final ClientController controller;
